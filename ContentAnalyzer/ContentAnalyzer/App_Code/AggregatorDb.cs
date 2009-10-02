@@ -44,10 +44,15 @@ namespace ContentAnalyzer
 								ItemUid UNIQUEIDENTIFIER PRIMARY KEY)
 
 							INSERT INTO #Item
-								SELECT ItemUid
-								FROM Catalog.[File] WITH(NOLOCK)
-								WHERE TemplateUid = '{0}'
-								GROUP BY ItemUid
+								SELECT CC.ItemUid
+								FROM Catalog.[File] CF WITH(NOLOCK)
+									INNER JOIN Catalog.Content CC WITH(NOLOCK)
+									ON CC.TemplateUid = CF.TemplateUid
+										AND CC.ItemUid = CF.ItemUid
+								WHERE
+									CC.TemplateUid = '{0}'
+									AND CC.OwnerUid <> 'AE16042A-32F6-47B2-AB09-3BEC75D1815C'
+								GROUP BY CC.ItemUid
 								HAVING COUNT(*) >= {1}
 								ORDER BY COUNT(*) DESC
 
