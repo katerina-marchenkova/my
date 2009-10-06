@@ -41,10 +41,13 @@ namespace ContentAnalyzer
 					cmd.CommandText = String.Format(
 						@"
 							CREATE TABLE #Item (
-								ItemUid UNIQUEIDENTIFIER PRIMARY KEY)
+								ItemUid UNIQUEIDENTIFIER PRIMARY KEY,
+								Total INT)
 
 							INSERT INTO #Item
-								SELECT CC.ItemUid
+								SELECT
+									CC.ItemUid,
+									COUNT(*) AS Total
 								FROM Catalog.[File] CF WITH(NOLOCK)
 									INNER JOIN Catalog.Content CC WITH(NOLOCK)
 									ON CC.TemplateUid = CF.TemplateUid
@@ -54,7 +57,6 @@ namespace ContentAnalyzer
 									AND CC.OwnerUid <> 'AE16042A-32F6-47B2-AB09-3BEC75D1815C'
 								GROUP BY CC.ItemUid
 								HAVING COUNT(*) >= {1}
-								ORDER BY COUNT(*) DESC
 
 							SELECT
 								F.TemplateUid,
@@ -66,7 +68,7 @@ namespace ContentAnalyzer
 								INNER JOIN Catalog.[File] F WITH(NOLOCK)
 								ON F.TemplateUid = '{0}'
 									AND F.ItemUid = I.ItemUid
-							ORDER BY F.ItemUid
+							ORDER BY I.Total DESC, F.ItemUid
 
 							DROP TABLE #Item
 						",
