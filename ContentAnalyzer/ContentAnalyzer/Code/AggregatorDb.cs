@@ -26,9 +26,9 @@ namespace ContentAnalyzer
 		/// <summary>
 		/// Gets multiple images with many files.
 		/// </summary>
-		public static List<FileRow> GetMultipleImagesByFileCount(int fileCount)
+		public static List<HelixFileRow> GetMultipleImagesByFileCount(int fileCount)
 		{
-			List<FileRow> rows = new List<FileRow>();
+			List<HelixFileRow> rows = new List<HelixFileRow>();
 
 			using (SqlConnection conn = new SqlConnection(s_connectionString))
 			{
@@ -79,7 +79,7 @@ namespace ContentAnalyzer
 					{
 						while (reader.Read())
 						{
-							FileRow row = new FileRow(reader);
+							HelixFileRow row = new HelixFileRow(reader);
 							rows.Add(row);
 						}
 					}

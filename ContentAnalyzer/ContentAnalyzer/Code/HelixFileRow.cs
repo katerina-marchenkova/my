@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ContentAnalyzer
 {
-	public struct FileRow
+	public struct HelixFileRow
 	{
 		public Guid TemplateUid;
 		public Guid FileUid;
@@ -11,7 +11,7 @@ namespace ContentAnalyzer
 		public string Name;
 		public string Extension;
 
-		public FileRow(IDataRecord reader)
+		public HelixFileRow(IDataRecord reader)
 		{
 			TemplateUid = (Guid)reader["TemplateUid"];
 			FileUid = (Guid)reader["FileUid"];
