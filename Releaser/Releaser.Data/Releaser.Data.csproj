@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="ReleaserDataSQLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rows\ProjectRowSQLite.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Releaser.Interfaces\Releaser.Interfaces.csproj">

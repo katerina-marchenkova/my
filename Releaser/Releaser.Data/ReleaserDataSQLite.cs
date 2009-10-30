@@ -15,11 +15,25 @@ namespace Shuruev.Releaser.Data
 	/// </summary>
 	public class ReleaserDataSQLite : IReleaserData
 	{
-		private string m_databaseFile;
-		private string m_connectionString;
+		private string databaseFile;
+		private string connectionString;
 
-		private TimeSpan m_commandTimeout = TimeSpan.FromSeconds(30);
-		private int m_commandTimeoutInSeconds = 30;
+		private TimeSpan commandTimeout = TimeSpan.FromSeconds(30);
+		private int commandTimeoutInSeconds = 30;
+
+		#region Delegates
+
+		/// <summary>
+		/// Performing actions inside the reader.
+		/// </summary>
+		private delegate void DoWithReader(IDataRecord reader);
+
+		/// <summary>
+		/// Return result from the reader.
+		/// </summary>
+		private delegate T ReturnFromReader<T>(IDataRecord reader);
+
+		#endregion
 
 		#region Initialization
 
@@ -28,78 +42,23 @@ namespace Shuruev.Releaser.Data
 		/// </summary>
 		public void Initialize(NameValueCollection config)
 		{
-			m_databaseFile = ConfigurationHelper.ReadString(config, "ReleaserData.DatabaseFile");
+			this.databaseFile = ConfigurationHelper.ReadString(config, "ReleaserData.DatabaseFile");
 
 			SQLiteConnectionStringBuilder sb = new SQLiteConnectionStringBuilder();
-			sb.DataSource = m_databaseFile;
-			m_connectionString = sb.ConnectionString;
+			sb.DataSource = this.databaseFile;
+			this.connectionString = sb.ConnectionString;
 
 			if (ConfigurationHelper.HasValue(config, "ReleaserData.Timeout"))
 			{
-				m_commandTimeout = ConfigurationHelper.ReadTimeSpan(config, "ReleaserData.Timeout");
-				m_commandTimeoutInSeconds = Convert.ToInt32(m_commandTimeout.TotalSeconds);
+				this.commandTimeout = ConfigurationHelper.ReadTimeSpan(config, "ReleaserData.Timeout");
+				this.commandTimeoutInSeconds = Convert.ToInt32(this.commandTimeout.TotalSeconds);
 			}
 
-			if (!File.Exists(m_databaseFile))
+			if (!File.Exists(this.databaseFile))
 			{
-				SQLiteConnection.CreateFile(m_databaseFile);
-				CreateDatabase();
+				SQLiteConnection.CreateFile(this.databaseFile);
+				this.CreateDatabase();
 			}
-		}
-
-		/// <summary>
-		/// Creates new database.
-		/// </summary>
-		private void CreateDatabase()
-		{
-			ExecuteNonQuery(
-				@"
-					CREATE TABLE [User] (
-						[UserId] INTEGER PRIMARY KEY,
-						[UserName] TEXT NOT NULL,
-						[ImageCode] TEXT NOT NULL,
-						[Login] TEXT NOT NULL);
-				");
-
-			ExecuteNonQuery(
-				@"
-					CREATE TABLE [Project] (
-						[ProjectId] INTEGER PRIMARY KEY,
-						[ProjectName] TEXT NOT NULL,
-						[ImageCode] TEXT NOT NULL,
-						[StorageCode] TEXT NOT NULL,
-						[StoragePath] TEXT NOT NULL);
-				");
-
-			ExecuteNonQuery(
-				@"
-					CREATE TABLE [Property] (
-						[PropertyCode] TEXT PRIMARY KEY,
-						[PropertyName] TEXT NOT NULL);
-				");
-
-			ExecuteNonQuery(
-				@"
-					CREATE TABLE [PropertyUsage] (
-						[PropertyCode] TEXT NOT NULL,
-						[EntityType] TEXT NOT NULL,
-						PRIMARY KEY (
-								[PropertyCode],
-								[EntityType]));
-				");
-
-			ExecuteNonQuery(
-				@"
-					CREATE TABLE [EntityProperty] (
-						[EntityType] TEXT NOT NULL,
-						[EntityId] INTEGER NOT NULL,
-						[PropertyCode] TEXT NOT NULL,
-						[PropertyValue] TEXT NOT NULL);
-
-					CREATE INDEX [IX_EntityProperty_Entity] ON [EntityProperty] (
-						[EntityType] ASC,
-						[EntityId] ASC);
-				");
 		}
 
 		#endregion
@@ -111,7 +70,7 @@ namespace Shuruev.Releaser.Data
 		/// </summary>
 		public int AddProject(ProjectData data)
 		{
-			object id = ExecuteScalar(
+			object id = this.ExecuteScalar(
 				@"
 					INSERT INTO [Project] (
 						[ProjectId],
@@ -141,7 +100,7 @@ namespace Shuruev.Releaser.Data
 		/// </summary>
 		public void UpdateProject(int projectId, ProjectData data)
 		{
-			ExecuteNonQuery(
+			this.ExecuteNonQuery(
 				@"
 					UPDATE [Project]
 					SET
@@ -163,7 +122,7 @@ namespace Shuruev.Releaser.Data
 		/// </summary>
 		public void RemoveProject(int projectId)
 		{
-			ExecuteNonQuery(
+			this.ExecuteNonQuery(
 				@"
 					DELETE FROM [Project]
 					WHERE [ProjectId] = @projectId;
@@ -176,7 +135,7 @@ namespace Shuruev.Releaser.Data
 		/// </summary>
 		public ProjectRow GetProject(int projectId)
 		{
-			return ExecuteReader(
+			return this.ExecuteReader(
 				@"
 					SELECT
 						[ProjectId],
@@ -187,7 +146,17 @@ namespace Shuruev.Releaser.Data
 					FROM [Project]
 					WHERE [ProjectId] = @projectId;
 				",
-				reader => new ProjectRowSQLite(reader),
+				delegate(IDataRecord reader)
+				{
+					int id = (int)Read.Int64(reader, "ProjectId");
+					ProjectData data = new ProjectData(
+						Read.String(reader, "ProjectName"),
+						Read.String(reader, "ImageCode"),
+						Read.String(reader, "StorageCode"),
+						Read.String(reader, "StoragePath"));
+
+					return new ProjectRow(id, data);
+				},
 				new ParamValue("@projectId", projectId));
 		}
 
@@ -251,7 +220,7 @@ namespace Shuruev.Releaser.Data
 			sb.AppendLine();
 			sb.AppendLine("COMMIT TRANSACTION;");
 
-			ExecuteNonQuery(
+			this.ExecuteNonQuery(
 				sb.ToString(),
 				parameters.ToArray());
 		}
@@ -265,7 +234,7 @@ namespace Shuruev.Releaser.Data
 		{
 			PropertyValues properties = new PropertyValues();
 
-			ExecuteReader(
+			this.ExecuteReader(
 				@"
 					SELECT
 						[PropertyCode],
@@ -292,6 +261,65 @@ namespace Shuruev.Releaser.Data
 
 		#endregion
 
+		#region Managing database schema
+
+		/// <summary>
+		/// Creates new database.
+		/// </summary>
+		private void CreateDatabase()
+		{
+			this.ExecuteNonQuery(
+				@"
+					CREATE TABLE [User] (
+						[UserId] INTEGER PRIMARY KEY,
+						[UserName] TEXT NOT NULL,
+						[ImageCode] TEXT NOT NULL,
+						[Login] TEXT NOT NULL);
+				");
+
+			this.ExecuteNonQuery(
+				@"
+					CREATE TABLE [Project] (
+						[ProjectId] INTEGER PRIMARY KEY,
+						[ProjectName] TEXT NOT NULL,
+						[ImageCode] TEXT NOT NULL,
+						[StorageCode] TEXT NOT NULL,
+						[StoragePath] TEXT NOT NULL);
+				");
+
+			this.ExecuteNonQuery(
+				@"
+					CREATE TABLE [Property] (
+						[PropertyCode] TEXT PRIMARY KEY,
+						[PropertyName] TEXT NOT NULL);
+				");
+
+			this.ExecuteNonQuery(
+				@"
+					CREATE TABLE [PropertyUsage] (
+						[PropertyCode] TEXT NOT NULL,
+						[EntityType] TEXT NOT NULL,
+						PRIMARY KEY (
+								[PropertyCode],
+								[EntityType]));
+				");
+
+			this.ExecuteNonQuery(
+				@"
+					CREATE TABLE [EntityProperty] (
+						[EntityType] TEXT NOT NULL,
+						[EntityId] INTEGER NOT NULL,
+						[PropertyCode] TEXT NOT NULL,
+						[PropertyValue] TEXT NOT NULL);
+
+					CREATE INDEX [IX_EntityProperty_Entity] ON [EntityProperty] (
+						[EntityType] ASC,
+						[EntityId] ASC);
+				");
+		}
+
+		#endregion
+
 		#region Service methods
 
 		/// <summary>
@@ -299,7 +327,7 @@ namespace Shuruev.Releaser.Data
 		/// </summary>
 		private SQLiteConnection OpenConnection()
 		{
-			SQLiteConnection conn = new SQLiteConnection(m_connectionString);
+			SQLiteConnection conn = new SQLiteConnection(this.connectionString);
 			conn.Open();
 			return conn;
 		}
@@ -310,7 +338,7 @@ namespace Shuruev.Releaser.Data
 		private SQLiteCommand CreateCommand(SQLiteConnection conn)
 		{
 			SQLiteCommand cmd = conn.CreateCommand();
-			cmd.CommandTimeout = m_commandTimeoutInSeconds;
+			cmd.CommandTimeout = this.commandTimeoutInSeconds;
 			return cmd;
 		}
 
@@ -321,9 +349,9 @@ namespace Shuruev.Releaser.Data
 			string commandText,
 			params ParamValue[] parameters)
 		{
-			using (SQLiteConnection conn = OpenConnection())
+			using (SQLiteConnection conn = this.OpenConnection())
 			{
-				using (SQLiteCommand cmd = CreateCommand(conn))
+				using (SQLiteCommand cmd = this.CreateCommand(conn))
 				{
 					cmd.CommandType = CommandType.Text;
 					cmd.CommandText = commandText;
@@ -347,9 +375,9 @@ namespace Shuruev.Releaser.Data
 			string commandText,
 			params ParamValue[] parameters)
 		{
-			using (SQLiteConnection conn = OpenConnection())
+			using (SQLiteConnection conn = this.OpenConnection())
 			{
-				using (SQLiteCommand cmd = CreateCommand(conn))
+				using (SQLiteCommand cmd = this.CreateCommand(conn))
 				{
 					cmd.CommandType = CommandType.Text;
 					cmd.CommandText = commandText;
@@ -367,16 +395,6 @@ namespace Shuruev.Releaser.Data
 		}
 
 		/// <summary>
-		/// Performing actions inside the reader.
-		/// </summary>
-		private delegate void DoWithReader(IDataRecord reader);
-
-		/// <summary>
-		/// Return result from the reader.
-		/// </summary>
-		private delegate T ReturnFromReader<T>(IDataRecord reader);
-
-		/// <summary>
 		/// Executes reader command.
 		/// </summary>
 		private void ExecuteReader(
@@ -384,9 +402,9 @@ namespace Shuruev.Releaser.Data
 			DoWithReader action,
 			params ParamValue[] parameters)
 		{
-			using (SQLiteConnection conn = OpenConnection())
+			using (SQLiteConnection conn = this.OpenConnection())
 			{
-				using (SQLiteCommand cmd = CreateCommand(conn))
+				using (SQLiteCommand cmd = this.CreateCommand(conn))
 				{
 					cmd.CommandType = CommandType.Text;
 					cmd.CommandText = commandText;
@@ -417,9 +435,9 @@ namespace Shuruev.Releaser.Data
 			ReturnFromReader<T> action,
 			params ParamValue[] parameters)
 		{
-			using (SQLiteConnection conn = OpenConnection())
+			using (SQLiteConnection conn = this.OpenConnection())
 			{
-				using (SQLiteCommand cmd = CreateCommand(conn))
+				using (SQLiteCommand cmd = this.CreateCommand(conn))
 				{
 					cmd.CommandType = CommandType.Text;
 					cmd.CommandText = commandText;
@@ -434,7 +452,9 @@ namespace Shuruev.Releaser.Data
 					using (SQLiteDataReader reader = cmd.ExecuteReader())
 					{
 						if (reader.Read())
+						{
 							return action(reader);
+						}
 					}
 				}
 			}

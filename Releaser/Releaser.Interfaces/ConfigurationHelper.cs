@@ -30,9 +30,9 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads configuration value.
+		/// Reads String configuration value.
 		/// </summary>
-		private static string ReadValue(NameValueCollection source, string name)
+		public static string ReadString(NameValueCollection source, string name)
 		{
 			string value = source[name];
 			if (value == null)
@@ -40,19 +40,12 @@ namespace Shuruev.Releaser.Interfaces
 				string message = String.Format("Configuration parameter '{0}' is not found.", name);
 				throw new ConfigurationErrorsException(message);
 			}
+
 			return value;
 		}
 
 		/// <summary>
-		/// Reads string configuration value.
-		/// </summary>
-		public static string ReadString(NameValueCollection source, string name)
-		{
-			return ReadValue(source, name);
-		}
-
-		/// <summary>
-		/// Reads string configuration value.
+		/// Reads String configuration value.
 		/// </summary>
 		public static string ReadString(string name)
 		{
@@ -60,11 +53,11 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads boolean configuration value.
+		/// Reads Boolean configuration value.
 		/// </summary>
 		public static bool ReadBoolean(NameValueCollection source, string name)
 		{
-			string value = ReadValue(source, name);
+			string value = ReadString(source, name);
 			try
 			{
 				return Boolean.Parse(value);
@@ -77,7 +70,7 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads boolean configuration value.
+		/// Reads Boolean configuration value.
 		/// </summary>
 		public static bool ReadBoolean(string name)
 		{
@@ -85,11 +78,11 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads integer configuration value.
+		/// Reads Integer configuration value.
 		/// </summary>
 		public static int ReadInteger(NameValueCollection source, string name)
 		{
-			string value = ReadValue(source, name);
+			string value = ReadString(source, name);
 			try
 			{
 				return Int32.Parse(value);
@@ -102,7 +95,7 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads integer configuration value.
+		/// Reads Integer configuration value.
 		/// </summary>
 		public static int ReadInteger(string name)
 		{
@@ -110,11 +103,11 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads time span configuration value.
+		/// Reads TimeSpan configuration value.
 		/// </summary>
 		public static TimeSpan ReadTimeSpan(NameValueCollection source, string name)
 		{
-			string value = ReadValue(source, name);
+			string value = ReadString(source, name);
 			try
 			{
 				return TimeSpan.Parse(value);
@@ -127,7 +120,7 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads time span configuration value.
+		/// Reads TimeSpan configuration value.
 		/// </summary>
 		public static TimeSpan ReadTimeSpan(string name)
 		{
@@ -135,11 +128,11 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads date time configuration value.
+		/// Reads DateTime configuration value.
 		/// </summary>
 		public static DateTime ReadDateTime(NameValueCollection source, string name)
 		{
-			string value = ReadValue(source, name);
+			string value = ReadString(source, name);
 			try
 			{
 				return DateTime.Parse(value, DateTimeFormatInfo.InvariantInfo);
@@ -152,7 +145,7 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads date time configuration value.
+		/// Reads DateTime configuration value.
 		/// </summary>
 		public static DateTime ReadDateTime(string name)
 		{
@@ -160,11 +153,11 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads GUID configuration value.
+		/// Reads Guid configuration value.
 		/// </summary>
 		public static Guid ReadGuid(NameValueCollection source, string name)
 		{
-			string value = ReadValue(source, name);
+			string value = ReadString(source, name);
 			try
 			{
 				return new Guid(value);
@@ -177,7 +170,7 @@ namespace Shuruev.Releaser.Interfaces
 		}
 
 		/// <summary>
-		/// Reads GUID configuration value.
+		/// Reads Guid configuration value.
 		/// </summary>
 		public static Guid ReadGuid(string name)
 		{
@@ -189,7 +182,7 @@ namespace Shuruev.Releaser.Interfaces
 		/// </summary>
 		public static object ReadEnumeration(NameValueCollection source, string name, Type type)
 		{
-			string value = ReadValue(source, name);
+			string value = ReadString(source, name);
 			try
 			{
 				return Enum.Parse(type, value);
@@ -216,14 +209,16 @@ namespace Shuruev.Releaser.Interfaces
 		/// <summary>
 		/// Reads connection string.
 		/// </summary>
-		private static string ReadConnectionString(ConnectionStringSettingsCollection source, string name)
+		public static string ReadConnectionString(ConnectionStringSettingsCollection source, string name)
 		{
 			ConnectionStringSettings settings = source[name];
 			if (settings != null)
 			{
 				string str = settings.ConnectionString;
 				if (!String.IsNullOrEmpty(str))
+				{
 					return str;
+				}
 			}
 
 			string message = String.Format("Connection string '{0}' is not found.", name);

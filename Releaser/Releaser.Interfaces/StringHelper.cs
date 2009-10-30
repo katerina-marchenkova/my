@@ -24,7 +24,10 @@ namespace Shuruev.Releaser.Interfaces
 		public static string RemoveDoubleSpaces(string text)
 		{
 			while (text.Contains("  "))
+			{
 				text = text.Replace("  ", " ");
+			}
+
 			return text;
 		}
 
@@ -67,7 +70,9 @@ namespace Shuruev.Releaser.Interfaces
 		public static bool IsEmpty(string text)
 		{
 			if (String.IsNullOrEmpty(text))
+			{
 				return true;
+			}
 
 			return TrimAll(text).Length == 0;
 		}

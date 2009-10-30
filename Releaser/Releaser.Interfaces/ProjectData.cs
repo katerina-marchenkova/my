@@ -7,13 +7,13 @@ namespace Shuruev.Releaser.Interfaces
 	/// </summary>
 	public class ProjectData
 	{
-		private string m_projectName;
-		private string m_imageCode;
-		private string m_storageCode;
-		private string m_storagePath;
+		private string projectName;
+		private string imageCode;
+		private string storageCode;
+		private string storagePath;
 
 		/// <summary>
-		/// Initializes a new instance.
+		/// Initializes a new instance of the <see cref="ProjectData"/> class.
 		/// </summary>
 		public ProjectData(
 			string projectName,
@@ -21,10 +21,10 @@ namespace Shuruev.Releaser.Interfaces
 			string storageCode,
 			string storagePath)
 		{
-			ProjectName = projectName;
-			ImageCode = imageCode;
-			StorageCode = storageCode;
-			StoragePath = storagePath;
+			this.ProjectName = projectName;
+			this.ImageCode = imageCode;
+			this.StorageCode = storageCode;
+			this.StoragePath = storagePath;
 		}
 
 		#region Properties
@@ -36,14 +36,17 @@ namespace Shuruev.Releaser.Interfaces
 		{
 			get
 			{
-				return m_projectName;
+				return this.projectName;
 			}
+
 			set
 			{
 				if (StringHelper.IsEmpty(value))
+				{
 					throw new ArgumentException("Property ProjectName should not be empty.");
+				}
 
-				m_projectName = value;
+				this.projectName = value;
 			}
 		}
 
@@ -54,32 +57,38 @@ namespace Shuruev.Releaser.Interfaces
 		{
 			get
 			{
-				return m_imageCode;
+				return this.imageCode;
 			}
+
 			set
 			{
 				if (StringHelper.IsEmpty(value))
+				{
 					throw new ArgumentException("Property ImageCode should not be empty.");
+				}
 
-				m_imageCode = value;
+				this.imageCode = value;
 			}
 		}
 
 		/// <summary>
-		/// Gets or sets the code or storage provider.
+		/// Gets or sets the code of storage provider.
 		/// </summary>
 		public string StorageCode
 		{
 			get
 			{
-				return m_storageCode;
+				return this.storageCode;
 			}
+
 			set
 			{
 				if (StringHelper.IsEmpty(value))
+				{
 					throw new ArgumentException("Property StorageCode should not be empty.");
+				}
 
-				m_storageCode = value;
+				this.storageCode = value;
 			}
 		}
 
@@ -90,14 +99,17 @@ namespace Shuruev.Releaser.Interfaces
 		{
 			get
 			{
-				return m_storagePath;
+				return this.storagePath;
 			}
+
 			set
 			{
 				if (StringHelper.IsEmpty(value))
+				{
 					throw new ArgumentException("Property StoragePath should not be empty.");
+				}
 
-				m_storagePath = value;
+				this.storagePath = value;
 			}
 		}
 
@@ -110,7 +122,7 @@ namespace Shuruev.Releaser.Interfaces
 		/// </summary>
 		public override string ToString()
 		{
-			return m_projectName;
+			return this.projectName;
 		}
 
 		#endregion

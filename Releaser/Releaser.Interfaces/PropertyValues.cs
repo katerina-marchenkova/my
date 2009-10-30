@@ -8,14 +8,14 @@ namespace Shuruev.Releaser.Interfaces
 	/// </summary>
 	public class PropertyValues
 	{
-		private readonly Dictionary<string, List<string>> m_data;
+		private readonly Dictionary<string, List<string>> data;
 
 		/// <summary>
-		/// Initializes a new instance.
+		/// Initializes a new instance of the <see cref="PropertyValues"/> class.
 		/// </summary>
 		public PropertyValues()
 		{
-			m_data = new Dictionary<string, List<string>>();
+			this.data = new Dictionary<string, List<string>>();
 		}
 
 		#region Getting values
@@ -25,7 +25,7 @@ namespace Shuruev.Releaser.Interfaces
 		/// </summary>
 		public List<string> GetCodes()
 		{
-			return new List<string>(m_data.Keys);
+			return new List<string>(this.data.Keys);
 		}
 
 		/// <summary>
@@ -33,10 +33,12 @@ namespace Shuruev.Releaser.Interfaces
 		/// </summary>
 		public List<string> GetValues(string propertyCode)
 		{
-			if (!m_data.ContainsKey(propertyCode))
+			if (!this.data.ContainsKey(propertyCode))
+			{
 				return new List<string>();
+			}
 
-			return m_data[propertyCode];
+			return this.data[propertyCode];
 		}
 
 		#endregion
@@ -49,15 +51,21 @@ namespace Shuruev.Releaser.Interfaces
 		public void Add(string propertyCode, string propertyValue)
 		{
 			if (StringHelper.IsEmpty(propertyCode))
+			{
 				throw new ArgumentException("Parameter propertyCode should not be empty.");
+			}
 
 			if (StringHelper.IsEmpty(propertyValue))
+			{
 				throw new ArgumentException("Parameter propertyValue should not be empty.");
+			}
 
-			if (!m_data.ContainsKey(propertyCode))
-				m_data[propertyCode] = new List<string>();
+			if (!this.data.ContainsKey(propertyCode))
+			{
+				this.data[propertyCode] = new List<string>();
+			}
 
-			m_data[propertyCode].Add(propertyValue);
+			this.data[propertyCode].Add(propertyValue);
 		}
 
 		/// <summary>
@@ -66,9 +74,11 @@ namespace Shuruev.Releaser.Interfaces
 		public void Clear(string propertyCode)
 		{
 			if (StringHelper.IsEmpty(propertyCode))
+			{
 				throw new ArgumentException("Parameter propertyCode should not be empty.");
+			}
 
-			m_data.Remove(propertyCode);
+			this.data.Remove(propertyCode);
 		}
 
 		#endregion

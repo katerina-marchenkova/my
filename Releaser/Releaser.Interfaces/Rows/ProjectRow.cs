@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace Shuruev.Releaser.Interfaces
 {
@@ -7,15 +8,44 @@ namespace Shuruev.Releaser.Interfaces
 	/// </summary>
 	public class ProjectRow
 	{
-		/// <summary>
-		/// Project ID.
-		/// </summary>
-		public int Id;
+		private readonly int id;
+		private readonly ProjectData data;
 
 		/// <summary>
-		/// Project data.
+		/// Initializes a new instance of the <see cref="ProjectRow"/> class.
 		/// </summary>
-		public ProjectData Data;
+		public ProjectRow(int id, ProjectData data)
+		{
+			if (data == null)
+			{
+				throw new ArgumentNullException("data");
+			}
+
+			this.id = id;
+			this.data = data;
+		}
+
+		#region Properties
+
+		/// <summary>
+		/// Gets project ID.
+		/// </summary>
+		public int Id
+		{
+			get { return this.id; }
+		}
+
+		/// <summary>
+		/// Gets project data.
+		/// </summary>
+		public ProjectData Data
+		{
+			get { return this.data; }
+		}
+
+		#endregion
+
+		#region Service methods
 
 		/// <summary>
 		/// Returns a string that represents the current object.
@@ -24,10 +54,12 @@ namespace Shuruev.Releaser.Interfaces
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.Append("[");
-			sb.Append(Id);
+			sb.Append(this.Id);
 			sb.Append("] ");
-			sb.Append(Data);
+			sb.Append(this.Data);
 			return sb.ToString();
 		}
+
+		#endregion
 	}
 }

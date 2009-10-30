@@ -10,26 +10,29 @@ namespace Shuruev.Releaser.Test
 	[TestClass]
 	public class ReleaserInterfacesTest
 	{
-		public List<string> EmptyWords = new List<string>();
+		private readonly List<string> emptyWords = new List<string>();
 
 		/// <summary>
-		/// Initializes a new instance.
+		/// Initializes a new instance of the <see cref="ReleaserInterfacesTest"/> class.
 		/// </summary>
 		public ReleaserInterfacesTest()
 		{
-			EmptyWords.Add("   ");
-			EmptyWords.Add("\r\n\r\n");
-			EmptyWords.Add("\t\t\v\v");
-			EmptyWords.Add("   \t\t   \r\n   \v\v   ");
-			EmptyWords.Add(null);
+			this.emptyWords.Add("   ");
+			this.emptyWords.Add("\r\n\r\n");
+			this.emptyWords.Add("\t\t\v\v");
+			this.emptyWords.Add("   \t\t   \r\n   \v\v   ");
+			this.emptyWords.Add(null);
 		}
 
 		#region Container classes
 
+		/// <summary>
+		/// Tests project data container.
+		/// </summary>
 		[TestMethod]
 		public void ProjectDataContainer()
 		{
-			foreach (string word in EmptyWords)
+			foreach (string word in this.emptyWords)
 			{
 				TestHelper.Throws(delegate
 				{
@@ -69,6 +72,9 @@ namespace Shuruev.Releaser.Test
 			}
 		}
 
+		/// <summary>
+		/// Tests property values container.
+		/// </summary>
 		[TestMethod]
 		public void PropertyValuesContainer()
 		{
@@ -97,7 +103,7 @@ namespace Shuruev.Releaser.Test
 			Assert.AreEqual(1, properties.GetValues("key2").Count);
 			Assert.AreEqual("hello", properties.GetValues("key2")[0]);
 
-			foreach (string word in EmptyWords)
+			foreach (string word in this.emptyWords)
 			{
 				TestHelper.Throws(delegate
 				{

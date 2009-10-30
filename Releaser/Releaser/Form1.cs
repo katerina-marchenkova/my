@@ -8,11 +8,17 @@ using System.Windows.Forms;
 
 namespace Shuruev.Releaser
 {
+	/// <summary>
+	/// This is a form.
+	/// </summary>
 	public partial class Form1 : Form
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Form1"/> class.
+		/// </summary>
 		public Form1()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 		}
 
 		private void button1_Click(object sender, EventArgs e)

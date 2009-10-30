@@ -6,7 +6,7 @@
 	public enum EntityType
 	{
 		/// <summary>
-		/// Project.
+		/// Defines project.
 		/// </summary>
 		Project
 	}
