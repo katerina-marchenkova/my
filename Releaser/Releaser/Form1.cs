@@ -26,5 +26,10 @@ namespace Shuruev.Releaser
 			Type type = Type.GetType("VX.Storage.VXMString, VXStorage", true, false);
 			object o = Activator.CreateInstance(type);
 		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			int a = 10;
+		}
 	}
 }
