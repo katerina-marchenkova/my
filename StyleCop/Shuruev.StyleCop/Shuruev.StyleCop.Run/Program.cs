@@ -9,8 +9,7 @@ namespace Shuruev.StyleCop.Run
 	/// </summary>
 	public class Program
 	{
-		private static readonly string settingsFile = @"C:\Users\Public\GIT\My\Settings.StyleCop";
-		private static readonly string addInPath = AppDomain.CurrentDomain.BaseDirectory;
+		private static readonly string basePath = AppDomain.CurrentDomain.BaseDirectory;
 		private static readonly string sourceFile = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Test.cs";
 
 		/// <summary>
@@ -19,14 +18,14 @@ namespace Shuruev.StyleCop.Run
 		public static void Main(string[] args)
 		{
 			StyleCopConsole console = new StyleCopConsole(
-				settingsFile,
+				null,
 				false,
 				null,
-				new List<string>(new[] { addInPath }),
+				new List<string>(new[] { basePath }),
 				true);
 
 			Configuration configuration = new Configuration(null);
-			CodeProject project = new CodeProject(0, null, configuration);
+			CodeProject project = new CodeProject(0, basePath, configuration);
 
 			console.Core.Environment.AddSourceCode(project, sourceFile, null);
 

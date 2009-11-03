@@ -1,0 +1,141 @@
+﻿// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+// OK //////////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		/// <summary>
+		/// Hello there.
+		/// </summary>
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		public void btnStart_OnClick(object sender, EventArgs e)
+		{
+			int a = 10;
+		}
+	}
+}
+// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		private void btnStart_OnClick(NotObject sender, EventArgs e)
+		{
+			int a = 10;
+		}
+	}
+}
+// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		private void btnStart_OnClick(object notSender, EventArgs e)
+		{
+			int a = 10;
+		}
+	}
+}
+// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		private void btnStart_OnClick(object sender, EventArgsWrong e)
+		{
+			int a = 10;
+		}
+	}
+}
+// ERROR ///////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		private void btnStart_OnClick(object sender, EventArgs notE)
+		{
+			int a = 10;
+		}
+	}
+}
+// OK //////////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		private void btnStart_OnClick(object sender, EventArgs e)
+		{
+			int a = 10;
+		}
+	}
+}
+// OK //////////////////////////////////////////////////////
+namespace Shuruev.StyleCop.Test
+{
+	/// <summary>
+	/// Hello there.
+	/// </summary>
+	public class TestClass
+	{
+		private void btnStart_OnClick(object sender, MouseEventArgs e)
+		{
+			int a = 10;
+		}
+	}
+}
+////////////////////////////////////////////////////////////

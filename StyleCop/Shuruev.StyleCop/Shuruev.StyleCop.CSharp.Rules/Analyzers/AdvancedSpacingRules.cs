@@ -3,9 +3,15 @@ using Microsoft.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.CSharp
 {
+	/// <summary>
+	/// Rules which verify the spacing placed between keywords and symbols in the code.
+	/// </summary>
 	[SourceAnalyzer(typeof(CsParser))]
 	public class AdvancedSpacingRules : SourceAnalyzer
 	{
+		/// <summary>
+		/// Analyzes source document.
+		/// </summary>
 		public override void AnalyzeDocument(CodeDocument document)
 		{
 			CsDocument doc = (CsDocument)document;

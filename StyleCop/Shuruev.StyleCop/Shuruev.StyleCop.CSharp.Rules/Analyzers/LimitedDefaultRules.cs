@@ -5,13 +5,19 @@ using Microsoft.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.CSharp
 {
+	/// <summary>
+	/// Rules that are based on the default ones with adding some exception cases.
+	/// </summary>
 	[SourceAnalyzer(typeof(CsParser))]
 	public class LimitedDefaultRules : SourceAnalyzer
 	{
+		/// <summary>
+		/// Analyzes source document.
+		/// </summary>
 		public override void AnalyzeDocument(CodeDocument document)
 		{
 			StyleCopCore customCore = new StyleCopCore();
-			customCore.ViolationEncountered += OnCustomViolationEncountered;
+			customCore.ViolationEncountered += this.OnCustomViolationEncountered;
 
 			NamingRules customNamingAnalyzer = new NamingRules();
 			DocumentationRules customDocumentationAnalyzer = new DocumentationRules();
@@ -32,6 +38,9 @@ namespace Shuruev.StyleCop.CSharp
 			customDocumentationAnalyzer.AnalyzeDocument(document);
 		}
 
+		/// <summary>
+		/// Handles encountered custom violations.
+		/// </summary>
 		private void OnCustomViolationEncountered(object sender, ViolationEventArgs e)
 		{
 			RemoveCustomViolation(e);
@@ -54,8 +63,6 @@ namespace Shuruev.StyleCop.CSharp
 				}
 			}
 		}
-
-		#region Helper methods
 
 		/// <summary>
 		/// Initializes custom analyzer based on the standard one.
@@ -140,7 +147,5 @@ namespace Shuruev.StyleCop.CSharp
 
 			violations.Remove(key);
 		}
-
-		#endregion
 	}
 }
