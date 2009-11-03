@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SourceAnalyzer Name="Advanced Documentation Rules">
+	<Description>
+		Rules which verify the spacing placed between keywords and symbols in the code.
+	</Description>
+	<Rules>
+		<Rule Name="CodeLineMustNotEndWithWhitespace" CheckId="CR2000">
+			<Context>Invalid spacing at the end of the line.</Context>
+			<Description>Validates the spacing at the end of the each code line.</Description>
+		</Rule>
+		<Rule Name="CodeLineMustNotBeginWithWhitespace" CheckId="CR2001">
+			<Context>Invalid spacing at the beginning of the line.</Context>
+			<Description>Validates the spacing at the beginning of the each code line.</Description>
+		</Rule>
+	</Rules>
+</SourceAnalyzer>
+

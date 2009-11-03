@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SourceAnalyzer Name="* Limited Default Rules">
+	<Description>
+		Rules that are based on the default ones with adding some exception cases.
+	</Description>
+	<Rules>
+		<Rule Name="ElementMustBeginWithUpperCaseLetter" CheckId="EA1300">
+			<Context>{0} names begin with an upper-case letter: {1}.</Context>
+			<Description>
+				Validates that names of certain types of elements begin with an upper-case letter.
+				Based on SA1300 behaviour, but allows windows forms event handlers to be named with a lower-case letter.
+			</Description>
+		</Rule>
+		<Rule Name="ElementsMustBeDocumented" CheckId="EA1600">
+			<Context>The {0} must have a documentation header.</Context>
+			<Description>
+				Validates that an element contains a properly formatted documentation header.
+				Based on SA1600 behaviour, but allows windows forms event handlers to be undocumented.
+			</Description>
+		</Rule>
+	</Rules>
+</SourceAnalyzer>

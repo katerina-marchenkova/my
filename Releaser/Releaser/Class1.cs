@@ -15,5 +15,13 @@ namespace Shuruev.Releaser
 		public Class2(int a)
 		{
 		}
+
+		/// <summary>
+		/// Oleg Shuruev created this method.
+		/// </summary>
+		public void Xxx()
+		{
+			int a =  10;
+		}
 	}
 }
