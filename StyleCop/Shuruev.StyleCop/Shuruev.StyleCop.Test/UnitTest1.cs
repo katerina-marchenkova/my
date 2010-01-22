@@ -29,6 +29,15 @@ namespace Shuruev.StyleCop.Test
 		}
 
 		/// <summary>
+		/// Tests EA1300 rule.
+		/// </summary>
+		[TestMethod]
+		public void EA1300()
+		{
+			TestCollection(Resources.EA1300, "EA1300");
+		}
+
+		/// <summary>
 		/// Tests EA1600 rule.
 		/// </summary>
 		[TestMethod]
@@ -46,26 +55,76 @@ namespace Shuruev.StyleCop.Test
 		{
 			string[] lines = sourceCollection.Split(new[] { "\r\n" }, StringSplitOptions.None);
 			bool expected = false;
+			string message = null;
+
+			if (lines.Length == 0)
+				throw new InvalidDataException("Test definition file doesn't contain any data.");
+
+			string firstLine = lines[0];
+			if (!firstLine.StartsWith("//# "))
+				throw new InvalidDataException("Test definition file has wrong format.");
+
+			string lastLine = lines[lines.Length - 1];
+			if (lastLine != "//# [END OF FILE]")
+				throw new InvalidDataException("The last line in test definition file doesn't contain valid EOF sign.");
 
 			StringBuilder sb = new StringBuilder();
 			foreach (string line in lines)
 			{
-				if (line.StartsWith("//")
-					&& line.EndsWith("///////////////////////////////////////////////////"))
+				if (line.StartsWith("//# "))
 				{
 					if (sb.Length > 0)
 					{
+						if (String.IsNullOrEmpty(message))
+							throw new InvalidDataException("Every test in file should contain describing message.");
+
 						string sourceCode = sb.ToString();
 						sourceCode = sourceCode.Remove(sourceCode.Length - 2, 2);
 
 						this.PerformAnalysis(sourceCode);
-						Assert.AreEqual(expected, this.currentViolations.Contains(checkId));
+						Assert.AreEqual(
+							expected,
+							this.currentViolations.Contains(checkId),
+							String.Format(
+								"Failed test description is: {0}",
+								message));
 
 						sb.Length = 0;
+						expected = false;
+						message = null;
 					}
 
-					string result = line.Trim('/', ' ');
-					expected = result == "ERROR";
+					if (line == "//# [END OF FILE]")
+						return;
+
+					if (line.StartsWith("//# ["))
+					{
+						string result = line.Trim('/', '#', ' ', '[', ']');
+						if (result == "ERROR")
+						{
+							expected = true;
+						}
+						else if (result == "OK")
+						{
+							expected = false;
+						}
+						else
+						{
+							throw new InvalidDataException(
+								String.Format(
+									"{0} is wrong string for expected result.",
+									result));
+						}
+					}
+					else
+					{
+						string text = line.Trim('/', '#', ' ');
+						if (String.IsNullOrEmpty(text))
+							throw new InvalidDataException("Describing message can not be empty.");
+
+						message = text;
+					}
+
 					continue;
 				}
 

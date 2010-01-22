@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.StyleCop;
 
 namespace Shuruev.StyleCop.Run
@@ -10,7 +11,7 @@ namespace Shuruev.StyleCop.Run
 	public class Program
 	{
 		private static readonly string basePath = AppDomain.CurrentDomain.BaseDirectory;
-		private static readonly string sourceFile = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class3.cs";
+		private static readonly string sourceFile = @"C:\Users\Public\GIT\My\StyleCop\Microsoft.StyleCop\ConsoleApplication1\Program.cs";
 
 		/// <summary>
 		/// Main program entry.
@@ -57,6 +58,14 @@ namespace Shuruev.StyleCop.Run
 		private static void OnViolationEncountered(object sender, ViolationEventArgs e)
 		{
 			Console.WriteLine("{0}: {1}", e.Violation.Rule.CheckId, e.Message);
+		}
+
+		/// <summary>
+		/// Test method.
+		/// </summary>
+		private static void Test1()
+		{
+			bool flag = (bool)typeof(Uri).InvokeMember(null, BindingFlags.Default, null, null, null);
 		}
 	}
 }

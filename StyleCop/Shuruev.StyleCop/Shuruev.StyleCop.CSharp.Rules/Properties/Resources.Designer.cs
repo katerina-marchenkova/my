@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shuruev.StyleCop.Test.Properties {
+namespace Shuruev.StyleCop.CSharp.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Shuruev.StyleCop.Test.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shuruev.StyleCop.Test.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shuruev.StyleCop.CSharp.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,81 +61,20 @@ namespace Shuruev.StyleCop.Test.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to //# [ERROR]
-        /////# Method name starts with lower case letter.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void testMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [OK]
-        /////# Method name starts with upper case letter.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# Windows forms event handler is not private.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Initializes a new instance..
         /// </summary>
-        internal static string EA1300 {
+        internal static string StandardConstructorSummaryText {
             get {
-                return ResourceManager.GetString("EA1300", resourceCulture);
+                return ResourceManager.GetString("StandardConstructorSummaryText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to //# [ERROR]
-        /////# Public class doesn&apos;t have summary.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# Public method doesn&apos;t have summary.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	/// &lt;summary&gt;
-        ///	/// Hello there.
-        ///	/// &lt;/summary&gt;
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [OK]
-        /////# Both class and method have summary.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	/// &lt;summary&gt; [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Finalizes an instance..
         /// </summary>
-        internal static string EA1600 {
+        internal static string StandardDestructorSummaryText {
             get {
-                return ResourceManager.GetString("EA1600", resourceCulture);
+                return ResourceManager.GetString("StandardDestructorSummaryText", resourceCulture);
             }
         }
     }

@@ -19,6 +19,18 @@
 		/// </summary>
 		ElementsMustBeDocumented,
 
+		/// <summary>
+		/// Verifies that a constructor's summary text begins with the appropriate wording.
+		/// Based on SA1642 behaviour, but allows any constructor to have the following summary text: "Initializes a new instance.".
+		/// </summary>
+		ConstructorSummaryDocumentationMustBeginWithStandardText,
+
+		/// <summary>
+		/// Verifies that a destructor's summary text begins with the appropriate wording.
+		/// Based on SA1643 behaviour, but allows any destructor to have the following summary text: "Finalizes an instance.".
+		/// </summary>
+		DestructorSummaryDocumentationMustBeginWithStandardText,
+
 		#endregion
 
 		#region Advanced Spacing Rules

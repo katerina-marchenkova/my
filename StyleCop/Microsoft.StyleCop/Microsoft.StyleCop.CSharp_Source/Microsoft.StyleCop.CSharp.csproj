@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{122278F6-6774-4035-9B21-CC7DEF2B92A0}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -569,11 +569,11 @@
     <Compile Include="Microsoft.StyleCop.CSharp\YieldStatement.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.CsParser.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.Strings.resx">
+    <EmbeddedResource Include="CsParser.xml" />
+    <EmbeddedResource Include="Strings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.TypeNames.resx">
+    <EmbeddedResource Include="TypeNames.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

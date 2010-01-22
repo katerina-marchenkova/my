@@ -88,10 +88,31 @@ namespace Microsoft.StyleCop.CSharp
                 return;
             }
             CsTokenType csTokenType = next.Value.CsTokenType;
-            if (((((((csTokenType == CsTokenType.WhiteSpace) || (csTokenType == CsTokenType.EndOfLine)) || ((csTokenType == CsTokenType.CloseParenthesis) || (csTokenType == CsTokenType.OpenParenthesis))) || (((csTokenType == CsTokenType.CloseSquareBracket) || (csTokenType == CsTokenType.OpenSquareBracket)) || ((csTokenType == CsTokenType.CloseAttributeBracket) || (csTokenType == CsTokenType.Semicolon)))) || ((((csTokenType == CsTokenType.Comma) || (csTokenType == CsTokenType.Other)) || ((csTokenType == CsTokenType.Base) || (csTokenType == CsTokenType.This))) || (((csTokenType == CsTokenType.Null) || (csTokenType == CsTokenType.New)) || ((csTokenType == CsTokenType.Number) || (csTokenType == CsTokenType.String))))) || ((csTokenType == CsTokenType.Delegate) || ((csTokenType == CsTokenType.OperatorSymbol) && (((OperatorSymbol) next.Value).SymbolType == OperatorType.AddressOf)))) || next.Value.Text.StartsWith(".", StringComparison.Ordinal))
-            {
-                goto Label_01C1;
-            }
+			if (((csTokenType == CsTokenType.WhiteSpace
+					|| csTokenType == CsTokenType.EndOfLine
+					|| csTokenType == CsTokenType.CloseParenthesis
+					|| csTokenType == CsTokenType.OpenParenthesis
+					|| csTokenType == CsTokenType.CloseSquareBracket
+					|| csTokenType == CsTokenType.OpenSquareBracket
+					|| csTokenType == CsTokenType.CloseAttributeBracket
+					|| csTokenType == CsTokenType.Semicolon
+					|| csTokenType == CsTokenType.Comma
+					|| csTokenType == CsTokenType.Other
+					|| csTokenType == CsTokenType.Base
+					|| csTokenType == CsTokenType.This
+					|| csTokenType == CsTokenType.Null
+					|| csTokenType == CsTokenType.New
+					|| csTokenType == CsTokenType.Number
+					|| csTokenType == CsTokenType.String
+					// Oleg Shuruev added
+					|| csTokenType == CsTokenType.Typeof)
+				|| ((csTokenType == CsTokenType.Delegate)
+					|| ((csTokenType == CsTokenType.OperatorSymbol)
+						&& (((OperatorSymbol)next.Value).SymbolType == OperatorType.AddressOf))))
+				|| next.Value.Text.StartsWith(".", StringComparison.Ordinal))
+			{
+				goto Label_01C1;
+			}
             bool flag = false;
             if (csTokenType == CsTokenType.OperatorSymbol)
             {

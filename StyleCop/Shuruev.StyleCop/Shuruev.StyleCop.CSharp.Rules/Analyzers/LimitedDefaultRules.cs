@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
+using Shuruev.StyleCop.CSharp.Properties;
 
 namespace Shuruev.StyleCop.CSharp
 {
@@ -11,31 +12,35 @@ namespace Shuruev.StyleCop.CSharp
 	[SourceAnalyzer(typeof(CsParser))]
 	public class LimitedDefaultRules : SourceAnalyzer
 	{
+		private StyleCopCore customCore;
+		private NamingRules customNamingAnalyzer;
+		private DocumentationRules customDocumentationAnalyzer;
+
 		/// <summary>
 		/// Analyzes source document.
 		/// </summary>
 		public override void AnalyzeDocument(CodeDocument document)
 		{
-			StyleCopCore customCore = new StyleCopCore();
-			customCore.ViolationEncountered += this.OnCustomViolationEncountered;
+			this.customCore = new StyleCopCore();
+			this.customCore.ViolationEncountered += this.OnCustomViolationEncountered;
 
-			NamingRules customNamingAnalyzer = new NamingRules();
-			DocumentationRules customDocumentationAnalyzer = new DocumentationRules();
+			this.customNamingAnalyzer = new NamingRules();
+			this.customDocumentationAnalyzer = new DocumentationRules();
 
 			InitializeCustomAnalyzer(
 				Core,
-				customCore,
+				this.customCore,
 				"Microsoft.StyleCop.CSharp.NamingRules",
-				customNamingAnalyzer);
+				this.customNamingAnalyzer);
 
 			InitializeCustomAnalyzer(
 				Core,
-				customCore,
+				this.customCore,
 				"Microsoft.StyleCop.CSharp.DocumentationRules",
-				customDocumentationAnalyzer);
+				this.customDocumentationAnalyzer);
 
-			customNamingAnalyzer.AnalyzeDocument(document);
-			customDocumentationAnalyzer.AnalyzeDocument(document);
+			this.customNamingAnalyzer.AnalyzeDocument(document);
+			this.customDocumentationAnalyzer.AnalyzeDocument(document);
 		}
 
 		/// <summary>
@@ -49,18 +54,48 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (e.Violation.Rule.CheckId == "SA1300")
 			{
-				if (!Helper.IsWindowsFormsEventHandler(element))
-				{
-					AddViolation(element, Rules.ElementMustBeginWithUpperCaseLetter, new object[] { element.FriendlyTypeText, element.Name });
-				}
+				if (Helper.IsWindowsFormsEventHandler(element))
+					return;
+
+				AddViolation(
+					element,
+					Rules.ElementMustBeginWithUpperCaseLetter,
+					new object[] { element.FriendlyTypeText, element.Name });
 			}
 
 			if (e.Violation.Rule.CheckId == "SA1600")
 			{
-				if (!Helper.IsWindowsFormsEventHandler(element))
-				{
-					AddViolation(element, Rules.ElementsMustBeDocumented, new object[] { element.FriendlyTypeText });
-				}
+				if (Helper.IsWindowsFormsEventHandler(element))
+					return;
+
+				AddViolation(
+					element,
+					Rules.ElementsMustBeDocumented,
+					new object[] { element.FriendlyTypeText });
+			}
+
+			if (e.Violation.Rule.CheckId == "SA1642")
+			{
+				string text = Helper.GetSummaryText(element);
+				if (text == Resources.StandardConstructorSummaryText)
+					return;
+
+				AddViolation(
+					element,
+					Rules.ConstructorSummaryDocumentationMustBeginWithStandardText,
+					new object[] { this.GetExampleSummaryTextForConstructor(element) });
+			}
+
+			if (e.Violation.Rule.CheckId == "SA1643")
+			{
+				string text = Helper.GetSummaryText(element);
+				if (text == Resources.StandardDestructorSummaryText)
+					return;
+
+				AddViolation(
+					element,
+					Rules.DestructorSummaryDocumentationMustBeginWithStandardText,
+					new object[] { this.GetExampleSummaryTextForDestructor() });
 			}
 		}
 
@@ -147,5 +182,36 @@ namespace Shuruev.StyleCop.CSharp
 
 			violations.Remove(key);
 		}
+
+		#region Calling specific private methods from base analyzers
+
+		/// <summary>
+		/// Gets example summary text for constructor.
+		/// </summary>
+		private string GetExampleSummaryTextForConstructor(ICodeUnit constructor)
+		{
+			string type = (constructor.Parent is Struct) ? "struct" : "class";
+			return (string)typeof(DocumentationRules).InvokeMember(
+				"GetExampleSummaryTextForConstructorType",
+				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
+				null,
+				this.customDocumentationAnalyzer,
+				new object[] { constructor, type });
+		}
+
+		/// <summary>
+		/// Gets example summary text for destructor.
+		/// </summary>
+		private string GetExampleSummaryTextForDestructor()
+		{
+			return (string)typeof(DocumentationRules).InvokeMember(
+				"GetExampleSummaryTextForDestructor",
+				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
+				null,
+				this.customDocumentationAnalyzer,
+				null);
+		}
+
+		#endregion
 	}
 }

@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D4AE619-B1F8-41B6-8145-03B3458BEC96}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -354,26 +354,26 @@
     <Compile Include="Microsoft.StyleCop\WritableSettings.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="Microsoft.StyleCop.AnalyzersOptions.resx">
+    <EmbeddedResource Include="AnalyzersOptions.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.CacheOptions.resx">
+    <EmbeddedResource Include="CacheOptions.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.CoreParser.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.GlobalSettingsFileOptions.resx">
+    <EmbeddedResource Include="CoreParser.xml" />
+    <EmbeddedResource Include="GlobalSettingsFileOptions.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.PropertyControl.resx">
+    <EmbeddedResource Include="PropertyControl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.PropertyDialog.resx">
+    <EmbeddedResource Include="PropertyDialog.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.Strings.resx">
+    <EmbeddedResource Include="Strings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.StyleCopAddIn.xml" />
+    <EmbeddedResource Include="StyleCopAddIn.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

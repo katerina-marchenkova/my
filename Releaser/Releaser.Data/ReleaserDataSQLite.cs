@@ -24,12 +24,12 @@ namespace Shuruev.Releaser.Data
 		#region Delegates
 
 		/// <summary>
-		/// Performing actions inside the reader.
+		/// Performs actions inside the reader.
 		/// </summary>
 		private delegate void DoWithReader(IDataRecord reader);
 
 		/// <summary>
-		/// Return result from the reader.
+		/// Returns result from the reader.
 		/// </summary>
 		private delegate T ReturnFromReader<T>(IDataRecord reader);
 

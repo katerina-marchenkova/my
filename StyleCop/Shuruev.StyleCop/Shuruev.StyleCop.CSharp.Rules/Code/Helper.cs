@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.Reflection;
-using Microsoft.StyleCop;
+using System.Text;
+using System.Xml;
 using Microsoft.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.CSharp
@@ -39,6 +38,47 @@ namespace Shuruev.StyleCop.CSharp
 			}
 
 			return false;
+		}
+
+		/// <summary>
+		/// Gets summary text for specified element.
+		/// </summary>
+		public static string GetSummaryText(CsElement element)
+		{
+			XmlDocument header = MakeXml(element.Header.Text);
+			if (header != null)
+			{
+				XmlNode node = header.SelectSingleNode("root/summary");
+				if (node != null)
+				{
+					return node.InnerXml.Trim();
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Creates XML document from its inner text.
+		/// </summary>
+		public static XmlDocument MakeXml(string text)
+		{
+			XmlDocument document = new XmlDocument();
+
+			try
+			{
+				StringBuilder xml = new StringBuilder();
+				xml.Append("<root>");
+				xml.Append(text);
+				xml.Append("</root>");
+				document.LoadXml(xml.ToString());
+			}
+			catch (XmlException)
+			{
+				return null;
+			}
+
+			return document;
 		}
 	}
 }

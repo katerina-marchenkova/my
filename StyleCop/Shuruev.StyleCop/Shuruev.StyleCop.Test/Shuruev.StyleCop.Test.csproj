@@ -57,7 +57,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="Resources\EA1600.txt" />
+    <Content Include="Resources\EA1600.cs" />
+    <Content Include="Resources\EA1300.cs" />
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>

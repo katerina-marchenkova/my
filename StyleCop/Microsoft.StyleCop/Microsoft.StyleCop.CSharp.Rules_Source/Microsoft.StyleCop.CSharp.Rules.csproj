@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C9EB7129-8922-446A-927F-C88EA09E97D8}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -18,7 +18,7 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>Library</OutputType>
-    <RootNamespace>Microsoft.StyleCop.CSharp.Rules</RootNamespace>
+    <RootNamespace>Microsoft.StyleCop.CSharp</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
@@ -147,23 +147,23 @@
     <Compile Include="Microsoft.StyleCop.CSharp\ValidPrefixes.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.CodeStrings.resx">
+    <EmbeddedResource Include="CodeStrings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.CompanyInformation.resx">
+    <EmbeddedResource Include="CompanyInformation.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.DocumentationRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.LayoutRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.MaintainabilityRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.NamingRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.OrderingRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.ReadabilityRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.SpacingRules.xml" />
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.Strings.resx">
+    <EmbeddedResource Include="DocumentationRules.xml" />
+    <EmbeddedResource Include="LayoutRules.xml" />
+    <EmbeddedResource Include="MaintainabilityRules.xml" />
+    <EmbeddedResource Include="NamingRules.xml" />
+    <EmbeddedResource Include="OrderingRules.xml" />
+    <EmbeddedResource Include="ReadabilityRules.xml" />
+    <EmbeddedResource Include="SpacingRules.xml" />
+    <EmbeddedResource Include="Strings.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Microsoft.StyleCop.CSharp.ValidPrefixes.resx">
+    <EmbeddedResource Include="ValidPrefixes.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
