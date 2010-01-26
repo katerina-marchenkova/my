@@ -93,9 +93,9 @@ namespace Shuruev.StyleCop.Test.Properties {
         ///	{
         ///		public void  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string EA1300 {
+        internal static string SH1300 {
             get {
-                return ResourceManager.GetString("EA1300", resourceCulture);
+                return ResourceManager.GetString("SH1300", resourceCulture);
             }
         }
         
@@ -133,9 +133,88 @@ namespace Shuruev.StyleCop.Test.Properties {
         ///{
         ///	/// &lt;summary&gt; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string EA1600 {
+        internal static string SH1600 {
             get {
-                return ResourceManager.GetString("EA1600", resourceCulture);
+                return ResourceManager.GetString("SH1600", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //# [ERROR]
+        /////# There is excess whitespace at the end of the line.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			int a = 10; 
+        ///		}
+        ///	}
+        ///}
+        /////# [ERROR]
+        /////# There is excess whitespace at the end of the line.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			int a = 10;	
+        ///		}
+        ///	}
+        ///}
+        /////# [ERROR]
+        /////# There are excess whitespaces at the end of the line.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SH2000 {
+            get {
+                return ResourceManager.GetString("SH2000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //# [OK]
+        /////# All identation is correct.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			int a = 10;
+        ///		}
+        ///	}
+        ///}
+        /////# [ERROR]
+        /////# One line uses tabs and whitespaces.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	 public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			int a = 10;
+        ///		}
+        ///	}
+        ///}
+        /////# [OK]
+        /////# All identation is correct.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///    public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			int a = 10;
+        ///		}        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SH2001 {
+            get {
+                return ResourceManager.GetString("SH2001", resourceCulture);
             }
         }
     }

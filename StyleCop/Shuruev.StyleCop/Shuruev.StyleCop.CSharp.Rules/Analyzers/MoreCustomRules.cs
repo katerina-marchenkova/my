@@ -4,10 +4,10 @@ using Microsoft.StyleCop.CSharp;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Rules which verify the spacing placed between keywords and symbols in the code.
+	/// More custom rules represented by Shuruev StyleCop plug-in.
 	/// </summary>
 	[SourceAnalyzer(typeof(CsParser))]
-	public class AdvancedSpacingRules : SourceAnalyzer
+	public class MoreCustomRules : SourceAnalyzer
 	{
 		/// <summary>
 		/// Analyzes source document.
@@ -40,7 +40,7 @@ namespace Shuruev.StyleCop.CSharp
 						AddViolation(
 							doc.RootElement,
 							node.Value.LineNumber,
-							Rules.CodeLineMustNotBeginWithWhitespace,
+							Rules.CodeLineMustBeginWithIdenticalWhitespaces,
 							new object[0]);
 					}
 				}

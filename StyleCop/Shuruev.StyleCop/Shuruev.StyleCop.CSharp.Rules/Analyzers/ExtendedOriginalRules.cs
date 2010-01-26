@@ -7,10 +7,10 @@ using Shuruev.StyleCop.CSharp.Properties;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Rules that are based on the default ones with adding some exception cases.
+	/// Rules that are based on the original ones with adding some exception cases.
 	/// </summary>
 	[SourceAnalyzer(typeof(CsParser))]
-	public class LimitedDefaultRules : SourceAnalyzer
+	public class ExtendedOriginalRules : SourceAnalyzer
 	{
 		private StyleCopCore customCore;
 		private NamingRules customNamingAnalyzer;

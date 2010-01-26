@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Shuruev")]
 [assembly: AssemblyProduct("Shuruev.StyleCop.CSharp.Rules")]
-[assembly: AssemblyCopyright("Copyright © Shuruev 2009")]
+[assembly: AssemblyCopyright("Copyright © Shuruev 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

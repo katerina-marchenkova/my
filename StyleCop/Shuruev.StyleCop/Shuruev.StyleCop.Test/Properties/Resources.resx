@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="EA1300" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EA1300.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SH1300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH1300.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="EA1600" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EA1600.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SH1600" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH1600.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SH2000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH2000.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SH2001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SH2001.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

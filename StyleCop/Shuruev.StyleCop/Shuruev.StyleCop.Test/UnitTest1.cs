@@ -28,23 +28,49 @@ namespace Shuruev.StyleCop.Test
 			this.currentViolations = new List<string>();
 		}
 
+		#region Extended original rules
+
 		/// <summary>
-		/// Tests EA1300 rule.
+		/// Tests SH1300 rule.
 		/// </summary>
 		[TestMethod]
-		public void EA1300()
+		public void SH1300()
 		{
-			TestCollection(Resources.EA1300, "EA1300");
+			TestCollection(Resources.SH1300, "SH1300");
 		}
 
 		/// <summary>
-		/// Tests EA1600 rule.
+		/// Tests SH1600 rule.
 		/// </summary>
 		[TestMethod]
-		public void EA1600()
+		public void SH1600()
 		{
-			TestCollection(Resources.EA1600, "EA1600");
+			TestCollection(Resources.SH1600, "SH1600");
 		}
+
+		#endregion
+
+		#region More custom rules
+
+		/// <summary>
+		/// Tests SH2000 rule.
+		/// </summary>
+		[TestMethod]
+		public void SH2000()
+		{
+			TestCollection(Resources.SH2000, "SH2000");
+		}
+
+		/// <summary>
+		/// Tests SH2001 rule.
+		/// </summary>
+		[TestMethod]
+		public void SH2001()
+		{
+			TestCollection(Resources.SH2001, "SH2001");
+		}
+
+		#endregion
 
 		#region Running tests for custom source code
 

@@ -5,7 +5,7 @@
 	/// </summary>
 	internal enum Rules
 	{
-		#region Limited Default Rules
+		#region Extended original rules
 
 		/// <summary>
 		/// Validates that names of certain types of elements begin with an upper-case letter.
@@ -33,7 +33,7 @@
 
 		#endregion
 
-		#region Advanced Spacing Rules
+		#region More custom rules
 
 		/// <summary>
 		/// Validates the spacing at the end of the each code line.
@@ -41,9 +41,9 @@
 		CodeLineMustNotEndWithWhitespace,
 
 		/// <summary>
-		/// Validates the spacing at the beginning of the each code line.
+		/// Validates that spacing at the beginning of the each code line uses identical characters.
 		/// </summary>
-		CodeLineMustNotBeginWithWhitespace
+		CodeLineMustBeginWithIdenticalWhitespaces
 
 		#endregion
 	}
