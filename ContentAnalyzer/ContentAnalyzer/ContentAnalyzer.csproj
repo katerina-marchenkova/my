@@ -40,15 +40,15 @@
     <Reference Include="System.Web.Mobile" />
     <Reference Include="VXKnowledgeDataSource, Version=1.0.64413.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Public\VSS\SED\SYS\Helix\VXCommander\References\VXKnowledgeDataSource.dll</HintPath>
+      <HintPath>..\..\..\..\VSS\SED\SYS\Helix\VXCommander\References\VXKnowledgeDataSource.dll</HintPath>
     </Reference>
     <Reference Include="VXStorage, Version=2.2.64413.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Public\VSS\SED\SYS\Helix\VXCommander\References\VXStorage.dll</HintPath>
+      <HintPath>..\..\..\..\VSS\SED\SYS\Helix\VXCommander\References\VXStorage.dll</HintPath>
     </Reference>
     <Reference Include="VXSystem, Version=2.2.64413.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Public\VSS\SED\SYS\Helix\VXCommander\References\VXSystem.dll</HintPath>
+      <HintPath>..\..\..\..\VSS\SED\SYS\Helix\VXCommander\References\VXSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
