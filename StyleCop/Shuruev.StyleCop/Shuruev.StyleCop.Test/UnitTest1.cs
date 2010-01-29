@@ -31,21 +31,21 @@ namespace Shuruev.StyleCop.Test
 		#region Extended original rules
 
 		/// <summary>
-		/// Tests SH1300 rule.
+		/// Tests EX1300 rule.
 		/// </summary>
 		[TestMethod]
-		public void SH1300()
+		public void EX1300()
 		{
-			TestCollection(Resources.SH1300, "SH1300");
+			TestCollection(Resources.EX1300, "EX1300");
 		}
 
 		/// <summary>
-		/// Tests SH1600 rule.
+		/// Tests EX1600 rule.
 		/// </summary>
 		[TestMethod]
-		public void SH1600()
+		public void EX1600()
 		{
-			TestCollection(Resources.SH1600, "SH1600");
+			TestCollection(Resources.EX1600, "EX1600");
 		}
 
 		#endregion
@@ -53,21 +53,21 @@ namespace Shuruev.StyleCop.Test
 		#region More custom rules
 
 		/// <summary>
-		/// Tests SH2000 rule.
+		/// Tests CR2000 rule.
 		/// </summary>
 		[TestMethod]
-		public void SH2000()
+		public void CR2000()
 		{
-			TestCollection(Resources.SH2000, "SH2000");
+			TestCollection(Resources.CR2000, "CR2000");
 		}
 
 		/// <summary>
-		/// Tests SH2001 rule.
+		/// Tests CR2001 rule.
 		/// </summary>
 		[TestMethod]
-		public void SH2001()
+		public void CR2001()
 		{
-			TestCollection(Resources.SH2001, "SH2001");
+			TestCollection(Resources.CR2001, "CR2001");
 		}
 
 		#endregion

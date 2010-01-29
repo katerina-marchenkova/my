@@ -15,13 +15,13 @@ namespace Shuruev.StyleCop.Run
 			int a = 10;
 		}
 
-		private void btn_OnClick(object sender, EventArgs e)
+		private void buttonStart_OnClick(object sender, EventArgs xe)
 		{
 		}
 
-		/// <summary>
+		/*/// <summary>
 		/// Hello there.
-		/// </summary>
+		/// </summary>*/
 		private void XXX()
 		{
 		}

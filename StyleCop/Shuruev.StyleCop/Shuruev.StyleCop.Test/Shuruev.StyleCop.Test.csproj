@@ -35,15 +35,15 @@
   <ItemGroup>
     <Reference Include="Microsoft.StyleCop, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft StyleCop 4.3.3.0\Microsoft.StyleCop.dll</HintPath>
+      <HintPath>.\Microsoft.StyleCop.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.StyleCop.CSharp, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft StyleCop 4.3.3.0\Microsoft.StyleCop.CSharp.dll</HintPath>
+      <HintPath>.\Microsoft.StyleCop.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft StyleCop 4.3.3.0\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
+      <HintPath>.\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -57,10 +57,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="Resources\SH1600.cs" />
-    <Content Include="Resources\SH1300.cs" />
-    <Content Include="Resources\SH2000.cs" />
-    <Content Include="Resources\SH2001.cs" />
+    <Content Include="Resources\EX1600.cs" />
+    <Content Include="Resources\EX1300.cs" />
+    <Content Include="Resources\CR2000.cs" />
+    <Content Include="Resources\CR2001.cs" />
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
