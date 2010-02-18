@@ -127,6 +127,9 @@
   <data name="EX1300" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EX1300.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="EX1509" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\ex1509.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="EX1600" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EX1600.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

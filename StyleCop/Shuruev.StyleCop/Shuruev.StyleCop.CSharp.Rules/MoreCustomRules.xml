@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SourceAnalyzer Name="+ More Custom Rules">
 	<Description>
-		More custom rules represented by Shuruev StyleCop plug-in.
+		More custom rules represented by StyleCop+ plug-in.
 	</Description>
 	<Rules>
 		<Rule Name="CodeLineMustNotEndWithWhitespace" CheckId="CR2000">

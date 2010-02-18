@@ -178,6 +178,50 @@ namespace Shuruev.StyleCop.Test.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to //# [OK]
+        /////# Well-formed example.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			for (int i = 0; i &lt; 10; i++)
+        ///			{
+        ///			}
+        ///		}
+        ///	}
+        ///}
+        /////# [ERROR]
+        /////# Excess blank line.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			for (int i = 0; i &lt; 10; i++)
+        ///
+        ///			{
+        ///			}
+        ///		}
+        ///	}
+        ///}
+        /////# [ERROR]
+        /////# Excess blank line.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod( [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string EX1509 {
+            get {
+                return ResourceManager.GetString("EX1509", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to //# [ERROR]
         /////# Public class doesn&apos;t have summary.
         ///namespace Shuruev.StyleCop.Test

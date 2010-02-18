@@ -1,32 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Shuruev.StyleCop.Run
+﻿namespace Shuruev.StyleCop.Test
 {
-	/// <summary>
-	/// Some class ho ho.
-	/// </summary>
-	public partial class Class3
+	public class TestClass
 	{
-		/// <summary>
-		/// Initializes a new instance.
-		/// </summary>
-		/// <remarks>
-		/// Some remark here.
-		/// </remarks>
-		private Class3()
+		public void TestMethod()
 		{
-		}
+			for (int i = 0; i < 10; i++)
 
-		/// <summary>
-		/// Finalizes an instance.
-		/// </summary>
-		/// <remarks>
-		/// Some remark here.
-		/// </remarks>
-		~Class3()
-		{
+			{
+			}
+
+			int a = 10;
+
+			{
+				int b = 10;
+			}
+
+			{
+				int c = 10;
+			}
 		}
 	}
 }

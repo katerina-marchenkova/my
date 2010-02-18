@@ -1,5 +1,6 @@
 using System.Text;
 using System.Xml;
+using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.CSharp
@@ -9,6 +10,8 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public static class Helper
 	{
+		#region Identifying elements
+
 		/// <summary>
 		/// Checks whether specified element describes windows forms event handler.
 		/// </summary>
@@ -39,6 +42,45 @@ namespace Shuruev.StyleCop.CSharp
 
 			return false;
 		}
+
+		#endregion
+
+		#region Working with node tree
+
+		/// <summary>
+		/// Gets first node by specified line number.
+		/// </summary>
+		public static Node<CsToken> GetNodeByLine(CsDocument document, int lineNumber)
+		{
+			for (Node<CsToken> node = document.Tokens.First; node != null; node = node.Next)
+			{
+				if (node.Value.LineNumber == lineNumber)
+					return node;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Gets first node by specified line number.
+		/// </summary>
+		public static Node<CsToken> FindPreviousValueableNode(Node<CsToken> target)
+		{
+			for (Node<CsToken> node = target.Previous; node != null; node = node.Previous)
+			{
+				if (node.Value.CsTokenType == CsTokenType.WhiteSpace
+					|| node.Value.CsTokenType == CsTokenType.EndOfLine)
+					continue;
+
+				return node;
+			}
+
+			return null;
+		}
+
+		#endregion
+
+		#region Working with documentation
 
 		/// <summary>
 		/// Gets summary text for specified element.
@@ -80,5 +122,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			return document;
 		}
+
+		#endregion
 	}
 }

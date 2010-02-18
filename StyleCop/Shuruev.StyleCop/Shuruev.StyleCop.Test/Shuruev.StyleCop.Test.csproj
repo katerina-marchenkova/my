@@ -61,7 +61,8 @@
     <Content Include="Resources\EX1300.cs" />
     <Content Include="Resources\CR2000.cs" />
     <Content Include="Resources\CR2001.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Content Include="Resources\EX1509.cs" />
+    <Compile Include="MainTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shuruev.StyleCop.CSharp.Rules\Shuruev.StyleCop.CSharp.Rules.csproj">

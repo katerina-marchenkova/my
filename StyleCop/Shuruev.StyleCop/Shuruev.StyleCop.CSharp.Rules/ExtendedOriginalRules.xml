@@ -8,6 +8,10 @@
 			<Context>{0} names begin with an upper-case letter: {1}.</Context>
 			<Description>Validates that names of certain types of elements begin with an upper-case letter. Based on SA1300 behaviour, but allows windows forms event handlers to be named with a lower-case letter.</Description>
 		</Rule>
+		<Rule Name="OpeningCurlyBracketsMustNotBePrecededByBlankLine" CheckId="EX1509" DisabledByDefault="true">
+			<Context>An opening curly bracket must not be preceded by a blank line.</Context>
+			<Description>Validates that an opening curly bracket is not preceded by a blank line. Based on SA1509 behaviour, but allows using nested code blocks.</Description>
+		</Rule>
 		<Rule Name="ElementsMustBeDocumented" CheckId="EX1600" DisabledByDefault="true">
 			<Context>The {0} must have a documentation header.</Context>
 			<Description>Validates that an element contains a properly formatted documentation header. Based on SA1600 behaviour, but allows windows forms event handlers to be undocumented.</Description>

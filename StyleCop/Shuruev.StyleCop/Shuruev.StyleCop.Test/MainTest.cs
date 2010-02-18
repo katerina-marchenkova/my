@@ -12,16 +12,16 @@ namespace Shuruev.StyleCop.Test
 	/// Testing StyleCop extensions.
 	/// </summary>
 	[TestClass]
-	public class UnitTest1
+	public class MainTest
 	{
 		private readonly string basePath;
 		private readonly string currentFilename;
 		private readonly List<string> currentViolations;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="UnitTest1"/> class.
+		/// Initializes a new instance.
 		/// </summary>
-		public UnitTest1()
+		public MainTest()
 		{
 			this.basePath = AppDomain.CurrentDomain.BaseDirectory;
 			this.currentFilename = Path.Combine(this.basePath, "Test.cs");
@@ -37,6 +37,15 @@ namespace Shuruev.StyleCop.Test
 		public void EX1300()
 		{
 			TestCollection(Resources.EX1300, "EX1300");
+		}
+
+		/// <summary>
+		/// Tests EX1509 rule.
+		/// </summary>
+		[TestMethod]
+		public void EX1509()
+		{
+			TestCollection(Resources.EX1509, "EX1509");
 		}
 
 		/// <summary>

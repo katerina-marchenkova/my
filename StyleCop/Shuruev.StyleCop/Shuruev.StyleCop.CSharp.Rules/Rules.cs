@@ -14,6 +14,12 @@
 		ElementMustBeginWithUpperCaseLetter,
 
 		/// <summary>
+		/// Validates that an opening curly bracket is not preceded by a blank line.
+		/// Based on SA1509 behaviour, but allows using nested code blocks.
+		/// </summary>
+		OpeningCurlyBracketsMustNotBePrecededByBlankLine,
+
+		/// <summary>
 		/// Validates that an element contains a properly formatted documentation header.
 		/// Based on SA1600 behaviour, but allows windows forms event handlers to be undocumented.
 		/// </summary>
