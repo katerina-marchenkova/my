@@ -13,6 +13,12 @@
 		<li>
 			<a href="Mirror.aspx">Mirror Page</a>
 		</li>
+		<li>
+			<a href="Duplicates.aspx">Duplicates Page</a>
+		</li>
+		<li>
+			<a href="Research.aspx">Research Page</a>
+		</li>
 	</ul>
 </body>
 </html>

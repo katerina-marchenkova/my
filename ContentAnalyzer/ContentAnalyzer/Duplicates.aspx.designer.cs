@@ -12,11 +12,11 @@ namespace ContentAnalyzer {
     
     
     /// <summary>
-    /// _Default class.
+    /// Duplicates class.
     /// </summary>
     /// <remarks>
     /// Auto-generated class.
     /// </remarks>
-    public partial class _Default {
+    public partial class Duplicates {
     }
 }

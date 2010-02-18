@@ -57,11 +57,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\AggregatorDb.cs" />
+    <Content Include="Research.aspx" />
+    <Content Include="Duplicates.aspx" />
     <Content Include="Helix.aspx" />
     <Content Include="Mirror.aspx" />
+    <Compile Include="Code\PairContentRow.cs" />
     <Compile Include="Code\DigitalContentRow.cs" />
     <Compile Include="Code\HelixFileRow.cs" />
     <Compile Include="Code\TPD.cs" />
+    <Compile Include="Research.aspx.cs">
+      <DependentUpon>Research.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Research.aspx.designer.cs">
+      <DependentUpon>Research.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Duplicates.aspx.cs">
+      <DependentUpon>Duplicates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Duplicates.aspx.designer.cs">
+      <DependentUpon>Duplicates.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
