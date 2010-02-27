@@ -1,11 +1,12 @@
-﻿namespace Shuruev.StyleCop.Test
+﻿using System;
+
+namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
 		public void TestMethod()
 		{
 			for (int i = 0; i < 10; i++)
-
 			{
 			}
 
@@ -18,6 +19,9 @@
 			{
 				int c = 10;
 			}
+
+			int z = sizeof(bool);
+			Type t = typeof(bool);
 		}
 	}
 }

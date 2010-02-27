@@ -3,6 +3,18 @@
 	<Description>
 		More custom rules represented by StyleCop+ plug-in.
 	</Description>
+	<Properties>
+		<StringProperty
+			Name="UsingDirectiveGroups"
+			DefaultValue="System;*"
+			FriendlyName="Using directive groups"
+			Description="List of the group prefix (* is a wildcard).  The group separator is ; and the namespace separator is ," />
+		<BooleanProperty
+			Name="AliasShouldBeLast"
+			DefaultValue="false"
+			FriendlyName="Alias should be last of using group"
+			Description="Wheither aliased using should be grouped at the end of their respective using group" />
+	</Properties>
 	<Rules>
 		<Rule Name="CodeLineMustNotEndWithWhitespace" CheckId="CR2000">
 			<Context>Invalid spacing at the end of the line.</Context>
