@@ -11,6 +11,6 @@
 namespace ContentAnalyzer {
     
     
-    public partial class _Default {
+    public partial class Plain {
     }
 }

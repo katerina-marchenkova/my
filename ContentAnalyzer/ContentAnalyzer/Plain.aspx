@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Mirror.aspx.cs" Inherits="ContentAnalyzer.Mirror" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Plain.aspx.cs" Inherits="ContentAnalyzer.Plain" %>
 <%@ Import Namespace="VX.Knowledge.DataSource"%>
 <%@ Import Namespace="ContentAnalyzer"%>
 
@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-	<title>Mirror Page</title>
+	<title>Plain Page</title>
 </head>
 <body>
 	<table>
@@ -19,7 +19,7 @@
 				<b><% Response.Write(skuId); %></b>
 			</td>
 			<%
-				foreach (DigitalContentRow row in m_rows[skuId])
+				foreach (DigitalContentRow row in TPD.GetMultipleImages(skuId))
 				{
 			%>
 			<td>

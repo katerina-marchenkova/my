@@ -20,10 +20,12 @@ namespace Shuruev.StyleCop.CSharp
 		#region Running original analyzers
 
 		/// <summary>
-		/// Analyzes source document.
+		/// Initializes an add-in.
 		/// </summary>
-		public override void AnalyzeDocument(CodeDocument document)
+		public override void InitializeAddIn()
 		{
+			base.InitializeAddIn();
+
 			this.customCore = new StyleCopCore();
 			this.customCore.ViolationEncountered += this.OnCustomViolationEncountered;
 
@@ -48,7 +50,13 @@ namespace Shuruev.StyleCop.CSharp
 				this.customCore,
 				"Microsoft.StyleCop.CSharp.DocumentationRules",
 				this.customDocumentationAnalyzer);
+		}
 
+		/// <summary>
+		/// Analyzes source document.
+		/// </summary>
+		public override void AnalyzeDocument(CodeDocument document)
+		{
 			this.customNamingAnalyzer.AnalyzeDocument(document);
 			this.customLayoutAnalyzer.AnalyzeDocument(document);
 			this.customDocumentationAnalyzer.AnalyzeDocument(document);

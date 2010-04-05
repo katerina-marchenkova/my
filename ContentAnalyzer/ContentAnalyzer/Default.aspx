@@ -6,6 +6,7 @@
 	<title>Content Analyzer</title>
 </head>
 <body>
+	<% Response.Write(Request.UserHostAddress); %>
 	<ul>
 		<li>
 			<a href="Helix.aspx">Helix Page</a>
@@ -18,6 +19,9 @@
 		</li>
 		<li>
 			<a href="Research.aspx">Research Page</a>
+		</li>
+		<li>
+			<a href="Plain.aspx">Plain Page</a>
 		</li>
 	</ul>
 </body>

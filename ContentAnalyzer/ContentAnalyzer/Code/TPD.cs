@@ -175,5 +175,100 @@ namespace ContentAnalyzer
 
 			return rows;
 		}
+
+		/// <summary>
+		/// Gets license multiple images.
+		/// </summary>
+		public static List<DigitalContentRow> GetLicenseMultipleImages()
+		{
+			List<DigitalContentRow> rows = new List<DigitalContentRow>();
+
+			using (SqlConnection conn = new SqlConnection(s_connectionString))
+			{
+				conn.Open();
+
+				using (SqlCommand cmd = conn.CreateCommand())
+				{
+					cmd.CommandType = CommandType.Text;
+					cmd.CommandTimeout = s_commandTimeoutInSeconds;
+					cmd.CommandText = String.Format(
+						@"
+							SELECT
+								A.content_guid,
+								A.original_file_name,
+								A.original_file_extension,
+								(SELECT TOP 1 sku_id FROM tpd_digital_content_link WHERE content_guid = A.content_guid) AS sku_id
+							FROM tpd_digital_content A
+								INNER JOIN tpd_digital_content_meta_link B
+								ON B.content_guid = A.content_guid
+								INNER JOIN tpd_digital_content_meta_link C
+								ON C.content_guid = A.content_guid
+							WHERE
+								B.meta_value_id = 1314536
+								AND C.meta_value_id = 2683
+						");
+
+					using (SqlDataReader reader = cmd.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							DigitalContentRow row = new DigitalContentRow(reader);
+							rows.Add(row);
+						}
+					}
+				}
+			}
+
+			return rows;
+		}
+
+		/// <summary>
+		/// Gets multiple images.
+		/// </summary>
+		public static List<DigitalContentRow> GetMultipleImages(int skuId)
+		{
+			List<DigitalContentRow> rows = new List<DigitalContentRow>();
+
+			using (SqlConnection conn = new SqlConnection(s_connectionString))
+			{
+				conn.Open();
+
+				using (SqlCommand cmd = conn.CreateCommand())
+				{
+					cmd.CommandType = CommandType.Text;
+					cmd.CommandTimeout = s_commandTimeoutInSeconds;
+					cmd.CommandText = String.Format(
+						@"
+							SELECT
+								DCL.sku_id,
+								DCL.content_guid,
+								DC.original_file_name,
+								DC.original_file_extension
+							FROM tpd_digital_content DC WITH(NOLOCK)
+								INNER JOIN tpd_digital_content_meta_link DCML WITH(NOLOCK)
+								ON DCML.content_guid = DC.content_guid
+									AND DCML.meta_value_id = 2683
+								INNER JOIN tpd_digital_content_link DCL WITH(NOLOCK)
+								ON DCL.content_guid = DC.content_guid
+							WHERE
+								media_type_id = 15
+								AND sku_id = @skuId
+						");
+
+					cmd.Parameters.AddWithValue("@skuId", skuId);
+
+					using (SqlDataReader reader = cmd.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							DigitalContentRow row = new DigitalContentRow(reader);
+							rows.Add(row);
+						}
+					}
+				}
+			}
+
+			return rows;
+		}
 	}
 }

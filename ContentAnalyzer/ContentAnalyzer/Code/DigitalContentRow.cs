@@ -12,7 +12,10 @@ namespace ContentAnalyzer
 
 		public DigitalContentRow(IDataRecord reader)
 		{
-			SkuId = (int)reader["sku_id"];
+			if (Convert.IsDBNull(reader["sku_id"]))
+				SkuId = -1;
+			else
+				SkuId = (int)reader["sku_id"];
 			ContentGuid = (Guid)reader["content_guid"];
 			Name = (string)reader["original_file_name"];
 			Extension = (string)reader["original_file_extension"];

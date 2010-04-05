@@ -14,7 +14,8 @@ namespace ContentAnalyzer
 			m_skuIds = new List<int>();
 			m_rows = new Dictionary<int, List<DigitalContentRow>>();
 
-			List<DigitalContentRow> rows = TPD.GetMultipleImagesByFileCount();
+			//List<DigitalContentRow> rows = TPD.GetMultipleImagesByFileCount();
+			List<DigitalContentRow> rows = TPD.GetLicenseMultipleImages();
 			foreach (DigitalContentRow row in rows)
 			{
 				if (!m_rows.ContainsKey(row.SkuId))
