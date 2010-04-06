@@ -67,6 +67,7 @@
     <Compile Include="Common\HighlightTextBox.designer.cs">
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Messages.cs" />
     <Compile Include="Common\OwnColors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Analyzers\MoreCustomRules.cs" />

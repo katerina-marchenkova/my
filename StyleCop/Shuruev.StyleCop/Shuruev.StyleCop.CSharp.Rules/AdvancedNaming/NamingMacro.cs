@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuruev.StyleCop.CSharp.Properties;
 
 namespace Shuruev.StyleCop.CSharp
 {
@@ -17,11 +18,30 @@ namespace Shuruev.StyleCop.CSharp
 
 		static NamingMacro()
 		{
-			AddMacro("AaBb", "PascalNamingStyle", "xxx");
-			AddMacro("aaBb", "camelNamingStyle", "xxx");
-			AddMacro("AA_BB", "ALL_WORDS_UPPER", "xxx");
-			AddMacro("aa_bb", "all_words_lower", "xxx");
-			AddMacro("Aa_Bb", "All_Words_Capitalized", "xxx");
+			AddMacro(
+				Resources.MacroPascalCode,
+				Resources.MacroPascalDescription,
+				Resources.MacroPascalRegular);
+
+			AddMacro(
+				Resources.MacroCamelCode,
+				Resources.MacroCamelDescription,
+				Resources.MacroCamelRegular);
+
+			AddMacro(
+				Resources.MacroUpperCode,
+				Resources.MacroUpperDescription,
+				Resources.MacroUpperRegular);
+
+			AddMacro(
+				Resources.MacroLowerCode,
+				Resources.MacroLowerDescription,
+				Resources.MacroLowerRegular);
+
+			AddMacro(
+				Resources.MacroCapitalizedCode,
+				Resources.MacroCapitalizedDescription,
+				Resources.MacroCapitalizedRegular);
 		}
 
 		#region Accessing macros
@@ -79,11 +99,24 @@ namespace Shuruev.StyleCop.CSharp
 		#region Parsing rule definitions
 
 		/// <summary>
+		/// Cleans meaningless data from specified text.
+		/// </summary>
+		public static string Clean(string text)
+		{
+			string[] lines = text.Split(
+				new[] { '\r', '\n' },
+				StringSplitOptions.RemoveEmptyEntries);
+
+			return String.Join("\r\n", lines);
+		}
+
+		/// <summary>
 		/// Checks if specified text can describe naming rule.
 		/// </summary>
 		public static bool Check(string text)
 		{
 			text = HideMarkups(text);
+			text = Clean(text);
 
 			string[] lines = text.Split(
 				new[] { '\r', '\n' },

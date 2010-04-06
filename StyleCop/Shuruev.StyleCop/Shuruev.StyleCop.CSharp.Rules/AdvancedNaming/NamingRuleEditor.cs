@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuruev.StyleCop.CSharp.Properties;
 
 namespace Shuruev.StyleCop.CSharp
 {
@@ -17,10 +18,38 @@ namespace Shuruev.StyleCop.CSharp
 			InitializeComponent();
 		}
 
+		#region Properties
+
+		/// <summary>
+		/// Gets or sets object name.
+		/// </summary>
+		public string ObjectName { get; set; }
+
+		/// <summary>
+		/// Gets or sets rule definition string.
+		/// </summary>
+		public string RuleDefinition { get; set; }
+
+		#endregion
+
 		#region Event handlers
 
 		private void NamingRuleEditor_Load(object sender, EventArgs e)
 		{
+			if (String.IsNullOrEmpty(ObjectName))
+				throw new InvalidOperationException("ObjectName is not set.");
+
+			Text = String.Format(Resources.NamingRuleEditorCaption, ObjectName);
+
+			if (String.IsNullOrEmpty(RuleDefinition))
+			{
+				checkDisable.Checked = true;
+			}
+			else
+			{
+				textEditor.RichTextBox.Text = RuleDefinition;
+			}
+
 			UpdateMacroList();
 			UpdateControls();
 		}
@@ -51,6 +80,22 @@ namespace Shuruev.StyleCop.CSharp
 		private void btnInsert_Click(object sender, EventArgs e)
 		{
 			Action_Insert_Do();
+		}
+
+		private void btnOK_Click(object sender, EventArgs e)
+		{
+			if (!NamingMacro.Check(textEditor.RichTextBox.Text))
+			{
+				Messages.ShowWarningOk(this, Resources.NamingRuleEditorWarning);
+				textEditor.Focus();
+				return;
+			}
+
+			RuleDefinition = checkDisable.Checked ?
+				String.Empty :
+				NamingMacro.Clean(textEditor.RichTextBox.Text);
+
+			DialogResult = DialogResult.OK;
 		}
 
 		#endregion

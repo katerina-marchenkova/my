@@ -61,6 +61,192 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string CaptionError {
+            get {
+                return ResourceManager.GetString("CaptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string CaptionInformation {
+            get {
+                return ResourceManager.GetString("CaptionInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        internal static string CaptionWarning {
+            get {
+                return ResourceManager.GetString("CaptionWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to aaBb.
+        /// </summary>
+        internal static string MacroCamelCode {
+            get {
+                return ResourceManager.GetString("MacroCamelCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to camelNamingStyle.
+        /// </summary>
+        internal static string MacroCamelDescription {
+            get {
+                return ResourceManager.GetString("MacroCamelDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xxx.
+        /// </summary>
+        internal static string MacroCamelRegular {
+            get {
+                return ResourceManager.GetString("MacroCamelRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aa_Bb.
+        /// </summary>
+        internal static string MacroCapitalizedCode {
+            get {
+                return ResourceManager.GetString("MacroCapitalizedCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All_Words_Capitalized.
+        /// </summary>
+        internal static string MacroCapitalizedDescription {
+            get {
+                return ResourceManager.GetString("MacroCapitalizedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xxx.
+        /// </summary>
+        internal static string MacroCapitalizedRegular {
+            get {
+                return ResourceManager.GetString("MacroCapitalizedRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to aa_bb.
+        /// </summary>
+        internal static string MacroLowerCode {
+            get {
+                return ResourceManager.GetString("MacroLowerCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to all_words_lower.
+        /// </summary>
+        internal static string MacroLowerDescription {
+            get {
+                return ResourceManager.GetString("MacroLowerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xxx.
+        /// </summary>
+        internal static string MacroLowerRegular {
+            get {
+                return ResourceManager.GetString("MacroLowerRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AaBb.
+        /// </summary>
+        internal static string MacroPascalCode {
+            get {
+                return ResourceManager.GetString("MacroPascalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PascalNamingStyle.
+        /// </summary>
+        internal static string MacroPascalDescription {
+            get {
+                return ResourceManager.GetString("MacroPascalDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xxx.
+        /// </summary>
+        internal static string MacroPascalRegular {
+            get {
+                return ResourceManager.GetString("MacroPascalRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AA_BB.
+        /// </summary>
+        internal static string MacroUpperCode {
+            get {
+                return ResourceManager.GetString("MacroUpperCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ALL_WORDS_UPPER.
+        /// </summary>
+        internal static string MacroUpperDescription {
+            get {
+                return ResourceManager.GetString("MacroUpperDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xxx.
+        /// </summary>
+        internal static string MacroUpperRegular {
+            get {
+                return ResourceManager.GetString("MacroUpperRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit &quot;{0}&quot; Naming Rule.
+        /// </summary>
+        internal static string NamingRuleEditorCaption {
+            get {
+                return ResourceManager.GetString("NamingRuleEditorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that your rule definition string has wrong syntax.
+        ///
+        ///Please check that:
+        ///- it doesn&apos;t contain whitespace characters
+        ///- all macros are written correctly
+        ///- it uses only letters, digits and underscore in string literals
+        ///- you are using &quot;Turn off&quot; option instead of empty definition.
+        /// </summary>
+        internal static string NamingRuleEditorWarning {
+            get {
+                return ResourceManager.GetString("NamingRuleEditorWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initializes a new instance..
         /// </summary>
         internal static string StandardConstructorSummaryText {

@@ -117,6 +117,72 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CaptionError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="CaptionInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="CaptionWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="MacroCamelCode" xml:space="preserve">
+    <value>aaBb</value>
+  </data>
+  <data name="MacroCamelDescription" xml:space="preserve">
+    <value>camelNamingStyle</value>
+  </data>
+  <data name="MacroCamelRegular" xml:space="preserve">
+    <value>xxx</value>
+  </data>
+  <data name="MacroCapitalizedCode" xml:space="preserve">
+    <value>Aa_Bb</value>
+  </data>
+  <data name="MacroCapitalizedDescription" xml:space="preserve">
+    <value>All_Words_Capitalized</value>
+  </data>
+  <data name="MacroCapitalizedRegular" xml:space="preserve">
+    <value>xxx</value>
+  </data>
+  <data name="MacroLowerCode" xml:space="preserve">
+    <value>aa_bb</value>
+  </data>
+  <data name="MacroLowerDescription" xml:space="preserve">
+    <value>all_words_lower</value>
+  </data>
+  <data name="MacroLowerRegular" xml:space="preserve">
+    <value>xxx</value>
+  </data>
+  <data name="MacroPascalCode" xml:space="preserve">
+    <value>AaBb</value>
+  </data>
+  <data name="MacroPascalDescription" xml:space="preserve">
+    <value>PascalNamingStyle</value>
+  </data>
+  <data name="MacroPascalRegular" xml:space="preserve">
+    <value>xxx</value>
+  </data>
+  <data name="MacroUpperCode" xml:space="preserve">
+    <value>AA_BB</value>
+  </data>
+  <data name="MacroUpperDescription" xml:space="preserve">
+    <value>ALL_WORDS_UPPER</value>
+  </data>
+  <data name="MacroUpperRegular" xml:space="preserve">
+    <value>xxx</value>
+  </data>
+  <data name="NamingRuleEditorCaption" xml:space="preserve">
+    <value>Edit "{0}" Naming Rule</value>
+  </data>
+  <data name="NamingRuleEditorWarning" xml:space="preserve">
+    <value>It seems that your rule definition string has wrong syntax.
+
+Please check that:
+- it doesn't contain whitespace characters
+- all macros are written correctly
+- it uses only letters, digits and underscore in string literals
+- you are using "Turn off" option instead of empty definition</value>
+  </data>
   <data name="StandardConstructorSummaryText" xml:space="preserve">
     <value>Initializes a new instance.</value>
   </data>

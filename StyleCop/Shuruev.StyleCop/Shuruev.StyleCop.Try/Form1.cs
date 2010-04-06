@@ -20,11 +20,18 @@ namespace Shuruev.StyleCop.Try
 		{
 		}
 
+		private string xxx = "I$(AaBb)";
+
 		private void button1_Click(object sender, EventArgs e)
 		{
 			using (NamingRuleEditor dialog = new NamingRuleEditor())
 			{
-				dialog.ShowDialog();
+				dialog.ObjectName = "Interface";
+				dialog.RuleDefinition = xxx;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					xxx = dialog.RuleDefinition;
+				}
 			}
 		}
 	}
