@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SourceAnalyzer Name="StyleCop+">
+	<Description>
+		Plug-in that extends original StyleCop features. Some settings for this plug-in are taken out to the separate StyleCop+ settings page.
+	</Description>
+	<Properties>
+		<StringProperty
+			Name="Surname"
+			DefaultValue="Shuruev"
+			FriendlyName="What is your surname?"
+			Description="Put your surname here." />
+	</Properties>
+</SourceAnalyzer>

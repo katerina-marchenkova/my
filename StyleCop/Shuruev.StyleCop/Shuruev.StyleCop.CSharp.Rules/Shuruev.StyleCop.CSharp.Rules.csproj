@@ -59,6 +59,13 @@
     <Compile Include="AdvancedNaming\NamingRuleEditor.Designer.cs">
       <DependentUpon>NamingRuleEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdvancedNaming\NamingRulesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRulesPage.Designer.cs">
+      <DependentUpon>NamingRulesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analyzers\StyleCopPlus.cs" />
     <Compile Include="Common\CustomCsParser.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="Common\HighlightTextBox.cs">
@@ -77,6 +84,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PropertyPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyPage.Designer.cs">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Rules.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +99,9 @@
     <EmbeddedResource Include="AdvancedNaming\NamingRuleEditor.resx">
       <DependentUpon>NamingRuleEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedNaming\NamingRulesPage.resx">
+      <DependentUpon>NamingRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\HighlightTextBox.resx">
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +110,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="PropertyPage.resx">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StyleCopPlus.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

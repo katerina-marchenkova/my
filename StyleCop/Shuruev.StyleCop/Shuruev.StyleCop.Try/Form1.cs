@@ -16,10 +16,6 @@ namespace Shuruev.StyleCop.Try
 			InitializeComponent();
 		}
 
-		private void highlightTextBox1_Highlight(object sender, ControlEventArgs e)
-		{
-		}
-
 		private string xxx = "I$(AaBb)";
 
 		private void button1_Click(object sender, EventArgs e)
