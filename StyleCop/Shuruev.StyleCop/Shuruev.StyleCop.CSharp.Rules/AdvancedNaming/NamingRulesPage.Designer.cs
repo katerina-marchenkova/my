@@ -29,26 +29,26 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NamingRulesPage));
-			this.panelHelp = new System.Windows.Forms.Panel();
+			this.panelHelpBorder = new System.Windows.Forms.Panel();
 			this.labelHelp = new System.Windows.Forms.Label();
 			this.btnReset = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.listRules = new System.Windows.Forms.ListView();
 			this.columnEntity = new System.Windows.Forms.ColumnHeader();
 			this.columnPreview = new System.Windows.Forms.ColumnHeader();
-			this.panelHelp.SuspendLayout();
+			this.panelHelpBorder.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panelHelp
+			// panelHelpBorder
 			// 
-			this.panelHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			this.panelHelpBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.panelHelp.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.panelHelp.Controls.Add(this.labelHelp);
-			this.panelHelp.Location = new System.Drawing.Point(481, 32);
-			this.panelHelp.Name = "panelHelp";
-			this.panelHelp.Size = new System.Drawing.Size(156, 385);
-			this.panelHelp.TabIndex = 3;
+			this.panelHelpBorder.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.panelHelpBorder.Controls.Add(this.labelHelp);
+			this.panelHelpBorder.Location = new System.Drawing.Point(481, 32);
+			this.panelHelpBorder.Name = "panelHelpBorder";
+			this.panelHelpBorder.Size = new System.Drawing.Size(156, 385);
+			this.panelHelpBorder.TabIndex = 3;
 			// 
 			// labelHelp
 			// 
@@ -114,20 +114,20 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.panelHelp);
+			this.Controls.Add(this.panelHelpBorder);
 			this.Controls.Add(this.btnReset);
 			this.Controls.Add(this.btnEdit);
 			this.Controls.Add(this.listRules);
 			this.Name = "NamingRulesPage";
 			this.Size = new System.Drawing.Size(640, 420);
-			this.panelHelp.ResumeLayout(false);
+			this.panelHelpBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel panelHelp;
+		private System.Windows.Forms.Panel panelHelpBorder;
 		private System.Windows.Forms.Label labelHelp;
 		private System.Windows.Forms.Button btnReset;
 		private System.Windows.Forms.Button btnEdit;

@@ -263,5 +263,12 @@ namespace Shuruev.StyleCop.CSharp.Properties {
                 return ResourceManager.GetString("StandardDestructorSummaryText", resourceCulture);
             }
         }
+        
+        internal static System.Drawing.Bitmap StyleCopPlusLogo {
+            get {
+                object obj = ResourceManager.GetObject("StyleCopPlusLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

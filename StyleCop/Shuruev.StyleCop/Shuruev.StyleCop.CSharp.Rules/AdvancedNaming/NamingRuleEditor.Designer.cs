@@ -28,7 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panelEditor = new System.Windows.Forms.Panel();
+			this.panelEditorBorder = new System.Windows.Forms.Panel();
+			this.textEditor = new Shuruev.StyleCop.CSharp.HighlightTextBox();
 			this.btnOK = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.listMacro = new System.Windows.Forms.ListView();
@@ -36,20 +37,33 @@
 			this.columnDescription = new System.Windows.Forms.ColumnHeader();
 			this.btnInsert = new System.Windows.Forms.Button();
 			this.checkDisable = new System.Windows.Forms.CheckBox();
-			this.textEditor = new Shuruev.StyleCop.CSharp.HighlightTextBox();
-			this.panelEditor.SuspendLayout();
+			this.panelEditorBorder.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panelEditor
+			// panelEditorBorder
 			// 
-			this.panelEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			this.panelEditorBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.panelEditor.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.panelEditor.Controls.Add(this.textEditor);
-			this.panelEditor.Location = new System.Drawing.Point(12, 12);
-			this.panelEditor.Name = "panelEditor";
-			this.panelEditor.Size = new System.Drawing.Size(440, 136);
-			this.panelEditor.TabIndex = 0;
+			this.panelEditorBorder.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.panelEditorBorder.Controls.Add(this.textEditor);
+			this.panelEditorBorder.Location = new System.Drawing.Point(12, 12);
+			this.panelEditorBorder.Name = "panelEditorBorder";
+			this.panelEditorBorder.Size = new System.Drawing.Size(440, 136);
+			this.panelEditorBorder.TabIndex = 0;
+			// 
+			// textEditor
+			// 
+			this.textEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.textEditor.DefaultColor = System.Drawing.Color.Blue;
+			this.textEditor.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textEditor.Location = new System.Drawing.Point(1, 1);
+			this.textEditor.Margin = new System.Windows.Forms.Padding(1);
+			this.textEditor.Name = "textEditor";
+			this.textEditor.Size = new System.Drawing.Size(438, 134);
+			this.textEditor.TabIndex = 0;
+			this.textEditor.Highlight += new System.Windows.Forms.ControlEventHandler(this.textEditor_Highlight);
 			// 
 			// btnOK
 			// 
@@ -126,20 +140,6 @@
 			this.checkDisable.UseVisualStyleBackColor = true;
 			this.checkDisable.CheckedChanged += new System.EventHandler(this.checkDisable_CheckedChanged);
 			// 
-			// textEditor
-			// 
-			this.textEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditor.DefaultColor = System.Drawing.Color.Blue;
-			this.textEditor.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textEditor.Location = new System.Drawing.Point(1, 1);
-			this.textEditor.Margin = new System.Windows.Forms.Padding(1);
-			this.textEditor.Name = "textEditor";
-			this.textEditor.Size = new System.Drawing.Size(438, 134);
-			this.textEditor.TabIndex = 0;
-			this.textEditor.Highlight += new System.Windows.Forms.ControlEventHandler(this.textEditor_Highlight);
-			// 
 			// NamingRuleEditor
 			// 
 			this.AcceptButton = this.btnOK;
@@ -152,7 +152,7 @@
 			this.Controls.Add(this.listMacro);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
-			this.Controls.Add(this.panelEditor);
+			this.Controls.Add(this.panelEditorBorder);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(440, 340);
@@ -162,7 +162,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "[Header Text]";
 			this.Load += new System.EventHandler(this.NamingRuleEditor_Load);
-			this.panelEditor.ResumeLayout(false);
+			this.panelEditorBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -171,7 +171,7 @@
 		#endregion
 
 		private HighlightTextBox textEditor;
-		private System.Windows.Forms.Panel panelEditor;
+		private System.Windows.Forms.Panel panelEditorBorder;
 		private System.Windows.Forms.Button btnOK;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.ListView listMacro;
