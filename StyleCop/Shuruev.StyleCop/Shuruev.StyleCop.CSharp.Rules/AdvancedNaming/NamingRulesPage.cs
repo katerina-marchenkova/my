@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using Microsoft.StyleCop;
+﻿using System.Windows.Forms;
 
-namespace Shuruev.StyleCop.CSharp.AdvancedNaming
+namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
 	/// Control displaying naming rules page.

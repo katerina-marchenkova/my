@@ -30,13 +30,13 @@
 		{
 			this.tabPages = new System.Windows.Forms.TabControl();
 			this.pageNaming = new System.Windows.Forms.TabPage();
-			this.namingRulesPage = new Shuruev.StyleCop.CSharp.AdvancedNaming.NamingRulesPage();
+			this.namingRulesPage = new Shuruev.StyleCop.CSharp.NamingRulesPage();
 			this.pictureLogo = new System.Windows.Forms.PictureBox();
 			this.panelLogoBorder = new System.Windows.Forms.Panel();
 			this.panelTitleBorder = new System.Windows.Forms.Panel();
 			this.panelTitle = new System.Windows.Forms.Panel();
-			this.labelTitle = new System.Windows.Forms.Label();
 			this.labelSubtitle = new System.Windows.Forms.Label();
+			this.labelTitle = new System.Windows.Forms.Label();
 			this.tabPages.SuspendLayout();
 			this.pageNaming.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
@@ -55,7 +55,7 @@
 			this.tabPages.Name = "tabPages";
 			this.tabPages.SelectedIndex = 0;
 			this.tabPages.Size = new System.Drawing.Size(634, 402);
-			this.tabPages.TabIndex = 4;
+			this.tabPages.TabIndex = 2;
 			// 
 			// pageNaming
 			// 
@@ -95,7 +95,7 @@
 			this.panelLogoBorder.Location = new System.Drawing.Point(3, 3);
 			this.panelLogoBorder.Name = "panelLogoBorder";
 			this.panelLogoBorder.Size = new System.Drawing.Size(66, 66);
-			this.panelLogoBorder.TabIndex = 6;
+			this.panelLogoBorder.TabIndex = 0;
 			// 
 			// panelTitleBorder
 			// 
@@ -106,7 +106,7 @@
 			this.panelTitleBorder.Location = new System.Drawing.Point(75, 3);
 			this.panelTitleBorder.Name = "panelTitleBorder";
 			this.panelTitleBorder.Size = new System.Drawing.Size(562, 66);
-			this.panelTitleBorder.TabIndex = 7;
+			this.panelTitleBorder.TabIndex = 1;
 			// 
 			// panelTitle
 			// 
@@ -122,31 +122,31 @@
 			this.panelTitle.Size = new System.Drawing.Size(560, 64);
 			this.panelTitle.TabIndex = 0;
 			// 
-			// labelTitle
-			// 
-			this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.labelTitle.Font = new System.Drawing.Font("Cambria", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelTitle.ForeColor = System.Drawing.Color.MidnightBlue;
-			this.labelTitle.Location = new System.Drawing.Point(3, 0);
-			this.labelTitle.Name = "labelTitle";
-			this.labelTitle.Size = new System.Drawing.Size(555, 36);
-			this.labelTitle.TabIndex = 0;
-			this.labelTitle.Text = "StyleCop+";
-			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-			// 
 			// labelSubtitle
 			// 
 			this.labelSubtitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.labelSubtitle.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelSubtitle.ForeColor = System.Drawing.Color.LightSlateGray;
-			this.labelSubtitle.Location = new System.Drawing.Point(2, 36);
+			this.labelSubtitle.Location = new System.Drawing.Point(2, 37);
 			this.labelSubtitle.Name = "labelSubtitle";
 			this.labelSubtitle.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-			this.labelSubtitle.Size = new System.Drawing.Size(556, 26);
+			this.labelSubtitle.Size = new System.Drawing.Size(556, 24);
 			this.labelSubtitle.TabIndex = 1;
 			this.labelSubtitle.Text = "Settings Page";
+			// 
+			// labelTitle
+			// 
+			this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelTitle.Font = new System.Drawing.Font("Cambria", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelTitle.ForeColor = System.Drawing.Color.MidnightBlue;
+			this.labelTitle.Location = new System.Drawing.Point(3, 1);
+			this.labelTitle.Name = "labelTitle";
+			this.labelTitle.Size = new System.Drawing.Size(555, 36);
+			this.labelTitle.TabIndex = 0;
+			this.labelTitle.Text = "StyleCop+";
+			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
 			// 
 			// PropertyPage
 			// 
@@ -172,7 +172,7 @@
 
 		private System.Windows.Forms.TabControl tabPages;
 		private System.Windows.Forms.TabPage pageNaming;
-		private Shuruev.StyleCop.CSharp.AdvancedNaming.NamingRulesPage namingRulesPage;
+		private Shuruev.StyleCop.CSharp.NamingRulesPage namingRulesPage;
 		private System.Windows.Forms.PictureBox pictureLogo;
 		private System.Windows.Forms.Panel panelLogoBorder;
 		private System.Windows.Forms.Panel panelTitleBorder;

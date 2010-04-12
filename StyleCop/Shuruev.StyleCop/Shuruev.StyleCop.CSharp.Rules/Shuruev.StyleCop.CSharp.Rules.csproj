@@ -84,10 +84,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="PropertyPage.cs">
+    <Compile Include="PropertyPage\NamingSettings.cs" />
+    <Compile Include="PropertyPage\SettingsManager.cs" />
+    <Compile Include="PropertyPage\PropertyPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PropertyPage.Designer.cs">
+    <Compile Include="PropertyPage\PropertyPage.Designer.cs">
       <DependentUpon>PropertyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Rules.cs" />
@@ -110,7 +112,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="PropertyPage.resx">
+    <EmbeddedResource Include="PropertyPage\PropertyPage.resx">
       <DependentUpon>PropertyPage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

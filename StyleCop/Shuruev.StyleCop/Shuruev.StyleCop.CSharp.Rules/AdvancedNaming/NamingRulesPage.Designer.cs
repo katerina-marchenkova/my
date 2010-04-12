@@ -1,4 +1,4 @@
-﻿namespace Shuruev.StyleCop.CSharp.AdvancedNaming
+﻿namespace Shuruev.StyleCop.CSharp
 {
 	partial class NamingRulesPage
 	{
