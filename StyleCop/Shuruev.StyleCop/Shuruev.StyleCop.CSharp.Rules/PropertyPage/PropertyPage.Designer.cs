@@ -35,14 +35,14 @@
 			this.panelLogoBorder = new System.Windows.Forms.Panel();
 			this.panelTitleBorder = new System.Windows.Forms.Panel();
 			this.panelTitle = new System.Windows.Forms.Panel();
-			this.labelSubtitle = new System.Windows.Forms.Label();
-			this.labelTitle = new System.Windows.Forms.Label();
+			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.tabPages.SuspendLayout();
 			this.pageNaming.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
 			this.panelLogoBorder.SuspendLayout();
 			this.panelTitleBorder.SuspendLayout();
 			this.panelTitle.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tabPages
@@ -114,39 +114,22 @@
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.panelTitle.BackColor = System.Drawing.Color.White;
-			this.panelTitle.Controls.Add(this.labelSubtitle);
-			this.panelTitle.Controls.Add(this.labelTitle);
+			this.panelTitle.Controls.Add(this.pictureTitle);
 			this.panelTitle.Location = new System.Drawing.Point(1, 1);
 			this.panelTitle.Margin = new System.Windows.Forms.Padding(1);
 			this.panelTitle.Name = "panelTitle";
 			this.panelTitle.Size = new System.Drawing.Size(560, 64);
 			this.panelTitle.TabIndex = 0;
 			// 
-			// labelSubtitle
+			// pictureTitle
 			// 
-			this.labelSubtitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.labelSubtitle.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelSubtitle.ForeColor = System.Drawing.Color.LightSlateGray;
-			this.labelSubtitle.Location = new System.Drawing.Point(2, 37);
-			this.labelSubtitle.Name = "labelSubtitle";
-			this.labelSubtitle.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-			this.labelSubtitle.Size = new System.Drawing.Size(556, 24);
-			this.labelSubtitle.TabIndex = 1;
-			this.labelSubtitle.Text = "Settings Page";
-			// 
-			// labelTitle
-			// 
-			this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.labelTitle.Font = new System.Drawing.Font("Cambria", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelTitle.ForeColor = System.Drawing.Color.MidnightBlue;
-			this.labelTitle.Location = new System.Drawing.Point(3, 1);
-			this.labelTitle.Name = "labelTitle";
-			this.labelTitle.Size = new System.Drawing.Size(555, 36);
-			this.labelTitle.TabIndex = 0;
-			this.labelTitle.Text = "StyleCop+";
-			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+			this.pictureTitle.Image = global::Shuruev.StyleCop.CSharp.Properties.Resources.StyleCopPlusTitle;
+			this.pictureTitle.Location = new System.Drawing.Point(0, 0);
+			this.pictureTitle.Name = "pictureTitle";
+			this.pictureTitle.Size = new System.Drawing.Size(250, 64);
+			this.pictureTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureTitle.TabIndex = 0;
+			this.pictureTitle.TabStop = false;
 			// 
 			// PropertyPage
 			// 
@@ -164,6 +147,8 @@
 			this.panelLogoBorder.PerformLayout();
 			this.panelTitleBorder.ResumeLayout(false);
 			this.panelTitle.ResumeLayout(false);
+			this.panelTitle.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureTitle)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -177,7 +162,6 @@
 		private System.Windows.Forms.Panel panelLogoBorder;
 		private System.Windows.Forms.Panel panelTitleBorder;
 		private System.Windows.Forms.Panel panelTitle;
-		private System.Windows.Forms.Label labelTitle;
-		private System.Windows.Forms.Label labelSubtitle;
+		private System.Windows.Forms.PictureBox pictureTitle;
 	}
 }

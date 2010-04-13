@@ -1,3 +1,4 @@
+using System.IO;
 using Microsoft.StyleCop;
 
 namespace Shuruev.StyleCop.CSharp
@@ -7,22 +8,60 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public static class SettingsManager
 	{
-		/// <summary>
-		/// Gets a value for naming rule.
-		/// </summary>
-		public static string GetNamingRule(PropertyPage page, string settingName, out bool modified)
-		{
-			PropertyDescriptor<string> descriptor = (PropertyDescriptor<string>)page.Analyzer.PropertyDescriptors[settingName];
+		#region Common methods
 
-			StringProperty setting = (StringProperty)page.Analyzer.GetSetting(page.TabControl.MergedSettings, settingName);
+		/// <summary>
+		/// Gets property descriptor with existing check.
+		/// </summary>
+		private static PropertyDescriptor<string> GetPropertyDescriptor(SourceAnalyzer analyzer, string settingName)
+		{
+			PropertyDescriptor<string> descriptor = (PropertyDescriptor<string>)analyzer.PropertyDescriptors[settingName];
+			if (descriptor == null)
+				throw new InvalidDataException("Setting " + settingName + " is not registered as a known one.");
+
+			return descriptor;
+		}
+
+		/// <summary>
+		/// Gets a value for specified setting.
+		/// </summary>
+		private static string GetValue(SourceAnalyzer analyzer, Settings settings, string settingName)
+		{
+			StringProperty setting = (StringProperty)analyzer.GetSetting(settings, settingName);
 			if (setting == null)
 			{
-				modified = false;
+				PropertyDescriptor<string> descriptor = GetPropertyDescriptor(analyzer, settingName);
 				return descriptor.DefaultValue;
 			}
 
-			modified = page.TabControl.SettingsComparer.IsAddInSettingOverwritten(page.Analyzer, settingName, setting);
 			return setting.Value;
 		}
+
+		/// <summary>
+		/// Gets friendly name for specified setting.
+		/// </summary>
+		public static string GetFriendlyName(PropertyPage page, string settingName)
+		{
+			PropertyDescriptor<string> descriptor = GetPropertyDescriptor(page.Analyzer, settingName);
+			return descriptor.FriendlyName;
+		}
+
+		/// <summary>
+		/// Gets a merged value for specified setting.
+		/// </summary>
+		public static string GetMergedValue(PropertyPage page, string settingName)
+		{
+			return GetValue(page.Analyzer, page.TabControl.MergedSettings, settingName);
+		}
+
+		/// <summary>
+		/// Gets an inherited value for specified setting.
+		/// </summary>
+		public static string GetInheritedValue(PropertyPage page, string settingName)
+		{
+			return GetValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
+		}
+
+		#endregion
 	}
 }

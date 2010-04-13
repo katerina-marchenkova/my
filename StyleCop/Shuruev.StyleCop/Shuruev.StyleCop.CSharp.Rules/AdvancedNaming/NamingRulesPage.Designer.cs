@@ -74,6 +74,7 @@
 			this.btnReset.TabIndex = 2;
 			this.btnReset.Text = "Reset";
 			this.btnReset.UseVisualStyleBackColor = true;
+			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
 			// 
 			// btnEdit
 			// 
@@ -84,6 +85,7 @@
 			this.btnEdit.TabIndex = 1;
 			this.btnEdit.Text = "Edit...";
 			this.btnEdit.UseVisualStyleBackColor = true;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
 			// 
 			// listRules
 			// 
@@ -93,12 +95,16 @@
 			this.listRules.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnEntity,
             this.columnPreview});
+			this.listRules.FullRowSelect = true;
+			this.listRules.HideSelection = false;
 			this.listRules.Location = new System.Drawing.Point(3, 3);
 			this.listRules.Name = "listRules";
 			this.listRules.Size = new System.Drawing.Size(472, 414);
 			this.listRules.TabIndex = 0;
 			this.listRules.UseCompatibleStateImageBehavior = false;
 			this.listRules.View = System.Windows.Forms.View.Details;
+			this.listRules.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listRules_MouseDoubleClick);
+			this.listRules.SelectedIndexChanged += new System.EventHandler(this.listRules_SelectedIndexChanged);
 			// 
 			// columnEntity
 			// 
@@ -120,6 +126,7 @@
 			this.Controls.Add(this.listRules);
 			this.Name = "NamingRulesPage";
 			this.Size = new System.Drawing.Size(640, 420);
+			this.Load += new System.EventHandler(this.NamingRulesPage_Load);
 			this.panelHelpBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
 

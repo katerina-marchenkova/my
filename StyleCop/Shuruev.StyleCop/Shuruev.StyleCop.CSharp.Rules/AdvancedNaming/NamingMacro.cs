@@ -15,33 +15,39 @@ namespace Shuruev.StyleCop.CSharp
 		private static readonly Dictionary<string, string> s_descriptions = new Dictionary<string, string>();
 		private static readonly Dictionary<string, string> s_markups = new Dictionary<string, string>();
 		private static readonly Dictionary<string, string> s_regulars = new Dictionary<string, string>();
+		private static readonly Dictionary<string, string> s_samples = new Dictionary<string, string>();
 
 		static NamingMacro()
 		{
 			AddMacro(
 				Resources.MacroPascalCode,
 				Resources.MacroPascalDescription,
-				Resources.MacroPascalRegular);
+				Resources.MacroPascalRegular,
+				Resources.MacroPascalSample);
 
 			AddMacro(
 				Resources.MacroCamelCode,
 				Resources.MacroCamelDescription,
-				Resources.MacroCamelRegular);
+				Resources.MacroCamelRegular,
+				Resources.MacroCamelSample);
 
 			AddMacro(
 				Resources.MacroUpperCode,
 				Resources.MacroUpperDescription,
-				Resources.MacroUpperRegular);
+				Resources.MacroUpperRegular,
+				Resources.MacroUpperSample);
 
 			AddMacro(
 				Resources.MacroLowerCode,
 				Resources.MacroLowerDescription,
-				Resources.MacroLowerRegular);
+				Resources.MacroLowerRegular,
+				Resources.MacroLowerSample);
 
 			AddMacro(
 				Resources.MacroCapitalizedCode,
 				Resources.MacroCapitalizedDescription,
-				Resources.MacroCapitalizedRegular);
+				Resources.MacroCapitalizedRegular,
+				Resources.MacroCapitalizedSample);
 		}
 
 		#region Accessing macros
@@ -52,7 +58,8 @@ namespace Shuruev.StyleCop.CSharp
 		private static void AddMacro(
 			string key,
 			string description,
-			string regular)
+			string regular,
+			string sample)
 		{
 			string markup = String.Format("$({0})", key);
 
@@ -60,6 +67,7 @@ namespace Shuruev.StyleCop.CSharp
 			s_descriptions.Add(key, description);
 			s_markups.Add(key, markup);
 			s_regulars.Add(key, regular);
+			s_samples.Add(key, sample);
 		}
 
 		/// <summary>
@@ -92,6 +100,14 @@ namespace Shuruev.StyleCop.CSharp
 		public static string GetRegular(string key)
 		{
 			return s_regulars[key];
+		}
+
+		/// <summary>
+		/// Gets sample name for specified macro.
+		/// </summary>
+		public static string GetSample(string key)
+		{
+			return s_samples[key];
 		}
 
 		#endregion
@@ -184,11 +200,11 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (Check(rich.Text))
 			{
-				rich.BackColor = OwnColors.LightYellow;
+				rich.BackColor = Colors.LightYellow;
 			}
 			else
 			{
-				rich.BackColor = OwnColors.LightRed;
+				rich.BackColor = Colors.LightRed;
 			}
 
 			int current = 0;
@@ -220,6 +236,27 @@ namespace Shuruev.StyleCop.CSharp
 
 				current += line.Length + 1;
 			}
+		}
+
+		#endregion
+
+		#region Applying rule definitions
+
+		/// <summary>
+		/// Builds example text for specified rule.
+		/// </summary>
+		public static string BuildExample(string text)
+		{
+			text = Clean(text);
+			foreach (string key in GetKeys())
+			{
+				string markup = GetMarkup(key);
+				string sample = GetSample(key);
+				text = text.Replace(markup, sample);
+			}
+
+			text = text.Replace("\r\n", ", ");
+			return text;
 		}
 
 		#endregion

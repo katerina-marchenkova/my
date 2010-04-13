@@ -126,6 +126,9 @@
   <data name="CaptionWarning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="DoNotCheck" xml:space="preserve">
+    <value>Do not check</value>
+  </data>
   <data name="MacroCamelCode" xml:space="preserve">
     <value>aaBb</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="MacroCamelRegular" xml:space="preserve">
     <value>xxx</value>
+  </data>
+  <data name="MacroCamelSample" xml:space="preserve">
+    <value>sampleName</value>
   </data>
   <data name="MacroCapitalizedCode" xml:space="preserve">
     <value>Aa_Bb</value>
@@ -144,6 +150,9 @@
   <data name="MacroCapitalizedRegular" xml:space="preserve">
     <value>xxx</value>
   </data>
+  <data name="MacroCapitalizedSample" xml:space="preserve">
+    <value>Sample_Name</value>
+  </data>
   <data name="MacroLowerCode" xml:space="preserve">
     <value>aa_bb</value>
   </data>
@@ -152,6 +161,9 @@
   </data>
   <data name="MacroLowerRegular" xml:space="preserve">
     <value>xxx</value>
+  </data>
+  <data name="MacroLowerSample" xml:space="preserve">
+    <value>sample_name</value>
   </data>
   <data name="MacroPascalCode" xml:space="preserve">
     <value>AaBb</value>
@@ -162,6 +174,9 @@
   <data name="MacroPascalRegular" xml:space="preserve">
     <value>xxx</value>
   </data>
+  <data name="MacroPascalSample" xml:space="preserve">
+    <value>SampleName</value>
+  </data>
   <data name="MacroUpperCode" xml:space="preserve">
     <value>AA_BB</value>
   </data>
@@ -170,6 +185,9 @@
   </data>
   <data name="MacroUpperRegular" xml:space="preserve">
     <value>xxx</value>
+  </data>
+  <data name="MacroUpperSample" xml:space="preserve">
+    <value>SAMPLE_NAME</value>
   </data>
   <data name="NamingRuleEditorCaption" xml:space="preserve">
     <value>Edit "{0}" Naming Rule</value>
@@ -183,14 +201,29 @@ Please check that:
 - it uses only letters, digits and underscore in string literals
 - you are using "Turn off" option instead of empty definition</value>
   </data>
+  <data name="ResetSettingQuestion" xml:space="preserve">
+    <value>Are you sure want to cancel all modification for this setting?
+
+It will be reset to its inherited (default) value:
+- {0}</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="RuleDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RuleDisabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RuleEnabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RuleEnabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="StandardConstructorSummaryText" xml:space="preserve">
     <value>Initializes a new instance.</value>
   </data>
   <data name="StandardDestructorSummaryText" xml:space="preserve">
     <value>Finalizes an instance.</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="StyleCopPlusLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StyleCopPlusLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StyleCopPlusTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StyleCopPlusTitle.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

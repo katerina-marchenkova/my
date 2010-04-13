@@ -5,7 +5,7 @@ namespace Shuruev.StyleCop.CSharp
 	/// <summary>
 	/// Colors for internal usage.
 	/// </summary>
-	internal static class OwnColors
+	internal static class Colors
 	{
 		public static readonly Color LightYellow = Color.FromArgb(255, 255, 225);
 		public static readonly Color LightRed = Color.FromArgb(255, 225, 225);

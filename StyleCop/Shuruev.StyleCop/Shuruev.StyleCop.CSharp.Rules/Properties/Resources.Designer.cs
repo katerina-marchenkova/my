@@ -88,6 +88,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do not check.
+        /// </summary>
+        internal static string DoNotCheck {
+            get {
+                return ResourceManager.GetString("DoNotCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to aaBb.
         /// </summary>
         internal static string MacroCamelCode {
@@ -111,6 +120,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string MacroCamelRegular {
             get {
                 return ResourceManager.GetString("MacroCamelRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sampleName.
+        /// </summary>
+        internal static string MacroCamelSample {
+            get {
+                return ResourceManager.GetString("MacroCamelSample", resourceCulture);
             }
         }
         
@@ -142,6 +160,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sample_Name.
+        /// </summary>
+        internal static string MacroCapitalizedSample {
+            get {
+                return ResourceManager.GetString("MacroCapitalizedSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to aa_bb.
         /// </summary>
         internal static string MacroLowerCode {
@@ -165,6 +192,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string MacroLowerRegular {
             get {
                 return ResourceManager.GetString("MacroLowerRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sample_name.
+        /// </summary>
+        internal static string MacroLowerSample {
+            get {
+                return ResourceManager.GetString("MacroLowerSample", resourceCulture);
             }
         }
         
@@ -196,6 +232,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SampleName.
+        /// </summary>
+        internal static string MacroPascalSample {
+            get {
+                return ResourceManager.GetString("MacroPascalSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AA_BB.
         /// </summary>
         internal static string MacroUpperCode {
@@ -219,6 +264,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string MacroUpperRegular {
             get {
                 return ResourceManager.GetString("MacroUpperRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SAMPLE_NAME.
+        /// </summary>
+        internal static string MacroUpperSample {
+            get {
+                return ResourceManager.GetString("MacroUpperSample", resourceCulture);
             }
         }
         
@@ -247,6 +301,32 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure want to cancel all modification for this setting?
+        ///
+        ///It will be reset to its inherited (default) value:
+        ///- {0}.
+        /// </summary>
+        internal static string ResetSettingQuestion {
+            get {
+                return ResourceManager.GetString("ResetSettingQuestion", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap RuleDisabled {
+            get {
+                object obj = ResourceManager.GetObject("RuleDisabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap RuleEnabled {
+            get {
+                object obj = ResourceManager.GetObject("RuleEnabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initializes a new instance..
         /// </summary>
         internal static string StandardConstructorSummaryText {
@@ -267,6 +347,13 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static System.Drawing.Bitmap StyleCopPlusLogo {
             get {
                 object obj = ResourceManager.GetObject("StyleCopPlusLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap StyleCopPlusTitle {
+            get {
+                object obj = ResourceManager.GetObject("StyleCopPlusTitle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
