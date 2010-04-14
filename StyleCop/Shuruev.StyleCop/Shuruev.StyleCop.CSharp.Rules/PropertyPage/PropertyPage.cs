@@ -53,11 +53,8 @@ namespace Shuruev.StyleCop.CSharp
 			}
 			set
 			{
-				if (m_dirty != value)
-				{
-					m_dirty = value;
-					m_tabControl.DirtyChanged();
-				}
+				m_dirty = value;
+				m_tabControl.DirtyChanged();
 			}
 		}
 

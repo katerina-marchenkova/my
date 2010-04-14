@@ -62,6 +62,23 @@ namespace Shuruev.StyleCop.CSharp
 			return GetValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
 		}
 
+		/// <summary>
+		/// Sets a local value for specified setting.
+		/// </summary>
+		public static void SetLocalValue(PropertyPage page, string settingName, string value)
+		{
+			StringProperty property = new StringProperty(page.Analyzer, settingName, value);
+			page.Analyzer.SetSetting(page.TabControl.LocalSettings, property);
+		}
+
+		/// <summary>
+		/// Clears a local value for specified setting.
+		/// </summary>
+		public static void ClearLocalValue(PropertyPage page, string settingName)
+		{
+			page.Analyzer.ClearSetting(page.TabControl.LocalSettings, settingName);
+		}
+
 		#endregion
 	}
 }

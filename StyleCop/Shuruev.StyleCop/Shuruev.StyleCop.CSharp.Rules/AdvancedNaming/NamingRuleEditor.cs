@@ -50,7 +50,7 @@ namespace Shuruev.StyleCop.CSharp
 				textEditor.RichTextBox.Text = RuleDefinition;
 			}
 
-			UpdateMacroList();
+			RebuildMacroList();
 			UpdateControls();
 		}
 
@@ -103,9 +103,9 @@ namespace Shuruev.StyleCop.CSharp
 		#region User interface
 
 		/// <summary>
-		/// Updates macro list.
+		/// Rebuilds macro list.
 		/// </summary>
-		private void UpdateMacroList()
+		private void RebuildMacroList()
 		{
 			listMacro.BeginUpdate();
 			listMacro.Items.Clear();

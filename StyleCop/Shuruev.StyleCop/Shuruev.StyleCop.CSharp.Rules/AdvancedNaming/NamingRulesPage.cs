@@ -67,12 +67,14 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
+		#region Property page methods
+
 		/// <summary>
 		/// Initializes the specified property control with the StyleCop settings file.
 		/// </summary>
 		public void Initialize()
 		{
-			UpdateRuleList();
+			RebuildRuleList();
 		}
 
 		/// <summary>
@@ -80,6 +82,19 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public bool Apply()
 		{
+			foreach (ListViewItem lvi in listRules.Items)
+			{
+				SettingTag tag = (SettingTag)lvi.Tag;
+				if (tag.Modified)
+				{
+					SettingsManager.SetLocalValue(Page, tag.SettingName, tag.MergedValue);
+				}
+				else
+				{
+					SettingsManager.ClearLocalValue(Page, tag.SettingName);
+				}
+			}
+
 			return true;
 		}
 
@@ -88,14 +103,34 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void RefreshSettingsOverrideState()
 		{
+			foreach (ListViewItem lvi in listRules.Items)
+			{
+				SettingTag tag = (SettingTag)lvi.Tag;
+				tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
+
+				if (tag.Modified)
+				{
+					Page.Dirty = true;
+				}
+				else
+				{
+					tag.MergedValue = SettingsManager.GetMergedValue(Page, tag.SettingName);
+				}
+
+				UpdateListItem(lvi);
+			}
+
+			UpdateControls();
 		}
+
+		#endregion
 
 		#region User interface
 
 		/// <summary>
-		/// Updates rule list.
+		/// Rebuilds rule list.
 		/// </summary>
-		private void UpdateRuleList()
+		private void RebuildRuleList()
 		{
 			listRules.BeginUpdate();
 			listRules.Items.Clear();
@@ -183,6 +218,9 @@ namespace Shuruev.StyleCop.CSharp
 				{
 					tag.MergedValue = dialog.RuleDefinition;
 					UpdateListItem(lvi);
+					Page.Dirty = true;
+
+					UpdateControls();
 				}
 			}
 		}
@@ -215,6 +253,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			tag.MergedValue = tag.InheritedValue;
 			UpdateListItem(lvi);
+			Page.Dirty = true;
 
 			UpdateControls();
 		}
