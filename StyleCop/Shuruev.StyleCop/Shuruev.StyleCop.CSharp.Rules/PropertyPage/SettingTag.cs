@@ -13,12 +13,12 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets or sets merged value.
 		/// </summary>
-		internal string MergedValue;
+		internal string MergedValue { get; set; }
 
 		/// <summary>
 		/// Gets or sets inherited value.
 		/// </summary>
-		internal string InheritedValue;
+		internal string InheritedValue { get; set; }
 
 		/// <summary>
 		/// Gets a value indicating whether current setting is modified in current instance.

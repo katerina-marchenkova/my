@@ -10,6 +10,25 @@ namespace Shuruev.StyleCop.CSharp
 	[SourceAnalyzer(typeof(CsParser))]
 	public class StyleCopPlus : SourceAnalyzer
 	{
+		private readonly AdvancedNamingRules m_advancedNamingRules;
+		private readonly ExtendedOriginalRules m_extendedOriginalRules;
+		private readonly MoreCustomRules m_moreCustomRules;
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public StyleCopPlus()
+		{
+			m_advancedNamingRules = new AdvancedNamingRules(this);
+			m_extendedOriginalRules = new ExtendedOriginalRules(this);
+			m_moreCustomRules = new MoreCustomRules(this);
+		}
+
+		#region Properties
+
+		/// <summary>
+		/// Gets a collection of own settings pages.
+		/// </summary>
 		public override ICollection<IPropertyControlPage> SettingsPages
 		{
 			get
@@ -17,5 +36,31 @@ namespace Shuruev.StyleCop.CSharp
 				return new IPropertyControlPage[] { new PropertyPage(this) };
 			}
 		}
+
+		#endregion
+
+		#region Analyzer methods
+
+		/// <summary>
+		/// Initializes an add-in.
+		/// </summary>
+		public override void InitializeAddIn()
+		{
+			m_extendedOriginalRules.InitializeAddIn();
+		}
+
+		/// <summary>
+		/// Analyzes source document.
+		/// </summary>
+		public override void AnalyzeDocument(CodeDocument document)
+		{
+			if (IsRuleEnabled(document, Rules.AdvancedNamingRules.ToString()))
+				m_advancedNamingRules.AnalyzeDocument(document);
+
+			m_extendedOriginalRules.AnalyzeDocument(document);
+			m_moreCustomRules.AnalyzeDocument(document);
+		}
+
+		#endregion
 	}
 }

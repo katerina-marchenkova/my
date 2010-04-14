@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
     <Compile Include="AdvancedNaming\NamingMacro.cs" />
     <Compile Include="AdvancedNaming\NamingRuleEditor.cs">
       <SubType>Form</SubType>
@@ -65,9 +66,11 @@
     <Compile Include="AdvancedNaming\NamingRulesPage.Designer.cs">
       <DependentUpon>NamingRulesPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
     <Compile Include="Analyzers\StyleCopPlus.cs" />
-    <Compile Include="Common\CustomCsParser.cs" />
-    <Compile Include="Common\Helper.cs" />
+    <Compile Include="Analyzers\CustomCsParser.cs" />
+    <Compile Include="Analyzers\CodeHelper.cs" />
+    <Compile Include="Common\Native.cs" />
     <Compile Include="Common\HighlightTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,9 +100,6 @@
     <Compile Include="Rules.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ExtendedOriginalRules.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="AdvancedNaming\NamingRuleEditor.resx">
       <DependentUpon>NamingRuleEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,7 +109,6 @@
     <EmbeddedResource Include="Common\HighlightTextBox.resx">
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MoreCustomRules.xml" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -4,9 +4,47 @@
 		Plug-in that extends original StyleCop features. Some settings for this plug-in are taken out to the separate StyleCop+ settings page.
 	</Description>
 	<Properties>
-		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespaces." />
-		<StringProperty Name="InterfaceNamingRule" DefaultValue="I$(AaBb)" FriendlyName="Interface" Description="Naming rules for interfaces." />
-		<StringProperty Name="ClassNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class" Description="Naming rules for classes." />
-		<StringProperty Name="StructNamingRule" DefaultValue="" FriendlyName="Struct" Description="Naming rules for structs." />
+		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
+		<StringProperty Name="InterfaceNamingRule" DefaultValue="I$(AaBb)" FriendlyName="Interface" Description="Naming rules for interface." />
+		<StringProperty Name="ClassNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class" Description="Naming rules for class." />
+		<StringProperty Name="StructNamingRule" DefaultValue="" FriendlyName="Struct" Description="Naming rules for struct." />
 	</Properties>
+	<Rules>
+		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
+			<Context>{0} name should conform the following style: {1}.</Context>
+			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ settings page for details.</Description>
+		</Rule>
+		<RuleGroup Name="Extended Original Rules">
+			<Rule Name="ElementMustBeginWithUpperCaseLetter" CheckId="SP1300" DisabledByDefault="true">
+				<Context>{0} names begin with an upper-case letter: {1}.</Context>
+				<Description>Validates that names of certain types of elements begin with an upper-case letter. Based on SA1300 behaviour, but allows windows forms event handlers to be named with a lower-case letter.</Description>
+			</Rule>
+			<Rule Name="OpeningCurlyBracketsMustNotBePrecededByBlankLine" CheckId="SP1509" DisabledByDefault="true">
+				<Context>An opening curly bracket must not be preceded by a blank line.</Context>
+				<Description>Validates that an opening curly bracket is not preceded by a blank line. Based on SA1509 behaviour, but allows using nested code blocks.</Description>
+			</Rule>
+			<Rule Name="ElementsMustBeDocumented" CheckId="SP1600" DisabledByDefault="true">
+				<Context>The {0} must have a documentation header.</Context>
+				<Description>Validates that an element contains a properly formatted documentation header. Based on SA1600 behaviour, but allows windows forms event handlers to be undocumented.</Description>
+			</Rule>
+			<Rule Name="ConstructorSummaryDocumentationMustBeginWithStandardText" CheckId="SP1642" DisabledByDefault="true">
+				<Context>The documentation text within the constructor's summary tag should be "Initializes a new instance." or should begin with the text: "{0}".</Context>
+				<Description>Verifies that a constructor's summary text begins with the appropriate wording. Based on SA1642 behaviour, but allows any constructor to have the following summary text: "Initializes a new instance.".</Description>
+			</Rule>
+			<Rule Name="DestructorSummaryDocumentationMustBeginWithStandardText" CheckId="SP1643" DisabledByDefault="true">
+				<Context>The documentation text within the destructor's summary tag should be "Finalizes an instance." or should begin with the text: "{0}".</Context>
+				<Description>Verifies that a destructor's summary text begins with the appropriate wording. Based on SA1643 behaviour, but allows any destructor to have the following summary text: "Finalizes an instance.".</Description>
+			</Rule>
+		</RuleGroup>
+		<RuleGroup Name="More Custom Rules">
+			<Rule Name="CodeLineMustNotEndWithWhitespace" CheckId="SP2000">
+				<Context>Invalid spacing at the end of the line.</Context>
+				<Description>Validates the spacing at the end of the each code line.</Description>
+			</Rule>
+			<Rule Name="CodeLineMustBeginWithIdenticalWhitespaces" CheckId="SP2001">
+				<Context>You should not use different characters for indention.</Context>
+				<Description>Validates that spacing at the beginning of the each code line uses identical characters.</Description>
+			</Rule>
+		</RuleGroup>
+	</Rules>
 </SourceAnalyzer>

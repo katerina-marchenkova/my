@@ -172,7 +172,7 @@
     <value>PascalNamingStyle</value>
   </data>
   <data name="MacroPascalRegular" xml:space="preserve">
-    <value>xxx</value>
+    <value>([A-Z0-9][a-z0-9]+)+</value>
   </data>
   <data name="MacroPascalSample" xml:space="preserve">
     <value>SampleName</value>

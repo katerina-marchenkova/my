@@ -6,9 +6,9 @@ using Microsoft.StyleCop.CSharp;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Helper methods.
+	/// Helper methods for analyzing code.
 	/// </summary>
-	public static class Helper
+	public static class CodeHelper
 	{
 		#region Identifying elements
 

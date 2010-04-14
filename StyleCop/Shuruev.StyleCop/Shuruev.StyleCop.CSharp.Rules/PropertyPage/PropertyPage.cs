@@ -51,6 +51,7 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				return m_dirty;
 			}
+
 			set
 			{
 				m_dirty = value;

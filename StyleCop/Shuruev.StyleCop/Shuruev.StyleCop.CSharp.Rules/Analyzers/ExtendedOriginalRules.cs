@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.StyleCop;
@@ -9,57 +10,67 @@ namespace Shuruev.StyleCop.CSharp
 	/// <summary>
 	/// Rules that are based on the original ones with adding some exception cases.
 	/// </summary>
-	[SourceAnalyzer(typeof(CsParser))]
-	public class ExtendedOriginalRules : SourceAnalyzer
+	public class ExtendedOriginalRules
 	{
-		private StyleCopCore customCore;
-		private NamingRules customNamingAnalyzer;
-		private LayoutRules customLayoutAnalyzer;
-		private DocumentationRules customDocumentationAnalyzer;
+		private readonly SourceAnalyzer m_parent;
+
+		private StyleCopCore m_customCore;
+		private NamingRules m_customNamingAnalyzer;
+		private LayoutRules m_customLayoutAnalyzer;
+		private DocumentationRules m_customDocumentationAnalyzer;
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public ExtendedOriginalRules(SourceAnalyzer parent)
+		{
+			if (parent == null)
+				throw new ArgumentNullException("parent");
+
+			m_parent = parent;
+		}
 
 		#region Running original analyzers
 
 		/// <summary>
 		/// Initializes an add-in.
 		/// </summary>
-		public override void InitializeAddIn()
+		public void InitializeAddIn()
 		{
-			base.InitializeAddIn();
+			m_customCore = new StyleCopCore();
+			m_customCore.ViolationEncountered += OnCustomViolationEncountered;
 
-			this.customCore = new StyleCopCore();
-			this.customCore.ViolationEncountered += this.OnCustomViolationEncountered;
-
-			this.customNamingAnalyzer = new NamingRules();
-			this.customLayoutAnalyzer = new LayoutRules();
-			this.customDocumentationAnalyzer = new DocumentationRules();
+			m_customNamingAnalyzer = new NamingRules();
+			m_customLayoutAnalyzer = new LayoutRules();
+			m_customDocumentationAnalyzer = new DocumentationRules();
 
 			InitializeCustomAnalyzer(
-				Core,
-				this.customCore,
+				m_parent.Core,
+				m_customCore,
 				"Microsoft.StyleCop.CSharp.NamingRules",
-				this.customNamingAnalyzer);
+				m_customNamingAnalyzer);
 
 			InitializeCustomAnalyzer(
-				Core,
-				this.customCore,
+				m_parent.Core,
+				m_customCore,
 				"Microsoft.StyleCop.CSharp.LayoutRules",
-				this.customLayoutAnalyzer);
+				m_customLayoutAnalyzer);
 
 			InitializeCustomAnalyzer(
-				Core,
-				this.customCore,
+				m_parent.Core,
+				m_customCore,
 				"Microsoft.StyleCop.CSharp.DocumentationRules",
-				this.customDocumentationAnalyzer);
+				m_customDocumentationAnalyzer);
 		}
 
 		/// <summary>
 		/// Analyzes source document.
 		/// </summary>
-		public override void AnalyzeDocument(CodeDocument document)
+		public void AnalyzeDocument(CodeDocument document)
 		{
-			this.customNamingAnalyzer.AnalyzeDocument(document);
-			this.customLayoutAnalyzer.AnalyzeDocument(document);
-			this.customDocumentationAnalyzer.AnalyzeDocument(document);
+			m_customNamingAnalyzer.AnalyzeDocument(document);
+			m_customLayoutAnalyzer.AnalyzeDocument(document);
+			m_customDocumentationAnalyzer.AnalyzeDocument(document);
 		}
 
 		/// <summary>
@@ -188,10 +199,10 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CsElement element = (CsElement)e.Element;
 
-			if (Helper.IsWindowsFormsEventHandler(element))
+			if (CodeHelper.IsWindowsFormsEventHandler(element))
 				return;
 
-			AddViolation(
+			m_parent.AddViolation(
 				element,
 				Rules.ElementMustBeginWithUpperCaseLetter,
 				new object[] { element.FriendlyTypeText, element.Name });
@@ -204,16 +215,16 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CsElement element = (CsElement)e.Element;
 
-			Node<CsToken> node = Helper.GetNodeByLine(element.Document, e.LineNumber);
+			Node<CsToken> node = CodeHelper.GetNodeByLine(element.Document, e.LineNumber);
 			if (node != null)
 			{
-				Node<CsToken> prev = Helper.FindPreviousValueableNode(node);
+				Node<CsToken> prev = CodeHelper.FindPreviousValueableNode(node);
 				if (prev.Value.CsTokenType == CsTokenType.Semicolon
 					|| prev.Value.CsTokenType == CsTokenType.CloseCurlyBracket)
 					return;
 			}
 
-			AddViolation(
+			m_parent.AddViolation(
 				element,
 				e.LineNumber,
 				Rules.OpeningCurlyBracketsMustNotBePrecededByBlankLine,
@@ -227,10 +238,10 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CsElement element = (CsElement)e.Element;
 
-			if (Helper.IsWindowsFormsEventHandler(element))
+			if (CodeHelper.IsWindowsFormsEventHandler(element))
 				return;
 
-			AddViolation(
+			m_parent.AddViolation(
 				element,
 				Rules.ElementsMustBeDocumented,
 				new object[] { element.FriendlyTypeText });
@@ -243,14 +254,14 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CsElement element = (CsElement)e.Element;
 
-			string text = Helper.GetSummaryText(element);
+			string text = CodeHelper.GetSummaryText(element);
 			if (text == Resources.StandardConstructorSummaryText)
 				return;
 
-			AddViolation(
+			m_parent.AddViolation(
 				element,
 				Rules.ConstructorSummaryDocumentationMustBeginWithStandardText,
-				new object[] { this.GetExampleSummaryTextForConstructor(element) });
+				new object[] { GetExampleSummaryTextForConstructor(element) });
 		}
 
 		/// <summary>
@@ -260,14 +271,14 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CsElement element = (CsElement)e.Element;
 
-			string text = Helper.GetSummaryText(element);
+			string text = CodeHelper.GetSummaryText(element);
 			if (text == Resources.StandardDestructorSummaryText)
 				return;
 
-			AddViolation(
+			m_parent.AddViolation(
 				element,
 				Rules.DestructorSummaryDocumentationMustBeginWithStandardText,
-				new object[] { this.GetExampleSummaryTextForDestructor() });
+				new object[] { GetExampleSummaryTextForDestructor() });
 		}
 
 		#endregion
@@ -284,7 +295,7 @@ namespace Shuruev.StyleCop.CSharp
 				"GetExampleSummaryTextForConstructorType",
 				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
 				null,
-				this.customDocumentationAnalyzer,
+				m_customDocumentationAnalyzer,
 				new object[] { constructor, type });
 		}
 
@@ -297,7 +308,7 @@ namespace Shuruev.StyleCop.CSharp
 				"GetExampleSummaryTextForDestructor",
 				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
 				null,
-				this.customDocumentationAnalyzer,
+				m_customDocumentationAnalyzer,
 				null);
 		}
 

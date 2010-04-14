@@ -1,18 +1,31 @@
+using System;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// More custom rules represented by Shuruev StyleCop plug-in.
+	/// More custom rules represented by StyleCop+ plug-in.
 	/// </summary>
-	[SourceAnalyzer(typeof(CsParser))]
-	public class MoreCustomRules : SourceAnalyzer
+	public class MoreCustomRules
 	{
+		private readonly SourceAnalyzer m_parent;
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public MoreCustomRules(SourceAnalyzer parent)
+		{
+			if (parent == null)
+				throw new ArgumentNullException("parent");
+
+			m_parent = parent;
+		}
+
 		/// <summary>
 		/// Analyzes source document.
 		/// </summary>
-		public override void AnalyzeDocument(CodeDocument document)
+		public void AnalyzeDocument(CodeDocument document)
 		{
 			CsDocument doc = (CsDocument)document;
 			for (Node<CsToken> node = doc.Tokens.First; node != null; node = node.Next)
@@ -22,7 +35,7 @@ namespace Shuruev.StyleCop.CSharp
 				{
 					if (node.Value.CsTokenType == CsTokenType.WhiteSpace)
 					{
-							AddViolation(
+						m_parent.AddViolation(
 								doc.RootElement,
 								node.Value.LineNumber,
 								Rules.CodeLineMustNotEndWithWhitespace,
@@ -37,7 +50,7 @@ namespace Shuruev.StyleCop.CSharp
 						&& node.Value.Text.Contains(" ")
 						&& node.Value.Text.Contains("\t"))
 					{
-						AddViolation(
+						m_parent.AddViolation(
 							doc.RootElement,
 							node.Value.LineNumber,
 							Rules.CodeLineMustBeginWithIdenticalWhitespaces,

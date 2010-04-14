@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
 
@@ -245,9 +246,9 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Builds example text for specified rule.
 		/// </summary>
-		public static string BuildExample(string text)
+		public static string BuildExample(string rule)
 		{
-			text = Clean(text);
+			string text = Clean(rule);
 			foreach (string key in GetKeys())
 			{
 				string markup = GetMarkup(key);
@@ -257,6 +258,34 @@ namespace Shuruev.StyleCop.CSharp
 
 			text = text.Replace("\r\n", ", ");
 			return text;
+		}
+
+		/// <summary>
+		/// Builds regular expression for specified rule.
+		/// </summary>
+		public static Regex BuildRegex(string rule)
+		{
+			string pattern = Clean(rule);
+			foreach (string key in GetKeys())
+			{
+				string markup = GetMarkup(key);
+				string regular = GetRegular(key);
+				pattern = pattern.Replace(markup, regular);
+			}
+
+			string[] lines = pattern.Split(
+				new[] { '\r', '\n' },
+				StringSplitOptions.RemoveEmptyEntries);
+
+			List<string> parts = new List<string>();
+			foreach (string line in lines)
+			{
+				string part = String.Format("^{0}$", line);
+				parts.Add(part);
+			}
+
+			pattern = String.Join("|", parts.ToArray());
+			return new Regex(pattern);
 		}
 
 		#endregion

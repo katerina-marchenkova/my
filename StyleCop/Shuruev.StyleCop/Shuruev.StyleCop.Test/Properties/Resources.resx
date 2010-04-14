@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CR2000" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CR2000.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SP2000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP2000.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="CR2001" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CR2001.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SP2001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP2001.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="EX1300" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EX1300.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SP1300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP1300.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="EX1509" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\ex1509.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SP1509" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP1509.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="EX1600" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EX1600.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="SP1600" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SP1600.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

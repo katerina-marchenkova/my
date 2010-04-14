@@ -13,7 +13,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets property descriptor with existing check.
 		/// </summary>
-		private static PropertyDescriptor<string> GetPropertyDescriptor(SourceAnalyzer analyzer, string settingName)
+		public static PropertyDescriptor<string> GetPropertyDescriptor(SourceAnalyzer analyzer, string settingName)
 		{
 			PropertyDescriptor<string> descriptor = (PropertyDescriptor<string>)analyzer.PropertyDescriptors[settingName];
 			if (descriptor == null)
@@ -25,7 +25,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets a value for specified setting.
 		/// </summary>
-		private static string GetValue(SourceAnalyzer analyzer, Settings settings, string settingName)
+		public static string GetSettingValue(SourceAnalyzer analyzer, Settings settings, string settingName)
 		{
 			StringProperty setting = (StringProperty)analyzer.GetSetting(settings, settingName);
 			if (setting == null)
@@ -40,10 +40,22 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets friendly name for specified setting.
 		/// </summary>
+		public static string GetFriendlyName(SourceAnalyzer analyzer, string settingName)
+		{
+			PropertyDescriptor<string> descriptor = GetPropertyDescriptor(analyzer, settingName);
+			return descriptor.FriendlyName;
+		}
+
+		#endregion
+
+		#region Accessing via property page
+
+		/// <summary>
+		/// Gets friendly name for specified setting.
+		/// </summary>
 		public static string GetFriendlyName(PropertyPage page, string settingName)
 		{
-			PropertyDescriptor<string> descriptor = GetPropertyDescriptor(page.Analyzer, settingName);
-			return descriptor.FriendlyName;
+			return GetFriendlyName(page.Analyzer, settingName);
 		}
 
 		/// <summary>
@@ -51,7 +63,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetMergedValue(PropertyPage page, string settingName)
 		{
-			return GetValue(page.Analyzer, page.TabControl.MergedSettings, settingName);
+			return GetSettingValue(page.Analyzer, page.TabControl.MergedSettings, settingName);
 		}
 
 		/// <summary>
@@ -59,7 +71,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetInheritedValue(PropertyPage page, string settingName)
 		{
-			return GetValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
+			return GetSettingValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
 		}
 
 		/// <summary>

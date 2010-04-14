@@ -5,6 +5,11 @@
 	/// </summary>
 	internal enum Rules
 	{
+		/// <summary>
+		/// Provides wide and flexible variety of naming rules.
+		/// </summary>
+		AdvancedNamingRules,
+
 		#region Extended original rules
 
 		/// <summary>

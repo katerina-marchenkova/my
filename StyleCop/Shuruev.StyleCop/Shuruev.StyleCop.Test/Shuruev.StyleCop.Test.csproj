@@ -52,17 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Resources\SP1600.cs" />
+    <Content Include="Resources\SP1300.cs" />
+    <Content Include="Resources\SP2000.cs" />
+    <Content Include="Resources\SP2001.cs" />
+    <Content Include="Resources\SP1509.cs" />
+    <Compile Include="MainTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="Resources\EX1600.cs" />
-    <Content Include="Resources\EX1300.cs" />
-    <Content Include="Resources\CR2000.cs" />
-    <Content Include="Resources\CR2001.cs" />
-    <Content Include="Resources\EX1509.cs" />
-    <Compile Include="MainTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shuruev.StyleCop.CSharp.Rules\Shuruev.StyleCop.CSharp.Rules.csproj">
@@ -74,6 +74,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
