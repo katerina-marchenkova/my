@@ -10,7 +10,7 @@ namespace Shuruev.StyleCop.Run
 	public class Program
 	{
 		private static readonly string basePath = AppDomain.CurrentDomain.BaseDirectory;
-		private static readonly string sourceFile = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class1.cs";
+		private static readonly string sourceFile = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class4.cs";
 
 		/// <summary>
 		/// Main program entry.

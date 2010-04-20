@@ -6,8 +6,8 @@ namespace Shuruev.StyleCop.Run
 {
 	public class Foo
 	{
-		readonly int f1;
-		readonly int f2;
+		protected internal readonly int f1;
+		protected internal readonly int f2;
 
 		public Foo()
 		{

@@ -43,6 +43,38 @@ namespace Shuruev.StyleCop.CSharp
 			return false;
 		}
 
+		/// <summary>
+		/// Checks whether specified element has internal access modifier.
+		/// </summary>
+		public static bool IsInternal(CsElement element)
+		{
+			AccessModifierType modifier = element.AccessModifier;
+
+			if (modifier == AccessModifierType.Internal)
+				return true;
+
+			if (modifier == AccessModifierType.ProtectedInternal)
+				return true;
+
+			return false;
+		}
+
+		#endregion
+
+		#region Working with element names
+
+		/// <summary>
+		/// Extracts pure name from the declaration.
+		/// </summary>
+		public static string ExtractPureName(string declarationName)
+		{
+			int index = declarationName.IndexOf('<');
+			if (index < 0)
+				return declarationName;
+
+			return declarationName.Substring(0, index);
+		}
+
 		#endregion
 
 		#region Working with node tree

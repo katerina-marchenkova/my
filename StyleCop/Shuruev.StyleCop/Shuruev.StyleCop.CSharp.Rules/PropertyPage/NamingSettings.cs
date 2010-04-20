@@ -9,18 +9,22 @@ namespace Shuruev.StyleCop.CSharp
 	{
 		internal const string Abbreviations = "NamingAbbreviations";
 		internal const string Namespace = "NamespaceNamingRule";
+		internal const string ClassNotInternal = "ClassNotInternalNamingRule";
+		internal const string ClassInternal = "ClassInternalNamingRule";
+		internal const string StructNotInternal = "StructNotInternalNamingRule";
+		internal const string StructInternal = "StructInternalNamingRule";
 		internal const string Interface = "InterfaceNamingRule";
-		internal const string Class = "ClassNamingRule";
-		internal const string Struct = "StructNamingRule";
 
 		internal static readonly List<string> All = new List<string>(
 			new[]
 			{
 				Abbreviations,
 				Namespace,
-				Interface,
-				Class,
-				Struct
+				ClassNotInternal,
+				ClassInternal,
+				StructNotInternal,
+				StructInternal,
+				Interface
 			});
 	}
 }

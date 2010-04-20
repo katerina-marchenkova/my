@@ -6,9 +6,11 @@
 	<Properties>
 		<StringProperty Name="NamingAbbreviations" DefaultValue="C" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
 		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
+		<StringProperty Name="ClassNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class (not internal)" Description="Naming rules for non-internal class." />
+		<StringProperty Name="ClassInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Class (internal)" Description="Naming rules for internal class." />
+		<StringProperty Name="StructNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Struct (not internal)" Description="Naming rules for non-internal struct." />
+		<StringProperty Name="StructInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Struct (internal)" Description="Naming rules for internal struct." />
 		<StringProperty Name="InterfaceNamingRule" DefaultValue="I$(AaBb)" FriendlyName="Interface" Description="Naming rules for interface." />
-		<StringProperty Name="ClassNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class" Description="Naming rules for class." />
-		<StringProperty Name="StructNamingRule" DefaultValue="" FriendlyName="Struct" Description="Naming rules for struct." />
 	</Properties>
 	<Rules>
 		<Rule Name="AdvancedNamingRules" CheckId="SP0100">

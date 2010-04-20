@@ -188,7 +188,7 @@ Please check that you are using UPPERCASE letters only separated by whitespaces.
     <value>ALL_WORDS_UPPER</value>
   </data>
   <data name="MacroUpperRegular" xml:space="preserve">
-    <value>xxx</value>
+    <value>([A-Z0-9]+_?)+</value>
   </data>
   <data name="MacroUpperSample" xml:space="preserve">
     <value>SAMPLE_NAME</value>

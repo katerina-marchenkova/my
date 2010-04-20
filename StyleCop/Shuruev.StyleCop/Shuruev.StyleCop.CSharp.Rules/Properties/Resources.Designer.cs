@@ -276,7 +276,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to xxx.
+        ///   Looks up a localized string similar to ([A-Z0-9]+_?)+.
         /// </summary>
         internal static string MacroUpperRegular {
             get {

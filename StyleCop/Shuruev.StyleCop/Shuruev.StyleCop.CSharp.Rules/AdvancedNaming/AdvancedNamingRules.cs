@@ -57,12 +57,36 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			if (element.ElementType == ElementType.Namespace)
 			{
-				CheckNamespace(settings, element);
+				Check(settings, element, NamingSettings.Namespace);
 			}
 
 			if (element.ElementType == ElementType.Class)
 			{
-				CheckClass(settings, element);
+				if (CodeHelper.IsInternal(element))
+				{
+					Check(settings, element, NamingSettings.ClassInternal);
+				}
+				else
+				{
+					Check(settings, element, NamingSettings.ClassNotInternal);
+				}
+			}
+
+			if (element.ElementType == ElementType.Struct)
+			{
+				if (CodeHelper.IsInternal(element))
+				{
+					Check(settings, element, NamingSettings.StructInternal);
+				}
+				else
+				{
+					Check(settings, element, NamingSettings.StructNotInternal);
+				}
+			}
+
+			if (element.ElementType == ElementType.Interface)
+			{
+				Check(settings, element, NamingSettings.Interface);
 			}
 		}
 
@@ -83,35 +107,25 @@ namespace Shuruev.StyleCop.CSharp
 		#region Checking entity names
 
 		/// <summary>
-		/// Checks namespace name.
+		/// Checks common naming setting.
 		/// </summary>
-		private void CheckNamespace(CurrentNamingSettings settings, CsElement element)
+		private void Check(CurrentNamingSettings settings, CsElement element, string settingName)
 		{
-			Regex regex = settings.GetRegex(NamingSettings.Namespace);
+			Regex regex = settings.GetRegex(settingName);
 			if (regex == null)
 				return;
 
-			foreach (string name in element.Declaration.Name.Split('.'))
+			string name = CodeHelper.ExtractPureName(element.Declaration.Name);
+
+			string[] parts = name.Split('.');
+			foreach (string part in parts)
 			{
-				if (!regex.IsMatch(name))
+				if (!regex.IsMatch(part))
 				{
-					AddViolation(settings, element, NamingSettings.Namespace);
+					AddViolation(settings, element, settingName);
 					return;
 				}
 			}
-		}
-
-		/// <summary>
-		/// Checks class name.
-		/// </summary>
-		private void CheckClass(CurrentNamingSettings settings, CsElement element)
-		{
-			Regex regex = settings.GetRegex(NamingSettings.Class);
-			if (regex == null)
-				return;
-
-			if (!regex.IsMatch(element.Declaration.Name))
-				AddViolation(settings, element, NamingSettings.Class);
 		}
 
 		#endregion
