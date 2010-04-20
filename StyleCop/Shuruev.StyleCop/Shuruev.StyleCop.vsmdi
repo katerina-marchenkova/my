@@ -3,4 +3,10 @@
   <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <RunConfiguration id="53ce2064-2515-413f-91cd-59b4234a39db" name="Local Test Run" storage="localtestrun.testrunconfig" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common,   PublicKeyToken=b03f5f7f11d50a3a" />
   </TestList>
+  <TestList name="Advanced Naming Rules" id="d33a96a0-671a-43f8-8c60-eedcae6f220e" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="0287cff3-2cdc-024a-83ab-cdaf336aa1d6" name="TestRulesApplying" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="341a4e28-404c-0869-fbd0-f3425c34f9de" name="TestMacroPascal" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
 </TestLists>
