@@ -33,8 +33,16 @@ namespace Shuruev.StyleCop.CSharp
 			m_examples.Clear();
 			m_regulars.Clear();
 
+			string abbreviations = SettingsManager.GetSettingValue(
+				analyzer,
+				document.Settings,
+				NamingSettings.Abbreviations);
+
 			foreach (string setting in NamingSettings.All)
 			{
+				if (setting == NamingSettings.Abbreviations)
+					continue;
+
 				string name = SettingsManager.GetFriendlyName(analyzer, setting);
 				m_names.Add(setting, name);
 
@@ -49,7 +57,7 @@ namespace Shuruev.StyleCop.CSharp
 					string example = NamingMacro.BuildExample(value);
 					m_examples.Add(setting, example);
 
-					Regex regex = NamingMacro.BuildRegex(value);
+					Regex regex = NamingMacro.BuildRegex(value, abbreviations);
 					m_regulars.Add(setting, regex);
 				}
 			}

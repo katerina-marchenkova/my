@@ -61,6 +61,23 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It seems that your abbreviations string has wrong syntax.
+        ///Please check that you are using UPPERCASE letters only separated by whitespaces..
+        /// </summary>
+        internal static string AbbreviationsEditorWarning {
+            get {
+                return ResourceManager.GetString("AbbreviationsEditorWarning", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CapitalLetter {
+            get {
+                object obj = ResourceManager.GetObject("CapitalLetter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string CaptionError {
@@ -223,7 +240,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ([A-Z0-9][a-z0-9]+)+.
+        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+)|{0})+.
         /// </summary>
         internal static string MacroPascalRegular {
             get {

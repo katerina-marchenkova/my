@@ -174,6 +174,13 @@ namespace Shuruev.StyleCop.CSharp
 				m_bold :
 				m_regular;
 
+			if (tag.SettingName == NamingSettings.Abbreviations)
+			{
+				lvi.ImageKey = Pictures.CapitalLetter;
+				sub.Text = tag.MergedValue;
+				return;
+			}
+
 			if (String.IsNullOrEmpty(tag.MergedValue))
 			{
 				lvi.ImageKey = Pictures.RuleDisabled;
@@ -210,17 +217,35 @@ namespace Shuruev.StyleCop.CSharp
 			ListViewItem lvi = listRules.SelectedItems[0];
 			SettingTag tag = (SettingTag)lvi.Tag;
 
-			using (NamingRuleEditor dialog = new NamingRuleEditor())
+			if (tag.SettingName == NamingSettings.Abbreviations)
 			{
-				dialog.ObjectName = lvi.Text;
-				dialog.RuleDefinition = tag.MergedValue;
-				if (dialog.ShowDialog() == DialogResult.OK)
+				using (AbbreviationsEditor dialog = new AbbreviationsEditor())
 				{
-					tag.MergedValue = dialog.RuleDefinition;
-					UpdateListItem(lvi);
-					Page.Dirty = true;
+					dialog.Abbreviations = tag.MergedValue;
+					if (dialog.ShowDialog() == DialogResult.OK)
+					{
+						tag.MergedValue = dialog.Abbreviations;
+						UpdateListItem(lvi);
+						Page.Dirty = true;
 
-					UpdateControls();
+						UpdateControls();
+					}
+				}
+			}
+			else
+			{
+				using (NamingRuleEditor dialog = new NamingRuleEditor())
+				{
+					dialog.ObjectName = lvi.Text;
+					dialog.RuleDefinition = tag.MergedValue;
+					if (dialog.ShowDialog() == DialogResult.OK)
+					{
+						tag.MergedValue = dialog.RuleDefinition;
+						UpdateListItem(lvi);
+						Page.Dirty = true;
+
+						UpdateControls();
+					}
 				}
 			}
 		}

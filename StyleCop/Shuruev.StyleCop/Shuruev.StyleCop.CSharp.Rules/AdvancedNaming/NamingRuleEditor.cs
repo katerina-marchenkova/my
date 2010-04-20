@@ -47,7 +47,7 @@ namespace Shuruev.StyleCop.CSharp
 			}
 			else
 			{
-				textEditor.RichTextBox.Text = RuleDefinition;
+				textEditor.RichTextBox.Text = NamingMacro.ConvertRuleToText(RuleDefinition);
 			}
 
 			RebuildMacroList();
@@ -56,7 +56,7 @@ namespace Shuruev.StyleCop.CSharp
 
 		private void textEditor_Highlight(object sender, ControlEventArgs e)
 		{
-			NamingMacro.Highlight((RichTextBox)e.Control);
+			NamingMacro.HighlightRule((RichTextBox)e.Control);
 		}
 
 		private void listMacro_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace Shuruev.StyleCop.CSharp
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			if (!NamingMacro.Check(textEditor.RichTextBox.Text))
+			if (!NamingMacro.CheckRule(textEditor.RichTextBox.Text))
 			{
 				Messages.ShowWarningOk(this, Resources.NamingRuleEditorWarning);
 				textEditor.Focus();
@@ -93,7 +93,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			RuleDefinition = checkDisable.Checked ?
 				String.Empty :
-				NamingMacro.Clean(textEditor.RichTextBox.Text);
+				NamingMacro.ParseRuleFromText(textEditor.RichTextBox.Text);
 
 			DialogResult = DialogResult.OK;
 		}

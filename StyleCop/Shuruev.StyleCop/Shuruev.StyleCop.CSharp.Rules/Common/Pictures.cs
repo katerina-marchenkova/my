@@ -14,6 +14,7 @@ namespace Shuruev.StyleCop.CSharp
 
 		internal const string RuleDisabled = "RuleDisabled";
 		internal const string RuleEnabled = "RuleEnabled";
+		internal const string CapitalLetter = "CapitalLetter";
 
 		#endregion
 
@@ -25,6 +26,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			s_images.Add(RuleDisabled, Resources.RuleDisabled);
 			s_images.Add(RuleEnabled, Resources.RuleEnabled);
+			s_images.Add(CapitalLetter, Resources.CapitalLetter);
 		}
 
 		#region Accessing pictures

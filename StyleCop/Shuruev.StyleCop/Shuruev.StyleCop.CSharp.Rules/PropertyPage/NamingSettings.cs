@@ -7,6 +7,7 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	internal static class NamingSettings
 	{
+		internal const string Abbreviations = "NamingAbbreviations";
 		internal const string Namespace = "NamespaceNamingRule";
 		internal const string Interface = "InterfaceNamingRule";
 		internal const string Class = "ClassNamingRule";
@@ -15,6 +16,7 @@ namespace Shuruev.StyleCop.CSharp
 		internal static readonly List<string> All = new List<string>(
 			new[]
 			{
+				Abbreviations,
 				Namespace,
 				Interface,
 				Class,

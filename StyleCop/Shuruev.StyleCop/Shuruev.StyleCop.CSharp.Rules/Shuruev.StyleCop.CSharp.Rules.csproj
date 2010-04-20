@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
+    <Compile Include="AdvancedNaming\AbbreviationsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\AbbreviationsEditor.Designer.cs">
+      <DependentUpon>AbbreviationsEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdvancedNaming\NamingMacro.cs" />
     <Compile Include="AdvancedNaming\NamingRuleEditor.cs">
       <SubType>Form</SubType>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AdvancedNaming\AbbreviationsEditor.resx">
+      <DependentUpon>AbbreviationsEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StyleCopPlus.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RuleEnabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapitalLetter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

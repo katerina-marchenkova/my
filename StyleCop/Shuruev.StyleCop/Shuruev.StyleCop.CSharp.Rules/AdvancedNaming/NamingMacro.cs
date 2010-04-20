@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
@@ -12,6 +13,8 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public static class NamingMacro
 	{
+		private const string c_ruleSeparator = ":";
+
 		private static readonly List<string> s_keys = new List<string>();
 		private static readonly Dictionary<string, string> s_descriptions = new Dictionary<string, string>();
 		private static readonly Dictionary<string, string> s_markups = new Dictionary<string, string>();
@@ -116,24 +119,31 @@ namespace Shuruev.StyleCop.CSharp
 		#region Parsing rule definitions
 
 		/// <summary>
-		/// Cleans meaningless data from specified text.
+		/// Creates rule definition string from specified text.
 		/// </summary>
-		public static string Clean(string text)
+		public static string ParseRuleFromText(string text)
 		{
 			string[] lines = text.Split(
 				new[] { '\r', '\n' },
 				StringSplitOptions.RemoveEmptyEntries);
 
-			return String.Join("\r\n", lines);
+			return String.Join(c_ruleSeparator, lines);
+		}
+
+		/// <summary>
+		/// Creates text describing rule definition string.
+		/// </summary>
+		public static string ConvertRuleToText(string ruleDefinition)
+		{
+			return ruleDefinition.Replace(c_ruleSeparator, Environment.NewLine);
 		}
 
 		/// <summary>
 		/// Checks if specified text can describe naming rule.
 		/// </summary>
-		public static bool Check(string text)
+		public static bool CheckRule(string text)
 		{
 			text = HideMarkups(text);
-			text = Clean(text);
 
 			string[] lines = text.Split(
 				new[] { '\r', '\n' },
@@ -187,9 +197,9 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Highlights specified rich text box.
+		/// Highlights rich text box with rule definition text.
 		/// </summary>
-		public static void Highlight(RichTextBox rich)
+		public static void HighlightRule(RichTextBox rich)
 		{
 			if (rich.ReadOnly)
 			{
@@ -199,7 +209,7 @@ namespace Shuruev.StyleCop.CSharp
 				return;
 			}
 
-			if (Check(rich.Text))
+			if (CheckRule(rich.Text))
 			{
 				rich.BackColor = Colors.LightYellow;
 			}
@@ -241,14 +251,112 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
+		#region Parsing abbreviations
+
+		/// <summary>
+		/// Creates abbreviations string from specified text.
+		/// </summary>
+		public static string ParseAbbreviationsFromText(string text)
+		{
+			bool closed = true;
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in text)
+			{
+				if (Char.IsWhiteSpace(c))
+				{
+					if (!closed)
+					{
+						sb.Append(' ');
+						closed = true;
+					}
+				}
+				else
+				{
+					sb.Append(c);
+					closed = false;
+				}
+			}
+
+			return sb.ToString().TrimEnd(' ');
+		}
+
+		/// <summary>
+		/// Creates text describing abbreviations string.
+		/// </summary>
+		public static string ConvertAbbreviationsToText(string ruleDefinition)
+		{
+			return ruleDefinition;
+		}
+
+		/// <summary>
+		/// Checks if specified text can describe naming abbreviations.
+		/// </summary>
+		public static bool CheckAbbreviations(string text)
+		{
+			foreach (char c in text)
+			{
+				if (!IsValidAbbreviationChar(c))
+					return false;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Checks if specified character is valid for using in identifier.
+		/// </summary>
+		private static bool IsValidAbbreviationChar(char c)
+		{
+			if (Char.IsWhiteSpace(c))
+				return true;
+
+			if (Char.IsUpper(c))
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Highlights rich text box with abbreviations text.
+		/// </summary>
+		public static void HighlightAbbreviations(RichTextBox rich)
+		{
+			if (CheckAbbreviations(rich.Text))
+			{
+				rich.ResetBackColor();
+			}
+			else
+			{
+				rich.BackColor = Colors.LightRed;
+			}
+
+			int current = 0;
+			foreach (string line in rich.Lines)
+			{
+				for (int i = 0; i < line.Length; i++)
+				{
+					if (!IsValidAbbreviationChar(line[i]))
+					{
+						rich.SelectionStart = current + i;
+						rich.SelectionLength = 1;
+						rich.SelectionColor = Color.Red;
+					}
+				}
+
+				current += line.Length + 1;
+			}
+		}
+
+		#endregion
+
 		#region Applying rule definitions
 
 		/// <summary>
 		/// Builds example text for specified rule.
 		/// </summary>
-		public static string BuildExample(string rule)
+		public static string BuildExample(string ruleDefinition)
 		{
-			string text = Clean(rule);
+			string text = ruleDefinition;
 			foreach (string key in GetKeys())
 			{
 				string markup = GetMarkup(key);
@@ -256,25 +364,28 @@ namespace Shuruev.StyleCop.CSharp
 				text = text.Replace(markup, sample);
 			}
 
-			text = text.Replace("\r\n", ", ");
+			text = text.Replace(c_ruleSeparator, ", ");
 			return text;
 		}
 
 		/// <summary>
 		/// Builds regular expression for specified rule.
 		/// </summary>
-		public static Regex BuildRegex(string rule)
+		public static Regex BuildRegex(string ruleDefinition, string abbreviations)
 		{
-			string pattern = Clean(rule);
+			string[] abbrs = abbreviations.Split(' ');
+			string extension = String.Join("|", abbrs);
+
+			string pattern = ruleDefinition;
 			foreach (string key in GetKeys())
 			{
 				string markup = GetMarkup(key);
-				string regular = GetRegular(key);
+				string regular = String.Format(GetRegular(key), extension);
 				pattern = pattern.Replace(markup, regular);
 			}
 
 			string[] lines = pattern.Split(
-				new[] { '\r', '\n' },
+				new[] { c_ruleSeparator },
 				StringSplitOptions.RemoveEmptyEntries);
 
 			List<string> parts = new List<string>();

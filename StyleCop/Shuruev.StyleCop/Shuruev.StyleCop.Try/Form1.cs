@@ -17,6 +17,7 @@ namespace Shuruev.StyleCop.Try
 		}
 
 		private string xxx = "I$(AaBb)";
+		private string yyy = null;
 
 		private void button1_Click(object sender, EventArgs e)
 		{
@@ -27,6 +28,18 @@ namespace Shuruev.StyleCop.Try
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
 					xxx = dialog.RuleDefinition;
+				}
+			}
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			using (AbbreviationsEditor dialog = new AbbreviationsEditor())
+			{
+				dialog.Abbreviations = yyy;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					yyy = dialog.Abbreviations;
 				}
 			}
 		}
