@@ -5,7 +5,11 @@
   </TestList>
   <TestList name="Advanced Naming Rules" id="d33a96a0-671a-43f8-8c60-eedcae6f220e" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <TestLinks>
+      <TestLink id="7962fa56-c677-0ba0-d483-6ab8781cb429" name="TestMacroCapitalized" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="10c0aeb0-460c-23e8-4e9d-0b810ab44b8a" name="TestMacroUpper" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
       <TestLink id="0287cff3-2cdc-024a-83ab-cdaf336aa1d6" name="TestRulesApplying" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="8f643f4c-796e-1464-bfb8-e9c537b979a1" name="TestMacroLower" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="28af484f-8021-6a71-4882-17c8acbc1c47" name="TestMacroCamel" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
       <TestLink id="341a4e28-404c-0869-fbd0-f3425c34f9de" name="TestMacroPascal" storage="shuruev.stylecop.test\bin\debug\shuruev.stylecop.test.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
     </TestLinks>
   </TestList>

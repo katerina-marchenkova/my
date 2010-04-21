@@ -9,6 +9,9 @@ namespace Shuruev.StyleCop.Run
 		protected internal readonly int f1;
 		protected internal readonly int f2;
 
+		/// <summary>
+		/// Initializes a new instance. of the <see cref="Foo"/> class.
+		/// </summary>
 		public Foo()
 		{
 			int x = 10;

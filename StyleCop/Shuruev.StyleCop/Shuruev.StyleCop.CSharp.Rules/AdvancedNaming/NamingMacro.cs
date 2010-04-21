@@ -373,8 +373,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static Regex BuildRegex(string ruleDefinition, string abbreviations)
 		{
-			string[] abbrs = abbreviations.Split(' ');
-			string extension = String.Join("|", abbrs);
+			string[] abbrs = abbreviations.Split(
+				new[] { ' ' },
+				StringSplitOptions.RemoveEmptyEntries);
+
+			string extension = String.Empty;
+			if (abbrs.Length > 0)
+			{
+				extension = String.Format("|{0}", String.Join("|", abbrs));
+			}
 
 			string pattern = ruleDefinition;
 			foreach (string key in GetKeys())
