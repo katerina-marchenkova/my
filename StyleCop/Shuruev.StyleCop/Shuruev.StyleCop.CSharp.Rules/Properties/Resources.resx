@@ -119,7 +119,10 @@
   </resheader>
   <data name="AbbreviationsEditorWarning" xml:space="preserve">
     <value>It seems that your abbreviations string has wrong syntax.
-Please check that you are using UPPERCASE letters only separated by whitespaces.</value>
+
+Please check that:
+- string literals don't contain any characters except UPPERCASE letters and digits
+- string literals are separated by whitespaces</value>
   </data>
   <data name="CaptionError" xml:space="preserve">
     <value>Error</value>
@@ -202,7 +205,7 @@ Please check that you are using UPPERCASE letters only separated by whitespaces.
 Please check that:
 - it doesn't contain whitespace characters
 - all macros are written correctly
-- it uses only letters, digits and underscore in string literals
+- string literals don't contain any characters except letters, digits and underscore
 - you are using "Turn off" option instead of empty definition</value>
   </data>
   <data name="ResetSettingQuestion" xml:space="preserve">
@@ -232,5 +235,24 @@ It will be reset to its inherited (default) value:
   </data>
   <data name="CapitalLetter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CapitalLetter.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RightArrow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DerivingsEditorWarning" xml:space="preserve">
+    <value>It seems that your derivings string has wrong syntax.
+
+Please check that:
+- string literals don't contain any characters except letters, digits and underscore
+- string literals are separated by whitespaces</value>
+  </data>
+  <data name="CommonEditorCaption" xml:space="preserve">
+    <value>Edit "{0}" Setting</value>
+  </data>
+  <data name="DerivingExample" xml:space="preserve">
+    <value>...{0}</value>
+  </data>
+  <data name="DerivedClassFriendlyName" xml:space="preserve">
+    <value>Derived class</value>
   </data>
 </root>

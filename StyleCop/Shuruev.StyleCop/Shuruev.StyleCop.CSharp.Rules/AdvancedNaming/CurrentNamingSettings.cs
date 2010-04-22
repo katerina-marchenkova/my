@@ -13,6 +13,7 @@ namespace Shuruev.StyleCop.CSharp
 		private readonly Dictionary<string, string> m_names;
 		private readonly Dictionary<string, string> m_examples;
 		private readonly Dictionary<string, Regex> m_regulars;
+		private readonly List<string> m_derivings;
 
 		/// <summary>
 		/// Initializes a new instance.
@@ -22,6 +23,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_names = new Dictionary<string, string>();
 			m_examples = new Dictionary<string, string>();
 			m_regulars = new Dictionary<string, Regex>();
+			m_derivings = new List<string>();
 		}
 
 		/// <summary>
@@ -32,6 +34,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_names.Clear();
 			m_examples.Clear();
 			m_regulars.Clear();
+			m_derivings.Clear();
 
 			string abbreviations = SettingsManager.GetSettingValue(
 				analyzer,
@@ -40,7 +43,8 @@ namespace Shuruev.StyleCop.CSharp
 
 			foreach (string setting in NamingSettings.All)
 			{
-				if (setting == NamingSettings.Abbreviations)
+				if (setting == NamingSettings.Abbreviations
+					|| setting == NamingSettings.Derivings)
 					continue;
 
 				string name = SettingsManager.GetFriendlyName(analyzer, setting);
@@ -61,6 +65,16 @@ namespace Shuruev.StyleCop.CSharp
 					m_regulars.Add(setting, regex);
 				}
 			}
+
+			string derivings = SettingsManager.GetSettingValue(
+				analyzer,
+				document.Settings,
+				NamingSettings.Derivings);
+
+			m_derivings.AddRange(
+				derivings.Split(
+					new[] { ' ' },
+					StringSplitOptions.RemoveEmptyEntries));
 		}
 
 		/// <summary>
@@ -85,6 +99,28 @@ namespace Shuruev.StyleCop.CSharp
 		public Regex GetRegex(string settingName)
 		{
 			return m_regulars[settingName];
+		}
+
+		/// <summary>
+		/// Checks whether derived name is correct.
+		/// </summary>
+		public bool CheckDerivedName(string baseName, string derivedName, out string failedDeriving)
+		{
+			failedDeriving = null;
+
+			foreach (string deriving in m_derivings)
+			{
+				if (baseName.EndsWith(deriving))
+				{
+					if (!derivedName.EndsWith(deriving))
+					{
+						failedDeriving = deriving;
+						return false;
+					}
+				}
+			}
+
+			return true;
 		}
 	}
 }

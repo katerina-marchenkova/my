@@ -3,28 +3,25 @@ using System.Xml;
 
 namespace Shuruev.StyleCop.Test
 {
-	public interface IComparisonGenerator<T>
-	{
-		void AddComparedItem(T item);
-
-		void WriteToXmlStream(XmlTextWriter xtw);
-
-		bool Compare();
-
-		bool IsCompareble { get; }
-	}
-
 	public class A
 	{
-		public class B1
+		public class B1Attribute : System.Attribute
 		{
 		}
 
-		protected class B2
+		public class B2Attr : Attribute
 		{
 		}
 
-		internal class B3
+		public class D1Attr : B1Attribute
+		{
+		}
+
+		protected class B2Exception : System.Exception
+		{
+		}
+
+		internal class B3<T>
 		{
 		}
 
@@ -32,12 +29,12 @@ namespace Shuruev.StyleCop.Test
 		{
 		}
 
-		private class B5
+		private class B5 : B3<int>
 		{
 		}
 	}
 
-	internal class B
+	/*internal class B
 	{
 		public class B1
 		{
@@ -58,5 +55,5 @@ namespace Shuruev.StyleCop.Test
 		private class B5
 		{
 		}
-	}
+	}*/
 }

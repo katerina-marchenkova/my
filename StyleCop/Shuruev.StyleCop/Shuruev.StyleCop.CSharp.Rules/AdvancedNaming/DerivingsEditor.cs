@@ -5,14 +5,14 @@ using Shuruev.StyleCop.CSharp.Properties;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Dialog for editing abbreviations.
+	/// Dialog for editing derivings.
 	/// </summary>
-	public partial class AbbreviationsEditor : Form
+	public partial class DerivingsEditor : Form
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public AbbreviationsEditor()
+		public DerivingsEditor()
 		{
 			InitializeComponent();
 		}
@@ -25,42 +25,42 @@ namespace Shuruev.StyleCop.CSharp
 		public string ObjectName { get; set; }
 
 		/// <summary>
-		/// Gets or sets abbreviations string.
+		/// Gets or sets derivings string.
 		/// </summary>
-		public string Abbreviations { get; set; }
+		public string Derivings { get; set; }
 
 		#endregion
 
 		#region Event handlers
 
-		private void AbbreviationsEditor_Load(object sender, EventArgs e)
+		private void DerivingsEditor_Load(object sender, EventArgs e)
 		{
 			if (String.IsNullOrEmpty(ObjectName))
 				throw new InvalidOperationException("ObjectName is not set.");
 
 			Text = String.Format(Resources.CommonEditorCaption, ObjectName);
 
-			if (!String.IsNullOrEmpty(Abbreviations))
+			if (!String.IsNullOrEmpty(Derivings))
 			{
-				textEditor.RichTextBox.Text = NamingMacro.ConvertAbbreviationsToText(Abbreviations);
+				textEditor.RichTextBox.Text = NamingMacro.ConvertDerivingsToText(Derivings);
 			}
 		}
 
 		private void textEditor_Highlight(object sender, ControlEventArgs e)
 		{
-			NamingMacro.HighlightAbbreviations((RichTextBox)e.Control);
+			NamingMacro.HighlightDerivings((RichTextBox)e.Control);
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
-			if (!NamingMacro.CheckAbbreviations(textEditor.RichTextBox.Text))
+			if (!NamingMacro.CheckDerivings(textEditor.RichTextBox.Text))
 			{
-				Messages.ShowWarningOk(this, Resources.AbbreviationsEditorWarning);
+				Messages.ShowWarningOk(this, Resources.DerivingsEditorWarning);
 				textEditor.Focus();
 				return;
 			}
 
-			Abbreviations = NamingMacro.ParseAbbreviationsFromText(textEditor.RichTextBox.Text);
+			Derivings = NamingMacro.ParseDerivingsFromText(textEditor.RichTextBox.Text);
 			DialogResult = DialogResult.OK;
 		}
 

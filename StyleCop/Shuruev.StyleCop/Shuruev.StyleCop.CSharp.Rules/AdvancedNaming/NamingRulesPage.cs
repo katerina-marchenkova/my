@@ -181,6 +181,13 @@ namespace Shuruev.StyleCop.CSharp
 				return;
 			}
 
+			if (tag.SettingName == NamingSettings.Derivings)
+			{
+				lvi.ImageKey = Pictures.RightArrow;
+				sub.Text = tag.MergedValue;
+				return;
+			}
+
 			if (String.IsNullOrEmpty(tag.MergedValue))
 			{
 				lvi.ImageKey = Pictures.RuleDisabled;
@@ -221,6 +228,7 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				using (AbbreviationsEditor dialog = new AbbreviationsEditor())
 				{
+					dialog.ObjectName = lvi.Text;
 					dialog.Abbreviations = tag.MergedValue;
 					if (dialog.ShowDialog() == DialogResult.OK)
 					{
@@ -231,21 +239,38 @@ namespace Shuruev.StyleCop.CSharp
 						UpdateControls();
 					}
 				}
+				return;
 			}
-			else
+
+			if (tag.SettingName == NamingSettings.Derivings)
 			{
-				using (NamingRuleEditor dialog = new NamingRuleEditor())
+				using (DerivingsEditor dialog = new DerivingsEditor())
 				{
 					dialog.ObjectName = lvi.Text;
-					dialog.RuleDefinition = tag.MergedValue;
+					dialog.Derivings = tag.MergedValue;
 					if (dialog.ShowDialog() == DialogResult.OK)
 					{
-						tag.MergedValue = dialog.RuleDefinition;
+						tag.MergedValue = dialog.Derivings;
 						UpdateListItem(lvi);
 						Page.Dirty = true;
 
 						UpdateControls();
 					}
+				}
+				return;
+			}
+
+			using (NamingRuleEditor dialog = new NamingRuleEditor())
+			{
+				dialog.ObjectName = lvi.Text;
+				dialog.RuleDefinition = tag.MergedValue;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					tag.MergedValue = dialog.RuleDefinition;
+					UpdateListItem(lvi);
+					Page.Dirty = true;
+
+					UpdateControls();
 				}
 			}
 		}

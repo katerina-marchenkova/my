@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
+using Shuruev.StyleCop.CSharp.Properties;
 
 namespace Shuruev.StyleCop.CSharp
 {
@@ -62,6 +63,8 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (element.ElementType == ElementType.Class)
 			{
+				CheckDerivings(settings, element);
+
 				if (CodeHelper.IsInternal(element))
 				{
 					Check(settings, element, NamingSettings.ClassInternal);
@@ -115,17 +118,42 @@ namespace Shuruev.StyleCop.CSharp
 			if (regex == null)
 				return;
 
-			string name = CodeHelper.ExtractPureName(element.Declaration.Name);
-
-			string[] parts = name.Split('.');
+			string[] parts = element.Declaration.Name.Split('.');
 			foreach (string part in parts)
 			{
-				if (!regex.IsMatch(part))
+				string name = CodeHelper.ExtractPureName(part);
+				if (!regex.IsMatch(name))
 				{
 					AddViolation(settings, element, settingName);
 					return;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Checks derivings condition.
+		/// </summary>
+		private void CheckDerivings(CurrentNamingSettings settings, CsElement element)
+		{
+			Class @class = (Class)element;
+			if (String.IsNullOrEmpty(@class.BaseClass))
+				return;
+
+			string name = CodeHelper.ExtractPureName(@class.Declaration.Name);
+			string baseName = CodeHelper.ExtractPureName(@class.BaseClass);
+
+			string deriving;
+			if (settings.CheckDerivedName(baseName, name, out deriving))
+				return;
+
+			string friendlyName = Resources.DerivedClassFriendlyName;
+			string example = String.Format(Resources.DerivingExample, deriving);
+
+			m_parent.AddViolation(
+				element,
+				Rules.AdvancedNamingRules,
+				friendlyName,
+				example);
 		}
 
 		#endregion

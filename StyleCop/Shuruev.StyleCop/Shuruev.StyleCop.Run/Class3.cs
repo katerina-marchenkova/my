@@ -2,8 +2,12 @@
 
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
+	internal class TestClass
 	{
+		private class Test2
+		{
+		}
+
 		public void TestMethod()
 		{
 			for (int i = 0; i < 10; i++)

@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeHelperTest.cs" />
     <Compile Include="NamingMacroTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Resources\SP1600.cs" />

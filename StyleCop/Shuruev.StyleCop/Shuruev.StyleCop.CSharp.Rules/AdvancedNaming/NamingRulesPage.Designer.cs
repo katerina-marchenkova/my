@@ -109,12 +109,12 @@
 			// columnEntity
 			// 
 			this.columnEntity.Text = "Entity";
-			this.columnEntity.Width = 120;
+			this.columnEntity.Width = 150;
 			// 
 			// columnPreview
 			// 
 			this.columnPreview.Text = "Preview";
-			this.columnPreview.Width = 300;
+			this.columnPreview.Width = 250;
 			// 
 			// NamingRulesPage
 			// 

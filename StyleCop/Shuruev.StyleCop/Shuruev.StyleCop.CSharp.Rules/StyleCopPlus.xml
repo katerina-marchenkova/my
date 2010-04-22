@@ -4,7 +4,8 @@
 		Plug-in that extends original StyleCop features. Some settings for this plug-in are taken out to the separate StyleCop+ settings page.
 	</Description>
 	<Properties>
-		<StringProperty Name="NamingAbbreviations" DefaultValue="A B C ID" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
+		<StringProperty Name="NamingAbbreviations" DefaultValue="A B C ID 3D" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
+		<StringProperty Name="NamingDerivings" DefaultValue="Attribute Exception" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
 		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
 		<StringProperty Name="ClassNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class (not internal)" Description="Naming rules for non-internal class." />
 		<StringProperty Name="ClassInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Class (internal)" Description="Naming rules for internal class." />

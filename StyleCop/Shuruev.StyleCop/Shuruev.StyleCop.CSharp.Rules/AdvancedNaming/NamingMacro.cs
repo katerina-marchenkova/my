@@ -303,11 +303,14 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Checks if specified character is valid for using in identifier.
+		/// Checks if specified character is valid for using in abbreviation.
 		/// </summary>
 		private static bool IsValidAbbreviationChar(char c)
 		{
 			if (Char.IsWhiteSpace(c))
+				return true;
+
+			if (Char.IsDigit(c))
 				return true;
 
 			if (Char.IsUpper(c))
@@ -336,6 +339,104 @@ namespace Shuruev.StyleCop.CSharp
 				for (int i = 0; i < line.Length; i++)
 				{
 					if (!IsValidAbbreviationChar(line[i]))
+					{
+						rich.SelectionStart = current + i;
+						rich.SelectionLength = 1;
+						rich.SelectionColor = Color.Red;
+					}
+				}
+
+				current += line.Length + 1;
+			}
+		}
+
+		#endregion
+
+		#region Parsing derivings
+
+		/// <summary>
+		/// Creates derivings string from specified text.
+		/// </summary>
+		public static string ParseDerivingsFromText(string text)
+		{
+			bool closed = true;
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in text)
+			{
+				if (Char.IsWhiteSpace(c))
+				{
+					if (!closed)
+					{
+						sb.Append(' ');
+						closed = true;
+					}
+				}
+				else
+				{
+					sb.Append(c);
+					closed = false;
+				}
+			}
+
+			return sb.ToString().TrimEnd(' ');
+		}
+
+		/// <summary>
+		/// Creates text describing derivings string.
+		/// </summary>
+		public static string ConvertDerivingsToText(string ruleDefinition)
+		{
+			return ruleDefinition;
+		}
+
+		/// <summary>
+		/// Checks if specified text can describe naming derivings.
+		/// </summary>
+		public static bool CheckDerivings(string text)
+		{
+			foreach (char c in text)
+			{
+				if (!IsValidDerivingChar(c))
+					return false;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Checks if specified character is valid for using in deriving.
+		/// </summary>
+		private static bool IsValidDerivingChar(char c)
+		{
+			if (Char.IsWhiteSpace(c))
+				return true;
+
+			if (IsValidIdentifierChar(c))
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Highlights rich text box with derivings text.
+		/// </summary>
+		public static void HighlightDerivings(RichTextBox rich)
+		{
+			if (CheckDerivings(rich.Text))
+			{
+				rich.ResetBackColor();
+			}
+			else
+			{
+				rich.BackColor = Colors.LightRed;
+			}
+
+			int current = 0;
+			foreach (string line in rich.Lines)
+			{
+				for (int i = 0; i < line.Length; i++)
+				{
+					if (!IsValidDerivingChar(line[i]))
 					{
 						rich.SelectionStart = current + i;
 						rich.SelectionLength = 1;

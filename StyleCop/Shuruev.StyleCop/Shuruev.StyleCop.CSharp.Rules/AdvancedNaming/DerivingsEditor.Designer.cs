@@ -1,6 +1,6 @@
 ﻿namespace Shuruev.StyleCop.CSharp
 {
-	partial class AbbreviationsEditor
+	partial class DerivingsEditor
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -45,7 +45,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.panelEditorBorder.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.panelEditorBorder.Controls.Add(this.textEditor);
-			this.panelEditorBorder.Location = new System.Drawing.Point(12, 58);
+			this.panelEditorBorder.Location = new System.Drawing.Point(12, 70);
 			this.panelEditorBorder.Name = "panelEditorBorder";
 			this.panelEditorBorder.Size = new System.Drawing.Size(440, 136);
 			this.panelEditorBorder.TabIndex = 1;
@@ -67,7 +67,7 @@
 			// btnOK
 			// 
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOK.Location = new System.Drawing.Point(296, 200);
+			this.btnOK.Location = new System.Drawing.Point(296, 212);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
 			this.btnOK.TabIndex = 2;
@@ -79,7 +79,7 @@
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(377, 200);
+			this.btnCancel.Location = new System.Drawing.Point(377, 212);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 3;
@@ -94,7 +94,7 @@
 			this.panelHelpBorder.Controls.Add(this.labelHelp);
 			this.panelHelpBorder.Location = new System.Drawing.Point(12, 12);
 			this.panelHelpBorder.Name = "panelHelpBorder";
-			this.panelHelpBorder.Size = new System.Drawing.Size(440, 40);
+			this.panelHelpBorder.Size = new System.Drawing.Size(440, 52);
 			this.panelHelpBorder.TabIndex = 0;
 			// 
 			// labelHelp
@@ -108,32 +108,33 @@
 			this.labelHelp.Margin = new System.Windows.Forms.Padding(1);
 			this.labelHelp.Name = "labelHelp";
 			this.labelHelp.Padding = new System.Windows.Forms.Padding(2);
-			this.labelHelp.Size = new System.Drawing.Size(438, 38);
+			this.labelHelp.Size = new System.Drawing.Size(438, 50);
 			this.labelHelp.TabIndex = 0;
-			this.labelHelp.Text = "Please specify a list of naming abbreveations.\r\nUse UPPERCASE letters and digits," +
-				" separating them by whitespaces.";
+			this.labelHelp.Text = "Please specify a list of classes, whose names should always\r\nbe added to the end " +
+				"of the name for derived class.\r\nUse letters, digits and underscore, separating t" +
+				"hem by whitespaces.";
 			this.labelHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// AbbreviationsEditor
+			// DerivingsEditor
 			// 
 			this.AcceptButton = this.btnOK;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(464, 235);
+			this.ClientSize = new System.Drawing.Size(464, 247);
 			this.Controls.Add(this.panelHelpBorder);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.panelEditorBorder);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(440, 240);
-			this.Name = "AbbreviationsEditor";
+			this.MinimumSize = new System.Drawing.Size(440, 250);
+			this.Name = "DerivingsEditor";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "[Header Text]";
-			this.Load += new System.EventHandler(this.AbbreviationsEditor_Load);
+			this.Load += new System.EventHandler(this.DerivingsEditor_Load);
 			this.panelEditorBorder.ResumeLayout(false);
 			this.panelHelpBorder.ResumeLayout(false);
 			this.ResumeLayout(false);

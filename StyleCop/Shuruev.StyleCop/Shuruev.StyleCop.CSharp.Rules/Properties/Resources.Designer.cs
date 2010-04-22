@@ -62,7 +62,10 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to It seems that your abbreviations string has wrong syntax.
-        ///Please check that you are using UPPERCASE letters only separated by whitespaces..
+        ///
+        ///Please check that:
+        ///- string literals don&apos;t contain any characters except UPPERCASE letters and digits
+        ///- string literals are separated by whitespaces.
         /// </summary>
         internal static string AbbreviationsEditorWarning {
             get {
@@ -101,6 +104,46 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string CaptionWarning {
             get {
                 return ResourceManager.GetString("CaptionWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit &quot;{0}&quot; Setting.
+        /// </summary>
+        internal static string CommonEditorCaption {
+            get {
+                return ResourceManager.GetString("CommonEditorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Derived class.
+        /// </summary>
+        internal static string DerivedClassFriendlyName {
+            get {
+                return ResourceManager.GetString("DerivedClassFriendlyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ...{0}.
+        /// </summary>
+        internal static string DerivingExample {
+            get {
+                return ResourceManager.GetString("DerivingExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that your derivings string has wrong syntax.
+        ///
+        ///Please check that:
+        ///- string literals don&apos;t contain any characters except letters, digits and underscore
+        ///- string literals are separated by whitespaces.
+        /// </summary>
+        internal static string DerivingsEditorWarning {
+            get {
+                return ResourceManager.GetString("DerivingsEditorWarning", resourceCulture);
             }
         }
         
@@ -308,7 +351,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         ///Please check that:
         ///- it doesn&apos;t contain whitespace characters
         ///- all macros are written correctly
-        ///- it uses only letters, digits and underscore in string literals
+        ///- string literals don&apos;t contain any characters except letters, digits and underscore
         ///- you are using &quot;Turn off&quot; option instead of empty definition.
         /// </summary>
         internal static string NamingRuleEditorWarning {
@@ -326,6 +369,13 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string ResetSettingQuestion {
             get {
                 return ResourceManager.GetString("ResetSettingQuestion", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap RightArrow {
+            get {
+                object obj = ResourceManager.GetObject("RightArrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

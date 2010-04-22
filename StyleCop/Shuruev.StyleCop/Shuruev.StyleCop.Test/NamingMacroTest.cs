@@ -67,6 +67,12 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("StyleCop"));
 			Assert.IsTrue(regex.IsMatch("StyleCX"));
 			Assert.IsTrue(regex.IsMatch("CXSharpStyle"));
+
+			regex = NamingMacro.BuildRegex("$(AaBb)", String.Empty);
+			Assert.IsFalse(regex.IsMatch("Point3D"));
+
+			regex = NamingMacro.BuildRegex("$(AaBb)", "3D");
+			Assert.IsTrue(regex.IsMatch("Point3D"));
 		}
 
 		/// <summary>
@@ -102,6 +108,12 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("styleCop"));
 			Assert.IsTrue(regex.IsMatch("styleCX"));
 			Assert.IsTrue(regex.IsMatch("styleCXSharp"));
+
+			regex = NamingMacro.BuildRegex("$(aaBb)", String.Empty);
+			Assert.IsFalse(regex.IsMatch("point3D"));
+
+			regex = NamingMacro.BuildRegex("$(aaBb)", "3D");
+			Assert.IsTrue(regex.IsMatch("point3D"));
 		}
 
 		/// <summary>
@@ -217,6 +229,12 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsFalse(regex.IsMatch("C_X_Sharp_Style"));
 			Assert.IsTrue(regex.IsMatch("CX_Sharp_Style"));
 			Assert.IsFalse(regex.IsMatch("CXSharp_Style"));
+
+			regex = NamingMacro.BuildRegex("$(Aa_Bb)", String.Empty);
+			Assert.IsFalse(regex.IsMatch("Point_3D"));
+
+			regex = NamingMacro.BuildRegex("$(Aa_Bb)", "3D");
+			Assert.IsTrue(regex.IsMatch("Point_3D"));
 		}
 	}
 }

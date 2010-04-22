@@ -68,11 +68,16 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string ExtractPureName(string declarationName)
 		{
-			int index = declarationName.IndexOf('<');
-			if (index < 0)
-				return declarationName;
+			string text = declarationName;
 
-			return declarationName.Substring(0, index);
+			string[] parts = text.Split('.');
+			text = parts[parts.Length - 1];
+
+			int index = text.IndexOf('<');
+			if (index < 0)
+				return text;
+
+			return text.Substring(0, index);
 		}
 
 		#endregion
