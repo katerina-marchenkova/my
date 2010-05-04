@@ -52,6 +52,12 @@ namespace Shuruev.StyleCop.CSharp
 				Resources.MacroCapitalizedDescription,
 				Resources.MacroCapitalizedRegular,
 				Resources.MacroCapitalizedSample);
+
+			AddMacro(
+				Resources.MacroAnyCode,
+				Resources.MacroAnyDescription,
+				Resources.MacroAnyRegular,
+				Resources.MacroAnySample);
 		}
 
 		#region Accessing macros
@@ -190,6 +196,7 @@ namespace Shuruev.StyleCop.CSharp
 				mask = mask.Replace('$', '_');
 				mask = mask.Replace('(', '_');
 				mask = mask.Replace(')', '_');
+				mask = mask.Replace('*', '_');
 				result = result.Replace(markup, mask);
 			}
 

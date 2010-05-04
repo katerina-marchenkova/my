@@ -44,6 +44,45 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
+		/// Checks whether specified element has public access modifier.
+		/// </summary>
+		public static bool IsPublic(CsElement element)
+		{
+			AccessModifierType modifier = element.AccessModifier;
+
+			if (modifier == AccessModifierType.Public)
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks whether specified element has protected access modifier.
+		/// </summary>
+		public static bool IsProtected(CsElement element)
+		{
+			AccessModifierType modifier = element.AccessModifier;
+
+			if (modifier == AccessModifierType.Protected)
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks whether specified element has private access modifier.
+		/// </summary>
+		public static bool IsPrivate(CsElement element)
+		{
+			AccessModifierType modifier = element.AccessModifier;
+
+			if (modifier == AccessModifierType.Private)
+				return true;
+
+			return false;
+		}
+
+		/// <summary>
 		/// Checks whether specified element has internal access modifier.
 		/// </summary>
 		public static bool IsInternal(CsElement element)
@@ -55,6 +94,42 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (modifier == AccessModifierType.ProtectedInternal)
 				return true;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks whether specified element is static.
+		/// </summary>
+		public static bool IsStatic(CsElement element)
+		{
+			return element.Declaration.ContainsModifier(CsTokenType.Static);
+		}
+
+		/// <summary>
+		/// Checks whether specified element is operator.
+		/// </summary>
+		public static bool IsOperator(CsElement element)
+		{
+			return element.Declaration.Name.StartsWith("operator ");
+		}
+
+		/// <summary>
+		/// Checks whether specified element is generated.
+		/// </summary>
+		public static bool IsGenerated(CsElement element)
+		{
+			if (element.Attributes != null)
+			{
+				foreach (Attribute attr in element.Attributes)
+				{
+					for (Node<CsToken> node = attr.ChildTokens.First; node != null; node = node.Next)
+					{
+						if (node.Value.Text == "GeneratedCodeAttribute")
+							return true;
+					}
+				}
+			}
 
 			return false;
 		}

@@ -157,6 +157,42 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *.
+        /// </summary>
+        internal static string MacroAnyCode {
+            get {
+                return ResourceManager.GetString("MacroAnyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AnyName_withoutRULES.
+        /// </summary>
+        internal static string MacroAnyDescription {
+            get {
+                return ResourceManager.GetString("MacroAnyDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .*.
+        /// </summary>
+        internal static string MacroAnyRegular {
+            get {
+                return ResourceManager.GetString("MacroAnyRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *.
+        /// </summary>
+        internal static string MacroAnySample {
+            get {
+                return ResourceManager.GetString("MacroAnySample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to aaBb.
         /// </summary>
         internal static string MacroCamelCode {

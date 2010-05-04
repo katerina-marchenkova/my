@@ -4,14 +4,28 @@
 		Plug-in that extends original StyleCop features. Some settings for this plug-in are taken out to the separate StyleCop+ settings page.
 	</Description>
 	<Properties>
-		<StringProperty Name="NamingAbbreviations" DefaultValue="A B C ID 3D" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
-		<StringProperty Name="NamingDerivings" DefaultValue="Attribute Exception" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
+		<StringProperty Name="NamingAbbreviations" DefaultValue="A B C ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
+		<StringProperty Name="NamingDerivings" DefaultValue="Attribute Exception EventArgs" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
 		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
 		<StringProperty Name="ClassNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class (not internal)" Description="Naming rules for non-internal class." />
 		<StringProperty Name="ClassInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Class (internal)" Description="Naming rules for internal class." />
 		<StringProperty Name="StructNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Struct (not internal)" Description="Naming rules for non-internal struct." />
 		<StringProperty Name="StructInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Struct (internal)" Description="Naming rules for internal struct." />
 		<StringProperty Name="InterfaceNamingRule" DefaultValue="I$(AaBb)" FriendlyName="Interface" Description="Naming rules for interface." />
+		<StringProperty Name="PublicInstanceFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Instance field (public)" Description="Naming rules for public instance field." />
+		<StringProperty Name="ProtectedInstanceFieldNamingRule" DefaultValue="m_$(aaBb)" FriendlyName="Instance field (protected)" Description="Naming rules for protected instance field." />
+		<StringProperty Name="PrivateInstanceFieldNamingRule" DefaultValue="m_$(aaBb)" FriendlyName="Instance field (private)" Description="Naming rules for private instance field." />
+		<StringProperty Name="InternalInstanceFieldNamingRule" DefaultValue="m_$(aaBb):$(AaBb):$(aaBb)" FriendlyName="Instance field (internal)" Description="Naming rules for internal instance field." />
+		<StringProperty Name="PublicStaticFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Static field (public)" Description="Naming rules for public static field." />
+		<StringProperty Name="ProtectedStaticFieldNamingRule" DefaultValue="s_$(aaBb)" FriendlyName="Static field (protected)" Description="Naming rules for protected static field." />
+		<StringProperty Name="PrivateStaticFieldNamingRule" DefaultValue="s_$(aaBb)" FriendlyName="Static field (private)" Description="Naming rules for private static field." />
+		<StringProperty Name="InternalStaticFieldNamingRule" DefaultValue="s_$(aaBb):$(AaBb):$(aaBb)" FriendlyName="Static field (internal)" Description="Naming rules for internal static field." />
+		<StringProperty Name="PublicConstNamingRule" DefaultValue="$(AaBb)" FriendlyName="Constant (public)" Description="Naming rules for public constant." />
+		<StringProperty Name="ProtectedConstNamingRule" DefaultValue="c_$(aaBb)" FriendlyName="Constant (protected)" Description="Naming rules for protected constant." />
+		<StringProperty Name="PrivateConstNamingRule" DefaultValue="c_$(aaBb)" FriendlyName="Constant (private)" Description="Naming rules for private constant." />
+		<StringProperty Name="InternalConstNamingRule" DefaultValue="c_$(aaBb):$(AaBb):$(AA_BB)" FriendlyName="Constant (internal)" Description="Naming rules for internal constant." />
+		<StringProperty Name="MethodGeneralNamingRule" DefaultValue="$(AaBb)" FriendlyName="Method (general)" Description="Naming rules for general method." />
+		<StringProperty Name="MethodWindowsHandlerNamingRule" DefaultValue="$(aaBb)_$(AaBb):$(AaBb)_$(AaBb)" FriendlyName="Method (Windows Forms event handler)" Description="Naming rules for Windows Forms event handler." />
 	</Properties>
 	<Rules>
 		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
@@ -19,10 +33,6 @@
 			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ settings page for details.</Description>
 		</Rule>
 		<RuleGroup Name="Extended Original Rules">
-			<Rule Name="ElementMustBeginWithUpperCaseLetter" CheckId="SP1300" DisabledByDefault="true">
-				<Context>{0} names begin with an upper-case letter: {1}.</Context>
-				<Description>Validates that names of certain types of elements begin with an upper-case letter. Based on SA1300 behaviour, but allows windows forms event handlers to be named with a lower-case letter.</Description>
-			</Rule>
 			<Rule Name="OpeningCurlyBracketsMustNotBePrecededByBlankLine" CheckId="SP1509" DisabledByDefault="true">
 				<Context>An opening curly bracket must not be preceded by a blank line.</Context>
 				<Description>Validates that an opening curly bracket is not preceded by a blank line. Based on SA1509 behaviour, but allows using nested code blocks.</Description>

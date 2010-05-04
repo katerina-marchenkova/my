@@ -1,19 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace Shuruev.StyleCop.Test
 {
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
 	public class A
 	{
+		public const int C1 = 0;
+		public static int Cz = 0;
+		protected const int c_as3452 = 0;
+		private const int c_3 = 0;
+		internal const int C4 = 0;
+
+		public static A operator --(A a)
+		{
+			foreach (var VARIABLE in new List<int>())
+			{
+				int z = 10;
+			}
+			return new A();
+		}
+
 		public class B1Attribute : System.Attribute
 		{
 		}
 
-		public class B2Attr : Attribute
+		public class B2Attribute : Attribute
 		{
 		}
 
-		public class D1Attr : B1Attribute
+		public class D1Attribute : B1Attribute
 		{
 		}
 

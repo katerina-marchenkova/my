@@ -82,10 +82,6 @@ namespace Shuruev.StyleCop.CSharp
 
 			switch (e.Violation.Rule.CheckId)
 			{
-				case "SA1300":
-					Handle1300(e);
-					break;
-
 				case "SA1509":
 					Handle1509(e);
 					break;
@@ -191,22 +187,6 @@ namespace Shuruev.StyleCop.CSharp
 		#endregion
 
 		#region Handling original violations
-
-		/// <summary>
-		/// Handles SA1300 violation.
-		/// </summary>
-		private void Handle1300(ViolationEventArgs e)
-		{
-			CsElement element = (CsElement)e.Element;
-
-			if (CodeHelper.IsWindowsFormsEventHandler(element))
-				return;
-
-			m_parent.AddViolation(
-				element,
-				Rules.ElementMustBeginWithUpperCaseLetter,
-				new object[] { element.FriendlyTypeText, element.Name });
-		}
 
 		/// <summary>
 		/// Handles SA1509 violation.

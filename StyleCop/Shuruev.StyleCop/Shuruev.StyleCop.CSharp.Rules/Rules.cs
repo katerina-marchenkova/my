@@ -13,12 +13,6 @@
 		#region Extended original rules
 
 		/// <summary>
-		/// Validates that names of certain types of elements begin with an upper-case letter.
-		/// Based on SA1300 behaviour, but allows windows forms event handlers to be named with a lower-case letter.
-		/// </summary>
-		ElementMustBeginWithUpperCaseLetter,
-
-		/// <summary>
 		/// Validates that an opening curly bracket is not preceded by a blank line.
 		/// Based on SA1509 behaviour, but allows using nested code blocks.
 		/// </summary>

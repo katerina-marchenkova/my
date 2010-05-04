@@ -46,6 +46,9 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			foreach (CsElement element in elements)
 			{
+				if (CodeHelper.IsGenerated(element))
+					continue;
+
 				AnalyzeElement(settings, element);
 				AnalyzeElements(settings, element.ChildElements);
 			}
@@ -91,6 +94,57 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				Check(settings, element, NamingSettings.Interface);
 			}
+
+			if (element.ElementType == ElementType.Field)
+			{
+				Field field = (Field)element;
+				if (field.Const)
+				{
+					CheckCommonAccess(
+						settings,
+						field,
+						NamingSettings.PublicConst,
+						NamingSettings.ProtectedConst,
+						NamingSettings.PrivateConst,
+						NamingSettings.InternalConst);
+				}
+				else if (CodeHelper.IsStatic(field))
+				{
+					CheckCommonAccess(
+						settings,
+						field,
+						NamingSettings.PublicStaticField,
+						NamingSettings.ProtectedStaticField,
+						NamingSettings.PrivateStaticField,
+						NamingSettings.InternalStaticField);
+				}
+				else
+				{
+					CheckCommonAccess(
+						settings,
+						field,
+						NamingSettings.PublicInstanceField,
+						NamingSettings.ProtectedInstanceField,
+						NamingSettings.PrivateInstanceField,
+						NamingSettings.InternalInstanceField);
+				}
+			}
+
+			if (element.ElementType == ElementType.Method)
+			{
+				Method method = (Method)element;
+				if (CodeHelper.IsOperator(method))
+					return;
+
+				if (CodeHelper.IsWindowsFormsEventHandler(method))
+				{
+					Check(settings, method, NamingSettings.MethodWindowsHandler);
+				}
+				else
+				{
+					Check(settings, method, NamingSettings.MethodGeneral);
+				}
+			}
 		}
 
 		/// <summary>
@@ -108,6 +162,35 @@ namespace Shuruev.StyleCop.CSharp
 		#endregion
 
 		#region Checking entity names
+
+		/// <summary>
+		/// Checks common naming setting for common access modifiers.
+		/// </summary>
+		private void CheckCommonAccess(
+			CurrentNamingSettings settings,
+			CsElement element,
+			string publicSettingName,
+			string protectedSettingName,
+			string privateSettingName,
+			string internalSettingName)
+		{
+			if (CodeHelper.IsPublic(element))
+			{
+				Check(settings, element, publicSettingName);
+			}
+			else if (CodeHelper.IsProtected(element))
+			{
+				Check(settings, element, protectedSettingName);
+			}
+			else if (CodeHelper.IsPrivate(element))
+			{
+				Check(settings, element, privateSettingName);
+			}
+			else if (CodeHelper.IsInternal(element))
+			{
+				Check(settings, element, internalSettingName);
+			}
+		}
 
 		/// <summary>
 		/// Checks common naming setting.

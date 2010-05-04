@@ -255,4 +255,16 @@ Please check that:
   <data name="DerivedClassFriendlyName" xml:space="preserve">
     <value>Derived class</value>
   </data>
+  <data name="MacroAnyCode" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="MacroAnyDescription" xml:space="preserve">
+    <value>AnyName_withoutRULES</value>
+  </data>
+  <data name="MacroAnyRegular" xml:space="preserve">
+    <value>.*</value>
+  </data>
+  <data name="MacroAnySample" xml:space="preserve">
+    <value>*</value>
+  </data>
 </root>

@@ -42,7 +42,8 @@
 			// 
 			// panelEditorBorder
 			// 
-			this.panelEditorBorder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			this.panelEditorBorder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.panelEditorBorder.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.panelEditorBorder.Controls.Add(this.textEditor);
@@ -68,7 +69,7 @@
 			// btnOK
 			// 
 			this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOK.Location = new System.Drawing.Point(296, 287);
+			this.btnOK.Location = new System.Drawing.Point(296, 297);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
 			this.btnOK.TabIndex = 4;
@@ -80,7 +81,7 @@
 			// 
 			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(377, 287);
+			this.btnCancel.Location = new System.Drawing.Point(377, 297);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 5;
@@ -89,8 +90,7 @@
 			// 
 			// listMacro
 			// 
-			this.listMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
+			this.listMacro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.listMacro.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnMacro,
@@ -100,7 +100,7 @@
 			this.listMacro.Location = new System.Drawing.Point(12, 154);
 			this.listMacro.MultiSelect = false;
 			this.listMacro.Name = "listMacro";
-			this.listMacro.Size = new System.Drawing.Size(440, 127);
+			this.listMacro.Size = new System.Drawing.Size(440, 137);
 			this.listMacro.TabIndex = 1;
 			this.listMacro.UseCompatibleStateImageBehavior = false;
 			this.listMacro.View = System.Windows.Forms.View.Details;
@@ -120,7 +120,7 @@
 			// btnInsert
 			// 
 			this.btnInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnInsert.Location = new System.Drawing.Point(215, 287);
+			this.btnInsert.Location = new System.Drawing.Point(215, 297);
 			this.btnInsert.Name = "btnInsert";
 			this.btnInsert.Size = new System.Drawing.Size(75, 23);
 			this.btnInsert.TabIndex = 3;
@@ -132,7 +132,7 @@
 			// 
 			this.checkDisable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkDisable.AutoSize = true;
-			this.checkDisable.Location = new System.Drawing.Point(12, 291);
+			this.checkDisable.Location = new System.Drawing.Point(12, 301);
 			this.checkDisable.Name = "checkDisable";
 			this.checkDisable.Size = new System.Drawing.Size(102, 17);
 			this.checkDisable.TabIndex = 2;
@@ -146,7 +146,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(464, 322);
+			this.ClientSize = new System.Drawing.Size(464, 332);
 			this.Controls.Add(this.checkDisable);
 			this.Controls.Add(this.btnInsert);
 			this.Controls.Add(this.listMacro);

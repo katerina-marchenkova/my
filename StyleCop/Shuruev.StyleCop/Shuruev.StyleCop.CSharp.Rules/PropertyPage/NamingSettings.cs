@@ -16,21 +16,28 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string StructNotInternal = "StructNotInternalNamingRule";
 		internal const string StructInternal = "StructInternalNamingRule";
 		internal const string Interface = "InterfaceNamingRule";
-		//ClassException
-		//ClassAttribute
-		//Field (static, readonly, accessor)
-		// - static / instance
-		// - read-only / read-write
-		//
-		// Constant
+
+		internal const string PublicInstanceField = "PublicInstanceFieldNamingRule";
+		internal const string ProtectedInstanceField = "ProtectedInstanceFieldNamingRule";
+		internal const string PrivateInstanceField = "PrivateInstanceFieldNamingRule";
+		internal const string InternalInstanceField = "InternalInstanceFieldNamingRule";
+		internal const string PublicStaticField = "PublicStaticFieldNamingRule";
+		internal const string ProtectedStaticField = "ProtectedStaticFieldNamingRule";
+		internal const string PrivateStaticField = "PrivateStaticFieldNamingRule";
+		internal const string InternalStaticField = "InternalStaticFieldNamingRule";
+		internal const string PublicConst = "PublicConstNamingRule";
+		internal const string ProtectedConst = "ProtectedConstNamingRule";
+		internal const string PrivateConst = "PrivateConstNamingRule";
+		internal const string InternalConst = "InternalConstNamingRule";
+
+		internal const string MethodGeneral = "MethodGeneralNamingRule";
+		internal const string MethodWindowsHandler = "MethodWindowsHandlerNamingRule";
+
 		//Delegate
 		//Event
 		//Enum
 		//EnumItem
 		//Property
-		//Method
-		//operator?
-		//Windows forms event handlers
 		//Type parameters
 		//Local variables (constant?)
 		//Parameters (value, reference, output, params array)
@@ -45,7 +52,21 @@ namespace Shuruev.StyleCop.CSharp
 				Derivings,
 				StructNotInternal,
 				StructInternal,
-				Interface
+				Interface,
+				PublicInstanceField,
+				ProtectedInstanceField,
+				PrivateInstanceField,
+				InternalInstanceField,
+				PublicStaticField,
+				ProtectedStaticField,
+				PrivateStaticField,
+				InternalStaticField,
+				PublicConst,
+				ProtectedConst,
+				PrivateConst,
+				InternalConst,
+				MethodGeneral,
+				MethodWindowsHandler
 			});
 	}
 }
