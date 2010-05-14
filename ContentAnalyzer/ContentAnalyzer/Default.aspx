@@ -23,6 +23,9 @@
 		<li>
 			<a href="Plain.aspx">Plain Page</a>
 		</li>
+		<li>
+			<a href="BadCanvas.aspx">Bad Canvas Page</a>
+		</li>
 	</ul>
 </body>
 </html>

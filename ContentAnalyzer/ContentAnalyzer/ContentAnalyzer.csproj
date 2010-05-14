@@ -61,17 +61,29 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadCanvas.aspx.cs">
+      <DependentUpon>BadCanvas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BadCanvas.aspx.designer.cs">
+      <DependentUpon>BadCanvas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Code\AggregatorDb.cs" />
+    <Content Include="BadCanvas.aspx" />
     <Content Include="Plain.aspx" />
     <Content Include="Plain.txt" />
     <Content Include="Research.aspx" />
     <Content Include="Duplicates.aspx" />
     <Content Include="Helix.aspx" />
     <Content Include="Mirror.aspx" />
+    <Compile Include="Code\IDataRow.cs" />
+    <Compile Include="Code\MultipleImageRow.cs" />
+    <Compile Include="Code\DbHelper.cs" />
     <Compile Include="Code\PairContentRow.cs" />
     <Compile Include="Code\DigitalContentRow.cs" />
     <Compile Include="Code\HelixFileRow.cs" />
     <Compile Include="Code\TPD.cs" />
+    <Compile Include="Code\WorkDb.cs" />
     <Compile Include="Plain.aspx.cs">
       <DependentUpon>Plain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

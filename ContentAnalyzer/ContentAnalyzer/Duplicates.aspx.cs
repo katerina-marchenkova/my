@@ -35,7 +35,7 @@ namespace ContentAnalyzer
 			}
 		}
 
-		private List<DigitalContentRow> GetRows()
+		/*xxxprivate List<DigitalContentRow> GetRows()
 		{
 			List<DigitalContentRow> rows = new List<DigitalContentRow>();
 			foreach (string line in File.ReadAllLines(@"D:\SimilarImages.txt"))
@@ -60,6 +60,23 @@ namespace ContentAnalyzer
 
 				rows.Add(row1);
 				rows.Add(row2);
+			}
+
+			return rows;
+		}*/
+
+		private List<DigitalContentRow> GetRows()
+		{
+			List<DigitalContentRow> rows = new List<DigitalContentRow>();
+			foreach (string line in File.ReadAllLines(@"D:\WrongCanvas.txt"))
+			{
+				DigitalContentRow row = new DigitalContentRow();
+				row.SkuId = rows.Count;
+				row.ContentGuid = new Guid(line);
+				row.Extension = ".jpg";
+				row.Name = "xxx";
+
+				rows.Add(row);
 			}
 
 			return rows;
