@@ -167,21 +167,21 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private static void RemoveCustomViolation(ViolationEventArgs e)
 		{
-			string key = (string)typeof(Violation).InvokeMember(
+			/*xxxstring key = (string)typeof(Violation).InvokeMember(
 				"Key",
 				BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetProperty,
 				null,
 				e.Violation,
 				null);
 
-			Dictionary<string, Violation> violations = (Dictionary<string, Violation>)typeof(CodeElement).InvokeMember(
+			Dictionary<string, Violation> violations = (Dictionary<string, Violation>)typeof(ICodeElement).InvokeMember(
 				"violations",
 				BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField,
 				null,
 				e.Element,
 				null);
 
-			violations.Remove(key);
+			violations.Remove(key);*/
 		}
 
 		#endregion
@@ -195,7 +195,7 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CsElement element = (CsElement)e.Element;
 
-			Node<CsToken> node = CodeHelper.GetNodeByLine(element.Document, e.LineNumber);
+			Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
 			if (node != null)
 			{
 				Node<CsToken> prev = CodeHelper.FindPreviousValueableNode(node);

@@ -19,7 +19,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks whether specified rule is suppressed.
 		/// </summary>
-		public override bool IsRuleSuppressed(CodeElement element, string ruleCheckId, string ruleName, string ruleNamespace)
+		public override bool IsRuleSuppressed(ICodeElement element, Rule rule)
 		{
 			return false;
 		}

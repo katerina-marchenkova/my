@@ -13,7 +13,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests pure name extracting.
 		/// </summary>
 		[TestMethod]
-		public void ExtractPureNameTest()
+		public void ExtractPureName()
 		{
 			string name;
 

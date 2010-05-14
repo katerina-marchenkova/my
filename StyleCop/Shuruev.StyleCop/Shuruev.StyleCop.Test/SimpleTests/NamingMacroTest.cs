@@ -15,7 +15,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests engine for applying one or several rules.
 		/// </summary>
 		[TestMethod]
-		public void TestRulesApplying()
+		public void RulesApplying()
 		{
 			Regex regex;
 
@@ -40,7 +40,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests $(AaBb) macro.
 		/// </summary>
 		[TestMethod]
-		public void TestMacroPascal()
+		public void MacroPascal()
 		{
 			Regex regex;
 
@@ -79,7 +79,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests $(aaBb) macro.
 		/// </summary>
 		[TestMethod]
-		public void TestMacroCamel()
+		public void MacroCamel()
 		{
 			Regex regex;
 
@@ -120,7 +120,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests $(AA_BB) macro.
 		/// </summary>
 		[TestMethod]
-		public void TestMacroUpper()
+		public void MacroUpper()
 		{
 			Regex regex;
 
@@ -144,7 +144,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests $(aa_bb) macro.
 		/// </summary>
 		[TestMethod]
-		public void TestMacroLower()
+		public void MacroLower()
 		{
 			Regex regex;
 
@@ -168,7 +168,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests $(Aa_Bb) macro.
 		/// </summary>
 		[TestMethod]
-		public void TestMacroCapitalized()
+		public void MacroCapitalized()
 		{
 			Regex regex;
 

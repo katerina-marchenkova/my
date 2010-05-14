@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.StyleCop;
+using Microsoft.StyleCop.CSharp;
+using Shuruev.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.Run
 {
@@ -24,17 +26,45 @@ namespace Shuruev.StyleCop.Run
 				new List<string>(new[] { basePath }),
 				true);
 
-			Configuration configuration = new Configuration(null);
-			CodeProject project = new CodeProject(0, basePath, configuration);
+			StyleCopPlus styleCopPlus = null;
+			foreach (SourceParser parser in console.Core.Parsers)
+			{
+				List<SourceAnalyzer> analyzersToRemove = new List<SourceAnalyzer>();
+				foreach (SourceAnalyzer analyzer in parser.Analyzers)
+				{
+					if (analyzer.GetType() == typeof(StyleCopPlus))
+					{
+						styleCopPlus = (StyleCopPlus)analyzer;
+						break;
+					}
+
+					analyzersToRemove.Add(analyzer);
+				}
+
+				foreach (SourceAnalyzer analyzer in analyzersToRemove)
+				{
+					parser.Analyzers.Remove(analyzer);
+				}
+			}
+
+			if (styleCopPlus == null)
+			{
+				throw new InvalidOperationException("StyleCopPlus was not found.");
+			}
+
+			styleCopPlus.DisableAllRulesExcept.Clear();
+			styleCopPlus.DisableAllRulesExcept.Add("AdvancedNamingRules");
+
+			CodeProject project = new CodeProject(
+				0,
+				basePath,
+				new Configuration(null));
 
 			console.Core.Environment.AddSourceCode(project, sourceFile, null);
 
-			List<CodeProject> projects = new List<CodeProject>();
-			projects.Add(project);
-
 			console.OutputGenerated += OnOutputGenerated;
 			console.ViolationEncountered += OnViolationEncountered;
-			console.Start(projects, true);
+			console.Start(new[] { project }, true);
 			console.OutputGenerated -= OnOutputGenerated;
 			console.ViolationEncountered -= OnViolationEncountered;
 			console.Dispose();

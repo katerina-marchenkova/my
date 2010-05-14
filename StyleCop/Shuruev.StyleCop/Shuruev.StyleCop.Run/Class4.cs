@@ -4,16 +4,16 @@ using System.Xml;
 
 namespace Shuruev.StyleCop.Test
 {
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
+	//[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.4927")]
 	public class A
 	{
 		public const int C1 = 0;
 		public static int Cz = 0;
 		protected const int c_as3452 = 0;
-		private const int c_3 = 0;
+		  private const int c_3 = 0;
 		internal const int C4 = 0;
 
-		public static A operator --(A a)
+		public static   A operator --(A a)
 		{
 			foreach (var VARIABLE in new List<int>())
 			{
@@ -30,7 +30,7 @@ namespace Shuruev.StyleCop.Test
 		{
 		}
 
-		public class D1Attribute : B1Attribute
+		public class D1Attributez : B1Attribute
 		{
 		}
 

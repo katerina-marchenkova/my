@@ -14,6 +14,8 @@ namespace Shuruev.StyleCop.CSharp
 		private readonly ExtendedOriginalRules m_extendedOriginalRules;
 		private readonly MoreCustomRules m_moreCustomRules;
 
+		private readonly HashSet<string> m_disableAllRulesExcept;
+
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
@@ -22,6 +24,8 @@ namespace Shuruev.StyleCop.CSharp
 			m_advancedNamingRules = new AdvancedNamingRules(this);
 			m_extendedOriginalRules = new ExtendedOriginalRules(this);
 			m_moreCustomRules = new MoreCustomRules(this);
+
+			m_disableAllRulesExcept = new HashSet<string>();
 		}
 
 		#region Properties
@@ -37,9 +41,31 @@ namespace Shuruev.StyleCop.CSharp
 			}
 		}
 
+		/// <summary>
+		/// Allows only specified rules to be enabled.
+		/// </summary>
+		public HashSet<string> DisableAllRulesExcept
+		{
+			get
+			{
+				return m_disableAllRulesExcept;
+			}
+		}
+
 		#endregion
 
 		#region Analyzer methods
+
+		/// <summary>
+		/// Checks whether specified rule is enabled.
+		/// </summary>
+		public override bool IsRuleEnabled(CodeDocument document, string ruleName)
+		{
+			if (m_disableAllRulesExcept.Count == 0)
+				return base.IsRuleEnabled(document, ruleName);
+
+			return m_disableAllRulesExcept.Contains(ruleName);
+		}
 
 		/// <summary>
 		/// Initializes an add-in.

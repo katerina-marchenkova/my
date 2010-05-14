@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shuruev.StyleCop.Test</RootNamespace>
     <AssemblyName>Shuruev.StyleCop.Test</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkSubset>
@@ -33,38 +33,49 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.StyleCop, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.StyleCop, Version=4.4.0.9, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Microsoft.StyleCop.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.StyleCop.CSharp, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.StyleCop.CSharp, Version=4.4.0.9, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Microsoft.StyleCop.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.4.0.9, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeHelperTest.cs" />
-    <Compile Include="NamingMacroTest.cs" />
+    <Content Include="Resources\StyleCopPlusTest.cs" />
+    <Compile Include="BlockItem.cs" />
+    <Compile Include="TestItem.cs" />
+    <Compile Include="SimpleTests\CodeHelperTest.cs" />
+    <Compile Include="SimpleTests\NamingMacroTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Resources\SP1600.cs" />
     <Content Include="Resources\SP1300.cs" />
-    <Content Include="Resources\SP2000.cs" />
-    <Content Include="Resources\SP2001.cs" />
     <Content Include="Resources\SP1509.cs" />
-    <Compile Include="MainTest.cs" />
+    <Compile Include="StyleCopPlusTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StyleCopPlusRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shuruev.StyleCop.CSharp.Rules\Shuruev.StyleCop.CSharp.Rules.csproj">

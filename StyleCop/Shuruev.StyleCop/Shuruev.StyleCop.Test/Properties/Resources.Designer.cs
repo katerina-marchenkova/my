@@ -184,80 +184,43 @@ namespace Shuruev.StyleCop.Test.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to //# [ERROR]
-        /////# There is excess whitespace at the end of the line.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10; 
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# There is excess whitespace at the end of the line.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;	
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# There are excess whitespaces at the end of the line.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string SP2000 {
-            get {
-                return ResourceManager.GetString("SP2000", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to //# [OK]
-        /////# Spacing uses identical characters.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# One spacing uses tabs and whitespaces.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	 public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
+        ///   Looks up a localized string similar to #region CodeLineMustNotEndWithWhitespace
+        ///
         /////# [OK]
-        /////# Spacing uses identical characters.
+        /////# Source file is OK.
         ///namespace Shuruev.StyleCop.Test
         ///{
-        ///    public class TestClass
+        ///	public class TestClass
         ///	{
         ///		public void TestMethod()
         ///		{
-        ///	 [rest of string was truncated]&quot;;.
+        ///			int a = 10;
+        ///		}
+        ///	}
+        ///}
+        /////# [END]
+        ///
+        /////# [OK]
+        /////# Source file without a line break at the end.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///
+        ///			int a = 10;
+        ///		}
+        ///	}
+        ///}//# [END]
+        ///
+        /////# [ERROR]
+        /////# There is excess whitespace at the end of the line.
+        ///namespace Shuruev.StyleCop. [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SP2001 {
+        internal static string StyleCopPlusTest {
             get {
-                return ResourceManager.GetString("SP2001", resourceCulture);
+                return ResourceManager.GetString("StyleCopPlusTest", resourceCulture);
             }
         }
     }
