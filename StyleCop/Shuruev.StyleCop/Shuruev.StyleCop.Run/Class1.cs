@@ -6,8 +6,18 @@ namespace Shuruev.StyleCop.Run
 {
 	public class Foo
 	{
-		protected internal readonly int f1;
-		protected internal readonly int f2;
+		public delegate void OlegOLOLO();
+		public event EventHandler OlegOLOLa;
+
+		protected internal readonly int Foo1;
+		protected internal readonly int Foo2;
+
+		public string ZzXXX { get; set; }
+
+		public int OlegShuruev
+		{
+			get { return 10; }
+		}
 
 		/// <summary>
 		/// Initializes a new instance. of the <see cref="Foo"/> class.
@@ -17,12 +27,12 @@ namespace Shuruev.StyleCop.Run
 			int x = 10;
 			{
 				int a = 1;
-				this.f1 = a + 15;
+				this.Foo1 = a + 15;
 			}
 
 			{
 				int b = 2;
-				this.f2 = b + 15;
+				this.Foo2 = b + 15;
 			}
 		}
 	}

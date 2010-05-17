@@ -164,7 +164,9 @@
     <EmbeddedResource Include="AdvancedNaming\DerivingsEditor.resx">
       <DependentUpon>DerivingsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StyleCopPlus.xml" />
+    <EmbeddedResource Include="StyleCopPlus.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\StyleCopPlusLogo.png" />

@@ -145,17 +145,47 @@ namespace Shuruev.StyleCop.CSharp
 					Check(settings, method, NamingSettings.MethodGeneral);
 				}
 			}
+
+			if (element.ElementType == ElementType.Delegate)
+			{
+				Check(settings, element, NamingSettings.Delegate);
+			}
+
+			if (element.ElementType == ElementType.Event)
+			{
+				Check(settings, element, NamingSettings.Event);
+			}
+
+			if (element.ElementType == ElementType.Property)
+			{
+				Check(settings, element, NamingSettings.Property);
+			}
+
+			if (element.ElementType == ElementType.Enum)
+			{
+				Check(settings, element, NamingSettings.Enum);
+			}
+
+			if (element.ElementType == ElementType.EnumItem)
+			{
+				Check(settings, element, NamingSettings.EnumItem);
+			}
 		}
 
 		/// <summary>
 		/// Fires violation.
 		/// </summary>
-		private void AddViolation(CurrentNamingSettings settings, CsElement element, string settingName)
+		private void AddViolation(
+			CurrentNamingSettings settings,
+			CsElement element,
+			string settingName,
+			string currentName)
 		{
 			m_parent.AddViolation(
 				element,
 				Rules.AdvancedNamingRules,
 				settings.GetFriendlyName(settingName),
+				currentName,
 				settings.GetExample(settingName));
 		}
 
@@ -207,7 +237,7 @@ namespace Shuruev.StyleCop.CSharp
 				string name = CodeHelper.ExtractPureName(part);
 				if (!regex.IsMatch(name))
 				{
-					AddViolation(settings, element, settingName);
+					AddViolation(settings, element, settingName, name);
 					return;
 				}
 			}

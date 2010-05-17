@@ -42,7 +42,7 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Allows only specified rules to be enabled.
+		/// Gets a set of rules that are enabled in the current instance.
 		/// </summary>
 		public HashSet<string> DisableAllRulesExcept
 		{

@@ -15,21 +15,26 @@
 		<StringProperty Name="PublicInstanceFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Instance field (public)" Description="Naming rules for public instance field." />
 		<StringProperty Name="ProtectedInstanceFieldNamingRule" DefaultValue="m_$(aaBb)" FriendlyName="Instance field (protected)" Description="Naming rules for protected instance field." />
 		<StringProperty Name="PrivateInstanceFieldNamingRule" DefaultValue="m_$(aaBb)" FriendlyName="Instance field (private)" Description="Naming rules for private instance field." />
-		<StringProperty Name="InternalInstanceFieldNamingRule" DefaultValue="m_$(aaBb):$(AaBb):$(aaBb)" FriendlyName="Instance field (internal)" Description="Naming rules for internal instance field." />
+		<StringProperty Name="InternalInstanceFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Instance field (internal)" Description="Naming rules for internal instance field." />
 		<StringProperty Name="PublicStaticFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Static field (public)" Description="Naming rules for public static field." />
 		<StringProperty Name="ProtectedStaticFieldNamingRule" DefaultValue="s_$(aaBb)" FriendlyName="Static field (protected)" Description="Naming rules for protected static field." />
 		<StringProperty Name="PrivateStaticFieldNamingRule" DefaultValue="s_$(aaBb)" FriendlyName="Static field (private)" Description="Naming rules for private static field." />
-		<StringProperty Name="InternalStaticFieldNamingRule" DefaultValue="s_$(aaBb):$(AaBb):$(aaBb)" FriendlyName="Static field (internal)" Description="Naming rules for internal static field." />
+		<StringProperty Name="InternalStaticFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Static field (internal)" Description="Naming rules for internal static field." />
 		<StringProperty Name="PublicConstNamingRule" DefaultValue="$(AaBb)" FriendlyName="Constant (public)" Description="Naming rules for public constant." />
 		<StringProperty Name="ProtectedConstNamingRule" DefaultValue="c_$(aaBb)" FriendlyName="Constant (protected)" Description="Naming rules for protected constant." />
-		<StringProperty Name="PrivateConstNamingRule" DefaultValue="c_$(aaBb)" FriendlyName="Constant (private)" Description="Naming rules for private constant." />
-		<StringProperty Name="InternalConstNamingRule" DefaultValue="c_$(aaBb):$(AaBb):$(AA_BB)" FriendlyName="Constant (internal)" Description="Naming rules for internal constant." />
+		<StringProperty Name="PrivateConstNamingRule" DefaultValue="c_$(aaBb):$(AA_BB)" FriendlyName="Constant (private)" Description="Naming rules for private constant." />
+		<StringProperty Name="InternalConstNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Constant (internal)" Description="Naming rules for internal constant." />
 		<StringProperty Name="MethodGeneralNamingRule" DefaultValue="$(AaBb)" FriendlyName="Method (general)" Description="Naming rules for general method." />
 		<StringProperty Name="MethodWindowsHandlerNamingRule" DefaultValue="$(aaBb)_$(AaBb):$(AaBb)_$(AaBb)" FriendlyName="Method (Windows Forms event handler)" Description="Naming rules for Windows Forms event handler." />
+		<StringProperty Name="DelegateNamingRule" DefaultValue="$(AaBb)" FriendlyName="Delegate" Description="Naming rules for delegate." />
+		<StringProperty Name="EventNamingRule" DefaultValue="$(AaBb)" FriendlyName="Event" Description="Naming rules for event." />
+		<StringProperty Name="PropertyNamingRule" DefaultValue="$(AaBb)" FriendlyName="Property" Description="Naming rules for property." />
+		<StringProperty Name="EnumNamingRule" DefaultValue="$(AaBb)" FriendlyName="Enumeration" Description="Naming rules for enumeration." />
+		<StringProperty Name="EnumItemNamingRule" DefaultValue="$(AaBb)" FriendlyName="Enumeration item" Description="Naming rules for enumeration item." />
 	</Properties>
 	<Rules>
 		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
-			<Context>{0} name should conform the following style: {1}.</Context>
+			<Context>{0} name {1} doesn't conform the specified style: {2}.</Context>
 			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ settings page for details.</Description>
 		</Rule>
 		<RuleGroup Name="Extended Original Rules">

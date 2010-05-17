@@ -33,11 +33,12 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string MethodGeneral = "MethodGeneralNamingRule";
 		internal const string MethodWindowsHandler = "MethodWindowsHandlerNamingRule";
 
-		//Delegate
-		//Event
-		//Enum
-		//EnumItem
-		//Property
+		internal const string Delegate = "DelegateNamingRule";
+		internal const string Event = "EventNamingRule";
+		internal const string Property = "PropertyNamingRule";
+		internal const string Enum = "EnumNamingRule";
+		internal const string EnumItem = "EnumItemNamingRule";
+
 		//Type parameters
 		//Local variables (constant?)
 		//Parameters (value, reference, output, params array)
@@ -66,7 +67,12 @@ namespace Shuruev.StyleCop.CSharp
 				PrivateConst,
 				InternalConst,
 				MethodGeneral,
-				MethodWindowsHandler
+				MethodWindowsHandler,
+				Delegate,
+				Event,
+				Property,
+				Enum,
+				EnumItem
 			});
 	}
 }

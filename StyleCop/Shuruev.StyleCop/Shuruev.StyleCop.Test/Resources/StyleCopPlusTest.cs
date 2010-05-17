@@ -400,3 +400,25 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 #endregion
+
+#region AdvancedNamingRules // Simple Tests
+
+//# [ERROR:3]
+//# Some enumeration and enumeration item names are incorrect.
+namespace Shuruev.StyleCop.Test
+{
+	public enum TestENUM
+	{
+		ITEM1,
+		ITEM2
+	}
+
+	public enum TestEnum
+	{
+		Item1,
+		Item2
+	}
+}
+//# [END]
+
+#endregion

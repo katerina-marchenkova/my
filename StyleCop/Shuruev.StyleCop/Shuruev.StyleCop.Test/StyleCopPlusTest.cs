@@ -65,7 +65,7 @@ namespace Shuruev.StyleCop.Test
 			{
 				if (line.StartsWith("#region "))
 				{
-					rule = line.Substring(8);
+					rule = line.Substring(8).Split('/', ' ')[0];
 					if (String.IsNullOrEmpty(rule))
 						ThrowWrongTestFile();
 

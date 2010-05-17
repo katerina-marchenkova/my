@@ -239,6 +239,7 @@ namespace Shuruev.StyleCop.CSharp
 						UpdateControls();
 					}
 				}
+
 				return;
 			}
 
@@ -257,6 +258,7 @@ namespace Shuruev.StyleCop.CSharp
 						UpdateControls();
 					}
 				}
+
 				return;
 			}
 

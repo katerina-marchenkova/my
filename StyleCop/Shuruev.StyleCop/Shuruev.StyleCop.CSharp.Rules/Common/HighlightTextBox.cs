@@ -127,12 +127,12 @@ namespace Shuruev.StyleCop.CSharp
 			m_buffer.SelectionLength = m_active.SelectionLength;
 
 			Native.SCROLLINFO si = new Native.SCROLLINFO();
-			si.cbSize = (uint)Marshal.SizeOf(typeof(Native.SCROLLINFO));
-			si.fMask = Native.SIF_POS;
+			si.Size = (uint)Marshal.SizeOf(typeof(Native.SCROLLINFO));
+			si.Mask = Native.SIF_POS;
 			Native.GetScrollInfo(m_active.Handle, (int)Native.SB_VERT, ref si);
 			Native.SetScrollInfo(m_buffer.Handle, (int)Native.SB_VERT, ref si, true);
 
-			uint wparam = ((uint)si.nPos << 16) + Native.SB_THUMBPOSITION;
+			uint wparam = ((uint)si.Pos << 16) + Native.SB_THUMBPOSITION;
 			Native.SendMessage(m_buffer.Handle, Native.WM_VSCROLL, wparam, 0);
 			Native.SendMessage(m_buffer.Handle, Native.WM_VSCROLL, Native.SB_ENDSCROLL, 0);
 

@@ -48,13 +48,13 @@ namespace Shuruev.StyleCop.CSharp
 
 		internal struct SCROLLINFO
 		{
-			internal uint cbSize;
-			internal uint fMask;
-			internal int nMin;
-			internal int nMax;
-			internal uint nPage;
-			internal int nPos;
-			internal int nTrackPos;
+			internal uint Size;
+			internal uint Mask;
+			internal int Min;
+			internal int Max;
+			internal uint Page;
+			internal int Pos;
+			internal int TrackPos;
 		}
 
 		[DllImport("User32.dll")]
