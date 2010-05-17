@@ -167,21 +167,14 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private static void RemoveCustomViolation(ViolationEventArgs e)
 		{
-			/*xxxstring key = (string)typeof(Violation).InvokeMember(
-				"Key",
-				BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetProperty,
-				null,
-				e.Violation,
-				null);
-
-			Dictionary<string, Violation> violations = (Dictionary<string, Violation>)typeof(ICodeElement).InvokeMember(
+			Dictionary<string, Violation> violations = (Dictionary<string, Violation>)typeof(CsElement).InvokeMember(
 				"violations",
 				BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField,
 				null,
 				e.Element,
 				null);
 
-			violations.Remove(key);*/
+			violations.Remove(e.Violation.Key);
 		}
 
 		#endregion

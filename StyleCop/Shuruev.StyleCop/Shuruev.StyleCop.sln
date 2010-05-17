@@ -1,17 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.CSharp.Rules", "Shuruev.StyleCop.CSharp.Rules\Shuruev.StyleCop.CSharp.Rules.csproj", "{BDC82CFD-67BF-4562-8BBD-E374C9538297}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Run", "Shuruev.StyleCop.Run\Shuruev.StyleCop.Run.csproj", "{E1C652A2-5DE7-4C4A-BC74-AA32FB598345}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Test", "Shuruev.StyleCop.Test\Shuruev.StyleCop.Test.csproj", "{440553E2-2EB0-487C-9F72-8C3B4852BD6B}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7988BC6D-A1F4-473C-B1B5-D9A0E50B1868}"
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		Shuruev.StyleCop.vsmdi = Shuruev.StyleCop.vsmdi
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.CSharp.Rules", "Shuruev.StyleCop.CSharp.Rules\Shuruev.StyleCop.CSharp.Rules.csproj", "{BDC82CFD-67BF-4562-8BBD-E374C9538297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Run", "Shuruev.StyleCop.Run\Shuruev.StyleCop.Run.csproj", "{E1C652A2-5DE7-4C4A-BC74-AA32FB598345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Test", "Shuruev.StyleCop.Test\Shuruev.StyleCop.Test.csproj", "{440553E2-2EB0-487C-9F72-8C3B4852BD6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Try", "Shuruev.StyleCop.Try\Shuruev.StyleCop.Try.csproj", "{BCA181F6-1584-4D2A-A0EE-1071D1FCA4FB}"
 EndProject
