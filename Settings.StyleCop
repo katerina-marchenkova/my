@@ -54,6 +54,16 @@
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>
         </Rule>
+        <Rule Name="ConstructorSummaryDocumentationMustBeginWithStandardText">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="DestructorSummaryDocumentationMustBeginWithStandardText">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
       </Rules>
       <AnalyzerSettings>
         <BooleanProperty Name="IncludeFields">False</BooleanProperty>
@@ -178,11 +188,6 @@
             <BooleanProperty Name="Enabled">True</BooleanProperty>
           </RuleSettings>
         </Rule>
-        <Rule Name="ElementMustBeginWithUpperCaseLetter">
-          <RuleSettings>
-            <BooleanProperty Name="Enabled">True</BooleanProperty>
-          </RuleSettings>
-        </Rule>
         <Rule Name="ElementsMustBeDocumented">
           <RuleSettings>
             <BooleanProperty Name="Enabled">True</BooleanProperty>
@@ -199,7 +204,9 @@
           </RuleSettings>
         </Rule>
       </Rules>
-      <AnalyzerSettings />
+      <AnalyzerSettings>
+        <StringProperty Name="MethodGeneralNamingRule">$(AaBb):Action_$(AaBb)_Do:Action_$(AaBb)_IsAvailable</StringProperty>
+      </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.ReadabilityRules">
       <Rules>
