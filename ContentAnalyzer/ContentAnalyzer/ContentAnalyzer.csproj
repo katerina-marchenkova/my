@@ -76,6 +76,8 @@
     <Content Include="Duplicates.aspx" />
     <Content Include="Helix.aspx" />
     <Content Include="Mirror.aspx" />
+    <Content Include="Review.aspx" />
+    <Compile Include="Code\Helpers.cs" />
     <Compile Include="Code\IDataRow.cs" />
     <Compile Include="Code\MultipleImageRow.cs" />
     <Compile Include="Code\DbHelper.cs" />
@@ -126,6 +128,13 @@
     </Compile>
     <Compile Include="Mirror.aspx.designer.cs">
       <DependentUpon>Mirror.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Review.aspx.cs">
+      <DependentUpon>Review.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Review.aspx.designer.cs">
+      <DependentUpon>Review.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

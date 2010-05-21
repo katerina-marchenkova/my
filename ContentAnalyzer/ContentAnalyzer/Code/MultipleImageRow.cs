@@ -1,24 +1,43 @@
 using System;
 using System.Data;
+using VX.Knowledge.DataSource;
+using VX.Storage;
 
 namespace ContentAnalyzer
 {
 	public struct MultipleImageRow
 	{
+		public Guid ContentUid;
 		public string Url;
 		public string OriginalId;
+		public Guid ItemUid;
 
 		public MultipleImageRow(IDataRecord reader)
 		{
-			Url = (string)reader["Url"];
-			OriginalId = (string)reader["OriginalId"];
-		}
+			ContentUid = Guid.Empty;
+			Url = String.Empty;
+			OriginalId = String.Empty;
+			ItemUid = Guid.Empty;
 
-		public string InfoItemId
-		{
-			get
+			for (int i = 0; i < reader.FieldCount; i++)
 			{
-				return OriginalId.Substring(0, 36);
+				switch (reader.GetName(i))
+				{
+					case "ContentUid":
+						ContentUid = (Guid)reader["ContentUid"];
+						Url = Helpers.GetDigitalContentUrl(ContentUid);
+						break;
+					case "Url":
+						Url = (string)reader["Url"];
+						break;
+					case "OriginalId":
+						OriginalId = (string)reader["OriginalId"];
+						ItemUid = new Guid(OriginalId.Substring(0, 36));
+						break;
+					case "ItemUid":
+						ItemUid = (Guid)reader["ItemUid"];
+						break;
+				}
 			}
 		}
 
@@ -26,7 +45,10 @@ namespace ContentAnalyzer
 		{
 			get
 			{
-				return String.Format("vx-storage://browse/item/template_id=992D38A1-A8EF-4D2C-82D2-93A4C887872A/item_id={0}", InfoItemId);
+				return VXStorageUri.GetItemUri(
+					KB.Template.Multipleimages.Id,
+					ItemUid,
+					VXStorageUri.UriAction.Browse).AbsoluteUri;
 			}
 		}
 	}

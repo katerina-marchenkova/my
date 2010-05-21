@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,15 +10,13 @@ namespace ContentAnalyzer
 	/// </summary>
 	public static class TPD
 	{
-		private static readonly string s_connectionString = String.Empty;
-		private static readonly TimeSpan s_commandTimeout = TimeSpan.FromSeconds(30);
-		private static readonly int s_commandTimeoutInSeconds = 30;
+		private static readonly DbHelper s_db;
 
 		static TPD()
 		{
-			s_connectionString = ConfigurationHelper.ReadConnectionString("TPD");
-			s_commandTimeout = ConfigurationHelper.ReadTimeSpan("TPD.Timeout");
-			s_commandTimeoutInSeconds = Convert.ToInt32(s_commandTimeout.TotalSeconds);
+			s_db = new DbHelper(
+				ConfigurationHelper.ReadConnectionString("TPD"),
+				ConfigurationHelper.ReadTimeSpan("TPD.Timeout"));
 		}
 
 		/// <summary>
@@ -29,7 +26,7 @@ namespace ContentAnalyzer
 		{
 			List<DigitalContentRow> rows = new List<DigitalContentRow>();
 
-			using (SqlConnection conn = new SqlConnection(s_connectionString))
+			/*using (SqlConnection conn = new SqlConnection(s_connectionString))
 			{
 				conn.Open();
 
@@ -54,7 +51,7 @@ namespace ContentAnalyzer
 								media_type_id = 15
 								AND sku_id IN
 								(
-									/*6238340,
+									6238340,
 									5408055,
 									5221661,
 									5394367,
@@ -73,92 +70,7 @@ namespace ContentAnalyzer
 									4976455,
 									4824121,
 									4778115,
-									5041535*/
-3314140,
-5627780,
-4517555,
-6846303,
-7181021,
-5160831,
-4773421,
-3753243,
-6446324,
-6386493,
-5473073,
-6334800,
-6380124,
-5814472,
-7213610,
-5740303,
-4123089,
-5661139,
-5015032,
-7483983,
-3385853,
-6439789,
-5995087,
-5665281,
-6723750,
-6408116,
-5806938,
-3527656,
-3750100,
-6726976,
-5805481,
-1541532,
-5009954,
-5663512,
-3523514,
-6626398,
-5209215,
-1214016,
-2295044,
-2317643,
-1942679,
-2447564,
-2420906,
-1936061,
-2124293,
-1360668,
-5721053,
-6224212,
-2917135,
-6275052,
-2218336,
-4785137,
-2099072,
-3623096,
-1744334,
-5090286,
-2634279,
-1432092,
-6925782,
-2803636,
-5021089,
-6085303,
-6606172,
-1732223,
-5238624,
-6684254,
-4520781,
-7176736,
-6256575,
-5263158,
-5948847,
-5497175,
-2489708,
-6750368,
-3771122,
-5880818,
-5965641,
-5694292,
-5441257,
-4403827,
-6396005,
-5425545,
-6174497,
-4280793,
-1825954
+									5041535
 								)
 						");
 
@@ -171,7 +83,7 @@ namespace ContentAnalyzer
 						}
 					}
 				}
-			}
+			}*/
 
 			return rows;
 		}
@@ -183,7 +95,7 @@ namespace ContentAnalyzer
 		{
 			List<DigitalContentRow> rows = new List<DigitalContentRow>();
 
-			using (SqlConnection conn = new SqlConnection(s_connectionString))
+			/*using (SqlConnection conn = new SqlConnection(s_connectionString))
 			{
 				conn.Open();
 
@@ -217,7 +129,7 @@ namespace ContentAnalyzer
 						}
 					}
 				}
-			}
+			}*/
 
 			return rows;
 		}
@@ -229,7 +141,7 @@ namespace ContentAnalyzer
 		{
 			List<DigitalContentRow> rows = new List<DigitalContentRow>();
 
-			using (SqlConnection conn = new SqlConnection(s_connectionString))
+			/*using (SqlConnection conn = new SqlConnection(s_connectionString))
 			{
 				conn.Open();
 
@@ -266,6 +178,70 @@ namespace ContentAnalyzer
 						}
 					}
 				}
+			}*/
+
+			return rows;
+		}
+
+		/// <summary>
+		/// Gets all multiple images by category.
+		/// </summary>
+		public static List<MultipleImageRow> GetAllMultipleImages(string categoryCode)
+		{
+			List<MultipleImageRow> rows = new List<MultipleImageRow>();
+
+			using (SqlConnection conn = s_db.OpenConnection())
+			{
+				s_db.ExecuteReader(
+					conn,
+					@"
+						CREATE TABLE #Temp (
+							ContentUid UNIQUEIDENTIFIER,
+							ItemUid UNIQUEIDENTIFIER,
+							FileUid UNIQUEIDENTIFIER,
+							MetaValueId INT)
+
+						INSERT INTO #Temp
+							SELECT DISTINCT TOP 500
+								TDC.content_guid,
+								CAST(LEFT(TDC.original_id, 36) AS UNIQUEIDENTIFIER),
+								CAST(SUBSTRING(TDC.original_id, 38, 36) AS UNIQUEIDENTIFIER),
+								TDCML.meta_value_id
+							FROM [tpd_digital_content] TDC WITH(NOLOCK)
+								INNER JOIN [tpd_digital_content_link] TDCL WITH(NOLOCK)
+								ON TDCL.content_guid = TDC.content_guid
+								INNER JOIN [tpd_digital_content_meta_link] TDCML WITH(NOLOCK)
+								ON TDCML.content_guid = TDC.content_guid
+								INNER JOIN [tpd_sku] TS WITH(NOLOCK)
+								ON TS.sku_id = TDCL.sku_id
+							WHERE
+								TDC.media_type_id = 15
+								AND TDCML.meta_value_id IN (2683, 2689) -- 200 x 150 or 400 x 300
+								AND TDCL.priority BETWEEN 500000 AND 509999
+								AND TS.category_code = @categoryCode
+
+						SELECT DISTINCT
+							ItemUid,
+							FileUid,
+							(
+								SELECT TOP 1 ContentUid
+								FROM #Temp A
+								WHERE
+									A.ItemUid = T.ItemUid
+									AND A.FileUid = T.FileUid
+								ORDER BY MetaValueId DESC
+							) AS ContentUid
+						FROM #Temp T
+						ORDER BY ItemUid
+
+						DROP TABLE #Temp
+					",
+					delegate(IDataRecord reader)
+					{
+						MultipleImageRow row = new MultipleImageRow(reader);
+						rows.Add(row);
+					},
+					new SqlParameter("@categoryCode", categoryCode));
 			}
 
 			return rows;

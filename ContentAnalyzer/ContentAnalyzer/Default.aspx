@@ -26,6 +26,9 @@
 		<li>
 			<a href="BadCanvas.aspx">Bad Canvas Page</a>
 		</li>
+		<li>
+			<a href="Review.aspx">Review Page</a>
+		</li>
 	</ul>
 </body>
 </html>

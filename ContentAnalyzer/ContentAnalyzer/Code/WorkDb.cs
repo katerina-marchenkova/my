@@ -45,11 +45,13 @@ namespace ContentAnalyzer
 									ELSE RealHeightPercent
 								END
 							FROM [Canvas]
+							WHERE RunCode = '2010-05-18'
 
-						SELECT TOP 1000
+						SELECT
 							Url,
 							OriginalId
 						FROM #MaxSize
+						WHERE [Size] <= 50
 						ORDER BY [Size]
 
 						DROP TABLE #MaxSize
