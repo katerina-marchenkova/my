@@ -31,7 +31,7 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string InternalConst = "InternalConstNamingRule";
 
 		internal const string MethodGeneral = "MethodGeneralNamingRule";
-		internal const string MethodWindowsHandler = "MethodWindowsHandlerNamingRule";
+		internal const string MethodPrivateEventHandler = "MethodPrivateEventHandlerNamingRule";
 
 		internal const string Delegate = "DelegateNamingRule";
 		internal const string Event = "EventNamingRule";
@@ -67,7 +67,7 @@ namespace Shuruev.StyleCop.CSharp
 				PrivateConst,
 				InternalConst,
 				MethodGeneral,
-				MethodWindowsHandler,
+				MethodPrivateEventHandler,
 				Delegate,
 				Event,
 				Property,

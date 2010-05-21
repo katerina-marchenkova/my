@@ -13,30 +13,27 @@ namespace Shuruev.StyleCop.CSharp
 		#region Identifying elements
 
 		/// <summary>
-		/// Checks whether specified element describes windows forms event handler.
+		/// Checks whether specified element describes private event handler.
 		/// </summary>
-		public static bool IsWindowsFormsEventHandler(CsElement element)
+		public static bool IsPrivateEventHandler(CsElement element)
 		{
-			if (element.ElementType == ElementType.Method)
+			if (element.ElementType != ElementType.Method)
+				return false;
+
+			if (element.AccessModifier != AccessModifierType.Private)
+				return false;
+
+			Method method = (Method)element;
+			if (method.Parameters.Count == 2)
 			{
-				if (element.AccessModifier == AccessModifierType.Private)
+				Parameter sender = method.Parameters[0];
+				Parameter args = method.Parameters[1];
+				if (sender.Name == "sender"
+					&& sender.Type.Text == "object"
+					&& args.Name == "e"
+					&& args.Type.Text.EndsWith("EventArgs"))
 				{
-					if (element.Declaration.Name.Contains("_"))
-					{
-						Method method = (Method)element;
-						if (method.Parameters.Count == 2)
-						{
-							Parameter sender = method.Parameters[0];
-							Parameter args = method.Parameters[1];
-							if (sender.Name == "sender"
-								&& sender.Type.Text == "object"
-								&& args.Name == "e"
-								&& args.Type.Text.EndsWith("EventArgs"))
-							{
-								return true;
-							}
-						}
-					}
+					return true;
 				}
 			}
 

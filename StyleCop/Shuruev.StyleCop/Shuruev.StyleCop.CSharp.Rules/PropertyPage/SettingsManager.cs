@@ -13,9 +13,9 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets property descriptor with existing check.
 		/// </summary>
-		public static PropertyDescriptor<string> GetPropertyDescriptor(SourceAnalyzer analyzer, string settingName)
+		public static PropertyDescriptor<T> GetPropertyDescriptor<T>(SourceAnalyzer analyzer, string settingName)
 		{
-			PropertyDescriptor<string> descriptor = (PropertyDescriptor<string>)analyzer.PropertyDescriptors[settingName];
+			PropertyDescriptor<T> descriptor = (PropertyDescriptor<T>)analyzer.PropertyDescriptors[settingName];
 			if (descriptor == null)
 				throw new InvalidDataException("Setting " + settingName + " is not registered as a known one.");
 
@@ -23,14 +23,41 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Gets a value for specified setting.
+		/// Gets property descriptor with existing check.
 		/// </summary>
-		public static string GetSettingValue(SourceAnalyzer analyzer, Settings settings, string settingName)
+		public static PropertyDescriptor GetPropertyDescriptor(SourceAnalyzer analyzer, string settingName)
+		{
+			PropertyDescriptor descriptor = analyzer.PropertyDescriptors[settingName];
+			if (descriptor == null)
+				throw new InvalidDataException("Setting " + settingName + " is not registered as a known one.");
+
+			return descriptor;
+		}
+
+		/// <summary>
+		/// Gets a string value for specified setting.
+		/// </summary>
+		public static string GetStringValue(SourceAnalyzer analyzer, Settings settings, string settingName)
 		{
 			StringProperty setting = (StringProperty)analyzer.GetSetting(settings, settingName);
 			if (setting == null)
 			{
-				PropertyDescriptor<string> descriptor = GetPropertyDescriptor(analyzer, settingName);
+				PropertyDescriptor<string> descriptor = GetPropertyDescriptor<string>(analyzer, settingName);
+				return descriptor.DefaultValue;
+			}
+
+			return setting.Value;
+		}
+
+		/// <summary>
+		/// Gets a string value for specified setting.
+		/// </summary>
+		public static bool GetBooleanValue(SourceAnalyzer analyzer, Settings settings, string settingName)
+		{
+			BooleanProperty setting = (BooleanProperty)analyzer.GetSetting(settings, settingName);
+			if (setting == null)
+			{
+				PropertyDescriptor<bool> descriptor = GetPropertyDescriptor<bool>(analyzer, settingName);
 				return descriptor.DefaultValue;
 			}
 
@@ -42,7 +69,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetFriendlyName(SourceAnalyzer analyzer, string settingName)
 		{
-			PropertyDescriptor<string> descriptor = GetPropertyDescriptor(analyzer, settingName);
+			PropertyDescriptor descriptor = GetPropertyDescriptor(analyzer, settingName);
 			return descriptor.FriendlyName;
 		}
 
@@ -63,7 +90,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetMergedValue(PropertyPage page, string settingName)
 		{
-			return GetSettingValue(page.Analyzer, page.TabControl.MergedSettings, settingName);
+			return GetStringValue(page.Analyzer, page.TabControl.MergedSettings, settingName);
 		}
 
 		/// <summary>
@@ -71,7 +98,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetInheritedValue(PropertyPage page, string settingName)
 		{
-			return GetSettingValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
+			return GetStringValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
 		}
 
 		/// <summary>

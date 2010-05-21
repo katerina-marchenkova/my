@@ -12,6 +12,9 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public class ExtendedOriginalRules
 	{
+		internal const string AllowConstructorsFor1502 = "SP1502_AllowConstructors";
+		internal const string AllowNestedCodeBlocksFor1509 = "SP1509_AllowNestedCodeBlocks";
+
 		private readonly SourceAnalyzer m_parent;
 
 		private StyleCopCore m_customCore;
@@ -82,12 +85,12 @@ namespace Shuruev.StyleCop.CSharp
 
 			switch (e.Violation.Rule.CheckId)
 			{
-				case "SA1509":
-					Handle1509(e);
+				case "SA1502":
+					Handle1502(e);
 					break;
 
-				case "SA1600":
-					Handle1600(e);
+				case "SA1509":
+					Handle1509(e);
 					break;
 
 				case "SA1642":
@@ -182,18 +185,15 @@ namespace Shuruev.StyleCop.CSharp
 		#region Handling original violations
 
 		/// <summary>
-		/// Handles SA1509 violation.
+		/// Handles SA1502 violation.
 		/// </summary>
-		private void Handle1509(ViolationEventArgs e)
+		private void Handle1502(ViolationEventArgs e)
 		{
 			CsElement element = (CsElement)e.Element;
 
-			Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
-			if (node != null)
+			if (ReadSetting(e, AllowConstructorsFor1502))
 			{
-				Node<CsToken> prev = CodeHelper.FindPreviousValueableNode(node);
-				if (prev.Value.CsTokenType == CsTokenType.Semicolon
-					|| prev.Value.CsTokenType == CsTokenType.CloseCurlyBracket)
+				if (element.ElementType == ElementType.Constructor)
 					return;
 			}
 
@@ -201,23 +201,33 @@ namespace Shuruev.StyleCop.CSharp
 				element,
 				e.LineNumber,
 				Rules.OpeningCurlyBracketsMustNotBePrecededByBlankLine,
-				new object[0]);
+				element.FriendlyTypeText);
 		}
 
 		/// <summary>
-		/// Handles SA1600 violation.
+		/// Handles SA1509 violation.
 		/// </summary>
-		private void Handle1600(ViolationEventArgs e)
+		private void Handle1509(ViolationEventArgs e)
 		{
 			CsElement element = (CsElement)e.Element;
 
-			if (CodeHelper.IsWindowsFormsEventHandler(element))
-				return;
+			if (ReadSetting(e, AllowNestedCodeBlocksFor1509))
+			{
+				Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
+				if (node != null)
+				{
+					Node<CsToken> prev = CodeHelper.FindPreviousValueableNode(node);
+					if (prev.Value.CsTokenType == CsTokenType.Semicolon
+						|| prev.Value.CsTokenType == CsTokenType.CloseCurlyBracket)
+						return;
+				}
+			}
 
 			m_parent.AddViolation(
 				element,
-				Rules.ElementsMustBeDocumented,
-				new object[] { element.FriendlyTypeText });
+				e.LineNumber,
+				Rules.OpeningCurlyBracketsMustNotBePrecededByBlankLine,
+				new object[0]);
 		}
 
 		/// <summary>
@@ -252,6 +262,21 @@ namespace Shuruev.StyleCop.CSharp
 				element,
 				Rules.DestructorSummaryDocumentationMustBeginWithStandardText,
 				new object[] { GetExampleSummaryTextForDestructor() });
+		}
+
+		#endregion
+
+		#region Reading custom settings
+
+		/// <summary>
+		/// Reads the value of custom setting.
+		/// </summary>
+		private bool ReadSetting(ViolationEventArgs e, string settingName)
+		{
+			return SettingsManager.GetBooleanValue(
+				m_parent,
+				e.Element.Document.Settings,
+				settingName);
 		}
 
 		#endregion

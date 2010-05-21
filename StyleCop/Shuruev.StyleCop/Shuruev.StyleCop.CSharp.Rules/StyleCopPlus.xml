@@ -5,7 +5,7 @@
 	</Description>
 	<Properties>
 		<StringProperty Name="NamingAbbreviations" DefaultValue="A B C ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
-		<StringProperty Name="NamingDerivings" DefaultValue="Attribute Exception EventArgs" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
+		<StringProperty Name="NamingDerivings" DefaultValue="Attribute Exception EventArgs Stream" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
 		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
 		<StringProperty Name="ClassNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class (not internal)" Description="Naming rules for non-internal class." />
 		<StringProperty Name="ClassInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Class (internal)" Description="Naming rules for internal class." />
@@ -25,12 +25,14 @@
 		<StringProperty Name="PrivateConstNamingRule" DefaultValue="c_$(aaBb):$(AA_BB)" FriendlyName="Constant (private)" Description="Naming rules for private constant." />
 		<StringProperty Name="InternalConstNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Constant (internal)" Description="Naming rules for internal constant." />
 		<StringProperty Name="MethodGeneralNamingRule" DefaultValue="$(AaBb)" FriendlyName="Method (general)" Description="Naming rules for general method." />
-		<StringProperty Name="MethodWindowsHandlerNamingRule" DefaultValue="$(aaBb)_$(AaBb):$(AaBb)_$(AaBb)" FriendlyName="Method (Windows Forms event handler)" Description="Naming rules for Windows Forms event handler." />
+		<StringProperty Name="MethodPrivateEventHandlerNamingRule" DefaultValue="$(AaBb):$(aaBb)_$(AaBb):$(AaBb)_$(AaBb)" FriendlyName="Method (private event handler)" Description="Naming rules for private event handler." />
 		<StringProperty Name="DelegateNamingRule" DefaultValue="$(AaBb)" FriendlyName="Delegate" Description="Naming rules for delegate." />
 		<StringProperty Name="EventNamingRule" DefaultValue="$(AaBb)" FriendlyName="Event" Description="Naming rules for event." />
 		<StringProperty Name="PropertyNamingRule" DefaultValue="$(AaBb)" FriendlyName="Property" Description="Naming rules for property." />
 		<StringProperty Name="EnumNamingRule" DefaultValue="$(AaBb)" FriendlyName="Enumeration" Description="Naming rules for enumeration." />
 		<StringProperty Name="EnumItemNamingRule" DefaultValue="$(AaBb)" FriendlyName="Enumeration item" Description="Naming rules for enumeration item." />
+		<BooleanProperty Name="SP1502_AllowConstructors" DefaultValue="True" FriendlyName="SP1502: Allow for constructors" Description="Allows constructors to be placed on a single line (for SP1502 rule)." />
+		<BooleanProperty Name="SP1509_AllowNestedCodeBlocks" DefaultValue="True" FriendlyName="SP1509: Allow nested code blocks" Description="Allows using nested code blocks (for SP1509 rule)." />
 	</Properties>
 	<Rules>
 		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
@@ -38,21 +40,21 @@
 			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ settings page for details.</Description>
 		</Rule>
 		<RuleGroup Name="Extended Original Rules">
+			<Rule Name="ElementMustNotBeOnSingleLine" CheckId="SP1502" DisabledByDefault="true">
+				<Context>The {0} must not be placed on a single line. The opening and closing curly brackets must each be placed on their own line.</Context>
+				<Description>Extends original SA1502 rule. Ensure that you have disabled SA1502 when you enable this rule. See detailed settings for more options.</Description>
+			</Rule>
 			<Rule Name="OpeningCurlyBracketsMustNotBePrecededByBlankLine" CheckId="SP1509" DisabledByDefault="true">
 				<Context>An opening curly bracket must not be preceded by a blank line.</Context>
-				<Description>Validates that an opening curly bracket is not preceded by a blank line. Based on SA1509 behaviour, but allows using nested code blocks.</Description>
-			</Rule>
-			<Rule Name="ElementsMustBeDocumented" CheckId="SP1600" DisabledByDefault="true">
-				<Context>The {0} must have a documentation header.</Context>
-				<Description>Validates that an element contains a properly formatted documentation header. Based on SA1600 behaviour, but allows windows forms event handlers to be undocumented.</Description>
+				<Description>Extends original SA1509 rule. Ensure that you have disabled SA1509 when you enable this rule. See detailed settings for more options.</Description>
 			</Rule>
 			<Rule Name="ConstructorSummaryDocumentationMustBeginWithStandardText" CheckId="SP1642" DisabledByDefault="true">
 				<Context>The documentation text within the constructor's summary tag should be "Initializes a new instance." or should begin with the text: "{0}".</Context>
-				<Description>Verifies that a constructor's summary text begins with the appropriate wording. Based on SA1642 behaviour, but allows any constructor to have the following summary text: "Initializes a new instance.".</Description>
+				<Description>Extends original SA1642 rule. Ensure that you have disabled SA1642 when you enable this rule. Allows any constructor to have the following summary text: "Initializes a new instance.".</Description>
 			</Rule>
 			<Rule Name="DestructorSummaryDocumentationMustBeginWithStandardText" CheckId="SP1643" DisabledByDefault="true">
 				<Context>The documentation text within the destructor's summary tag should be "Finalizes an instance." or should begin with the text: "{0}".</Context>
-				<Description>Verifies that a destructor's summary text begins with the appropriate wording. Based on SA1643 behaviour, but allows any destructor to have the following summary text: "Finalizes an instance.".</Description>
+				<Description>Extends original SA1643 rule. Ensure that you have disabled SA1643 when you enable this rule. Allows any destructor to have the following summary text: "Finalizes an instance.".</Description>
 			</Rule>
 		</RuleGroup>
 		<RuleGroup Name="More Custom Rules">

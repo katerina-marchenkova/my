@@ -136,9 +136,9 @@ namespace Shuruev.StyleCop.CSharp
 				if (CodeHelper.IsOperator(method))
 					return;
 
-				if (CodeHelper.IsWindowsFormsEventHandler(method))
+				if (CodeHelper.IsPrivateEventHandler(method))
 				{
-					Check(settings, method, NamingSettings.MethodWindowsHandler);
+					Check(settings, method, NamingSettings.MethodPrivateEventHandler);
 				}
 				else
 				{

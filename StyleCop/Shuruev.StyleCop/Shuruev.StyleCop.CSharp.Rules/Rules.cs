@@ -13,26 +13,26 @@
 		#region Extended original rules
 
 		/// <summary>
-		/// Validates that an opening curly bracket is not preceded by a blank line.
-		/// Based on SA1509 behaviour, but allows using nested code blocks.
+		/// Extends original SA1502 rule. Ensure that you have disabled SA1502 when you enable this rule.
+		/// See detailed settings for more options.
+		/// </summary>
+		ElementMustNotBeOnSingleLine,
+
+		/// <summary>
+		/// Extends original SA1509 rule. Ensure that you have disabled SA1509 when you enable this rule.
+		/// See detailed settings for more options.
 		/// </summary>
 		OpeningCurlyBracketsMustNotBePrecededByBlankLine,
 
 		/// <summary>
-		/// Validates that an element contains a properly formatted documentation header.
-		/// Based on SA1600 behaviour, but allows windows forms event handlers to be undocumented.
-		/// </summary>
-		ElementsMustBeDocumented,
-
-		/// <summary>
-		/// Verifies that a constructor's summary text begins with the appropriate wording.
-		/// Based on SA1642 behaviour, but allows any constructor to have the following summary text: "Initializes a new instance.".
+		/// Extends original SA1642 rule. Ensure that you have disabled SA1642 when you enable this rule.
+		/// Allows any constructor to have the following summary text: "Initializes a new instance.".
 		/// </summary>
 		ConstructorSummaryDocumentationMustBeginWithStandardText,
 
 		/// <summary>
-		/// Verifies that a destructor's summary text begins with the appropriate wording.
-		/// Based on SA1643 behaviour, but allows any destructor to have the following summary text: "Finalizes an instance.".
+		/// Extends original SA1643 rule. Ensure that you have disabled SA1643 when you enable this rule.
+		/// Allows any destructor to have the following summary text: "Finalizes an instance.".
 		/// </summary>
 		DestructorSummaryDocumentationMustBeginWithStandardText,
 
