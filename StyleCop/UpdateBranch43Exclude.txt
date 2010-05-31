@@ -3,3 +3,6 @@
 Resources.
 \bin\
 \obj\
+AssemblyInfo.cs
+CustomCsParser.cs
+ExtendedOriginalRules.Reflection.cs

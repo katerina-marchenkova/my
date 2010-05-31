@@ -14,7 +14,7 @@ namespace Shuruev.StyleCop.CSharp
 		private readonly ExtendedOriginalRules m_extendedOriginalRules;
 		private readonly MoreCustomRules m_moreCustomRules;
 
-		private readonly HashSet<string> m_disableAllRulesExcept;
+		private readonly List<string> m_disableAllRulesExcept;
 
 		/// <summary>
 		/// Initializes a new instance.
@@ -25,7 +25,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_extendedOriginalRules = new ExtendedOriginalRules(this);
 			m_moreCustomRules = new MoreCustomRules(this);
 
-			m_disableAllRulesExcept = new HashSet<string>();
+			m_disableAllRulesExcept = new List<string>();
 		}
 
 		#region Properties
@@ -44,7 +44,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets a set of rules that are enabled in the current instance.
 		/// </summary>
-		public HashSet<string> DisableAllRulesExcept
+		public List<string> DisableAllRulesExcept
 		{
 			get
 			{

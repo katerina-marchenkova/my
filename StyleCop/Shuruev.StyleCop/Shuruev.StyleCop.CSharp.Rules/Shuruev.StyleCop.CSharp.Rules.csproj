@@ -107,6 +107,7 @@
       <DependentUpon>NamingRulesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
+    <Compile Include="Analyzers\ExtendedOriginalRules.Reflection.cs" />
     <Compile Include="Analyzers\StyleCopPlus.cs" />
     <Compile Include="Analyzers\CustomCsParser.cs" />
     <Compile Include="Analyzers\CodeHelper.cs" />

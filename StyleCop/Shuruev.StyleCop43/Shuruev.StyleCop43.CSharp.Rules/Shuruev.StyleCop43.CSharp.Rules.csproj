@@ -80,6 +80,7 @@
     <Compile Include="Analyzers\CodeHelper.cs" />
     <Compile Include="Analyzers\CustomCsParser.cs" />
     <Compile Include="Analyzers\ExtendedOriginalRules.cs" />
+    <Compile Include="Analyzers\ExtendedOriginalRules.Reflection.cs" />
     <Compile Include="Analyzers\MoreCustomRules.cs" />
     <Compile Include="Analyzers\StyleCopPlus.cs" />
     <Compile Include="Common\Colors.cs" />
