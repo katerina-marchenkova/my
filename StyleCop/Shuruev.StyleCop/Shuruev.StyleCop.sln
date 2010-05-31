@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Test", "Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop.Try", "Shuruev.StyleCop.Try\Shuruev.StyleCop.Try.csproj", "{BCA181F6-1584-4D2A-A0EE-1071D1FCA4FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuruev.StyleCop43.CSharp.Rules", "Shuruev.StyleCop43.CSharp.Rules\Shuruev.StyleCop43.CSharp.Rules.csproj", "{3F923159-2289-45FC-8AE8-383C17DE1EE0}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Shuruev.StyleCop.vsmdi
@@ -40,6 +42,10 @@ Global
 		{BCA181F6-1584-4D2A-A0EE-1071D1FCA4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCA181F6-1584-4D2A-A0EE-1071D1FCA4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCA181F6-1584-4D2A-A0EE-1071D1FCA4FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F923159-2289-45FC-8AE8-383C17DE1EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F923159-2289-45FC-8AE8-383C17DE1EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F923159-2289-45FC-8AE8-383C17DE1EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F923159-2289-45FC-8AE8-383C17DE1EE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
