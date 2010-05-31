@@ -80,14 +80,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\StyleCopPlusTest.cs" />
+    <None Include="Resources\StyleCopPlusTest.cs" />
     <Compile Include="BlockItem.cs" />
     <Compile Include="TestItem.cs" />
     <Compile Include="SimpleTests\CodeHelperTest.cs" />
     <Compile Include="SimpleTests\NamingMacroTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Resources\SP1600.cs" />
-    <Content Include="Resources\SP1300.cs" />
+    <None Include="Resources\SP1600.cs" />
+    <None Include="Resources\SP1300.cs" />
     <Compile Include="StyleCopPlusTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

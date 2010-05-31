@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{223D13F6-C5DD-43A2-BBFB-EC0173064BF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shuruev.StyleCop.CSharp</RootNamespace>
+    <AssemblyName>Shuruev.StyleCop43.CSharp.Rules</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.StyleCop, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.StyleCop.CSharp, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.StyleCop.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.3.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedNaming\AbbreviationsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\AbbreviationsEditor.designer.cs">
+      <DependentUpon>AbbreviationsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
+    <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
+    <Compile Include="AdvancedNaming\DerivingsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\DerivingsEditor.designer.cs">
+      <DependentUpon>DerivingsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingMacro.cs" />
+    <Compile Include="AdvancedNaming\NamingRuleEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRuleEditor.designer.cs">
+      <DependentUpon>NamingRuleEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRulesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRulesPage.designer.cs">
+      <DependentUpon>NamingRulesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analyzers\CodeHelper.cs" />
+    <Compile Include="Analyzers\CustomCsParser.cs" />
+    <Compile Include="Analyzers\ExtendedOriginalRules.cs" />
+    <Compile Include="Analyzers\MoreCustomRules.cs" />
+    <Compile Include="Analyzers\StyleCopPlus.cs" />
+    <Compile Include="Common\Colors.cs" />
+    <Compile Include="Common\HighlightTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\HighlightTextBox.designer.cs">
+      <DependentUpon>HighlightTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Messages.cs" />
+    <Compile Include="Common\Native.cs" />
+    <Compile Include="Common\Pictures.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyPage\NamingSettings.cs" />
+    <Compile Include="PropertyPage\PropertyPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyPage\PropertyPage.designer.cs">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyPage\SettingsManager.cs" />
+    <Compile Include="PropertyPage\SettingTag.cs" />
+    <Compile Include="Rules.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AdvancedNaming\AbbreviationsEditor.resx">
+      <DependentUpon>AbbreviationsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedNaming\DerivingsEditor.resx">
+      <DependentUpon>DerivingsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedNaming\NamingRuleEditor.resx">
+      <DependentUpon>NamingRuleEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedNaming\NamingRulesPage.resx">
+      <DependentUpon>NamingRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\HighlightTextBox.resx">
+      <DependentUpon>HighlightTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyPage\PropertyPage.resx">
+      <DependentUpon>PropertyPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StyleCopPlus.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapitalLetter.png" />
+    <None Include="Resources\RightArrow.png" />
+    <None Include="Resources\RuleDisabled.png" />
+    <None Include="Resources\RuleEnabled.png" />
+    <None Include="Resources\StyleCopPlusLogo.png" />
+    <None Include="Resources\StyleCopPlusTitle.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

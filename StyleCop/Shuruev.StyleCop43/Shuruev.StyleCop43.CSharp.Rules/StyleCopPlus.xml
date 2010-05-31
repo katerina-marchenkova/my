@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SourceAnalyzer Name="StyleCop+">
+	<Description>
+		Plug-in that extends original StyleCop features. Some settings for this plug-in are taken out to the separate StyleCop+ settings page.
+	</Description>
+	<Properties>
+		<StringProperty Name="NamingAbbreviations" DefaultValue="A B C ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
+		<StringProperty Name="NamingDerivings" DefaultValue="Attribute Exception EventArgs Stream" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
+		<StringProperty Name="NamespaceNamingRule" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
+		<StringProperty Name="ClassNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Class (not internal)" Description="Naming rules for non-internal class." />
+		<StringProperty Name="ClassInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Class (internal)" Description="Naming rules for internal class." />
+		<StringProperty Name="StructNotInternalNamingRule" DefaultValue="$(AaBb)" FriendlyName="Struct (not internal)" Description="Naming rules for non-internal struct." />
+		<StringProperty Name="StructInternalNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Struct (internal)" Description="Naming rules for internal struct." />
+		<StringProperty Name="InterfaceNamingRule" DefaultValue="I$(AaBb)" FriendlyName="Interface" Description="Naming rules for interface." />
+		<StringProperty Name="PublicInstanceFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Instance field (public)" Description="Naming rules for public instance field." />
+		<StringProperty Name="ProtectedInstanceFieldNamingRule" DefaultValue="m_$(aaBb)" FriendlyName="Instance field (protected)" Description="Naming rules for protected instance field." />
+		<StringProperty Name="PrivateInstanceFieldNamingRule" DefaultValue="m_$(aaBb)" FriendlyName="Instance field (private)" Description="Naming rules for private instance field." />
+		<StringProperty Name="InternalInstanceFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Instance field (internal)" Description="Naming rules for internal instance field." />
+		<StringProperty Name="PublicStaticFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Static field (public)" Description="Naming rules for public static field." />
+		<StringProperty Name="ProtectedStaticFieldNamingRule" DefaultValue="s_$(aaBb)" FriendlyName="Static field (protected)" Description="Naming rules for protected static field." />
+		<StringProperty Name="PrivateStaticFieldNamingRule" DefaultValue="s_$(aaBb)" FriendlyName="Static field (private)" Description="Naming rules for private static field." />
+		<StringProperty Name="InternalStaticFieldNamingRule" DefaultValue="$(AaBb)" FriendlyName="Static field (internal)" Description="Naming rules for internal static field." />
+		<StringProperty Name="PublicConstNamingRule" DefaultValue="$(AaBb)" FriendlyName="Constant (public)" Description="Naming rules for public constant." />
+		<StringProperty Name="ProtectedConstNamingRule" DefaultValue="c_$(aaBb)" FriendlyName="Constant (protected)" Description="Naming rules for protected constant." />
+		<StringProperty Name="PrivateConstNamingRule" DefaultValue="c_$(aaBb):$(AA_BB)" FriendlyName="Constant (private)" Description="Naming rules for private constant." />
+		<StringProperty Name="InternalConstNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Constant (internal)" Description="Naming rules for internal constant." />
+		<StringProperty Name="MethodGeneralNamingRule" DefaultValue="$(AaBb)" FriendlyName="Method (general)" Description="Naming rules for general method." />
+		<StringProperty Name="MethodPrivateEventHandlerNamingRule" DefaultValue="$(AaBb):$(aaBb)_$(AaBb):$(AaBb)_$(AaBb)" FriendlyName="Method (private event handler)" Description="Naming rules for private event handler." />
+		<StringProperty Name="DelegateNamingRule" DefaultValue="$(AaBb)" FriendlyName="Delegate" Description="Naming rules for delegate." />
+		<StringProperty Name="EventNamingRule" DefaultValue="$(AaBb)" FriendlyName="Event" Description="Naming rules for event." />
+		<StringProperty Name="PropertyNamingRule" DefaultValue="$(AaBb)" FriendlyName="Property" Description="Naming rules for property." />
+		<StringProperty Name="EnumNamingRule" DefaultValue="$(AaBb)" FriendlyName="Enumeration" Description="Naming rules for enumeration." />
+		<StringProperty Name="EnumItemNamingRule" DefaultValue="$(AaBb)" FriendlyName="Enumeration item" Description="Naming rules for enumeration item." />
+		<BooleanProperty Name="SP1502_AllowConstructors" DefaultValue="True" FriendlyName="SP1502: Allow for constructors" Description="Allows constructors to be placed on a single line (for SP1502 rule)." />
+		<BooleanProperty Name="SP1509_AllowNestedCodeBlocks" DefaultValue="True" FriendlyName="SP1509: Allow nested code blocks" Description="Allows using nested code blocks (for SP1509 rule)." />
+	</Properties>
+	<Rules>
+		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
+			<Context>{0} name {1} doesn't conform the specified style: {2}.</Context>
+			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ settings page for details.</Description>
+		</Rule>
+		<RuleGroup Name="Extended Original Rules">
+			<Rule Name="ElementMustNotBeOnSingleLine" CheckId="SP1502" DisabledByDefault="true">
+				<Context>The {0} must not be placed on a single line. The opening and closing curly brackets must each be placed on their own line.</Context>
+				<Description>Extends original SA1502 rule. Ensure that you have disabled SA1502 when you enable this rule. See detailed settings for more options.</Description>
+			</Rule>
+			<Rule Name="OpeningCurlyBracketsMustNotBePrecededByBlankLine" CheckId="SP1509" DisabledByDefault="true">
+				<Context>An opening curly bracket must not be preceded by a blank line.</Context>
+				<Description>Extends original SA1509 rule. Ensure that you have disabled SA1509 when you enable this rule. See detailed settings for more options.</Description>
+			</Rule>
+			<Rule Name="ConstructorSummaryDocumentationMustBeginWithStandardText" CheckId="SP1642" DisabledByDefault="true">
+				<Context>The documentation text within the constructor's summary tag should be "Initializes a new instance." or should begin with the text: "{0}".</Context>
+				<Description>Extends original SA1642 rule. Ensure that you have disabled SA1642 when you enable this rule. Allows any constructor to have the following summary text: "Initializes a new instance.".</Description>
+			</Rule>
+			<Rule Name="DestructorSummaryDocumentationMustBeginWithStandardText" CheckId="SP1643" DisabledByDefault="true">
+				<Context>The documentation text within the destructor's summary tag should be "Finalizes an instance." or should begin with the text: "{0}".</Context>
+				<Description>Extends original SA1643 rule. Ensure that you have disabled SA1643 when you enable this rule. Allows any destructor to have the following summary text: "Finalizes an instance.".</Description>
+			</Rule>
+		</RuleGroup>
+		<RuleGroup Name="More Custom Rules">
+			<Rule Name="CodeLineMustNotEndWithWhitespace" CheckId="SP2000">
+				<Context>Invalid spacing at the end of the line.</Context>
+				<Description>Validates the spacing at the end of the each code line.</Description>
+			</Rule>
+			<Rule Name="CodeLineMustBeginWithIdenticalWhitespaces" CheckId="SP2001">
+				<Context>You should not use different characters for indention.</Context>
+				<Description>Validates that spacing at the beginning of the each code line uses identical characters.</Description>
+			</Rule>
+		</RuleGroup>
+	</Rules>
+</SourceAnalyzer>
