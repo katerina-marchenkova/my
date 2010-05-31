@@ -39,10 +39,6 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string Enum = "EnumNamingRule";
 		internal const string EnumItem = "EnumItemNamingRule";
 
-		//Type parameters
-		//Local variables (constant?)
-		//Parameters (value, reference, output, params array)
-
 		internal static readonly List<string> All = new List<string>(
 			new[]
 			{
