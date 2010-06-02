@@ -495,7 +495,9 @@ namespace Shuruev.StyleCop.CSharp
 			foreach (string key in GetKeys())
 			{
 				string markup = GetMarkup(key);
-				string regular = String.Format(GetRegular(key), extension);
+				string regular = String.Format(
+					String.Format("({0})", GetRegular(key)),
+					extension);
 				pattern = pattern.Replace(markup, regular);
 			}
 

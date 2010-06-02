@@ -39,6 +39,11 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string Enum = "EnumNamingRule";
 		internal const string EnumItem = "EnumItemNamingRule";
 
+		internal const string Parameter = "ParameterNamingRule";
+		internal const string TypeParameter = "TypeParameterNamingRule";
+		internal const string LocalVariable = "LocalVariableNamingRule";
+		internal const string LocalConstant = "LocalConstantNamingRule";
+
 		internal static readonly List<string> All = new List<string>(
 			new[]
 			{
@@ -68,7 +73,11 @@ namespace Shuruev.StyleCop.CSharp
 				Event,
 				Property,
 				Enum,
-				EnumItem
+				EnumItem,
+				Parameter,
+				TypeParameter,
+				LocalVariable,
+				LocalConstant
 			});
 	}
 }

@@ -1,32 +1,20 @@
-﻿namespace Shuruev.StyleCop.Run
+﻿using System.Collections.Generic;
+
+namespace Shuruev.StyleCop.Run
 {
-	public class Foo
+	public delegate bool InputDelegate<in TInput, out TOutput>(TInput args)
+		where TInput : IEnumerable<byte>;
+
+	public delegate TOutput OutputDelegate<out TOutput>(int count)
+		where TOutput : IEnumerable<byte>;
+
+	public class TestClass<TKeys>
+		where TKeys : IEnumerable<int>
 	{
-		protected internal readonly int Foo1;
-		protected internal readonly int Foo2;
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Foo"/> class.
-		/// </summary>
-		public Foo() { }
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Foo"/> class.
-		/// </summary>
-		public Foo(int y)
+		public TResult TestMethod<TResult>(int arg)
+			where TResult : new()
 		{
-			string[] lines = new[] { "xxx" };
-
-			int x = 10;
-			{
-				int a = 1;
-				this.Foo1 = a + 15;
-			}
-
-			{
-				int b = 2;
-				this.Foo2 = b + 15;
-			}
+			return new TResult();
 		}
 	}
 }

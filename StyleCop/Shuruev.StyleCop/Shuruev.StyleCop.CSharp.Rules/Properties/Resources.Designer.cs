@@ -247,7 +247,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})(_(([A-Z0-9][a-z0-9]+){0}))*.
+        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})(_(([A-Z0-9][a-z0-9]+){0}))*|[A-Z0-9].
         /// </summary>
         internal static string MacroCapitalizedRegular {
             get {
@@ -319,7 +319,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})+.
+        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})+|[A-Z0-9].
         /// </summary>
         internal static string MacroPascalRegular {
             get {

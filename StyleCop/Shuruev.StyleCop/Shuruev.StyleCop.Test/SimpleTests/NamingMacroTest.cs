@@ -27,13 +27,22 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsFalse(regex.IsMatch("olegus"));
 			Assert.IsFalse(regex.IsMatch("nonshuruev"));
 
-			regex = NamingMacro.BuildRegex("Pre$(AaBb)_Post", String.Empty);
+			regex = NamingMacro.BuildRegex("Pre$(AaBb)_POST", String.Empty);
 			Assert.IsFalse(regex.IsMatch("Style"));
 			Assert.IsFalse(regex.IsMatch("StyleCop"));
-			Assert.IsTrue(regex.IsMatch("PreStyle_Post"));
-			Assert.IsTrue(regex.IsMatch("PreStyleCop_Post"));
-			Assert.IsFalse(regex.IsMatch("PrestyleCop_Post"));
-			Assert.IsFalse(regex.IsMatch("PreStyleCop+_Post"));
+			Assert.IsTrue(regex.IsMatch("PreStyle_POST"));
+			Assert.IsTrue(regex.IsMatch("PreStyleCop_POST"));
+			Assert.IsFalse(regex.IsMatch("PrestyleCop_POST"));
+			Assert.IsFalse(regex.IsMatch("PreStyleCop+_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(*)_POST", String.Empty);
+			Assert.IsFalse(regex.IsMatch("Style"));
+			Assert.IsFalse(regex.IsMatch("StyleCop"));
+			Assert.IsTrue(regex.IsMatch("PreStyle_POST"));
+			Assert.IsFalse(regex.IsMatch("PREStyleCOP+_POST"));
+			Assert.IsFalse(regex.IsMatch("PreStyleCOP+POST"));
+			Assert.IsFalse(regex.IsMatch("PreStyleCOP+_Post"));
+			Assert.IsTrue(regex.IsMatch("PreStyleCOP+_POST"));
 		}
 
 		/// <summary>
@@ -44,6 +53,7 @@ namespace Shuruev.StyleCop.Test
 		{
 			Regex regex;
 
+			// general
 			regex = NamingMacro.BuildRegex("$(AaBb)", String.Empty);
 			Assert.IsTrue(regex.IsMatch("Style"));
 			Assert.IsTrue(regex.IsMatch("StyleCop"));
@@ -53,6 +63,7 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsFalse(regex.IsMatch("StyleC"));
 			Assert.IsFalse(regex.IsMatch("CSharpStyle"));
 
+			// abbreviations
 			regex = NamingMacro.BuildRegex("$(AaBb)", "C");
 			Assert.IsTrue(regex.IsMatch("Style"));
 			Assert.IsTrue(regex.IsMatch("StyleCop"));
@@ -68,11 +79,29 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("StyleCX"));
 			Assert.IsTrue(regex.IsMatch("CXSharpStyle"));
 
+			// 3D
 			regex = NamingMacro.BuildRegex("$(AaBb)", String.Empty);
 			Assert.IsFalse(regex.IsMatch("Point3D"));
 
 			regex = NamingMacro.BuildRegex("$(AaBb)", "3D");
 			Assert.IsTrue(regex.IsMatch("Point3D"));
+
+			// single letter
+			regex = NamingMacro.BuildRegex("$(AaBb)", String.Empty);
+			Assert.IsFalse(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("$(AaBb)", "A");
+			Assert.IsFalse(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("Pre$(AaBb)_POST", String.Empty);
+			Assert.IsFalse(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(AaBb)_POST", "A");
+			Assert.IsFalse(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
 		}
 
 		/// <summary>
@@ -83,6 +112,7 @@ namespace Shuruev.StyleCop.Test
 		{
 			Regex regex;
 
+			// general
 			regex = NamingMacro.BuildRegex("$(aaBb)", String.Empty);
 			Assert.IsTrue(regex.IsMatch("style"));
 			Assert.IsTrue(regex.IsMatch("styleCop"));
@@ -93,6 +123,7 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsFalse(regex.IsMatch("styleC"));
 			Assert.IsFalse(regex.IsMatch("styleCSharp"));
 
+			// abbreviations
 			regex = NamingMacro.BuildRegex("$(aaBb)", "C");
 			Assert.IsTrue(regex.IsMatch("style"));
 			Assert.IsTrue(regex.IsMatch("styleCop"));
@@ -109,11 +140,29 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("styleCX"));
 			Assert.IsTrue(regex.IsMatch("styleCXSharp"));
 
+			// 3D
 			regex = NamingMacro.BuildRegex("$(aaBb)", String.Empty);
 			Assert.IsFalse(regex.IsMatch("point3D"));
 
 			regex = NamingMacro.BuildRegex("$(aaBb)", "3D");
 			Assert.IsTrue(regex.IsMatch("point3D"));
+
+			// single letter
+			regex = NamingMacro.BuildRegex("$(aaBb)", String.Empty);
+			Assert.IsTrue(regex.IsMatch("a"));
+			Assert.IsFalse(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("$(aaBb)", "A");
+			Assert.IsTrue(regex.IsMatch("a"));
+			Assert.IsFalse(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("Pre$(aaBb)_POST", String.Empty);
+			Assert.IsTrue(regex.IsMatch("Prea_POST"));
+			Assert.IsFalse(regex.IsMatch("PreA_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(aaBb)_POST", "A");
+			Assert.IsTrue(regex.IsMatch("Prea_POST"));
+			Assert.IsFalse(regex.IsMatch("PreA_POST"));
 		}
 
 		/// <summary>
@@ -124,6 +173,7 @@ namespace Shuruev.StyleCop.Test
 		{
 			Regex regex;
 
+			// general
 			regex = NamingMacro.BuildRegex("$(AA_BB)", String.Empty);
 			Assert.IsTrue(regex.IsMatch("STYLE"));
 			Assert.IsTrue(regex.IsMatch("STYLE_COP"));
@@ -135,9 +185,27 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("STYLE_C"));
 			Assert.IsTrue(regex.IsMatch("C_SHARP_STYLE"));
 
+			// abbreviations
 			regex = NamingMacro.BuildRegex("$(AA_BB)", "A B");
 			Assert.IsTrue(regex.IsMatch("STYLE"));
 			Assert.IsTrue(regex.IsMatch("STYLE_COP"));
+
+			// single letter
+			regex = NamingMacro.BuildRegex("$(AA_BB)", String.Empty);
+			Assert.IsFalse(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("$(AA_BB)", "A");
+			Assert.IsFalse(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("Pre$(AA_BB)_POST", String.Empty);
+			Assert.IsFalse(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(AA_BB)_POST", "A");
+			Assert.IsFalse(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
 		}
 
 		/// <summary>
@@ -148,6 +216,7 @@ namespace Shuruev.StyleCop.Test
 		{
 			Regex regex;
 
+			// general
 			regex = NamingMacro.BuildRegex("$(aa_bb)", String.Empty);
 			Assert.IsTrue(regex.IsMatch("style"));
 			Assert.IsTrue(regex.IsMatch("style_cop"));
@@ -159,9 +228,27 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("style_c"));
 			Assert.IsTrue(regex.IsMatch("c_sharp_style"));
 
+			// abbreviations
 			regex = NamingMacro.BuildRegex("$(aa_bb)", "A B");
 			Assert.IsTrue(regex.IsMatch("style"));
 			Assert.IsTrue(regex.IsMatch("style_cop"));
+
+			// single letter
+			regex = NamingMacro.BuildRegex("$(aa_bb)", String.Empty);
+			Assert.IsTrue(regex.IsMatch("a"));
+			Assert.IsFalse(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("$(aa_bb)", "A");
+			Assert.IsTrue(regex.IsMatch("a"));
+			Assert.IsFalse(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("Pre$(aa_bb)_POST", String.Empty);
+			Assert.IsTrue(regex.IsMatch("Prea_POST"));
+			Assert.IsFalse(regex.IsMatch("PreA_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(aa_bb)_POST", "A");
+			Assert.IsTrue(regex.IsMatch("Prea_POST"));
+			Assert.IsFalse(regex.IsMatch("PreA_POST"));
 		}
 
 		/// <summary>
@@ -172,6 +259,7 @@ namespace Shuruev.StyleCop.Test
 		{
 			Regex regex;
 
+			// general
 			regex = NamingMacro.BuildRegex("$(Aa_Bb)", String.Empty);
 			Assert.IsTrue(regex.IsMatch("Style"));
 			Assert.IsTrue(regex.IsMatch("Style_Cop"));
@@ -188,6 +276,7 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsFalse(regex.IsMatch("CSharp_Style"));
 			Assert.IsFalse(regex.IsMatch("C_Sharp_Style"));
 
+			// abbreviations
 			regex = NamingMacro.BuildRegex("$(Aa_Bb)", "C");
 			Assert.IsTrue(regex.IsMatch("Style"));
 			Assert.IsTrue(regex.IsMatch("Style_Cop"));
@@ -230,11 +319,62 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("CX_Sharp_Style"));
 			Assert.IsFalse(regex.IsMatch("CXSharp_Style"));
 
+			// 3D
 			regex = NamingMacro.BuildRegex("$(Aa_Bb)", String.Empty);
 			Assert.IsFalse(regex.IsMatch("Point_3D"));
 
 			regex = NamingMacro.BuildRegex("$(Aa_Bb)", "3D");
 			Assert.IsTrue(regex.IsMatch("Point_3D"));
+
+			// single letter
+			regex = NamingMacro.BuildRegex("$(Aa_Bb)", String.Empty);
+			Assert.IsFalse(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("$(Aa_Bb)", "A");
+			Assert.IsFalse(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("Pre$(Aa_Bb)_POST", String.Empty);
+			Assert.IsFalse(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(Aa_Bb)_POST", "A");
+			Assert.IsFalse(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
+		}
+
+		/// <summary>
+		/// Tests $(*) macro.
+		/// </summary>
+		[TestMethod]
+		public void MacroAny()
+		{
+			Regex regex;
+
+			// general
+			regex = NamingMacro.BuildRegex("$(*)", String.Empty);
+			Assert.IsTrue(regex.IsMatch("Style"));
+			Assert.IsTrue(regex.IsMatch("Style_COP"));
+			Assert.IsTrue(regex.IsMatch("style_Cop++CSharp"));
+			Assert.IsTrue(regex.IsMatch("Point3D_3D"));
+
+			// single letter
+			regex = NamingMacro.BuildRegex("$(*)", String.Empty);
+			Assert.IsTrue(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("$(*)", "A");
+			Assert.IsTrue(regex.IsMatch("a"));
+			Assert.IsTrue(regex.IsMatch("A"));
+
+			regex = NamingMacro.BuildRegex("Pre$(*)_POST", String.Empty);
+			Assert.IsTrue(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
+
+			regex = NamingMacro.BuildRegex("Pre$(*)_POST", "A");
+			Assert.IsTrue(regex.IsMatch("Prea_POST"));
+			Assert.IsTrue(regex.IsMatch("PreA_POST"));
 		}
 	}
 }
