@@ -401,6 +401,55 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
+#region AdvancedNamingRules // Methods
+
+//# [OK]
+//# Method name is correct.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Method name is incorrect.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void Test_Method()
+		{
+		}
+	}
+}
+//# [END]
+
+//# [OK]
+//# Test method names are correct.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		[TestMethod]
+		public void TestMethod()
+		{
+		}
+
+		[TestMethod]
+		public void Test_Method()
+		{
+		}
+	}
+}
+//# [END]
+
+#endregion
+
 #region AdvancedNamingRules // Enumerations
 
 //# [ERROR:3]

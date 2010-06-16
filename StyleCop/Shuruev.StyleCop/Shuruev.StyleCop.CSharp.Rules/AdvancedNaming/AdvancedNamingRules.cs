@@ -229,6 +229,10 @@ namespace Shuruev.StyleCop.CSharp
 				{
 					CheckDeclaration(settings, NamingSettings.MethodPrivateEventHandler, element);
 				}
+				else if (CodeHelper.IsTestMethod(element))
+				{
+					CheckDeclaration(settings, NamingSettings.MethodTest, element);
+				}
 				else
 				{
 					CheckDeclaration(settings, NamingSettings.MethodGeneral, element);

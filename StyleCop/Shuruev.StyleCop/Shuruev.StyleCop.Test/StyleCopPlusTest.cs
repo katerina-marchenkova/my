@@ -30,7 +30,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests rules from StyleCop+ plug-in.
 		/// </summary>
 		[TestMethod]
-		public void StyleCopPlus()
+		public void StyleCopPlus_Batch_Tests()
 		{
 			List<BlockItem> blocks = ParseBlocks(Resources.StyleCopPlusTest);
 			foreach (BlockItem block in blocks)
@@ -214,7 +214,8 @@ namespace Shuruev.StyleCop.Test
 
 			string message = String.Format(
 				"{0}: {1}",
-				targetRule, description);
+				targetRule,
+				description);
 
 			Assert.AreEqual(
 				errorCount,

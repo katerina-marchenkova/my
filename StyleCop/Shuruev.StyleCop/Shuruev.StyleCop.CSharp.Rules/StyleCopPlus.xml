@@ -26,6 +26,7 @@
 		<StringProperty Name="InternalConstNamingRule" DefaultValue="$(AaBb):$(AA_BB)" FriendlyName="Constant (internal)" Description="Naming rules for internal constant." />
 		<StringProperty Name="MethodGeneralNamingRule" DefaultValue="$(AaBb)" FriendlyName="Method (general)" Description="Naming rules for general method." />
 		<StringProperty Name="MethodPrivateEventHandlerNamingRule" DefaultValue="$(AaBb):$(aaBb)_$(AaBb):$(AaBb)_$(AaBb)" FriendlyName="Method (private event handler)" Description="Naming rules for private event handler." />
+		<StringProperty Name="MethodTestNamingRule" DefaultValue="$(AaBb):$(Aa_Bb)" FriendlyName="Method (unit test)" Description="Naming rules for test method." />
 		<StringProperty Name="DelegateNamingRule" DefaultValue="$(AaBb)" FriendlyName="Delegate" Description="Naming rules for delegate." />
 		<StringProperty Name="EventNamingRule" DefaultValue="$(AaBb)" FriendlyName="Event" Description="Naming rules for event." />
 		<StringProperty Name="PropertyNamingRule" DefaultValue="$(AaBb)" FriendlyName="Property" Description="Naming rules for property." />

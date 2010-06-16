@@ -45,6 +45,29 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
+		/// Checks whether specified element describes test method.
+		/// </summary>
+		public static bool IsTestMethod(CsElement element)
+		{
+			if (element.ElementType != ElementType.Method)
+				return false;
+
+			if (element.Attributes != null)
+			{
+				foreach (Attribute attr in element.Attributes)
+				{
+					for (Node<CsToken> node = attr.ChildTokens.First; node != null; node = node.Next)
+					{
+						if (node.Value.Text == "TestMethod")
+							return true;
+					}
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
 		/// Checks whether specified element has public access modifier.
 		/// </summary>
 		public static bool IsPublic(CsElement element)
