@@ -137,50 +137,73 @@ namespace ContentAnalyzer
 		/// <summary>
 		/// Gets multiple images.
 		/// </summary>
-		public static List<DigitalContentRow> GetMultipleImages(int skuId)
+		public static Dictionary<int, List<MultipleImageRow>> GetMultipleImages(IEnumerable<int> skuIds)
 		{
-			List<DigitalContentRow> rows = new List<DigitalContentRow>();
+			Dictionary<int, List<MultipleImageRow>> map = new Dictionary<int, List<MultipleImageRow>>();
 
-			/*using (SqlConnection conn = new SqlConnection(s_connectionString))
+			using (SqlConnection conn = s_db.OpenConnection())
 			{
-				conn.Open();
+				s_db.ExecuteNonQuery(
+					conn,
+					@"
+						CREATE TABLE #Sku (
+							SkuId INT PRIMARY KEY)
+					");
 
-				using (SqlCommand cmd = conn.CreateCommand())
-				{
-					cmd.CommandType = CommandType.Text;
-					cmd.CommandTimeout = s_commandTimeoutInSeconds;
-					cmd.CommandText = String.Format(
-						@"
-							SELECT
-								DCL.sku_id,
-								DCL.content_guid,
-								DC.original_file_name,
-								DC.original_file_extension
-							FROM tpd_digital_content DC WITH(NOLOCK)
-								INNER JOIN tpd_digital_content_meta_link DCML WITH(NOLOCK)
-								ON DCML.content_guid = DC.content_guid
-									AND DCML.meta_value_id = 2683
-								INNER JOIN tpd_digital_content_link DCL WITH(NOLOCK)
-								ON DCL.content_guid = DC.content_guid
-							WHERE
-								media_type_id = 15
-								AND sku_id = @skuId
-						");
+				s_db.ExecuteBulkCopy(
+					conn,
+					"#Sku",
+					s_db.CreateBulkTable(new HashSet<int>(skuIds), "SkuId"));
 
-					cmd.Parameters.AddWithValue("@skuId", skuId);
+				s_db.ExecuteReader(
+					conn,
+					@"
+						SELECT
+							DCL.sku_id AS SkuId,
+							DC.content_guid AS ContentUid,
+							DC.original_id AS OriginalId
+						FROM tpd_digital_content DC WITH(NOLOCK)
 
-					using (SqlDataReader reader = cmd.ExecuteReader())
+							-- Resolution: 200 x 150
+							INNER JOIN tpd_digital_content_meta_link DCML_Resolution WITH(NOLOCK)
+							ON DCML_Resolution.content_guid = DC.content_guid
+								AND DCML_Resolution.meta_value_id = 2683
+
+							-- Image Weight for ordering
+							/*INNER JOIN tpd_digital_content_meta_link DCML_Weight WITH(NOLOCK)
+							ON DCML_Weight.content_guid = DC.content_guid
+							INNER JOIN tpd_digital_content_meta_value_voc DCMVV_Weight WITH(NOLOCK)
+							ON DCMVV_Weight.meta_value_id = DCML_Weight.meta_value_id
+							INNER JOIN tpd_digital_content_meta_value DCMV_Weight WITH(NOLOCK)
+							ON DCMV_Weight.meta_value_id = DCML_Weight.meta_value_id
+								AND DCMV_Weight.meta_attribute_id = 7*/
+
+							INNER JOIN tpd_digital_content_link DCL WITH(NOLOCK)
+							ON DCL.content_guid = DC.content_guid
+							INNER JOIN #Sku S WITH(NOLOCK)
+							ON S.SkuId = DCL.sku_id
+						WHERE
+							media_type_id = 15
+						--ORDER BY DCL.sku_id, DCMVV_Weight.meta_value_name
+					",
+					delegate(IDataRecord reader)
 					{
-						while (reader.Read())
-						{
-							DigitalContentRow row = new DigitalContentRow(reader);
-							rows.Add(row);
-						}
-					}
-				}
-			}*/
+						int skuId = (int)reader["SkuId"];
+						if (!map.ContainsKey(skuId))
+							map[skuId] = new List<MultipleImageRow>();
 
-			return rows;
+						MultipleImageRow row = new MultipleImageRow(reader);
+						map[skuId].Add(row);
+					});
+
+				s_db.ExecuteNonQuery(
+					conn,
+					@"
+						DROP TABLE #Sku
+					");
+			}
+
+			return map;
 		}
 
 		/// <summary>

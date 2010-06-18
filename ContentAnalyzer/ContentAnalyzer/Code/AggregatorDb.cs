@@ -12,15 +12,13 @@ namespace ContentAnalyzer
 	/// </summary>
 	public static class AggregatorDb
 	{
-		private static readonly string s_connectionString = String.Empty;
-		private static readonly TimeSpan s_commandTimeout = TimeSpan.FromSeconds(30);
-		private static readonly int s_commandTimeoutInSeconds = 30;
+		private static readonly DbHelper s_db;
 
 		static AggregatorDb()
 		{
-			s_connectionString = ConfigurationHelper.ReadConnectionString("Aggregator");
-			s_commandTimeout = ConfigurationHelper.ReadTimeSpan("Aggregator.Timeout");
-			s_commandTimeoutInSeconds = Convert.ToInt32(s_commandTimeout.TotalSeconds);
+			s_db = new DbHelper(
+				ConfigurationHelper.ReadConnectionString("Aggregator"),
+				ConfigurationHelper.ReadTimeSpan("Aggregator.Timeout"));
 		}
 
 		/// <summary>
@@ -30,7 +28,7 @@ namespace ContentAnalyzer
 		{
 			List<HelixFileRow> rows = new List<HelixFileRow>();
 
-			using (SqlConnection conn = new SqlConnection(s_connectionString))
+			/*using (SqlConnection conn = new SqlConnection(s_connectionString))
 			{
 				conn.Open();
 
@@ -84,9 +82,60 @@ namespace ContentAnalyzer
 						}
 					}
 				}
-			}
+			}*/
 
 			return rows;
+		}
+
+		/// <summary>
+		/// Gets information for specified products.
+		/// </summary>
+		public static Dictionary<int, SkuInfoRow> GetSkuInfo(IEnumerable<int> skuIds)
+		{
+			Dictionary<int, SkuInfoRow> map = new Dictionary<int, SkuInfoRow>();
+
+			using (SqlConnection conn = s_db.OpenConnection())
+			{
+				s_db.ExecuteNonQuery(
+					conn,
+					@"
+						CREATE TABLE #Sku (
+							SkuId INT PRIMARY KEY)
+					");
+
+				s_db.ExecuteBulkCopy(
+					conn,
+					"#Sku",
+					s_db.CreateBulkTable(new HashSet<int>(skuIds), "SkuId"));
+
+				s_db.ExecuteReader(
+					conn,
+					@"
+						SELECT
+							CN.SkuId,
+							CM.ManufacturerName,
+							CN.ParentTree
+						FROM [Catalog].[Node] CN WITH(NOLOCK)
+							INNER JOIN [Catalog].[Manufacturer] CM WITH(NOLOCK)
+							ON CM.ManufacturerUid = CN.ManufacturerUid
+							INNER JOIN #Sku S WITH(NOLOCK)
+							ON S.SkuId = CN.SkuId
+					",
+					delegate(IDataRecord reader)
+					{
+						int skuId = (int)reader["SkuId"];
+						SkuInfoRow row = new SkuInfoRow(reader);
+						map[skuId] = row;
+					});
+
+				s_db.ExecuteNonQuery(
+					conn,
+					@"
+						DROP TABLE #Sku
+					");
+			}
+
+			return map;
 		}
 	}
 }

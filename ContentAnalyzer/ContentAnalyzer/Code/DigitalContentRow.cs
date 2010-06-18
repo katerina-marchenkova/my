@@ -12,13 +12,18 @@ namespace ContentAnalyzer
 
 		public DigitalContentRow(IDataRecord reader)
 		{
-			if (Convert.IsDBNull(reader["sku_id"]))
-				SkuId = -1;
-			else
-				SkuId = (int)reader["sku_id"];
+			SkuId = Convert.IsDBNull(reader["sku_id"]) ?
+				SkuId = -1 :
+				(int)reader["sku_id"];
+
 			ContentGuid = (Guid)reader["content_guid"];
 			Name = (string)reader["original_file_name"];
 			Extension = (string)reader["original_file_extension"];
+		}
+
+		public string Url
+		{
+			get { return Helpers.GetDigitalContentUrl(ContentGuid); }
 		}
 	}
 }
