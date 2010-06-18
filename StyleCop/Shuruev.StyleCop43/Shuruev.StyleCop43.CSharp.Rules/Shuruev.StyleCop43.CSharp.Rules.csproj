@@ -50,21 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedNaming\AbbreviationsEditor.cs">
-      <SubType>Form</SubType>
+    <Compile Include="AdvancedNaming\AbbreviationsSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\AdvancedNamingRules.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AdvancedNaming\AbbreviationsEditor.designer.cs">
-      <DependentUpon>AbbreviationsEditor.cs</DependentUpon>
+    <Compile Include="AdvancedNaming\CurrentNamingSettings.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
-    <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
-    <Compile Include="AdvancedNaming\DerivingsEditor.cs">
-      <SubType>Form</SubType>
+    <Compile Include="AdvancedNaming\DerivingsSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\IAdvancedNamingEditor.cs" />
+    <Compile Include="AdvancedNaming\ICharValidator.cs" />
+    <Compile Include="AdvancedNaming\ISpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\ITextValidator.cs" />
+    <Compile Include="AdvancedNaming\NamingMacro.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AdvancedNaming\DerivingsEditor.designer.cs">
-      <DependentUpon>DerivingsEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AdvancedNaming\NamingMacro.cs" />
     <Compile Include="AdvancedNaming\NamingRuleEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +77,14 @@
     <Compile Include="AdvancedNaming\NamingRulesPage.designer.cs">
       <DependentUpon>NamingRulesPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdvancedNaming\SimpleSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettingEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\SpecialSettingEditor.Designer.cs">
+      <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedNaming\WordsSpecialSetting.cs" />
     <Compile Include="Analyzers\CodeHelper.cs" />
     <Compile Include="Analyzers\CustomCsParser.cs" />
     <Compile Include="Analyzers\ExtendedOriginalRules.cs" />
@@ -111,17 +119,14 @@
     <Compile Include="Rules.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AdvancedNaming\AbbreviationsEditor.resx">
-      <DependentUpon>AbbreviationsEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AdvancedNaming\DerivingsEditor.resx">
-      <DependentUpon>DerivingsEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AdvancedNaming\NamingRuleEditor.resx">
       <DependentUpon>NamingRuleEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdvancedNaming\NamingRulesPage.resx">
       <DependentUpon>NamingRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedNaming\SpecialSettingEditor.resx">
+      <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\HighlightTextBox.resx">
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
@@ -129,6 +134,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PropertyPage\PropertyPage.resx">
       <DependentUpon>PropertyPage.cs</DependentUpon>

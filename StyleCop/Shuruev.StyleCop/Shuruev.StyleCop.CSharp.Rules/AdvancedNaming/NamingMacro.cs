@@ -173,7 +173,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks if specified character is valid for using in identifier.
 		/// </summary>
-		public static bool IsValidIdentifierChar(char c)
+		private static bool IsValidIdentifierChar(char c)
 		{
 			if (Char.IsLetterOrDigit(c))
 				return true;
@@ -367,17 +367,32 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Builds regular expression for specified rule.
 		/// </summary>
-		public static Regex BuildRegex(string ruleDefinition, string abbreviations)
+		public static Regex BuildRegex(
+			string ruleDefinition,
+			string abbreviations,
+			string words)
 		{
-			string[] abbrs = abbreviations.Split(
+			string[] abbreviationsList = abbreviations.Split(
 				new[] { ' ' },
 				StringSplitOptions.RemoveEmptyEntries);
 
-			string extension = String.Empty;
-			if (abbrs.Length > 0)
+			string abbreviationsExtension = String.Empty;
+			if (abbreviationsList.Length > 0)
 			{
-				extension = String.Format("|{0}", String.Join("|", abbrs));
+				abbreviationsExtension = String.Format("|{0}", String.Join("|", abbreviationsList));
 			}
+
+			string[] wordsList = words.Split(
+				new[] { ' ' },
+				StringSplitOptions.RemoveEmptyEntries);
+
+			string wordsExtension = String.Empty;
+			if (wordsList.Length > 0)
+			{
+				wordsExtension = String.Format("|{0}", String.Join("|", wordsList));
+			}
+
+			string extension = String.Format("{0}{1}", abbreviationsExtension, wordsExtension);
 
 			string pattern = ruleDefinition;
 			foreach (string key in GetKeys())

@@ -706,13 +706,39 @@ namespace Shuruev.StyleCop.Test
 //# Type parameters should not be confused with generics.
 namespace Shuruev.StyleCop.Test
 {
-	public delegate List<byte> TestDelegate();
-
 	public class TestClass
 	{
-		public List<int> TestMethod()
+		public delegate List<bool> TestDelegate<in TInput>(List<char> args);
+
+		public class TestClass1<TFirst>
 		{
-			return null;
+			public List<string> TestMethod<TSecond>(IEnumerable<int> list)
+			{
+				List<byte> a = new List<byte>();
+				return new List<string>();
+			}
+		}
+
+		public class TestClass2 : List<int>
+		{
+		}
+
+		public class TestClass3<TKeys>
+			where TKeys : IEnumerable<int>
+		{
+		}
+	}
+}
+//# [END]
+
+//# [OK]
+//# One-letter type parameters.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass<T>
+	{
+		public void TestMethod()
+		{
 		}
 	}
 }
@@ -725,6 +751,20 @@ namespace Shuruev.StyleCop.Test
 	public class TestClass<Keys>
 		where Keys : IEnumerable<int>
 	{
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid type parameter name in nested class.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public class InnerClass<Keys>
+			where Keys : IEnumerable<int>
+		{
+		}
 	}
 }
 //# [END]

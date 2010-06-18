@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
     <Compile Include="AdvancedNaming\AbbreviationsSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\WordsSpecialSetting.cs" />
     <Compile Include="AdvancedNaming\DerivingsSpecialSetting.cs" />
     <Compile Include="AdvancedNaming\SimpleSpecialSetting.cs" />
     <Compile Include="AdvancedNaming\ITextValidator.cs" />
@@ -201,6 +202,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TwoLetters.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

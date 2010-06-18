@@ -213,8 +213,18 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			List<string> names = new List<string>();
 
-			for (Node<CsToken> node = element.Tokens.First; node != null && node.Value.Parent == element; node = node.Next)
+			for (Node<CsToken> node = element.Tokens.First; node != null; node = node.Next)
 			{
+				if (node.Value.CsTokenType == CsTokenType.OpenCurlyBracket
+					|| node.Value.CsTokenType == CsTokenType.OpenParenthesis
+					|| node.Value.CsTokenType == CsTokenType.BaseColon
+					|| node.Value.CsTokenType == CsTokenType.Where)
+					break;
+
+				// compatibility fix for StyleCop 4.3
+				if (node.Value.Text == "where")
+					break;
+
 				if (node.Value.CsTokenClass == CsTokenClass.GenericType)
 				{
 					GenericType type = (GenericType)node.Value;

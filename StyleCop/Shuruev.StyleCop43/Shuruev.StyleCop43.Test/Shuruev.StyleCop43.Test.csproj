@@ -45,9 +45,12 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockItem.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Resources\SP1300.cs" />
     <None Include="Resources\SP1600.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="SimpleTests\NamingMacroTest.cs" />
     <Compile Include="StyleCopPlusRunner.cs" />
     <Compile Include="StyleCopPlusTest.cs" />
+    <Compile Include="StyleCopPlusTest.Modifier.cs" />
     <Compile Include="TestItem.cs" />
   </ItemGroup>
   <ItemGroup>

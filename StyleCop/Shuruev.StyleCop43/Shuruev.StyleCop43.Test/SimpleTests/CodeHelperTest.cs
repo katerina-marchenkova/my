@@ -9,11 +9,8 @@ namespace Shuruev.StyleCop.Test
 	[TestClass]
 	public class CodeHelperTest
 	{
-		/// <summary>
-		/// Tests pure name extracting.
-		/// </summary>
 		[TestMethod]
-		public void ExtractPureName()
+		public void Extract_Pure_Name()
 		{
 			string name;
 

@@ -2,11 +2,20 @@
 
 namespace Shuruev.StyleCop.Test
 {
-	public class Class1
+	public class AAA
 	{
-		public List<int> TestMethod<TOleg>()
+		public class Class1 : List<int>
 		{
-			return null;
+		}
+
+		public class TestClass<TKeys>
+			where TKeys : IEnumerable<int>
+		{
+			public TResult TestMethod<TResult>(int arg)
+				where TResult : new()
+			{
+				return new TResult();
+			}
 		}
 	}
 }

@@ -189,6 +189,13 @@ namespace Shuruev.StyleCop.CSharp
 				return;
 			}
 
+			if (tag.SettingName == NamingSettings.Words)
+			{
+				lvi.ImageKey = Pictures.TwoLetters;
+				sub.Text = tag.MergedValue;
+				return;
+			}
+
 			if (tag.SettingName == NamingSettings.Derivings)
 			{
 				lvi.ImageKey = Pictures.RightArrow;

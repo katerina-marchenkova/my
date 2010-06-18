@@ -5,6 +5,7 @@
 	</Description>
 	<Properties>
 		<StringProperty Name="AdvancedNaming_Abbreviations" DefaultValue="A B C ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
+		<StringProperty Name="AdvancedNaming_Words" DefaultValue="StyleCop FxCop" FriendlyName="Complex words" Description="Words used in naming rules." />
 		<StringProperty Name="AdvancedNaming_Derivings" DefaultValue="Attribute Exception EventArgs Stream" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
 		<StringProperty Name="AdvancedNaming_Namespace" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
 		<StringProperty Name="AdvancedNaming_ClassNotInternal" DefaultValue="$(AaBb)" FriendlyName="Class (not internal)" Description="Naming rules for non-internal class." />
@@ -33,7 +34,7 @@
 		<StringProperty Name="AdvancedNaming_Event" DefaultValue="$(AaBb)" FriendlyName="Event" Description="Naming rules for event." />
 		<StringProperty Name="AdvancedNaming_Delegate" DefaultValue="$(AaBb)" FriendlyName="Delegate" Description="Naming rules for delegate." />
 		<StringProperty Name="AdvancedNaming_Parameter" DefaultValue="$(aaBb)" FriendlyName="Parameter" Description="Naming rules for parameter." />
-		<StringProperty Name="AdvancedNaming_TypeParameter" DefaultValue="T$(AaBb)" FriendlyName="Type parameter" Description="Naming rules for type parameter." />
+		<StringProperty Name="AdvancedNaming_TypeParameter" DefaultValue="T:T$(AaBb)" FriendlyName="Type parameter" Description="Naming rules for type parameter." />
 		<StringProperty Name="AdvancedNaming_LocalVariable" DefaultValue="$(aaBb)" FriendlyName="Local variable" Description="Naming rules for local variable." />
 		<StringProperty Name="AdvancedNaming_LocalConstant" DefaultValue="$(aaBb)" FriendlyName="Local constant" Description="Naming rules for local constant." />
 		<BooleanProperty Name="SP1502_AllowConstructors" DefaultValue="True" FriendlyName="SP1502: Allow for constructors" Description="Allows constructors to be placed on a single line (for SP1502 rule)." />

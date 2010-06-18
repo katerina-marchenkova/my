@@ -1,8 +1,9 @@
 .csproj
 .user
-Resources.
+Resources.Designer.cs
 \bin\
 \obj\
 AssemblyInfo.cs
 CustomCsParser.cs
 ExtendedOriginalRules.Reflection.cs
+StyleCopPlusTest.Modifier.cs

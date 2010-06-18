@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.StyleCop;
 using Shuruev.StyleCop.CSharp;
 
-namespace Shuruev.StyleCop.Run
+namespace Shuruev.StyleCop.Test
 {
 	/// <summary>
 	/// Runs StyleCop+ with specified settings.

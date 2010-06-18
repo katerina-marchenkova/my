@@ -8,7 +8,7 @@ namespace Shuruev.StyleCop.CSharp
 	/// <summary>
 	/// Dialog for editing naming rule.
 	/// </summary>
-	public partial class NamingRuleEditor : Form
+	public partial class NamingRuleEditor : Form, IAdvancedNamingEditor
 	{
 		/// <summary>
 		/// Initializes a new instance.
@@ -26,9 +26,9 @@ namespace Shuruev.StyleCop.CSharp
 		public string ObjectName { get; set; }
 
 		/// <summary>
-		/// Gets or sets rule definition string.
+		/// Gets or sets target rule string.
 		/// </summary>
-		public string RuleDefinition { get; set; }
+		public string TargetRule { get; set; }
 
 		#endregion
 
@@ -41,13 +41,13 @@ namespace Shuruev.StyleCop.CSharp
 
 			Text = String.Format(Resources.NamingRuleEditorCaption, ObjectName);
 
-			if (String.IsNullOrEmpty(RuleDefinition))
+			if (String.IsNullOrEmpty(TargetRule))
 			{
 				checkDisable.Checked = true;
 			}
 			else
 			{
-				textEditor.RichTextBox.Text = NamingMacro.ConvertRuleToText(RuleDefinition);
+				textEditor.RichTextBox.Text = NamingMacro.ConvertRuleToText(TargetRule);
 			}
 
 			RebuildMacroList();
@@ -91,7 +91,7 @@ namespace Shuruev.StyleCop.CSharp
 				return;
 			}
 
-			RuleDefinition = checkDisable.Checked ?
+			TargetRule = checkDisable.Checked ?
 				String.Empty :
 				NamingMacro.ParseRuleFromText(textEditor.RichTextBox.Text);
 

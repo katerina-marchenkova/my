@@ -9,6 +9,7 @@ namespace Shuruev.StyleCop.CSharp
 	internal static class NamingSettings
 	{
 		internal const string Abbreviations = "AdvancedNaming_Abbreviations";
+		internal const string Words = "AdvancedNaming_Words";
 		internal const string Derivings = "AdvancedNaming_Derivings";
 
 		internal const string Namespace = "AdvancedNaming_Namespace";
@@ -52,6 +53,7 @@ namespace Shuruev.StyleCop.CSharp
 		static NamingSettings()
 		{
 			Add(Abbreviations, false, Resources.GroupSpecial);
+			Add(Words, false, Resources.GroupSpecial);
 			Add(Derivings, false, Resources.GroupSpecial);
 
 			Add(Namespace, true, Resources.GroupEntities);
@@ -143,6 +145,11 @@ namespace Shuruev.StyleCop.CSharp
 					return new SpecialSettingEditor
 					{
 						SpecialSetting = new AbbreviationsSpecialSetting()
+					};
+				case Words:
+					return new SpecialSettingEditor
+					{
+						SpecialSetting = new WordsSpecialSetting()
 					};
 				case Derivings:
 					return new SpecialSettingEditor

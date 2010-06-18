@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
+using Attribute = Microsoft.StyleCop.CSharp.Attribute;
+using Delegate = Microsoft.StyleCop.CSharp.Delegate;
 
 namespace Shuruev.StyleCop.CSharp
 {
@@ -20,7 +24,7 @@ namespace Shuruev.StyleCop.CSharp
 			if (element.ElementType != ElementType.Method)
 				return false;
 
-			if (element.AccessModifier != AccessModifierType.Private)
+			if (!IsPrivate(element))
 				return false;
 
 			Method method = (Method)element;
@@ -34,6 +38,29 @@ namespace Shuruev.StyleCop.CSharp
 					&& args.Type.Text.EndsWith("EventArgs"))
 				{
 					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks whether specified element describes test method.
+		/// </summary>
+		public static bool IsTestMethod(CsElement element)
+		{
+			if (element.ElementType != ElementType.Method)
+				return false;
+
+			if (element.Attributes != null)
+			{
+				foreach (Attribute attr in element.Attributes)
+				{
+					for (Node<CsToken> node = attr.ChildTokens.First; node != null; node = node.Next)
+					{
+						if (node.Value.Text == "TestMethod")
+							return true;
+					}
 				}
 			}
 
@@ -150,6 +177,84 @@ namespace Shuruev.StyleCop.CSharp
 				return text;
 
 			return text.Substring(0, index);
+		}
+
+		#endregion
+
+		#region Working with parameters
+
+		/// <summary>
+		/// Gets a list of parameters for an element.
+		/// </summary>
+		public static IList<Parameter> GetParameters(CsElement element)
+		{
+			switch (element.ElementType)
+			{
+				case ElementType.Constructor:
+					return ((Constructor)element).Parameters;
+				case ElementType.Delegate:
+					return ((Delegate)element).Parameters;
+				case ElementType.Indexer:
+					return ((Indexer)element).Parameters;
+				case ElementType.Method:
+					return ((Method)element).Parameters;
+				default:
+					throw new InvalidOperationException(
+						String.Format(
+							"Can't find parameters for a {0} element.",
+							element.FriendlyTypeText));
+			}
+		}
+
+		/// <summary>
+		/// Gets a list of type parameters for an element.
+		/// </summary>
+		public static List<string> GetTypeParameters(CsElement element)
+		{
+			List<string> names = new List<string>();
+
+			for (Node<CsToken> node = element.Tokens.First; node != null; node = node.Next)
+			{
+				if (node.Value.CsTokenType == CsTokenType.OpenCurlyBracket
+					|| node.Value.CsTokenType == CsTokenType.OpenParenthesis
+					|| node.Value.CsTokenType == CsTokenType.BaseColon
+					|| node.Value.CsTokenType == CsTokenType.Where)
+					break;
+
+				// compatibility fix for StyleCop 4.3
+				if (node.Value.Text == "where")
+					break;
+
+				if (node.Value.CsTokenClass == CsTokenClass.GenericType)
+				{
+					GenericType type = (GenericType)node.Value;
+
+					if (element.ElementType == ElementType.Method)
+					{
+						Method method = (Method)element;
+						if (type == method.ReturnType)
+							continue;
+					}
+
+					if (element.ElementType == ElementType.Delegate)
+					{
+						Delegate @delegate = (Delegate)element;
+						if (type == @delegate.ReturnType)
+							continue;
+					}
+
+					for (Node<CsToken> inner = type.ChildTokens.First; inner != null; inner = inner.Next)
+					{
+						if (inner.Value.CsTokenClass == CsTokenClass.Type)
+						{
+							string name = inner.Value.Text;
+							names.Add(name);
+						}
+					}
+				}
+			}
+
+			return names;
 		}
 
 		#endregion

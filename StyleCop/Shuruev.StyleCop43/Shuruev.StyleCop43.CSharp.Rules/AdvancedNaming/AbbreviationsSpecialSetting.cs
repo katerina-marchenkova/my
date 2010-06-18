@@ -4,16 +4,16 @@ using Shuruev.StyleCop.CSharp.Properties;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Allows to setup derivings setting.
+	/// Allows to setup abbreviations setting.
 	/// </summary>
-	public class DerivingsSpecialSetting : SimpleSpecialSetting
+	public class AbbreviationsSpecialSetting : SimpleSpecialSetting
 	{
 		/// <summary>
 		/// Gets help text for current setting.
 		/// </summary>
 		public override string HelpText
 		{
-			get { return Resources.SpecialSettingEditorHelpDerivings; }
+			get { return Resources.SpecialSettingEditorHelpAbbreviations; }
 		}
 
 		/// <summary>
@@ -21,7 +21,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public override string WarningText
 		{
-			get { return Resources.SpecialSettingEditorWarningDerivings; }
+			get { return Resources.SpecialSettingEditorWarningAbbreviations; }
 		}
 
 		/// <summary>
@@ -32,10 +32,10 @@ namespace Shuruev.StyleCop.CSharp
 			if (Char.IsWhiteSpace(c))
 				return true;
 
-			if (Char.IsLetterOrDigit(c))
+			if (Char.IsDigit(c))
 				return true;
 
-			if (c == '_')
+			if (Char.IsUpper(c))
 				return true;
 
 			return false;

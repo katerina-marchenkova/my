@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shuruev.StyleCop.Run;
 using Shuruev.StyleCop.Test.Properties;
 
 namespace Shuruev.StyleCop.Test
@@ -12,7 +11,7 @@ namespace Shuruev.StyleCop.Test
 	/// Testing StyleCop+ plug-in.
 	/// </summary>
 	[TestClass]
-	public class StyleCopPlusTest
+	public partial class StyleCopPlusTest
 	{
 		private readonly string m_tempFileName;
 
@@ -30,7 +29,7 @@ namespace Shuruev.StyleCop.Test
 		/// Tests rules from StyleCop+ plug-in.
 		/// </summary>
 		[TestMethod]
-		public void StyleCopPlus()
+		public void StyleCopPlus_Batch_Tests()
 		{
 			List<BlockItem> blocks = ParseBlocks(Resources.StyleCopPlusTest);
 			foreach (BlockItem block in blocks)
@@ -207,14 +206,15 @@ namespace Shuruev.StyleCop.Test
 				File.Delete(m_tempFileName);
 			}
 
-			File.WriteAllText(m_tempFileName, sourceCode);
+			File.WriteAllText(m_tempFileName, ModifySource(sourceCode));
 
 			StyleCopPlusRunner runner = new StyleCopPlusRunner();
 			runner.Run(m_tempFileName, targetRule);
 
 			string message = String.Format(
 				"{0}: {1}",
-				targetRule, description);
+				targetRule,
+				description);
 
 			Assert.AreEqual(
 				errorCount,

@@ -59,134 +59,219 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void AnalyzeElement(CurrentNamingSettings settings, CsElement element)
 		{
-			if (element.ElementType == ElementType.Namespace)
+			switch (element.ElementType)
 			{
-				Check(settings, element, NamingSettings.Namespace);
-			}
-
-			if (element.ElementType == ElementType.Class)
-			{
-				CheckDerivings(settings, element);
-
-				if (CodeHelper.IsInternal(element))
-				{
-					Check(settings, element, NamingSettings.ClassInternal);
-				}
-				else
-				{
-					Check(settings, element, NamingSettings.ClassNotInternal);
-				}
-			}
-
-			if (element.ElementType == ElementType.Struct)
-			{
-				if (CodeHelper.IsInternal(element))
-				{
-					Check(settings, element, NamingSettings.StructInternal);
-				}
-				else
-				{
-					Check(settings, element, NamingSettings.StructNotInternal);
-				}
-			}
-
-			if (element.ElementType == ElementType.Interface)
-			{
-				Check(settings, element, NamingSettings.Interface);
-			}
-
-			if (element.ElementType == ElementType.Field)
-			{
-				Field field = (Field)element;
-				if (field.Const)
-				{
-					CheckCommonAccess(
-						settings,
-						field,
-						NamingSettings.PublicConst,
-						NamingSettings.ProtectedConst,
-						NamingSettings.PrivateConst,
-						NamingSettings.InternalConst);
-				}
-				else if (CodeHelper.IsStatic(field))
-				{
-					CheckCommonAccess(
-						settings,
-						field,
-						NamingSettings.PublicStaticField,
-						NamingSettings.ProtectedStaticField,
-						NamingSettings.PrivateStaticField,
-						NamingSettings.InternalStaticField);
-				}
-				else
-				{
-					CheckCommonAccess(
-						settings,
-						field,
-						NamingSettings.PublicInstanceField,
-						NamingSettings.ProtectedInstanceField,
-						NamingSettings.PrivateInstanceField,
-						NamingSettings.InternalInstanceField);
-				}
-			}
-
-			if (element.ElementType == ElementType.Method)
-			{
-				Method method = (Method)element;
-				if (CodeHelper.IsOperator(method))
-					return;
-
-				if (CodeHelper.IsPrivateEventHandler(method))
-				{
-					Check(settings, method, NamingSettings.MethodPrivateEventHandler);
-				}
-				else
-				{
-					Check(settings, method, NamingSettings.MethodGeneral);
-				}
-			}
-
-			if (element.ElementType == ElementType.Delegate)
-			{
-				Check(settings, element, NamingSettings.Delegate);
-			}
-
-			if (element.ElementType == ElementType.Event)
-			{
-				Check(settings, element, NamingSettings.Event);
-			}
-
-			if (element.ElementType == ElementType.Property)
-			{
-				Check(settings, element, NamingSettings.Property);
-			}
-
-			if (element.ElementType == ElementType.Enum)
-			{
-				Check(settings, element, NamingSettings.Enum);
-			}
-
-			if (element.ElementType == ElementType.EnumItem)
-			{
-				Check(settings, element, NamingSettings.EnumItem);
+				case ElementType.Class:
+					AnalyzeClass(settings, element);
+					break;
+				case ElementType.Constructor:
+					AnalyzeConstructor(settings, element);
+					break;
+				case ElementType.Delegate:
+					AnalyzeDelegate(settings, element);
+					break;
+				case ElementType.Enum:
+					AnalyzeEnum(settings, element);
+					break;
+				case ElementType.EnumItem:
+					AnalyzeEnumItem(settings, element);
+					break;
+				case ElementType.Event:
+					AnalyzeEvent(settings, element);
+					break;
+				case ElementType.Field:
+					AnalyzeField(settings, element);
+					break;
+				case ElementType.Indexer:
+					AnalyzeIndexer(settings, element);
+					break;
+				case ElementType.Interface:
+					AnalyzeInterface(settings, element);
+					break;
+				case ElementType.Method:
+					AnalyzeMethod(settings, element);
+					break;
+				case ElementType.Namespace:
+					AnalyzeNamespace(settings, element);
+					break;
+				case ElementType.Property:
+					AnalyzeProperty(settings, element);
+					break;
+				case ElementType.Struct:
+					AnalyzeStruct(settings, element);
+					break;
 			}
 		}
 
 		/// <summary>
-		/// Fires violation.
+		/// Analyzes class element.
 		/// </summary>
-		private void AddViolation(
-			CurrentNamingSettings settings,
-			CsElement element,
-			string settingName,
-			string currentName)
+		private void AnalyzeClass(CurrentNamingSettings settings, CsElement element)
 		{
-			m_parent.AddViolation(
-				element,
-				Rules.AdvancedNamingRules,
-				settings.GetFriendlyName(settingName),
-				currentName,
-				settings.GetExample(settingName));
+			CheckDerivings(settings, element);
+
+			if (CodeHelper.IsInternal(element))
+			{
+				CheckDeclaration(settings, NamingSettings.ClassInternal, element);
+			}
+			else
+			{
+				CheckDeclaration(settings, NamingSettings.ClassNotInternal, element);
+			}
+
+			CheckTypeParameters(settings, element);
+		}
+
+		/// <summary>
+		/// Analyzes constructor element.
+		/// </summary>
+		private void AnalyzeConstructor(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckParameters(settings, element);
+		}
+
+		/// <summary>
+		/// Analyzes delegate element.
+		/// </summary>
+		private void AnalyzeDelegate(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.Delegate, element);
+			CheckTypeParameters(settings, element);
+			CheckParameters(settings, element);
+		}
+
+		/// <summary>
+		/// Analyzes enum element.
+		/// </summary>
+		private void AnalyzeEnum(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.Enum, element);
+		}
+
+		/// <summary>
+		/// Analyzes enum item element.
+		/// </summary>
+		private void AnalyzeEnumItem(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.EnumItem, element);
+		}
+
+		/// <summary>
+		/// Analyzes event element.
+		/// </summary>
+		private void AnalyzeEvent(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.Event, element);
+		}
+
+		/// <summary>
+		/// Analyzes field element.
+		/// </summary>
+		private void AnalyzeField(CurrentNamingSettings settings, CsElement element)
+		{
+			Field field = (Field)element;
+			if (field.Const)
+			{
+				CheckDeclarationAccess(
+					settings,
+					NamingSettings.PublicConst,
+					NamingSettings.ProtectedConst,
+					NamingSettings.PrivateConst,
+					NamingSettings.InternalConst,
+					field);
+			}
+			else if (CodeHelper.IsStatic(field))
+			{
+				CheckDeclarationAccess(
+					settings,
+					NamingSettings.PublicStaticField,
+					NamingSettings.ProtectedStaticField,
+					NamingSettings.PrivateStaticField,
+					NamingSettings.InternalStaticField,
+					field);
+			}
+			else
+			{
+				CheckDeclarationAccess(
+					settings,
+					NamingSettings.PublicInstanceField,
+					NamingSettings.ProtectedInstanceField,
+					NamingSettings.PrivateInstanceField,
+					NamingSettings.InternalInstanceField,
+					field);
+			}
+		}
+
+		/// <summary>
+		/// Analyzes indexer element.
+		/// </summary>
+		private void AnalyzeIndexer(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckParameters(settings, element);
+		}
+
+		/// <summary>
+		/// Analyzes interface element.
+		/// </summary>
+		private void AnalyzeInterface(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.Interface, element);
+		}
+
+		/// <summary>
+		/// Analyzes method element.
+		/// </summary>
+		private void AnalyzeMethod(CurrentNamingSettings settings, CsElement element)
+		{
+			if (!CodeHelper.IsOperator(element))
+			{
+				if (CodeHelper.IsPrivateEventHandler(element))
+				{
+					CheckDeclaration(settings, NamingSettings.MethodPrivateEventHandler, element);
+				}
+				else if (CodeHelper.IsTestMethod(element))
+				{
+					CheckDeclaration(settings, NamingSettings.MethodTest, element);
+				}
+				else
+				{
+					CheckDeclaration(settings, NamingSettings.MethodGeneral, element);
+				}
+			}
+
+			CheckTypeParameters(settings, element);
+			CheckParameters(settings, element);
+		}
+
+		/// <summary>
+		/// Analyzes namespace element.
+		/// </summary>
+		private void AnalyzeNamespace(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.Namespace, element);
+		}
+
+		/// <summary>
+		/// Analyzes property element.
+		/// </summary>
+		private void AnalyzeProperty(CurrentNamingSettings settings, CsElement element)
+		{
+			CheckDeclaration(settings, NamingSettings.Property, element);
+		}
+
+		/// <summary>
+		/// Analyzes struct element.
+		/// </summary>
+		private void AnalyzeStruct(CurrentNamingSettings settings, CsElement element)
+		{
+			if (CodeHelper.IsInternal(element))
+			{
+				CheckDeclaration(settings, NamingSettings.StructInternal, element);
+			}
+			else
+			{
+				CheckDeclaration(settings, NamingSettings.StructNotInternal, element);
+			}
 		}
 
 		#endregion
@@ -194,53 +279,98 @@ namespace Shuruev.StyleCop.CSharp
 		#region Checking entity names
 
 		/// <summary>
-		/// Checks common naming setting for common access modifiers.
+		/// Checks declaration naming for common access modifiers.
 		/// </summary>
-		private void CheckCommonAccess(
+		private void CheckDeclarationAccess(
 			CurrentNamingSettings settings,
-			CsElement element,
 			string publicSettingName,
 			string protectedSettingName,
 			string privateSettingName,
-			string internalSettingName)
+			string internalSettingName,
+			CsElement element)
 		{
 			if (CodeHelper.IsPublic(element))
 			{
-				Check(settings, element, publicSettingName);
+				CheckDeclaration(settings, publicSettingName, element);
 			}
 			else if (CodeHelper.IsProtected(element))
 			{
-				Check(settings, element, protectedSettingName);
+				CheckDeclaration(settings, protectedSettingName, element);
 			}
 			else if (CodeHelper.IsPrivate(element))
 			{
-				Check(settings, element, privateSettingName);
+				CheckDeclaration(settings, privateSettingName, element);
 			}
 			else if (CodeHelper.IsInternal(element))
 			{
-				Check(settings, element, internalSettingName);
+				CheckDeclaration(settings, internalSettingName, element);
 			}
 		}
 
 		/// <summary>
-		/// Checks common naming setting.
+		/// Checks declaration naming.
 		/// </summary>
-		private void Check(CurrentNamingSettings settings, CsElement element, string settingName)
+		private void CheckDeclaration(
+			CurrentNamingSettings settings,
+			string settingName,
+			CsElement element)
 		{
-			Regex regex = settings.GetRegex(settingName);
-			if (regex == null)
-				return;
-
 			string[] parts = element.Declaration.Name.Split('.');
 			foreach (string part in parts)
 			{
 				string name = CodeHelper.ExtractPureName(part);
-				if (!regex.IsMatch(name))
-				{
-					AddViolation(settings, element, settingName, name);
-					return;
-				}
+				if (!CheckName(settings, settingName, element, name))
+					break;
 			}
+		}
+
+		/// <summary>
+		/// Checks parameters naming.
+		/// </summary>
+		private void CheckParameters(
+			CurrentNamingSettings settings,
+			CsElement element)
+		{
+			foreach (Parameter parameter in CodeHelper.GetParameters(element))
+			{
+				string name = parameter.Name;
+				if (!CheckName(settings, NamingSettings.Parameter, element, name))
+					break;
+			}
+		}
+
+		/// <summary>
+		/// Checks type parameters naming.
+		/// </summary>
+		private void CheckTypeParameters(
+			CurrentNamingSettings settings,
+			CsElement element)
+		{
+			foreach (string name in CodeHelper.GetTypeParameters(element))
+			{
+				if (!CheckName(settings, NamingSettings.TypeParameter, element, name))
+					break;
+			}
+		}
+
+		/// <summary>
+		/// Checks specified name.
+		/// </summary>
+		private bool CheckName(
+			CurrentNamingSettings settings,
+			string settingName,
+			CsElement element,
+			string nameToCheck)
+		{
+			Regex regex = settings.GetRegex(settingName);
+			if (regex == null)
+				return true;
+
+			if (regex.IsMatch(nameToCheck))
+				return true;
+
+			AddViolation(settings, element, settingName, nameToCheck);
+			return false;
 		}
 
 		/// <summary>
@@ -262,10 +392,43 @@ namespace Shuruev.StyleCop.CSharp
 			string friendlyName = Resources.DerivedClassFriendlyName;
 			string example = String.Format(Resources.DerivingExample, deriving);
 
+			AddViolation(
+				element,
+				friendlyName,
+				name,
+				example);
+		}
+
+		/// <summary>
+		/// Fires violation.
+		/// </summary>
+		private void AddViolation(
+			CurrentNamingSettings settings,
+			CsElement element,
+			string settingName,
+			string currentName)
+		{
+			AddViolation(
+				element,
+				settings.GetFriendlyName(settingName),
+				currentName,
+				settings.GetExample(settingName));
+		}
+
+		/// <summary>
+		/// Fires violation.
+		/// </summary>
+		private void AddViolation(
+			CsElement element,
+			string friendlyName,
+			string currentName,
+			string example)
+		{
 			m_parent.AddViolation(
 				element,
 				Rules.AdvancedNamingRules,
 				friendlyName,
+				currentName,
 				example);
 		}
 

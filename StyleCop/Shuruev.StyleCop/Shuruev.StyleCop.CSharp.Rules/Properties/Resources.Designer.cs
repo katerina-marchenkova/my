@@ -471,6 +471,17 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please specify a list of complex words, that should be considered
+        ///as one word in $(Aa_Bb) macro.
+        ///Use letters and digits, separating them by whitespaces..
+        /// </summary>
+        internal static string SpecialSettingEditorHelpWords {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorHelpWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to It seems that your abbreviations string has wrong syntax.
         ///
         ///Please check that:
@@ -493,6 +504,19 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string SpecialSettingEditorWarningDerivings {
             get {
                 return ResourceManager.GetString("SpecialSettingEditorWarningDerivings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that your words string has wrong syntax.
+        ///
+        ///Please check that:
+        ///- string literals don&apos;t contain any characters except letters and digits
+        ///- string literals are separated by whitespaces.
+        /// </summary>
+        internal static string SpecialSettingEditorWarningWords {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorWarningWords", resourceCulture);
             }
         }
         
@@ -524,6 +548,13 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static System.Drawing.Bitmap StyleCopPlusTitle {
             get {
                 object obj = ResourceManager.GetObject("StyleCopPlusTitle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TwoLetters {
+            get {
+                object obj = ResourceManager.GetObject("TwoLetters", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

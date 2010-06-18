@@ -60,19 +60,6 @@ namespace Shuruev.StyleCop.CSharp.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to It seems that your abbreviations string has wrong syntax.
-        ///
-        ///Please check that:
-        ///- string literals don&apos;t contain any characters except UPPERCASE letters and digits
-        ///- string literals are separated by whitespaces.
-        /// </summary>
-        internal static string AbbreviationsEditorWarning {
-            get {
-                return ResourceManager.GetString("AbbreviationsEditorWarning", resourceCulture);
-            }
-        }
-        
         internal static System.Drawing.Bitmap CapitalLetter {
             get {
                 object obj = ResourceManager.GetObject("CapitalLetter", resourceCulture);
@@ -108,15 +95,6 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit &quot;{0}&quot; Setting.
-        /// </summary>
-        internal static string CommonEditorCaption {
-            get {
-                return ResourceManager.GetString("CommonEditorCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Derived class.
         /// </summary>
         internal static string DerivedClassFriendlyName {
@@ -135,24 +113,56 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It seems that your derivings string has wrong syntax.
-        ///
-        ///Please check that:
-        ///- string literals don&apos;t contain any characters except letters, digits and underscore
-        ///- string literals are separated by whitespaces.
-        /// </summary>
-        internal static string DerivingsEditorWarning {
-            get {
-                return ResourceManager.GetString("DerivingsEditorWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Do not check.
         /// </summary>
         internal static string DoNotCheck {
             get {
                 return ResourceManager.GetString("DoNotCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entities.
+        /// </summary>
+        internal static string GroupEntities {
+            get {
+                return ResourceManager.GetString("GroupEntities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields and Properties.
+        /// </summary>
+        internal static string GroupFields {
+            get {
+                return ResourceManager.GetString("GroupFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Methods, Events and Delegates.
+        /// </summary>
+        internal static string GroupMethods {
+            get {
+                return ResourceManager.GetString("GroupMethods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters and Variables.
+        /// </summary>
+        internal static string GroupParameters {
+            get {
+                return ResourceManager.GetString("GroupParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special.
+        /// </summary>
+        internal static string GroupSpecial {
+            get {
+                return ResourceManager.GetString("GroupSpecial", resourceCulture);
             }
         }
         
@@ -247,7 +257,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})(_(([A-Z0-9][a-z0-9]+){0}))*.
+        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})(_(([A-Z0-9][a-z0-9]+){0}))*|[A-Z0-9].
         /// </summary>
         internal static string MacroCapitalizedRegular {
             get {
@@ -319,7 +329,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})+.
+        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})+|[A-Z0-9].
         /// </summary>
         internal static string MacroPascalRegular {
             get {
@@ -430,6 +440,87 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit &quot;{0}&quot; Setting.
+        /// </summary>
+        internal static string SpecialSettingEditorCaption {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a list of naming abbreviations, that should be considered
+        ///as separate words in $(AaBb), $(aaBb) and $(Aa_Bb) macros.
+        ///Use UPPERCASE letters and digits, separating them by whitespaces..
+        /// </summary>
+        internal static string SpecialSettingEditorHelpAbbreviations {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorHelpAbbreviations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a list of classes, whose names should always
+        ///be added to the end of the name for derived class.
+        ///Use letters, digits and underscore, separating them by whitespaces..
+        /// </summary>
+        internal static string SpecialSettingEditorHelpDerivings {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorHelpDerivings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a list of complex words, that should be considered
+        ///as one word in $(Aa_Bb) macro.
+        ///Use letters and digits, separating them by whitespaces..
+        /// </summary>
+        internal static string SpecialSettingEditorHelpWords {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorHelpWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that your abbreviations string has wrong syntax.
+        ///
+        ///Please check that:
+        ///- string literals don&apos;t contain any characters except UPPERCASE letters and digits
+        ///- string literals are separated by whitespaces.
+        /// </summary>
+        internal static string SpecialSettingEditorWarningAbbreviations {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorWarningAbbreviations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that your derivings string has wrong syntax.
+        ///
+        ///Please check that:
+        ///- string literals don&apos;t contain any characters except letters, digits and underscore
+        ///- string literals are separated by whitespaces.
+        /// </summary>
+        internal static string SpecialSettingEditorWarningDerivings {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorWarningDerivings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that your words string has wrong syntax.
+        ///
+        ///Please check that:
+        ///- string literals don&apos;t contain any characters except letters and digits
+        ///- string literals are separated by whitespaces.
+        /// </summary>
+        internal static string SpecialSettingEditorWarningWords {
+            get {
+                return ResourceManager.GetString("SpecialSettingEditorWarningWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initializes a new instance..
         /// </summary>
         internal static string StandardConstructorSummaryText {
@@ -457,6 +548,13 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static System.Drawing.Bitmap StyleCopPlusTitle {
             get {
                 object obj = ResourceManager.GetObject("StyleCopPlusTitle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TwoLetters {
+            get {
+                object obj = ResourceManager.GetObject("TwoLetters", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
