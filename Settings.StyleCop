@@ -210,7 +210,7 @@
         </Rule>
       </Rules>
       <AnalyzerSettings>
-        <StringProperty Name="MethodGeneralNamingRule">$(AaBb):Action_$(AaBb)_Do:Action_$(AaBb)_IsAvailable</StringProperty>
+        <StringProperty Name="AdvancedNaming_MethodGeneral">$(AaBb):Action_$(AaBb)_Do:Action_$(AaBb)_IsAvailable</StringProperty>
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.ReadabilityRules">

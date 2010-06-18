@@ -12,14 +12,6 @@ namespace Shuruev.StyleCop.Run
 		public int A = 10;
 
 		/// <summary>
-		/// Gets text.
-		/// </summary>
-		public string XXX
-		{
-			get { return "xxx"; }
-		}
-
-		/// <summary>
 		/// Some action here.
 		/// </summary>
 		public void Zzz()

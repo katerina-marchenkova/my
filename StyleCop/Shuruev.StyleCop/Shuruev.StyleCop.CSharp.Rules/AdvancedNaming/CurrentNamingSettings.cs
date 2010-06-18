@@ -41,12 +41,8 @@ namespace Shuruev.StyleCop.CSharp
 				document.Settings,
 				NamingSettings.Abbreviations);
 
-			foreach (string setting in NamingSettings.All)
+			foreach (string setting in NamingSettings.GetCommon())
 			{
-				if (setting == NamingSettings.Abbreviations
-					|| setting == NamingSettings.Derivings)
-					continue;
-
 				string name = SettingsManager.GetFriendlyName(analyzer, setting);
 				m_names.Add(setting, name);
 

@@ -1,20 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Shuruev.StyleCop.Run
+namespace Shuruev.StyleCop.Test
 {
-	public delegate bool InputDelegate<in TInput, out TOutput>(TInput args)
-		where TInput : IEnumerable<byte>;
-
-	public delegate TOutput OutputDelegate<out TOutput>(int count)
-		where TOutput : IEnumerable<byte>;
-
-	public class TestClass<TKeys>
-		where TKeys : IEnumerable<int>
+	public class Class1
 	{
-		public TResult TestMethod<TResult>(int arg)
-			where TResult : new()
+		public List<int> TestMethod<TOleg>()
 		{
-			return new TResult();
+			return null;
 		}
 	}
 }

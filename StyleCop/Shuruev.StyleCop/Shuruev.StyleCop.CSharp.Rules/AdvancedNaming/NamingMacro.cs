@@ -173,7 +173,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks if specified character is valid for using in identifier.
 		/// </summary>
-		private static bool IsValidIdentifierChar(char c)
+		public static bool IsValidIdentifierChar(char c)
 		{
 			if (Char.IsLetterOrDigit(c))
 				return true;
@@ -258,12 +258,12 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
-		#region Parsing abbreviations
+		#region Parsing special settings
 
 		/// <summary>
-		/// Creates abbreviations string from specified text.
+		/// Creates definition string from whitespace-delimited text.
 		/// </summary>
-		public static string ParseAbbreviationsFromText(string text)
+		public static string ParseWhitespacedSettingFromText(string text)
 		{
 			bool closed = true;
 			StringBuilder sb = new StringBuilder();
@@ -288,21 +288,21 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Creates text describing abbreviations string.
+		/// Creates text describing whitespace-delimited setting.
 		/// </summary>
-		public static string ConvertAbbreviationsToText(string ruleDefinition)
+		public static string ConvertWhitespacedSettingToText(string ruleDefinition)
 		{
 			return ruleDefinition;
 		}
 
 		/// <summary>
-		/// Checks if specified text can describe naming abbreviations.
+		/// Checks if specified text can describe a simple setting.
 		/// </summary>
-		public static bool CheckAbbreviations(string text)
+		public static bool CheckSimpleSetting(string text, ICharValidator validator)
 		{
 			foreach (char c in text)
 			{
-				if (!IsValidAbbreviationChar(c))
+				if (!validator.IsValidChar(c))
 					return false;
 			}
 
@@ -310,28 +310,14 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Checks if specified character is valid for using in abbreviation.
+		/// Highlights rich text box with simple setting definition string.
 		/// </summary>
-		private static bool IsValidAbbreviationChar(char c)
+		public static void HighlightSimpleSetting(
+			RichTextBox rich,
+			ITextValidator textValidator,
+			ICharValidator charValidator)
 		{
-			if (Char.IsWhiteSpace(c))
-				return true;
-
-			if (Char.IsDigit(c))
-				return true;
-
-			if (Char.IsUpper(c))
-				return true;
-
-			return false;
-		}
-
-		/// <summary>
-		/// Highlights rich text box with abbreviations text.
-		/// </summary>
-		public static void HighlightAbbreviations(RichTextBox rich)
-		{
-			if (CheckAbbreviations(rich.Text))
+			if (textValidator.IsValidText(rich.Text))
 			{
 				rich.ResetBackColor();
 			}
@@ -345,105 +331,7 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				for (int i = 0; i < line.Length; i++)
 				{
-					if (!IsValidAbbreviationChar(line[i]))
-					{
-						rich.SelectionStart = current + i;
-						rich.SelectionLength = 1;
-						rich.SelectionColor = Color.Red;
-					}
-				}
-
-				current += line.Length + 1;
-			}
-		}
-
-		#endregion
-
-		#region Parsing derivings
-
-		/// <summary>
-		/// Creates derivings string from specified text.
-		/// </summary>
-		public static string ParseDerivingsFromText(string text)
-		{
-			bool closed = true;
-			StringBuilder sb = new StringBuilder();
-			foreach (char c in text)
-			{
-				if (Char.IsWhiteSpace(c))
-				{
-					if (!closed)
-					{
-						sb.Append(' ');
-						closed = true;
-					}
-				}
-				else
-				{
-					sb.Append(c);
-					closed = false;
-				}
-			}
-
-			return sb.ToString().TrimEnd(' ');
-		}
-
-		/// <summary>
-		/// Creates text describing derivings string.
-		/// </summary>
-		public static string ConvertDerivingsToText(string ruleDefinition)
-		{
-			return ruleDefinition;
-		}
-
-		/// <summary>
-		/// Checks if specified text can describe naming derivings.
-		/// </summary>
-		public static bool CheckDerivings(string text)
-		{
-			foreach (char c in text)
-			{
-				if (!IsValidDerivingChar(c))
-					return false;
-			}
-
-			return true;
-		}
-
-		/// <summary>
-		/// Checks if specified character is valid for using in deriving.
-		/// </summary>
-		private static bool IsValidDerivingChar(char c)
-		{
-			if (Char.IsWhiteSpace(c))
-				return true;
-
-			if (IsValidIdentifierChar(c))
-				return true;
-
-			return false;
-		}
-
-		/// <summary>
-		/// Highlights rich text box with derivings text.
-		/// </summary>
-		public static void HighlightDerivings(RichTextBox rich)
-		{
-			if (CheckDerivings(rich.Text))
-			{
-				rich.ResetBackColor();
-			}
-			else
-			{
-				rich.BackColor = Colors.LightRed;
-			}
-
-			int current = 0;
-			foreach (string line in rich.Lines)
-			{
-				for (int i = 0; i < line.Length; i++)
-				{
-					if (!IsValidDerivingChar(line[i]))
+					if (!charValidator.IsValidChar(line[i]))
 					{
 						rich.SelectionStart = current + i;
 						rich.SelectionLength = 1;

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbbreviationsEditorWarning" xml:space="preserve">
+  <data name="SpecialSettingEditorWarningAbbreviations" xml:space="preserve">
     <value>It seems that your abbreviations string has wrong syntax.
 
 Please check that:
@@ -239,14 +239,14 @@ It will be reset to its inherited (default) value:
   <data name="RightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RightArrow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DerivingsEditorWarning" xml:space="preserve">
+  <data name="SpecialSettingEditorWarningDerivings" xml:space="preserve">
     <value>It seems that your derivings string has wrong syntax.
 
 Please check that:
 - string literals don't contain any characters except letters, digits and underscore
 - string literals are separated by whitespaces</value>
   </data>
-  <data name="CommonEditorCaption" xml:space="preserve">
+  <data name="SpecialSettingEditorCaption" xml:space="preserve">
     <value>Edit "{0}" Setting</value>
   </data>
   <data name="DerivingExample" xml:space="preserve">
@@ -266,5 +266,30 @@ Please check that:
   </data>
   <data name="MacroAnySample" xml:space="preserve">
     <value>*</value>
+  </data>
+  <data name="GroupEntities" xml:space="preserve">
+    <value>Entities</value>
+  </data>
+  <data name="GroupSpecial" xml:space="preserve">
+    <value>Special</value>
+  </data>
+  <data name="GroupFields" xml:space="preserve">
+    <value>Fields and Properties</value>
+  </data>
+  <data name="GroupMethods" xml:space="preserve">
+    <value>Methods, Events and Delegates</value>
+  </data>
+  <data name="GroupParameters" xml:space="preserve">
+    <value>Parameters and Variables</value>
+  </data>
+  <data name="SpecialSettingEditorHelpAbbreviations" xml:space="preserve">
+    <value>Please specify a list of naming abbreviations, that should be considered
+as separate words in $(AaBb), $(aaBb) and $(Aa_Bb) macros.
+Use UPPERCASE letters and digits, separating them by whitespaces.</value>
+  </data>
+  <data name="SpecialSettingEditorHelpDerivings" xml:space="preserve">
+    <value>Please specify a list of classes, whose names should always
+be added to the end of the name for derived class.
+Use letters, digits and underscore, separating them by whitespaces.</value>
   </data>
 </root>

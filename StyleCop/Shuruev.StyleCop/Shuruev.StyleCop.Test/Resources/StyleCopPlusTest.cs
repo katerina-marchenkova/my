@@ -444,6 +444,16 @@ namespace Shuruev.StyleCop.Test
 		public void Test_Method()
 		{
 		}
+
+		[TestMethod]
+		public void StyleCop_Test_Method()
+		{
+		}
+
+		[TestMethod]
+		public void FxCop_Test_Method()
+		{
+		}
 	}
 }
 //# [END]
@@ -687,6 +697,22 @@ namespace Shuruev.StyleCop.Test
 			where TResult : new()
 		{
 			return new TResult();
+		}
+	}
+}
+//# [END]
+
+//# [OK]
+//# Type parameters should not be confused with generics.
+namespace Shuruev.StyleCop.Test
+{
+	public delegate List<byte> TestDelegate();
+
+	public class TestClass
+	{
+		public List<int> TestMethod()
+		{
+			return null;
 		}
 	}
 }

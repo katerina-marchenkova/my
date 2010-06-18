@@ -218,6 +218,21 @@ namespace Shuruev.StyleCop.CSharp
 				if (node.Value.CsTokenClass == CsTokenClass.GenericType)
 				{
 					GenericType type = (GenericType)node.Value;
+
+					if (element.ElementType == ElementType.Method)
+					{
+						Method method = (Method)element;
+						if (type == method.ReturnType)
+							continue;
+					}
+
+					if (element.ElementType == ElementType.Delegate)
+					{
+						Delegate @delegate = (Delegate)element;
+						if (type == @delegate.ReturnType)
+							continue;
+					}
+
 					for (Node<CsToken> inner = type.ChildTokens.First; inner != null; inner = inner.Next)
 					{
 						if (inner.Value.CsTokenClass == CsTokenClass.Type)

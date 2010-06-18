@@ -133,30 +133,38 @@ namespace Shuruev.StyleCop.CSharp
 		private void RebuildRuleList()
 		{
 			listRules.BeginUpdate();
+			listRules.Groups.Clear();
 			listRules.Items.Clear();
 
-			foreach (string setting in NamingSettings.All)
+			foreach (string group in NamingSettings.GetGroups())
 			{
-				string friendlyName = SettingsManager.GetFriendlyName(Page, setting);
-				string mergedValue = SettingsManager.GetMergedValue(Page, setting);
-				string inheritedValue = SettingsManager.GetInheritedValue(Page, setting);
+				ListViewGroup lvg = new ListViewGroup(group);
+				listRules.Groups.Add(lvg);
 
-				SettingTag tag = new SettingTag();
-				tag.SettingName = setting;
-				tag.MergedValue = mergedValue;
-				tag.InheritedValue = inheritedValue;
+				foreach (string setting in NamingSettings.GetByGroup(group))
+				{
+					string friendlyName = SettingsManager.GetFriendlyName(Page, setting);
+					string mergedValue = SettingsManager.GetMergedValue(Page, setting);
+					string inheritedValue = SettingsManager.GetInheritedValue(Page, setting);
 
-				ListViewItem lvi = new ListViewItem();
-				lvi.UseItemStyleForSubItems = false;
-				lvi.Text = friendlyName;
-				lvi.Tag = tag;
+					SettingTag tag = new SettingTag();
+					tag.SettingName = setting;
+					tag.MergedValue = mergedValue;
+					tag.InheritedValue = inheritedValue;
 
-				ListViewItem.ListViewSubItem sub = new ListViewItem.ListViewSubItem();
-				lvi.SubItems.Add(sub);
+					ListViewItem lvi = new ListViewItem();
+					lvi.Group = lvg;
+					lvi.UseItemStyleForSubItems = false;
+					lvi.Text = friendlyName;
+					lvi.Tag = tag;
 
-				UpdateListItem(lvi);
+					ListViewItem.ListViewSubItem sub = new ListViewItem.ListViewSubItem();
+					lvi.SubItems.Add(sub);
 
-				listRules.Items.Add(lvi);
+					UpdateListItem(lvi);
+
+					listRules.Items.Add(lvi);
+				}
 			}
 
 			listRules.EndUpdate();
@@ -224,51 +232,13 @@ namespace Shuruev.StyleCop.CSharp
 			ListViewItem lvi = listRules.SelectedItems[0];
 			SettingTag tag = (SettingTag)lvi.Tag;
 
-			if (tag.SettingName == NamingSettings.Abbreviations)
-			{
-				using (AbbreviationsEditor dialog = new AbbreviationsEditor())
-				{
-					dialog.ObjectName = lvi.Text;
-					dialog.Abbreviations = tag.MergedValue;
-					if (dialog.ShowDialog() == DialogResult.OK)
-					{
-						tag.MergedValue = dialog.Abbreviations;
-						UpdateListItem(lvi);
-						Page.Dirty = true;
-
-						UpdateControls();
-					}
-				}
-
-				return;
-			}
-
-			if (tag.SettingName == NamingSettings.Derivings)
-			{
-				using (DerivingsEditor dialog = new DerivingsEditor())
-				{
-					dialog.ObjectName = lvi.Text;
-					dialog.Derivings = tag.MergedValue;
-					if (dialog.ShowDialog() == DialogResult.OK)
-					{
-						tag.MergedValue = dialog.Derivings;
-						UpdateListItem(lvi);
-						Page.Dirty = true;
-
-						UpdateControls();
-					}
-				}
-
-				return;
-			}
-
-			using (NamingRuleEditor dialog = new NamingRuleEditor())
+			using (IAdvancedNamingEditor dialog = NamingSettings.GetEditor(tag.SettingName))
 			{
 				dialog.ObjectName = lvi.Text;
-				dialog.RuleDefinition = tag.MergedValue;
-				if (dialog.ShowDialog() == DialogResult.OK)
+				dialog.TargetRule = tag.MergedValue;
+				if (dialog.ShowDialog(this) == DialogResult.OK)
 				{
-					tag.MergedValue = dialog.RuleDefinition;
+					tag.MergedValue = dialog.TargetRule;
 					UpdateListItem(lvi);
 					Page.Dirty = true;
 

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp;
 
@@ -16,30 +11,32 @@ namespace Shuruev.StyleCop.Try
 			InitializeComponent();
 		}
 
-		private string xxx = "I$(AaBb)";
-		private string yyy = null;
+		private string m_test1 = "I$(AaBb)";
+		private string m_test2 = null;
 
 		private void button1_Click(object sender, EventArgs e)
 		{
 			using (NamingRuleEditor dialog = new NamingRuleEditor())
 			{
 				dialog.ObjectName = "Interface";
-				dialog.RuleDefinition = xxx;
+				dialog.TargetRule = m_test1;
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					xxx = dialog.RuleDefinition;
+					m_test1 = dialog.TargetRule;
 				}
 			}
 		}
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			using (AbbreviationsEditor dialog = new AbbreviationsEditor())
+			using (SpecialSettingEditor dialog = new SpecialSettingEditor())
 			{
-				dialog.Abbreviations = yyy;
+				dialog.SpecialSetting = new DerivingsSpecialSetting();
+				dialog.ObjectName = "Test";
+				dialog.TargetRule = m_test2;
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					yyy = dialog.Abbreviations;
+					m_test2 = dialog.TargetRule;
 				}
 			}
 		}
