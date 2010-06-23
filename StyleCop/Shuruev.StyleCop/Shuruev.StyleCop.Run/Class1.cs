@@ -39,6 +39,8 @@ namespace Shuruev.StyleCop.Test
 		/*public int TestProperty3 { get; set; }
 		public int TestProperty4 { get; set; }*/
 
-		public Class1() { }
+		public Class1()
+
+		{ }
 	}
 }
