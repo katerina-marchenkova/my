@@ -25,25 +25,22 @@ namespace Shuruev.StyleCop.Test
 				"Test.cs");
 		}
 
-		/// <summary>
-		/// Tests rules from StyleCop+ plug-in.
-		/// </summary>
 		[TestMethod]
-		public void StyleCopPlus_Batch_Tests()
+		public void Advanced_Naming_Rules_Batch_Tests()
 		{
-			List<BlockItem> blocks = ParseBlocks(Resources.StyleCopPlusTest);
-			foreach (BlockItem block in blocks)
-			{
-				List<TestItem> tests = ParseTests(block.Content);
-				foreach (TestItem test in tests)
-				{
-					RunTest(
-						block.Rule,
-						test.ErrorCount,
-						test.Description,
-						test.SourceCode);
-				}
-			}
+			RunTests(Resources.AdvancedNamingRules);
+		}
+
+		[TestMethod]
+		public void Extended_Original_Rules_Batch_Tests()
+		{
+			RunTests(Resources.ExtendedOriginalRules);
+		}
+
+		[TestMethod]
+		public void More_Custom_Rules_Batch_Tests()
+		{
+			RunTests(Resources.MoreCustomRules);
 		}
 
 		#region Reading test definition file
@@ -191,6 +188,26 @@ namespace Shuruev.StyleCop.Test
 		#endregion
 
 		#region Running tests
+
+		/// <summary>
+		/// Runs all test from definition file.
+		/// </summary>
+		private void RunTests(string definitionFile)
+		{
+			List<BlockItem> blocks = ParseBlocks(definitionFile);
+			foreach (BlockItem block in blocks)
+			{
+				List<TestItem> tests = ParseTests(block.Content);
+				foreach (TestItem test in tests)
+				{
+					RunTest(
+						block.Rule,
+						test.ErrorCount,
+						test.Description,
+						test.SourceCode);
+				}
+			}
+		}
 
 		/// <summary>
 		/// Runs specified test.

@@ -12,12 +12,12 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public class AdvancedNamingRules
 	{
-		private readonly SourceAnalyzer m_parent;
+		private readonly StyleCopPlus m_parent;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public AdvancedNamingRules(SourceAnalyzer parent)
+		public AdvancedNamingRules(StyleCopPlus parent)
 		{
 			if (parent == null)
 				throw new ArgumentNullException("parent");

@@ -13,16 +13,24 @@
 		#region Extended original rules
 
 		/// <summary>
-		/// Extends original SA1502 rule. Ensure that you have disabled SA1502 when you enable this rule.
-		/// See detailed settings for more options.
+		/// Extends original SA1502 rule.
 		/// </summary>
 		ElementMustNotBeOnSingleLine,
 
 		/// <summary>
-		/// Extends original SA1509 rule. Ensure that you have disabled SA1509 when you enable this rule.
-		/// See detailed settings for more options.
+		/// Extends original SA1509 rule.
 		/// </summary>
 		OpeningCurlyBracketsMustNotBePrecededByBlankLine,
+
+		/// <summary>
+		/// Extends original SA1513 rule.
+		/// </summary>
+		ClosingCurlyBracketMustBeFollowedByBlankLine,
+
+		/// <summary>
+		/// Extends original SA1516 rule.
+		/// </summary>
+		ElementsMustBeSeparatedByBlankLine,
 
 		/// <summary>
 		/// Extends original SA1642 rule. Ensure that you have disabled SA1642 when you enable this rule.

@@ -80,8 +80,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\StyleCopPlusTest.cs" />
+    <None Include="Resources\AdvancedNamingRules.cs" />
     <Compile Include="BlockItem.cs" />
+    <None Include="Resources\MoreCustomRules.cs" />
+    <None Include="Resources\ExtendedOriginalRules.cs" />
     <Compile Include="StyleCopPlusTest.Modifier.cs" />
     <Compile Include="TestItem.cs" />
     <Compile Include="SimpleTests\CodeHelperTest.cs" />

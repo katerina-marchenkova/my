@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using Microsoft.StyleCop;
@@ -14,6 +15,20 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public static class CodeHelper
 	{
+		#region Compatibility helpers
+
+		/// <summary>
+		/// Checks whether we are working with old StyleCop version.
+		/// </summary>
+		public static bool IsStyleCop43()
+		{
+			Assembly assembly = (typeof(StyleCopCore)).Assembly;
+			Version version = assembly.GetName().Version;
+			return version.Major == 4 && version.Minor == 3;
+		}
+
+		#endregion
+
 		#region Identifying elements
 
 		/// <summary>
@@ -221,9 +236,11 @@ namespace Shuruev.StyleCop.CSharp
 					|| node.Value.CsTokenType == CsTokenType.Where)
 					break;
 
-				// compatibility fix for StyleCop 4.3
-				if (node.Value.Text == "where")
-					break;
+				if (IsStyleCop43())
+				{
+					if (node.Value.Text == "where")
+						break;
+				}
 
 				if (node.Value.CsTokenClass == CsTokenClass.GenericType)
 				{
@@ -276,11 +293,28 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Gets first node by specified line number.
+		/// Finds previous valuable node.
 		/// </summary>
 		public static Node<CsToken> FindPreviousValueableNode(Node<CsToken> target)
 		{
 			for (Node<CsToken> node = target.Previous; node != null; node = node.Previous)
+			{
+				if (node.Value.CsTokenType == CsTokenType.WhiteSpace
+					|| node.Value.CsTokenType == CsTokenType.EndOfLine)
+					continue;
+
+				return node;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Finds next valuable node.
+		/// </summary>
+		public static Node<CsToken> FindNextValueableNode(Node<CsToken> target)
+		{
+			for (Node<CsToken> node = target.Next; node != null; node = node.Next)
 			{
 				if (node.Value.CsTokenType == CsTokenType.WhiteSpace
 					|| node.Value.CsTokenType == CsTokenType.EndOfLine)

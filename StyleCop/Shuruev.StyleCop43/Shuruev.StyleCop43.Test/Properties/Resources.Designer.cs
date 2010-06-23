@@ -61,6 +61,137 @@ namespace Shuruev.StyleCop.Test.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #region AdvancedNamingRules // Methods
+        ///
+        /////# [OK]
+        /////# Method name is correct.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///		}
+        ///	}
+        ///}
+        /////# [END]
+        ///
+        /////# [ERROR]
+        /////# Method name is incorrect.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void Test_Method()
+        ///		{
+        ///		}
+        ///	}
+        ///}
+        /////# [END]
+        ///
+        /////# [OK]
+        /////# Test method names are correct.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		[TestMethod]
+        ///		public void [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AdvancedNamingRules {
+            get {
+                return ResourceManager.GetString("AdvancedNamingRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #region OpeningCurlyBracketsMustNotBePrecededByBlankLine
+        ///
+        /////# [OK]
+        /////# Well-formed example.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			for (int i = 0; i &lt; 10; i++)
+        ///			{
+        ///			}
+        ///		}
+        ///	}
+        ///}
+        /////# [END]
+        ///
+        /////# [ERROR]
+        /////# Excess blank line.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			for (int i = 0; i &lt; 10; i++)
+        ///
+        ///			{
+        ///			}
+        ///		}
+        ///	}
+        ///}
+        /////# [END]
+        ///
+        /////# [ERROR]
+        /////# Excess blank line.
+        ///name [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ExtendedOriginalRules {
+            get {
+                return ResourceManager.GetString("ExtendedOriginalRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #region CodeLineMustNotEndWithWhitespace
+        ///
+        /////# [OK]
+        /////# Source file is OK.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///			int a = 10;
+        ///		}
+        ///	}
+        ///}
+        /////# [END]
+        ///
+        /////# [OK]
+        /////# Source file without a line break at the end.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public void TestMethod()
+        ///		{
+        ///
+        ///			int a = 10;
+        ///		}
+        ///	}
+        ///}//# [END]
+        ///
+        /////# [ERROR]
+        /////# There is excess whitespace at the end of the line.
+        ///namespace Shuruev.StyleCop. [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MoreCustomRules {
+            get {
+                return ResourceManager.GetString("MoreCustomRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to //# [ERROR]
         /////# Method name starts with lower case letter.
         ///namespace Shuruev.StyleCop.Test
@@ -136,47 +267,6 @@ namespace Shuruev.StyleCop.Test.Properties {
         internal static string SP1600 {
             get {
                 return ResourceManager.GetString("SP1600", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to #region CodeLineMustNotEndWithWhitespace
-        ///
-        /////# [OK]
-        /////# Source file is OK.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [END]
-        ///
-        /////# [OK]
-        /////# Source file without a line break at the end.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}//# [END]
-        ///
-        /////# [ERROR]
-        /////# There is excess whitespace at the end of the line.
-        ///namespace Shuruev.StyleCop. [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string StyleCopPlusTest {
-            get {
-                return ResourceManager.GetString("StyleCopPlusTest", resourceCulture);
             }
         }
     }

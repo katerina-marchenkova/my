@@ -118,13 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AdvancedNamingRules" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdvancedNamingRules.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ExtendedOriginalRules" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtendedOriginalRules.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MoreCustomRules" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MoreCustomRules.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="SP1300" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SP1300.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="SP1600" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SP1600.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="StyleCopPlusTest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StyleCopPlusTest.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

@@ -12,8 +12,10 @@ namespace Shuruev.StyleCop.CSharp
 	{
 		internal const string AllowConstructorsFor1502 = "SP1502_AllowConstructors";
 		internal const string AllowNestedCodeBlocksFor1509 = "SP1509_AllowNestedCodeBlocks";
+		internal const string AllowJoinedAccessorsFor1513 = "SP1513_AllowJoinedAccessors";
+		internal const string AllowJoinedAccessorsFor1516 = "SP1516_AllowJoinedAccessors";
 
-		private readonly SourceAnalyzer m_parent;
+		private readonly StyleCopPlus m_parent;
 
 		private StyleCopCore m_customCore;
 		private NamingRules m_customNamingAnalyzer;
@@ -23,7 +25,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public ExtendedOriginalRules(SourceAnalyzer parent)
+		public ExtendedOriginalRules(StyleCopPlus parent)
 		{
 			if (parent == null)
 				throw new ArgumentNullException("parent");
@@ -69,6 +71,11 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void AnalyzeDocument(CodeDocument document)
 		{
+			CheckOriginalRule(document, "LayoutRules", Rules.ElementMustNotBeOnSingleLine);
+			CheckOriginalRule(document, "LayoutRules", Rules.OpeningCurlyBracketsMustNotBePrecededByBlankLine);
+			CheckOriginalRule(document, "LayoutRules", Rules.ClosingCurlyBracketMustBeFollowedByBlankLine);
+			CheckOriginalRule(document, "LayoutRules", Rules.ElementsMustBeSeparatedByBlankLine);
+
 			m_customNamingAnalyzer.AnalyzeDocument(document);
 			m_customLayoutAnalyzer.AnalyzeDocument(document);
 			m_customDocumentationAnalyzer.AnalyzeDocument(document);
@@ -89,6 +96,14 @@ namespace Shuruev.StyleCop.CSharp
 
 				case "SA1509":
 					Handle1509(e);
+					break;
+
+				case "SA1513":
+					Handle1513(e);
+					break;
+
+				case "SA1516":
+					Handle1516(e);
 					break;
 
 				case "SA1642":
@@ -152,6 +167,75 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
+		/// Handles SA1513 violation.
+		/// </summary>
+		private void Handle1513(ViolationEventArgs e)
+		{
+			CsElement element = (CsElement)e.Element;
+
+			if (ReadSetting(e, AllowJoinedAccessorsFor1513))
+			{
+				if (element.ElementType == ElementType.Accessor)
+					return;
+
+				if (CodeHelper.IsStyleCop43())
+				{
+					Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
+					if (node != null)
+					{
+						Node<CsToken> next1 = CodeHelper.FindNextValueableNode(node);
+						if (next1.Value.CsTokenType == CsTokenType.CloseCurlyBracket)
+						{
+							Node<CsToken> next2 = CodeHelper.FindNextValueableNode(next1);
+							if (next2.Value.CsTokenType == CsTokenType.Get
+								|| next2.Value.CsTokenType == CsTokenType.Set)
+								return;
+						}
+					}
+				}
+			}
+
+			m_parent.AddViolation(
+				element,
+				e.LineNumber,
+				Rules.ClosingCurlyBracketMustBeFollowedByBlankLine);
+		}
+
+		/// <summary>
+		/// Handles SA1516 violation.
+		/// </summary>
+		private void Handle1516(ViolationEventArgs e)
+		{
+			CsElement element = (CsElement)e.Element;
+
+			if (ReadSetting(e, AllowJoinedAccessorsFor1516))
+			{
+				if (element.ElementType == ElementType.Accessor)
+					return;
+
+				if (CodeHelper.IsStyleCop43())
+				{
+					Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
+					if (node != null)
+					{
+						Node<CsToken> next1 = CodeHelper.FindNextValueableNode(node);
+						if (next1.Value.CsTokenType == CsTokenType.CloseCurlyBracket)
+						{
+							Node<CsToken> next2 = CodeHelper.FindNextValueableNode(next1);
+							if (next2.Value.CsTokenType == CsTokenType.Get
+								|| next2.Value.CsTokenType == CsTokenType.Set)
+								return;
+						}
+					}
+				}
+			}
+
+			m_parent.AddViolation(
+				element,
+				Rules.ElementsMustBeSeparatedByBlankLine);
+		}
+
+		/// <summary>
 		/// Handles SA1642 violation.
 		/// </summary>
 		private void Handle1642(ViolationEventArgs e)
@@ -188,6 +272,33 @@ namespace Shuruev.StyleCop.CSharp
 		#endregion
 
 		#region Reading custom settings
+
+		/// <summary>
+		/// Reads the value of custom setting.
+		/// </summary>
+		private void CheckOriginalRule(CodeDocument document, string analyzerName, Rules rule)
+		{
+			if (m_parent.DisableAllRulesExcept.Count > 0)
+				return;
+
+			string ruleName = rule.ToString();
+
+			if (!m_parent.IsRuleEnabled(document, ruleName))
+				return;
+
+			string fullName = String.Format("Microsoft.StyleCop.CSharp.{0}", analyzerName);
+			SourceAnalyzer analyzer = m_parent.Core.GetAnalyzer(fullName);
+
+			if (!analyzer.IsRuleEnabled(document, ruleName))
+				return;
+
+			string message = String.Format(
+				Resources.ExtendedRuleConflictError,
+				m_parent.GetRule(ruleName).CheckId,
+				analyzer.GetRule(ruleName).CheckId);
+
+			throw new Exception(message);
+		}
 
 		/// <summary>
 		/// Reads the value of custom setting.

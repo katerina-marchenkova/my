@@ -9,12 +9,12 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public class MoreCustomRules
 	{
-		private readonly SourceAnalyzer m_parent;
+		private readonly StyleCopPlus m_parent;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public MoreCustomRules(SourceAnalyzer parent)
+		public MoreCustomRules(StyleCopPlus parent)
 		{
 			if (parent == null)
 				throw new ArgumentNullException("parent");

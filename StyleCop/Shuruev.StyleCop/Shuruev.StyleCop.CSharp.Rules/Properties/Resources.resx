@@ -307,4 +307,7 @@ Please check that:
 - string literals don't contain any characters except letters and digits
 - string literals are separated by whitespaces</value>
   </data>
+  <data name="ExtendedRuleConflictError" xml:space="preserve">
+    <value>Extended rule {0} from StyleCop+ conflicts with enabled original rule from StyleCop. Disable {1} rule in StyleCop if you want to use extended StyleCop+ rule.</value>
+  </data>
 </root>
