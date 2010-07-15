@@ -137,9 +137,9 @@ namespace ContentAnalyzer
 		/// <summary>
 		/// Gets multiple images.
 		/// </summary>
-		public static Dictionary<int, List<MultipleImageRow>> GetMultipleImages(IEnumerable<int> skuIds)
+		public static Dictionary<int, List<DigitalContentRow>> GetMultipleImages(IEnumerable<int> skuIds)
 		{
-			Dictionary<int, List<MultipleImageRow>> map = new Dictionary<int, List<MultipleImageRow>>();
+			Dictionary<int, List<DigitalContentRow>> map = new Dictionary<int, List<DigitalContentRow>>();
 
 			using (SqlConnection conn = s_db.OpenConnection())
 			{
@@ -170,13 +170,13 @@ namespace ContentAnalyzer
 								AND DCML_Resolution.meta_value_id = 2683
 
 							-- Image Weight for ordering
-							/*INNER JOIN tpd_digital_content_meta_link DCML_Weight WITH(NOLOCK)
+							INNER JOIN tpd_digital_content_meta_link DCML_Weight WITH(NOLOCK)
 							ON DCML_Weight.content_guid = DC.content_guid
 							INNER JOIN tpd_digital_content_meta_value_voc DCMVV_Weight WITH(NOLOCK)
 							ON DCMVV_Weight.meta_value_id = DCML_Weight.meta_value_id
 							INNER JOIN tpd_digital_content_meta_value DCMV_Weight WITH(NOLOCK)
 							ON DCMV_Weight.meta_value_id = DCML_Weight.meta_value_id
-								AND DCMV_Weight.meta_attribute_id = 7*/
+								AND DCMV_Weight.meta_attribute_id = 7
 
 							INNER JOIN tpd_digital_content_link DCL WITH(NOLOCK)
 							ON DCL.content_guid = DC.content_guid
@@ -184,15 +184,72 @@ namespace ContentAnalyzer
 							ON S.SkuId = DCL.sku_id
 						WHERE
 							media_type_id = 15
-						--ORDER BY DCL.sku_id, DCMVV_Weight.meta_value_name
+						ORDER BY DCL.sku_id, DCMVV_Weight.meta_value_name
 					",
 					delegate(IDataRecord reader)
 					{
 						int skuId = (int)reader["SkuId"];
 						if (!map.ContainsKey(skuId))
-							map[skuId] = new List<MultipleImageRow>();
+							map[skuId] = new List<DigitalContentRow>();
 
-						MultipleImageRow row = new MultipleImageRow(reader);
+						DigitalContentRow row = new DigitalContentRow(reader);
+						map[skuId].Add(row);
+					});
+
+				s_db.ExecuteNonQuery(
+					conn,
+					@"
+						DROP TABLE #Sku
+					");
+			}
+
+			return map;
+		}
+
+		/// <summary>
+		/// Gets standard images.
+		/// </summary>
+		public static Dictionary<int, List<DigitalContentRow>> GetStandardImages(IEnumerable<int> skuIds)
+		{
+			Dictionary<int, List<DigitalContentRow>> map = new Dictionary<int, List<DigitalContentRow>>();
+
+			using (SqlConnection conn = s_db.OpenConnection())
+			{
+				s_db.ExecuteNonQuery(
+					conn,
+					@"
+						CREATE TABLE #Sku (
+							SkuId INT PRIMARY KEY)
+					");
+
+				s_db.ExecuteBulkCopy(
+					conn,
+					"#Sku",
+					s_db.CreateBulkTable(new HashSet<int>(skuIds), "SkuId"));
+
+				s_db.ExecuteReader(
+					conn,
+					@"
+						SELECT
+							DCL.sku_id AS SkuId,
+							DC.content_guid AS ContentUid,
+							DC.original_id AS OriginalId
+						FROM tpd_digital_content DC WITH(NOLOCK)
+							INNER JOIN tpd_digital_content_link DCL WITH(NOLOCK)
+							ON DCL.content_guid = DC.content_guid
+							INNER JOIN #Sku S WITH(NOLOCK)
+							ON S.SkuId = DCL.sku_id
+						WHERE
+							media_type_id = 1
+						ORDER BY DCL.sku_id
+					",
+					delegate(IDataRecord reader)
+					{
+						int skuId = (int)reader["SkuId"];
+						if (!map.ContainsKey(skuId))
+							map[skuId] = new List<DigitalContentRow>();
+
+						DigitalContentRow row = new DigitalContentRow(reader);
 						map[skuId].Add(row);
 					});
 
@@ -209,9 +266,9 @@ namespace ContentAnalyzer
 		/// <summary>
 		/// Gets all multiple images by category.
 		/// </summary>
-		public static List<MultipleImageRow> GetAllMultipleImages(string categoryCode)
+		public static List<DigitalContentRow> GetAllMultipleImages(string categoryCode)
 		{
-			List<MultipleImageRow> rows = new List<MultipleImageRow>();
+			List<DigitalContentRow> rows = new List<DigitalContentRow>();
 
 			using (SqlConnection conn = s_db.OpenConnection())
 			{
@@ -261,7 +318,7 @@ namespace ContentAnalyzer
 					",
 					delegate(IDataRecord reader)
 					{
-						MultipleImageRow row = new MultipleImageRow(reader);
+						DigitalContentRow row = new DigitalContentRow(reader);
 						rows.Add(row);
 					},
 					new SqlParameter("@categoryCode", categoryCode));

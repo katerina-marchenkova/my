@@ -8,7 +8,8 @@ namespace ContentAnalyzer
 	public partial class Plain : Page
 	{
 		protected List<int> m_skuIds;
-		protected Dictionary<int, List<MultipleImageRow>> m_images;
+		protected Dictionary<int, List<DigitalContentRow>> m_multipleImages;
+		protected Dictionary<int, List<DigitalContentRow>> m_standardImages;
 		protected Dictionary<int, SkuInfoRow> m_infos;
 
 		protected void Page_Load(object sender, EventArgs e)
@@ -22,7 +23,8 @@ namespace ContentAnalyzer
 				m_skuIds.Add(skuId);
 			}
 
-			m_images = TPD.GetMultipleImages(m_skuIds);
+			m_multipleImages = TPD.GetMultipleImages(m_skuIds);
+			m_standardImages = TPD.GetStandardImages(m_skuIds);
 			m_infos = AggregatorDb.GetSkuInfo(m_skuIds);
 		}
 	}

@@ -1,48 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Shuruev.StyleCop.Run
 {
 	/// <summary>
-	/// BBB class.
+	/// This is a class 2.
 	/// </summary>
-	public class BBB
+	public class Class2
 	{
-		public int A = 10;
+		private event CancelEventHandler _onCancel;
 
 		/// <summary>
-		/// Some action here.
+		/// Adds or removes Cancel event.
 		/// </summary>
-		public void Zzz()
+		[Category("Action")]
+		[Description("Cancel")]
+		public event CancelEventHandler Cancel
 		{
-			string text = String.Format(
-				"oleg {0}{1}{2}",
-				String.Format(
-					"{0}{1}",
-					"uh",
-					"eh"),
-				"aga",
-				"ogo");
-			/*string text = String.Format(
-				"oleg {0}",
-				String.Format(
-					"*/
+			add { _onCancel += value; }
+			remove { _onCancel -= value; }
+		}
 
-			/*XElement xml = new XElement(
-				"contacts",
-				new XElement(
-					"contact",
-					new XAttribute("contactId", "2"),
-					new XElement("firstName", "Barry"),
-					new XElement("lastName", "Gottshall")),
-				new XElement("contact",
-					new XAttribute("contactId", "3"),
-					new XElement("firstName", "Armando"),
-					new XElement("lastName", "Valdes")
-				));
-
-			Console.WriteLine(xml);*/
+		/// <summary>
+		/// Fires cancel event.
+		/// </summary>
+		protected virtual void OnCancel(CancelEventArgs e)
+		{
+			if (_onCancel != null)
+			{
+				_onCancel(this, e);
+			}
 		}
 	}
 }

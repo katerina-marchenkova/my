@@ -1,29 +1,51 @@
 using System;
 using System.Data;
+using VX.Storage;
 
 namespace ContentAnalyzer
 {
 	public struct DigitalContentRow
 	{
-		public int SkuId;
-		public Guid ContentGuid;
-		public string Name;
-		public string Extension;
+		public Guid ContentUid;
+		public string Url;
+		public string OriginalId;
+		public Guid ItemUid;
 
 		public DigitalContentRow(IDataRecord reader)
 		{
-			SkuId = Convert.IsDBNull(reader["sku_id"]) ?
-				SkuId = -1 :
-				(int)reader["sku_id"];
+			ContentUid = Guid.Empty;
+			Url = String.Empty;
+			OriginalId = String.Empty;
+			ItemUid = Guid.Empty;
 
-			ContentGuid = (Guid)reader["content_guid"];
-			Name = (string)reader["original_file_name"];
-			Extension = (string)reader["original_file_extension"];
+			for (int i = 0; i < reader.FieldCount; i++)
+			{
+				switch (reader.GetName(i))
+				{
+					case "ContentUid":
+						ContentUid = (Guid)reader["ContentUid"];
+						Url = Helpers.GetDigitalContentUrl(ContentUid);
+						break;
+					case "Url":
+						Url = (string)reader["Url"];
+						break;
+					case "OriginalId":
+						OriginalId = (string)reader["OriginalId"];
+						ItemUid = new Guid(OriginalId.Substring(0, 36));
+						break;
+					case "ItemUid":
+						ItemUid = (Guid)reader["ItemUid"];
+						break;
+				}
+			}
 		}
 
-		public string Url
+		public string GetVXStorageLink(VXGuid templateId)
 		{
-			get { return Helpers.GetDigitalContentUrl(ContentGuid); }
+			return VXStorageUri.GetItemUri(
+				templateId,
+				ItemUid,
+				VXStorageUri.UriAction.Browse).AbsoluteUri;
 		}
 	}
 }

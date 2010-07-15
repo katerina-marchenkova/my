@@ -22,9 +22,9 @@ namespace ContentAnalyzer
 		/// <summary>
 		/// Gets multuple images with bad canvas.
 		/// </summary>
-		public static List<MultipleImageRow> GetMultipleImagesWithBadCanvas()
+		public static List<DigitalContentRow> GetMultipleImagesWithBadCanvas()
 		{
-			List<MultipleImageRow> rows = new List<MultipleImageRow>();
+			List<DigitalContentRow> rows = new List<DigitalContentRow>();
 
 			using (SqlConnection conn = s_db.OpenConnection())
 			{
@@ -58,7 +58,7 @@ namespace ContentAnalyzer
 					",
 					delegate(IDataRecord reader)
 					{
-						MultipleImageRow row = new MultipleImageRow(reader);
+						DigitalContentRow row = new DigitalContentRow(reader);
 						rows.Add(row);
 					});
 			}

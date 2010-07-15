@@ -18,7 +18,7 @@ namespace ContentAnalyzer
 			m_rows = new Dictionary<int, List<DigitalContentRow>>();
 
 			List<DigitalContentRow> rows = GetRows();
-			foreach (DigitalContentRow row in rows)
+			/*foreach (DigitalContentRow row in rows)
 			{
 				if (m_content.ContainsKey(row.ContentGuid))
 					continue;
@@ -32,7 +32,7 @@ namespace ContentAnalyzer
 				}
 
 				m_rows[row.SkuId].Add(row);
-			}
+			}*/
 		}
 
 		/*xxxprivate List<DigitalContentRow> GetRows()
@@ -68,7 +68,7 @@ namespace ContentAnalyzer
 		private List<DigitalContentRow> GetRows()
 		{
 			List<DigitalContentRow> rows = new List<DigitalContentRow>();
-			foreach (string line in File.ReadAllLines(@"D:\WrongCanvas.txt"))
+			/*foreach (string line in File.ReadAllLines(@"D:\WrongCanvas.txt"))
 			{
 				DigitalContentRow row = new DigitalContentRow();
 				row.SkuId = rows.Count;
@@ -77,7 +77,7 @@ namespace ContentAnalyzer
 				row.Name = "xxx";
 
 				rows.Add(row);
-			}
+			}*/
 
 			return rows;
 		}

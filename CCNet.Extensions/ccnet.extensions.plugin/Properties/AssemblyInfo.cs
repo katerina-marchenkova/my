@@ -1,17 +1,15 @@
-﻿using System;
-using System.Reflection;
-using System.Resources;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("StyleCop+")]
-[assembly: AssemblyDescription("Plug-in that extends original StyleCop features.")]
+[assembly: AssemblyTitle("ccnet.extensions.plugin")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Shuruev")]
-[assembly: AssemblyProduct("Shuruev.StyleCop.CSharp.Rules")]
-[assembly: AssemblyCopyright("Copyright © Shuruev 2010")]
+[assembly: AssemblyCompany("CNET Content Solutions")]
+[assembly: AssemblyProduct("ccnet.extensions.plugin")]
+[assembly: AssemblyCopyright("Copyright © CNET Content Solutions 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9b0ec18d-e7d2-4f3a-8b43-b581f3c3a6ed")]
+[assembly: Guid("d3940666-d62d-441d-b96a-3c81cfc9ad09")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +30,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

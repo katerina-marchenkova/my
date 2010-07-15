@@ -16,6 +16,7 @@
 		.important { color: #ff0000; font-weight: bold; }
 		.information { color: #0066cc; font-size: 80%; }
 		.note { color: #666666; font-size: 80%; }
+		.micro { color: #666666; font-size: 50%; }
 	</style>
 </head>
 <body>
@@ -46,15 +47,42 @@
 				%>
 			</td>
 			<%
-				if (m_images.ContainsKey(skuId))
+				if (m_standardImages.ContainsKey(skuId))
 				{
 			%>
 				<%
-					foreach (MultipleImageRow image in m_images[skuId])
+					foreach (DigitalContentRow row in m_standardImages[skuId])
 					{
 				%>
 					<td>
-						<img src="<% Response.Write(image.Url); %>" />
+						<span class="micro">STANDARD IMAGE</span><br />
+						<img src="<% Response.Write(row.Url); %>" />
+					</td>
+				<%
+					}
+				%>
+			<%
+				}
+				else
+				{
+			%>
+			<td>
+				<span class="note">NO STANDARD IMAGE</span>
+			</td>
+			<%
+				}
+			%>
+			<%
+				if (m_multipleImages.ContainsKey(skuId))
+				{
+			%>
+				<%
+					foreach (DigitalContentRow row in m_multipleImages[skuId])
+					{
+				%>
+					<td>
+						<span class="micro">MULTIPLE IMAGE</span><br />
+						<img src="<% Response.Write(row.Url); %>" />
 					</td>
 				<%
 					}

@@ -96,10 +96,9 @@
     <Compile Include="Code\SkuInfoRow.cs" />
     <Compile Include="Code\Helpers.cs" />
     <Compile Include="Code\IDataRow.cs" />
-    <Compile Include="Code\MultipleImageRow.cs" />
+    <Compile Include="Code\DigitalContentRow.cs" />
     <Compile Include="Code\DbHelper.cs" />
     <Compile Include="Code\PairContentRow.cs" />
-    <Compile Include="Code\DigitalContentRow.cs" />
     <Compile Include="Code\HelixFileRow.cs" />
     <Compile Include="Code\TPD.cs" />
     <Compile Include="Code\WorkDb.cs" />
