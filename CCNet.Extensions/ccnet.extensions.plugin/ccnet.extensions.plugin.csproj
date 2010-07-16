@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCNet.Extensions.Plugin</RootNamespace>
-    <AssemblyName>ccnet.extensions.plugin</AssemblyName>
+    <AssemblyName>CCNet.Extensions.Plugin</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
