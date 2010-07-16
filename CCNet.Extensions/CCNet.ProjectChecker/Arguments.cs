@@ -8,7 +8,7 @@ namespace CCNet.ProjectChecker
 	public static class Arguments
 	{
 		/// <summary>
-		/// Default instance.
+		/// Gets or sets a default instance.
 		/// </summary>
 		public static ArgumentProperties Default { get; set; }
 
@@ -31,9 +31,9 @@ namespace CCNet.ProjectChecker
 		/// <summary>
 		/// Gets project type.
 		/// </summary>
-		public static string ProjectType
+		public static ProjectType ProjectType
 		{
-			get { return Default.GetValue("ProjectType"); }
+			get { return Default.GetEnumValue<ProjectType>("ProjectType"); }
 		}
 
 		/// <summary>
@@ -47,9 +47,9 @@ namespace CCNet.ProjectChecker
 		/// <summary>
 		/// Gets target framework.
 		/// </summary>
-		public static string TargetFramework
+		public static TargetFramework TargetFramework
 		{
-			get { return Default.GetValue("TargetFramework"); }
+			get { return Default.GetEnumValue<TargetFramework>("TargetFramework"); }
 		}
 
 		/// <summary>

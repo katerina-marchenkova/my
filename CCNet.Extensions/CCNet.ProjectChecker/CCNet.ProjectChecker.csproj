@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments.cs" />
+    <Compile Include="Enumerations\TargetFramework.cs" />
+    <Compile Include="Enumerations\ProjectType.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -46,6 +46,7 @@ namespace CCNet.Common
 						break;
 				}
 			}
+
 			text = sb.ToString();
 
 			if (text.StartsWith(" "))

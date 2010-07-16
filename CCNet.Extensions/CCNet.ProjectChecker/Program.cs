@@ -22,7 +22,7 @@ namespace CCNet.ProjectChecker
 				@"ProjectPath=C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\ConsoleApplication1\ConsoleApplication1",
 				@"ProjectType=ConsoleApplication",
 				@"VisualStudioVersion=2010",
-				@"TargetFramework=4.0",
+				@"TargetFramework=Net40",
 				@"TargetPlatform=x86",
 				@"RootNamespace=ConsoleApplication1",
 			};
@@ -131,44 +131,65 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			required.Add("RootNamespace", Arguments.RootNamespace);
-			required.Add("AssemblyName", Arguments.ProjectName);
 			required.Add("AppDesignerFolder", "Properties");
-			required.Add("FileAlignment", "512");
 
 			switch (Arguments.ProjectType)
 			{
-				case "ConsoleApplication":
+				case ProjectType.ConsoleApplication:
+					allowed.Add("ApplicationIcon", String.Empty);
+					break;
+				case ProjectType.WindowsApplication:
+					required.Add("ApplicationIcon", null);
+					break;
+			}
+
+			required.Add("AssemblyName", Arguments.ProjectName);
+			allowed.Add("CodeContractsAssemblyMode", null);
+			allowed.Add("Configuration", null);
+			required.Add("FileAlignment", "512");
+			allowed.Add("GenerateResourceNeverLockTypeAssemblies", "true");
+
+			switch (Arguments.ProjectType)
+			{
+				case ProjectType.ConsoleApplication:
 					required.Add("OutputType", "Exe");
 					break;
-				default:
-					throw new InvalidOperationException("Invalid project type specified.");
+				case ProjectType.WindowsApplication:
+					required.Add("OutputType", "WinExe");
+					break;
 			}
+
+			allowed.Add("Platform", null);
+			allowed.Add("PostBuildEvent", String.Empty);
+			allowed.Add("PreBuildEvent", String.Empty);
+			allowed.Add("ProductVersion", null);
+			allowed.Add("ProjectGuid", null);
+			required.Add("RootNamespace", Arguments.RootNamespace);
+			allowed.Add("RunPostBuildEvent", "OnBuildSuccess");
+			allowed.Add("SccAuxPath", null);
+			allowed.Add("SccLocalPath", null);
+			allowed.Add("SccProjectName", null);
+			allowed.Add("SccProvider", null);
+			allowed.Add("SchemaVersion", null);
+			allowed.Add("SignAssembly", "false");
+			allowed.Add("StartupObject", String.Empty);
+			allowed.Add("TargetFrameworkProfile", null);
 
 			switch (Arguments.TargetFramework)
 			{
-				case "2.0":
+				case TargetFramework.Net20:
 					allowed.Add("TargetFrameworkVersion", "v2.0");
 					break;
-				case "3.5":
+				case TargetFramework.Net35:
 					required.Add("TargetFrameworkVersion", "v3.5");
 					break;
-				case "4.0":
+				case TargetFramework.Net40:
 					required.Add("TargetFrameworkVersion", "v4.0");
 					break;
-				default:
-					throw new InvalidOperationException("Invalid target framework specified.");
 			}
 
-			allowed.Add("PreBuildEvent", String.Empty);
-			allowed.Add("PostBuildEvent", String.Empty);
-			allowed.Add("Configuration", null);
-			allowed.Add("Platform", null);
-			allowed.Add("ProductVersion", null);
-			allowed.Add("SchemaVersion", null);
-			allowed.Add("ProjectGuid", null);
-			allowed.Add("TargetFrameworkProfile", null);
-			allowed.Add("CodeContractsAssemblyMode", null);
+			allowed.Add("UseVSHostingProcess", null);
+			allowed.Add("Win32Resource", String.Empty);
 
 			string description;
 			if (ValidationHelper.CheckProperties(
@@ -192,35 +213,34 @@ namespace CCNet.ProjectChecker
 
 			required.Add("DebugSymbols", "true");
 			required.Add("DebugType", "full");
+			required.Add("DefineConstants", "DEBUG;TRACE");
+			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.ProjectName));
+			required.Add("ErrorReport", "prompt");
 			required.Add("Optimize", "false");
 			required.Add("OutputPath", @"bin\Debug\");
-			required.Add("DefineConstants", "DEBUG;TRACE");
-			required.Add("ErrorReport", "prompt");
-			required.Add("WarningLevel", "4");
-			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.ProjectName));
-
 			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
-			allowed.Add("CodeContractsEnableRuntimeChecking", null);
-			allowed.Add("CodeContractsRuntimeOnlyPublicSurface", null);
-			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
-			allowed.Add("CodeContractsRuntimeCallSiteRequires", null);
-			allowed.Add("CodeContractsRunCodeAnalysis", null);
-			allowed.Add("CodeContractsNonNullObligations", null);
-			allowed.Add("CodeContractsBoundsObligations", null);
+			required.Add("WarningLevel", "4");
 			allowed.Add("CodeContractsArithmeticObligations", null);
-			allowed.Add("CodeContractsRedundantAssumptions", null);
-			allowed.Add("CodeContractsRunInBackground", null);
-			allowed.Add("CodeContractsShowSquigglies", null);
-			allowed.Add("CodeContractsUseBaseLine", null);
-			allowed.Add("CodeContractsEmitXMLDocs", null);
+			allowed.Add("CodeContractsBaseLineFile", null);
+			allowed.Add("CodeContractsBoundsObligations", null);
 			allowed.Add("CodeContractsCustomRewriterAssembly", null);
 			allowed.Add("CodeContractsCustomRewriterClass", null);
-			allowed.Add("CodeContractsLibPaths", null);
-			allowed.Add("CodeContractsExtraRewriteOptions", null);
+			allowed.Add("CodeContractsEmitXMLDocs", null);
+			allowed.Add("CodeContractsEnableRuntimeChecking", null);
 			allowed.Add("CodeContractsExtraAnalysisOptions", null);
-			allowed.Add("CodeContractsBaseLineFile", null);
-			allowed.Add("CodeContractsRuntimeCheckingLevel", null);
+			allowed.Add("CodeContractsExtraRewriteOptions", null);
+			allowed.Add("CodeContractsLibPaths", null);
+			allowed.Add("CodeContractsNonNullObligations", null);
+			allowed.Add("CodeContractsRedundantAssumptions", null);
 			allowed.Add("CodeContractsReferenceAssembly", null);
+			allowed.Add("CodeContractsRunCodeAnalysis", null);
+			allowed.Add("CodeContractsRunInBackground", null);
+			allowed.Add("CodeContractsRuntimeCallSiteRequires", null);
+			allowed.Add("CodeContractsRuntimeCheckingLevel", null);
+			allowed.Add("CodeContractsRuntimeOnlyPublicSurface", null);
+			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
+			allowed.Add("CodeContractsShowSquigglies", null);
+			allowed.Add("CodeContractsUseBaseLine", null);
 
 			string description;
 			if (ValidationHelper.CheckProperties(
@@ -244,35 +264,34 @@ namespace CCNet.ProjectChecker
 
 			required.Add("DebugSymbols", "true");
 			required.Add("DebugType", "pdbonly");
+			required.Add("DefineConstants", "TRACE");
+			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.ProjectName));
+			required.Add("ErrorReport", "prompt");
 			required.Add("Optimize", "true");
 			required.Add("OutputPath", @"bin\Release\");
-			required.Add("DefineConstants", "TRACE");
-			required.Add("ErrorReport", "prompt");
-			required.Add("WarningLevel", "4");
-			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.ProjectName));
-
 			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
-			allowed.Add("CodeContractsEnableRuntimeChecking", null);
-			allowed.Add("CodeContractsRuntimeOnlyPublicSurface", null);
-			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
-			allowed.Add("CodeContractsRuntimeCallSiteRequires", null);
-			allowed.Add("CodeContractsRunCodeAnalysis", null);
-			allowed.Add("CodeContractsNonNullObligations", null);
-			allowed.Add("CodeContractsBoundsObligations", null);
+			required.Add("WarningLevel", "4");
 			allowed.Add("CodeContractsArithmeticObligations", null);
-			allowed.Add("CodeContractsRedundantAssumptions", null);
-			allowed.Add("CodeContractsRunInBackground", null);
-			allowed.Add("CodeContractsShowSquigglies", null);
-			allowed.Add("CodeContractsUseBaseLine", null);
-			allowed.Add("CodeContractsEmitXMLDocs", null);
+			allowed.Add("CodeContractsBaseLineFile", null);
+			allowed.Add("CodeContractsBoundsObligations", null);
 			allowed.Add("CodeContractsCustomRewriterAssembly", null);
 			allowed.Add("CodeContractsCustomRewriterClass", null);
-			allowed.Add("CodeContractsLibPaths", null);
-			allowed.Add("CodeContractsExtraRewriteOptions", null);
+			allowed.Add("CodeContractsEmitXMLDocs", null);
+			allowed.Add("CodeContractsEnableRuntimeChecking", null);
 			allowed.Add("CodeContractsExtraAnalysisOptions", null);
-			allowed.Add("CodeContractsBaseLineFile", null);
-			allowed.Add("CodeContractsRuntimeCheckingLevel", null);
+			allowed.Add("CodeContractsExtraRewriteOptions", null);
+			allowed.Add("CodeContractsLibPaths", null);
+			allowed.Add("CodeContractsNonNullObligations", null);
+			allowed.Add("CodeContractsRedundantAssumptions", null);
 			allowed.Add("CodeContractsReferenceAssembly", null);
+			allowed.Add("CodeContractsRunCodeAnalysis", null);
+			allowed.Add("CodeContractsRunInBackground", null);
+			allowed.Add("CodeContractsRuntimeCallSiteRequires", null);
+			allowed.Add("CodeContractsRuntimeCheckingLevel", null);
+			allowed.Add("CodeContractsRuntimeOnlyPublicSurface", null);
+			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
+			allowed.Add("CodeContractsShowSquigglies", null);
+			allowed.Add("CodeContractsUseBaseLine", null);
 
 			string description;
 			if (ValidationHelper.CheckProperties(

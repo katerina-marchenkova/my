@@ -82,6 +82,24 @@ namespace CCNet.Common
 			return m_values[key];
 		}
 
+		/// <summary>
+		/// Reads enumeration value.
+		/// </summary>
+		public T GetEnumValue<T>(string key)
+		{
+			string value = GetValue(key);
+			try
+			{
+				return (T)Enum.Parse(typeof(T), value);
+			}
+			catch
+			{
+				throw new ArgumentException(
+					"Property {0} contains unknown value {1}."
+					.Display(key, value));
+			}
+		}
+
 		#endregion
 	}
 }

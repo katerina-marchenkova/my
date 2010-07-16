@@ -8,7 +8,7 @@
     <ProjectGuid>{53DB7203-BDF9-4711-A4C6-28EAD1C8524F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ccnet.extensions.plugin</RootNamespace>
+    <RootNamespace>CCNet.Extensions.Plugin</RootNamespace>
     <AssemblyName>ccnet.extensions.plugin</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>

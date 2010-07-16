@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using System.Text;
 using CCNet.Common.Properties;
 
@@ -41,6 +40,9 @@ namespace CCNet.Common
 					continue;
 				}
 
+				if (item.Value == null)
+					continue;
+
 				string value = properties[item.Key];
 				if (value != item.Value)
 				{
@@ -51,9 +53,12 @@ namespace CCNet.Common
 				}
 			}
 
-			foreach (var item in allowed.Where(item => item.Value != null))
+			foreach (var item in allowed)
 			{
 				if (!properties.ContainsKey(item.Key))
+					continue;
+
+				if (item.Value == null)
 					continue;
 
 				string value = properties[item.Key];

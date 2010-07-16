@@ -3,7 +3,7 @@ using Exortech.NetReflector;
 using ThoughtWorks.CruiseControl.Core;
 using ThoughtWorks.CruiseControl.Core.Util;
 
-namespace ccnet.extensions.plugin
+namespace CCNet.Extensions.Plugin
 {
 	/// <summary>
 	/// The ShortDateLabeller builds label using

@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ccnet.extensions.plugin")]
+[assembly: AssemblyTitle("CCNet.Extensions.Plugin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CNET Content Solutions")]
-[assembly: AssemblyProduct("ccnet.extensions.plugin")]
+[assembly: AssemblyProduct("CCNet.Extensions.Plugin")]
 [assembly: AssemblyCopyright("Copyright © CNET Content Solutions 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
