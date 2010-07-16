@@ -76,7 +76,7 @@ namespace CCNet.Common
 
 			if (!m_values.ContainsKey(key))
 				throw new ArgumentException(
-					"Property {0} is not found."
+					"Property {0} is not specified."
 					.Display(key));
 
 			return m_values[key];

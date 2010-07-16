@@ -70,6 +70,15 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;&lt;b&gt;Checking process has failed&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;.
+        /// </summary>
+        internal static string ExceptionHtml {
+            get {
+                return ResourceManager.GetString("ExceptionHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checks project during build process.
         ///
         ///CCNet.ProjectChecker.exe [Property1=Value1] [Property2=Value2] ....

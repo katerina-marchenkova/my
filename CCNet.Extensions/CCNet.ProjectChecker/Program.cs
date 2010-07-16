@@ -16,7 +16,7 @@ namespace CCNet.ProjectChecker
 		/// </summary>
 		public static int Main(string[] args)
 		{
-			args = new[]
+			/*xxxargs = new[]
 			{
 				@"ProjectName=ConsoleApplication1",
 				@"ProjectPath=C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\ConsoleApplication1\ConsoleApplication1",
@@ -25,7 +25,7 @@ namespace CCNet.ProjectChecker
 				@"TargetFramework=Net40",
 				@"TargetPlatform=x86",
 				@"RootNamespace=ConsoleApplication1",
-			};
+			};*/
 
 			if (args == null || args.Length == 0)
 			{
@@ -33,11 +33,27 @@ namespace CCNet.ProjectChecker
 				return 0;
 			}
 
-			Arguments.Default = ArgumentProperties.Parse(args);
+			try
+			{
+				Arguments.Default = ArgumentProperties.Parse(args);
+				PerformChecks();
+			}
+			catch (Exception e)
+			{
+				RaiseError.RuntimeException(e);
+			}
 
+			return RaiseError.ExitCode;
+		}
+
+		/// <summary>
+		/// Performs all checks.
+		/// </summary>
+		private static void PerformChecks()
+		{
 			CheckWrongProjectFileLocation();
 			if (RaiseError.ExitCode > 0)
-				return RaiseError.ExitCode;
+				return;
 
 			ProjectHelper.LoadProject(Paths.ProjectFile);
 			CheckWrongVisualStudioVersion();
@@ -46,8 +62,6 @@ namespace CCNet.ProjectChecker
 			CheckWrongCommonProperties();
 			CheckWrongDebugProperties();
 			CheckWrongReleaseProperties();
-
-			return RaiseError.ExitCode;
 		}
 
 		/// <summary>

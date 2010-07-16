@@ -120,6 +120,9 @@
   <data name="DescriptionHtml" xml:space="preserve">
     <value>&lt;p&gt;&lt;b&gt;Error in project structure&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;</value>
   </data>
+  <data name="ExceptionHtml" xml:space="preserve">
+    <value>&lt;p&gt;&lt;b&gt;Checking process has failed&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;</value>
+  </data>
   <data name="UsageInfo" xml:space="preserve">
     <value>Checks project during build process.
 
