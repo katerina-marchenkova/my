@@ -34,7 +34,7 @@ namespace CCNet.Common
 		private void Add(string key, string value)
 		{
 			Contract.Requires(!String.IsNullOrEmpty(key));
-			Contract.Requires(!String.IsNullOrEmpty(value));
+			Contract.Requires(value != null);
 
 			m_values[key] = value;
 		}
