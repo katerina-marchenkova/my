@@ -37,6 +37,22 @@ namespace CCNet.ProjectChecker
 		}
 
 		/// <summary>
+		/// Gets project friendly name.
+		/// </summary>
+		public static string FriendlyName
+		{
+			get { return Default.GetValue("FriendlyName"); }
+		}
+
+		/// <summary>
+		/// Gets project download zone.
+		/// </summary>
+		public static string DownloadZone
+		{
+			get { return Default.GetValue("DownloadZone"); }
+		}
+
+		/// <summary>
 		/// Gets Visual Studio version.
 		/// </summary>
 		public static string VisualStudioVersion
@@ -66,6 +82,14 @@ namespace CCNet.ProjectChecker
 		public static string RootNamespace
 		{
 			get { return Default.GetValue("RootNamespace"); }
+		}
+
+		/// <summary>
+		/// Gets suppressed warnings.
+		/// </summary>
+		public static string SuppressWarnings
+		{
+			get { return Default.GetValue("SuppressWarnings"); }
 		}
 	}
 }

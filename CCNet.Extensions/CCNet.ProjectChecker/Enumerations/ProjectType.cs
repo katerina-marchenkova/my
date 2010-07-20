@@ -8,11 +8,11 @@
 		/// <summary>
 		/// Console application.
 		/// </summary>
-		ConsoleApplication,
+		Console,
 
 		/// <summary>
-		/// Windows application.
+		/// ClickOnce application.
 		/// </summary>
-		WindowsApplication
+		ClickOnce
 	}
 }

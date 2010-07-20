@@ -61,7 +61,7 @@ namespace CCNet.ProjectAdapter
 			Regex regex = new Regex("\\[assembly: AssemblyVersion\\(\"[0-9\\.\\*]+\"\\)]");
 			text = regex.Replace(text, "[assembly: AssemblyVersion(\"" + Arguments.CurrentVersion + "\")]");
 
-			File.WriteAllText(Paths.AssemblyInfoFile, text);
+			File.WriteAllText(Paths.AssemblyInfoFile, text, Encoding.UTF8);
 
 			Console.WriteLine(
 				Resources.UpdateAssemblyInfoDone,
@@ -82,7 +82,7 @@ namespace CCNet.ProjectAdapter
 			regex = new Regex("<ApplicationVersion>[0-9\\.\\*]+</ApplicationVersion>");
 			text = regex.Replace(text, "<ApplicationVersion>" + Arguments.CurrentVersion + "</ApplicationVersion>");
 
-			File.WriteAllText(Paths.ProjectFile, text);
+			File.WriteAllText(Paths.ProjectFile, text, Encoding.UTF8);
 
 			Console.WriteLine(
 				Resources.UpdatePublishVersionsDone,
@@ -138,7 +138,7 @@ namespace CCNet.ProjectAdapter
 					external);
 			}
 
-			using (XmlTextWriter xtw = new XmlTextWriter(Paths.ProjectFile, Encoding.Unicode))
+			using (XmlTextWriter xtw = new XmlTextWriter(Paths.ProjectFile, Encoding.UTF8))
 			{
 				xtw.Formatting = Formatting.Indented;
 				doc.WriteTo(xtw);

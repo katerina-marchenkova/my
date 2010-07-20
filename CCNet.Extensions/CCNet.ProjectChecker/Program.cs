@@ -20,7 +20,8 @@ namespace CCNet.ProjectChecker
 			{
 				@"ProjectName=ConsoleApplication1",
 				@"ProjectPath=C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\ConsoleApplication1\ConsoleApplication1",
-				@"ProjectType=ConsoleApplication",
+				@"ProjectType=Console",
+				@"FriendlyName=123",
 				@"VisualStudioVersion=2010",
 				@"TargetFramework=Net40",
 				@"TargetPlatform=x86",
@@ -149,26 +150,30 @@ namespace CCNet.ProjectChecker
 
 			switch (Arguments.ProjectType)
 			{
-				case ProjectType.ConsoleApplication:
+				case ProjectType.Console:
 					allowed.Add("ApplicationIcon", String.Empty);
 					break;
-				case ProjectType.WindowsApplication:
+				case ProjectType.ClickOnce:
 					required.Add("ApplicationIcon", null);
 					break;
 			}
 
 			required.Add("AssemblyName", Arguments.ProjectName);
+			required.Add("AssemblyOriginatorKeyFile", null);
 			allowed.Add("CodeContractsAssemblyMode", null);
 			allowed.Add("Configuration", null);
-			required.Add("FileAlignment", "512");
+			allowed.Add("DelaySign", "false");
+			allowed.Add("FileAlignment", "512");
+			allowed.Add("FileUpgradeFlags", null);
 			allowed.Add("GenerateResourceNeverLockTypeAssemblies", "true");
+			allowed.Add("OldToolsVersion", null);
 
 			switch (Arguments.ProjectType)
 			{
-				case ProjectType.ConsoleApplication:
+				case ProjectType.Console:
 					required.Add("OutputType", "Exe");
 					break;
-				case ProjectType.WindowsApplication:
+				case ProjectType.ClickOnce:
 					required.Add("OutputType", "WinExe");
 					break;
 			}
@@ -178,6 +183,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("PreBuildEvent", String.Empty);
 			allowed.Add("ProductVersion", null);
 			allowed.Add("ProjectGuid", null);
+			allowed.Add("PublishWizardCompleted", null);
 			required.Add("RootNamespace", Arguments.RootNamespace);
 			allowed.Add("RunPostBuildEvent", "OnBuildSuccess");
 			allowed.Add("SccAuxPath", null);
@@ -186,6 +192,42 @@ namespace CCNet.ProjectChecker
 			allowed.Add("SccProvider", null);
 			allowed.Add("SchemaVersion", null);
 			allowed.Add("SignAssembly", "false");
+
+			switch (Arguments.ProjectType)
+			{
+				case ProjectType.ClickOnce:
+					required.Add("ApplicationManifest", @"Properties\App.manifest");
+					required.Add("ApplicationRevision", "0");
+					required.Add("ApplicationVersion", "1.0.0.0");
+					required.Add("BootstrapperEnabled", "true");
+					required.Add("GenerateManifests", "true");
+					required.Add("Install", "true");
+					required.Add("InstallFrom", "Web");
+					required.Add("InstallUrl", "http://download.cnetcontentsolutions.com/{0}/{1}/".Display(Arguments.DownloadZone, Arguments.ProjectName));
+					required.Add("IsWebBootstrapper", "true");
+					required.Add("ManifestCertificateThumbprint", "51C48C1CDB83928A3A6F46ED8865E80BF5D0B5EF");
+					required.Add("ManifestKeyFile", "vortex.pfx");
+					required.Add("ManifestTimestampUrl", "http://timestamp.comodoca.com/authenticode");
+					required.Add("MapFileExtensions", "true");
+					required.Add("MinimumRequiredVersion", "1.0.0.0");
+					required.Add("ProductName", Arguments.FriendlyName);
+					required.Add("PublisherName", "CNET Content Solutions");
+					required.Add("PublishUrl", @"D:\publish\{0}\".Display(Arguments.ProjectName));
+					required.Add("SignManifests", "true");
+					required.Add("UpdateEnabled", "true");
+					allowed.Add("UpdateInterval", null);
+					allowed.Add("UpdateIntervalUnits", null);
+					required.Add("UpdateMode", "Foreground");
+					required.Add("UpdatePeriodically", "false");
+					required.Add("UpdateRequired", "true");
+					required.Add("UseApplicationTrust", "false");
+					break;
+				default:
+					required.Add("GenerateManifests", "false");
+					allowed.Add("SignManifests", "true");
+					break;
+			}
+
 			allowed.Add("StartupObject", String.Empty);
 			allowed.Add("TargetFrameworkProfile", null);
 
@@ -202,7 +244,8 @@ namespace CCNet.ProjectChecker
 					break;
 			}
 
-			allowed.Add("UseVSHostingProcess", null);
+			allowed.Add("TargetZone", null);
+			allowed.Add("UpgradeBackupLocation", null);
 			allowed.Add("Win32Resource", String.Empty);
 
 			string description;
@@ -225,15 +268,7 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			required.Add("DebugSymbols", "true");
-			required.Add("DebugType", "full");
-			required.Add("DefineConstants", "DEBUG;TRACE");
-			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.ProjectName));
-			required.Add("ErrorReport", "prompt");
-			required.Add("Optimize", "false");
-			required.Add("OutputPath", @"bin\Debug\");
-			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
-			required.Add("WarningLevel", "4");
+			allowed.Add("CodeAnalysisRuleSet", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
 			allowed.Add("CodeContractsBoundsObligations", null);
@@ -255,6 +290,18 @@ namespace CCNet.ProjectChecker
 			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
 			allowed.Add("CodeContractsShowSquigglies", null);
 			allowed.Add("CodeContractsUseBaseLine", null);
+			required.Add("DebugSymbols", "true");
+			required.Add("DebugType", "full");
+			required.Add("DefineConstants", "DEBUG;TRACE");
+			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.ProjectName));
+			required.Add("ErrorReport", "prompt");
+			allowed.Add("FxCopRules", null);
+			allowed.Add("NoWarn", Arguments.SuppressWarnings);
+			required.Add("Optimize", "false");
+			required.Add("OutputPath", @"bin\Debug\");
+			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
+			required.Add("WarningLevel", "4");
+			allowed.Add("UseVSHostingProcess", null);
 
 			string description;
 			if (ValidationHelper.CheckProperties(
@@ -276,15 +323,7 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			required.Add("DebugSymbols", "true");
-			required.Add("DebugType", "pdbonly");
-			required.Add("DefineConstants", "TRACE");
-			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.ProjectName));
-			required.Add("ErrorReport", "prompt");
-			required.Add("Optimize", "true");
-			required.Add("OutputPath", @"bin\Release\");
-			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
-			required.Add("WarningLevel", "4");
+			allowed.Add("CodeAnalysisRuleSet", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
 			allowed.Add("CodeContractsBoundsObligations", null);
@@ -306,6 +345,18 @@ namespace CCNet.ProjectChecker
 			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
 			allowed.Add("CodeContractsShowSquigglies", null);
 			allowed.Add("CodeContractsUseBaseLine", null);
+			allowed.Add("DebugSymbols", "true");
+			required.Add("DebugType", "pdbonly");
+			required.Add("DefineConstants", "TRACE");
+			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.ProjectName));
+			required.Add("ErrorReport", "prompt");
+			allowed.Add("FxCopRules", null);
+			allowed.Add("NoWarn", Arguments.SuppressWarnings);
+			required.Add("Optimize", "true");
+			required.Add("OutputPath", @"bin\Release\");
+			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
+			required.Add("WarningLevel", "4");
+			allowed.Add("UseVSHostingProcess", null);
 
 			string description;
 			if (ValidationHelper.CheckProperties(
