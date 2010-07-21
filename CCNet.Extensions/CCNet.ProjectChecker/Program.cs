@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using CCNet.Common;
 using CCNet.ProjectChecker.Properties;
 
@@ -20,12 +21,15 @@ namespace CCNet.ProjectChecker
 			{
 				@"ProjectName=ConsoleApplication1",
 				@"ProjectPath=C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\ConsoleApplication1\ConsoleApplication1",
-				@"ProjectType=Console",
+				@"ProjectType=ClickOnce",
+				@"AssemblyName=ConsoleApplication12",
 				@"FriendlyName=123",
+				@"DownloadZone=Public",
 				@"VisualStudioVersion=2010",
 				@"TargetFramework=Net40",
 				@"TargetPlatform=x86",
 				@"RootNamespace=ConsoleApplication1",
+				@"SuppressWarnings="
 			};*/
 
 			if (args == null || args.Length == 0)
@@ -53,6 +57,7 @@ namespace CCNet.ProjectChecker
 		private static void PerformChecks()
 		{
 			CheckWrongProjectFileLocation();
+			CheckWrongManifestFileLocation();
 			if (RaiseError.ExitCode > 0)
 				return;
 
@@ -63,6 +68,8 @@ namespace CCNet.ProjectChecker
 			CheckWrongCommonProperties();
 			CheckWrongDebugProperties();
 			CheckWrongReleaseProperties();
+
+			CheckWrongManifestContents();
 		}
 
 		/// <summary>
@@ -90,6 +97,24 @@ namespace CCNet.ProjectChecker
 			}
 
 			RaiseError.WrongProjectFileLocation();
+		}
+
+		/// <summary>
+		/// Checks "WrongManifestFileLocation" condition.
+		/// </summary>
+		private static void CheckWrongManifestFileLocation()
+		{
+			if (Arguments.ProjectType != ProjectType.ClickOnce)
+				return;
+
+			string[] files = Directory.GetFiles(Arguments.ProjectPath, "App.manifest", SearchOption.AllDirectories);
+			if (files.Length == 1)
+			{
+				if (files[0] == Paths.ManifestFile)
+					return;
+			}
+
+			RaiseError.WrongManifestFileLocation();
 		}
 
 		#endregion
@@ -158,8 +183,8 @@ namespace CCNet.ProjectChecker
 					break;
 			}
 
-			required.Add("AssemblyName", Arguments.ProjectName);
-			required.Add("AssemblyOriginatorKeyFile", null);
+			required.Add("AssemblyName", Arguments.AssemblyName);
+			allowed.Add("AssemblyOriginatorKeyFile", null);
 			allowed.Add("CodeContractsAssemblyMode", null);
 			allowed.Add("Configuration", null);
 			allowed.Add("DelaySign", "false");
@@ -203,7 +228,7 @@ namespace CCNet.ProjectChecker
 					required.Add("GenerateManifests", "true");
 					required.Add("Install", "true");
 					required.Add("InstallFrom", "Web");
-					required.Add("InstallUrl", "http://download.cnetcontentsolutions.com/{0}/{1}/".Display(Arguments.DownloadZone, Arguments.ProjectName));
+					required.Add("InstallUrl", "http://download.cnetcontentsolutions.com/{0}/{1}/".Display(Arguments.DownloadZone, Arguments.AssemblyName));
 					required.Add("IsWebBootstrapper", "true");
 					required.Add("ManifestCertificateThumbprint", "51C48C1CDB83928A3A6F46ED8865E80BF5D0B5EF");
 					required.Add("ManifestKeyFile", "vortex.pfx");
@@ -212,7 +237,7 @@ namespace CCNet.ProjectChecker
 					required.Add("MinimumRequiredVersion", "1.0.0.0");
 					required.Add("ProductName", Arguments.FriendlyName);
 					required.Add("PublisherName", "CNET Content Solutions");
-					required.Add("PublishUrl", @"D:\publish\{0}\".Display(Arguments.ProjectName));
+					required.Add("PublishUrl", @"D:\publish\{0}\".Display(Arguments.AssemblyName));
 					required.Add("SignManifests", "true");
 					required.Add("UpdateEnabled", "true");
 					allowed.Add("UpdateInterval", null);
@@ -293,7 +318,7 @@ namespace CCNet.ProjectChecker
 			required.Add("DebugSymbols", "true");
 			required.Add("DebugType", "full");
 			required.Add("DefineConstants", "DEBUG;TRACE");
-			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.ProjectName));
+			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.AssemblyName));
 			required.Add("ErrorReport", "prompt");
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoWarn", Arguments.SuppressWarnings);
@@ -348,7 +373,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("DebugSymbols", "true");
 			required.Add("DebugType", "pdbonly");
 			required.Add("DefineConstants", "TRACE");
-			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.ProjectName));
+			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.AssemblyName));
 			required.Add("ErrorReport", "prompt");
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoWarn", Arguments.SuppressWarnings);
@@ -367,6 +392,50 @@ namespace CCNet.ProjectChecker
 				return;
 
 			RaiseError.WrongReleaseProperties(description);
+		}
+
+		#endregion
+
+		#region Checking file contents
+
+		/// <summary>
+		/// Checks "WrongManifestContents" condition.
+		/// </summary>
+		public static void CheckWrongManifestContents()
+		{
+			if (Arguments.ProjectType != ProjectType.ClickOnce)
+				return;
+
+			string xml = File.ReadAllText(Paths.ManifestFile);
+			XmlDocument doc = new XmlDocument();
+			doc.LoadXml(xml);
+
+			Dictionary<string, string> properties = PropertiesHelper.ParseFromXml(doc);
+			Dictionary<string, string> required = new Dictionary<string, string>();
+			Dictionary<string, string> allowed = new Dictionary<string, string>();
+
+			required.Add("/asmv1:assembly[@manifestVersion]", "1.0");
+			required.Add("/asmv1:assembly/assemblyIdentity[@version]", "1.0.0.0");
+			required.Add("/asmv1:assembly/assemblyIdentity[@name]", "{0}.app".Display(Arguments.AssemblyName));
+			required.Add("/asmv1:assembly/trustInfo/security/requestedPrivileges/requestedExecutionLevel[@level]", "asInvoker");
+			required.Add("/asmv1:assembly/trustInfo/security/requestedPrivileges/requestedExecutionLevel[@uiAccess]", "false");
+			required.Add("/asmv1:assembly/trustInfo/security/applicationRequestMinimum/defaultAssemblyRequest[@permissionSetReference]", "Custom");
+			required.Add("/asmv1:assembly/trustInfo/security/applicationRequestMinimum/PermissionSet[@class]", "System.Security.PermissionSet");
+			required.Add("/asmv1:assembly/trustInfo/security/applicationRequestMinimum/PermissionSet[@version]", "1");
+			required.Add("/asmv1:assembly/trustInfo/security/applicationRequestMinimum/PermissionSet[@ID]", "Custom");
+			required.Add("/asmv1:assembly/trustInfo/security/applicationRequestMinimum/PermissionSet[@SameSite]", "site");
+			required.Add("/asmv1:assembly/trustInfo/security/applicationRequestMinimum/PermissionSet[@Unrestricted]", "true");
+			allowed.Add("/asmv1:assembly/compatibility/application", String.Empty);
+
+			string description;
+			if (ValidationHelper.CheckProperties(
+				properties,
+				required,
+				allowed,
+				out description))
+				return;
+
+			RaiseError.WrongManifestContents(description);
 		}
 
 		#endregion

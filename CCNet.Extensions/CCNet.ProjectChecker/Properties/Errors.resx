@@ -129,6 +129,13 @@ Use standard configurations only: Debug and Release.</value>
     <value>Some project properties for Debug configuration seem not to conform the agreements:
 {0}</value>
   </data>
+  <data name="WrongManifestContents" xml:space="preserve">
+    <value>Some manifest file contents seem not to conform the agreements:
+{0}</value>
+  </data>
+  <data name="WrongManifestFileLocation" xml:space="preserve">
+    <value>Manifest file should be named as App.manifest and should be placed in Properties folder.</value>
+  </data>
   <data name="WrongPlatform" xml:space="preserve">
     <value>Project is supposed to use the only {0} platform, but now it uses {1}.</value>
   </data>

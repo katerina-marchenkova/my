@@ -54,6 +54,14 @@ namespace CCNet.ProjectChecker
 				.Display(Arguments.ProjectName));
 		}
 
+		/// <summary>
+		/// Raises "WrongManifestFileLocation" error.
+		/// </summary>
+		public static void WrongManifestFileLocation()
+		{
+			RaiseInternal(Errors.WrongManifestFileLocation);
+		}
+
 		#endregion
 
 		#region Project properties errors
@@ -115,6 +123,20 @@ namespace CCNet.ProjectChecker
 		{
 			RaiseInternal(
 				Errors.WrongReleaseProperties
+				.Display(description));
+		}
+
+		#endregion
+
+		#region File contents errors
+
+		/// <summary>
+		/// Raises "WrongManifestContents" error.
+		/// </summary>
+		public static void WrongManifestContents(string description)
+		{
+			RaiseInternal(
+				Errors.WrongManifestContents
 				.Display(description));
 		}
 

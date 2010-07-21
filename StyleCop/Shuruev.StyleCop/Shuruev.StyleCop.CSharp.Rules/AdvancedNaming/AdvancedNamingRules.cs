@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
@@ -12,6 +13,7 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public class AdvancedNamingRules
 	{
+		private static object s_xxx = new object();
 		private readonly StyleCopPlus m_parent;
 
 		/// <summary>
@@ -362,6 +364,13 @@ namespace Shuruev.StyleCop.CSharp
 			CsElement element,
 			string nameToCheck)
 		{
+			//xxx
+			lock (s_xxx)
+			{
+				foreach (string word in SplitIntoWords(nameToCheck))
+					System.IO.File.AppendAllText(@"D:\Words.txt", word + Environment.NewLine);
+			}
+
 			Regex regex = settings.GetRegex(settingName);
 			if (regex == null)
 				return true;
@@ -430,6 +439,47 @@ namespace Shuruev.StyleCop.CSharp
 				friendlyName,
 				currentName,
 				example);
+		}
+
+		#endregion
+
+		#region XXX
+
+		/// <summary>
+		/// Splits specified name into words.
+		/// </summary>
+		public static List<string> SplitIntoWords(string name)
+		{
+			List<string> words = new List<string>();
+			StringBuilder word = new StringBuilder();
+			bool isLetter = false;
+			bool isDigit = false;
+			bool isUpper = false;
+			foreach (char c in name)
+			{
+				if (word.Length > 0)
+				{
+					if (Char.IsLetter(c) != isLetter
+						|| Char.IsDigit(c) != isDigit
+						|| (Char.IsLetter(c) && Char.IsUpper(c) && !isUpper))
+					{
+						words.Add(word.ToString());
+						word.Length = 0;
+					}
+				}
+
+				isLetter = Char.IsLetter(c);
+				isDigit = Char.IsDigit(c);
+				isUpper = Char.IsUpper(c);
+
+				if (isLetter || isDigit)
+					word.Append(c);
+			}
+
+			if (word.Length > 0)
+				words.Add(word.ToString());
+
+			return words;
 		}
 
 		#endregion

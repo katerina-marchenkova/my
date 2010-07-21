@@ -91,6 +91,25 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some manifest file contents seem not to conform the agreements:
+        ///{0}.
+        /// </summary>
+        internal static string WrongManifestContents {
+            get {
+                return ResourceManager.GetString("WrongManifestContents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manifest file should be named as App.manifest and should be placed in Properties folder..
+        /// </summary>
+        internal static string WrongManifestFileLocation {
+            get {
+                return ResourceManager.GetString("WrongManifestFileLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project is supposed to use the only {0} platform, but now it uses {1}..
         /// </summary>
         internal static string WrongPlatform {

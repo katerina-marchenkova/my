@@ -8,9 +8,9 @@ namespace CCNet.ProjectAdapter
 	public static class Arguments
 	{
 		/// <summary>
-		/// Default instance.
+		/// Gets or sets a default instance.
 		/// </summary>
-		public static ArgumentProperties Default;
+		public static ArgumentProperties Default { get; set; }
 
 		/// <summary>
 		/// Gets project name.

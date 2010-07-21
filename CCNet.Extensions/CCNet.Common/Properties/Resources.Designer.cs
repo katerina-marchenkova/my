@@ -61,11 +61,29 @@ namespace CCNet.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - found forbidden entry &quot;{0}&quot;.
+        /// </summary>
+        internal static string ForbiddenEntry {
+            get {
+                return ResourceManager.GetString("ForbiddenEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - property {0} is supposed to have value &quot;{1}&quot;, but now it is &quot;{2}&quot;.
         /// </summary>
         internal static string InvalidPropertyValue {
             get {
                 return ResourceManager.GetString("InvalidPropertyValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - missing required entry &quot;{0}&quot;.
+        /// </summary>
+        internal static string MissingRequiredEntry {
+            get {
+                return ResourceManager.GetString("MissingRequiredEntry", resourceCulture);
             }
         }
         

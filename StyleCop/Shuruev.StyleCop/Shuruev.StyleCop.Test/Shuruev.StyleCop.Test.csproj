@@ -84,6 +84,7 @@
     <Compile Include="BlockItem.cs" />
     <None Include="Resources\MoreCustomRules.cs" />
     <None Include="Resources\ExtendedOriginalRules.cs" />
+    <Compile Include="SimpleTests\UnknownTest.cs" />
     <Compile Include="StyleCopPlusTest.Modifier.cs" />
     <Compile Include="TestItem.cs" />
     <Compile Include="SimpleTests\CodeHelperTest.cs" />

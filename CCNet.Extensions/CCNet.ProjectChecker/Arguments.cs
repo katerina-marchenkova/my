@@ -37,6 +37,14 @@ namespace CCNet.ProjectChecker
 		}
 
 		/// <summary>
+		/// Gets assembly name.
+		/// </summary>
+		public static string AssemblyName
+		{
+			get { return Default.GetValue("AssemblyName"); }
+		}
+
+		/// <summary>
 		/// Gets project friendly name.
 		/// </summary>
 		public static string FriendlyName

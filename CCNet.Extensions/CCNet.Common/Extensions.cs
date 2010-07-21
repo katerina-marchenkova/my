@@ -49,13 +49,13 @@ namespace CCNet.Common
 
 			text = sb.ToString();
 
-			if (text.StartsWith(" "))
+			if (text.StartsWith(" ", StringComparison.Ordinal))
 			{
 				text = text.TrimStart(' ');
 				text = text.Insert(0, "&nbsp;");
 			}
 
-			if (text.EndsWith(" "))
+			if (text.EndsWith(" ", StringComparison.Ordinal))
 			{
 				text = text.TrimEnd(' ');
 				text = text.Insert(text.Length, "&nbsp;");
