@@ -21,27 +21,51 @@ namespace CCNet.ProjectAdapter
 		}
 
 		/// <summary>
-		/// Gets project path.
-		/// </summary>
-		public static string ProjectPath
-		{
-			get { return Default.GetValue("ProjectPath"); }
-		}
-
-		/// <summary>
-		/// Gets external path.
-		/// </summary>
-		public static string ExternalPath
-		{
-			get { return Default.GetValue("ExternalPath"); }
-		}
-
-		/// <summary>
 		/// Gets current version.
 		/// </summary>
 		public static string CurrentVersion
 		{
 			get { return Default.GetValue("CurrentVersion"); }
+		}
+
+		/// <summary>
+		/// Gets path for project source.
+		/// </summary>
+		public static string WorkingDirectorySource
+		{
+			get { return Default.GetValue("WorkingDirectorySource"); }
+		}
+
+		/// <summary>
+		/// Gets path for project external references.
+		/// </summary>
+		public static string WorkingDirectoryExternal
+		{
+			get { return Default.GetValue("WorkingDirectoryExternal"); }
+		}
+
+		/// <summary>
+		/// Gets path for project internal references.
+		/// </summary>
+		public static string WorkingDirectoryInternal
+		{
+			get { return Default.GetValue("WorkingDirectoryInternal"); }
+		}
+
+		/// <summary>
+		/// Gets path for external references.
+		/// </summary>
+		public static string ExternalReferencesPath
+		{
+			get { return Default.GetValue("ExternalReferencesPath"); }
+		}
+
+		/// <summary>
+		/// Gets path for internal references.
+		/// </summary>
+		public static string InternalReferencesPath
+		{
+			get { return Default.GetValue("InternalReferencesPath"); }
 		}
 	}
 }

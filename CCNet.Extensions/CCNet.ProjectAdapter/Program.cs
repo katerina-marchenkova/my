@@ -95,7 +95,8 @@ namespace CCNet.ProjectAdapter
 		/// </summary>
 		private static void UpdateExternalReferences()
 		{
-			if (!Directory.Exists(Arguments.ExternalPath))
+			// xxx тут нужно будет не искать внешние зависимости по шаре, а копировать оттуда уже найденные
+			if (!Directory.Exists(Arguments.ExternalReferencesPath))
 			{
 				Console.WriteLine(Resources.UpdateExternalReferencesNotFound);
 				return;
@@ -109,7 +110,7 @@ namespace CCNet.ProjectAdapter
 			XmlNamespaceManager xnm = new XmlNamespaceManager(doc.NameTable);
 			xnm.AddNamespace("ms", "http://schemas.microsoft.com/developer/msbuild/2003");
 
-			foreach (string external in Directory.GetFiles(Arguments.ExternalPath))
+			foreach (string external in Directory.GetFiles(Arguments.ExternalReferencesPath))
 			{
 				if (!external.EndsWith("dll", StringComparison.OrdinalIgnoreCase))
 					continue;

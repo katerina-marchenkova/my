@@ -14,16 +14,26 @@ namespace CCNet.Common
 		#region Parsing from XML
 
 		/// <summary>
+		/// Gets properties collection from an XML node.
+		/// </summary>
+		public static Dictionary<string, string> ParseFromXml(XmlNode node)
+		{
+			Contract.Requires(node != null);
+
+			Dictionary<string, string> properties = new Dictionary<string, string>();
+			ResearchNode(properties, String.Empty, node);
+
+			return properties;
+		}
+
+		/// <summary>
 		/// Gets properties collection from an XML document.
 		/// </summary>
 		public static Dictionary<string, string> ParseFromXml(XmlDocument document)
 		{
 			Contract.Requires(document != null);
 
-			Dictionary<string, string> properties = new Dictionary<string, string>();
-			ResearchNode(properties, String.Empty, document.DocumentElement);
-
-			return properties;
+			return ParseFromXml(document.DocumentElement);
 		}
 
 		/// <summary>

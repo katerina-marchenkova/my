@@ -141,5 +141,19 @@ namespace CCNet.ProjectChecker
 		}
 
 		#endregion
+
+		#region Project references errors
+
+		/// <summary>
+		/// Raises "WrongReferences" error.
+		/// </summary>
+		public static void WrongReferences(string description)
+		{
+			RaiseInternal(
+				Errors.WrongReferences
+				.Display(description));
+		}
+
+		#endregion
 	}
 }

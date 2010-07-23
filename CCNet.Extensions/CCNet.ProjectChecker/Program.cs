@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 using CCNet.Common;
 using CCNet.ProjectChecker.Properties;
@@ -70,6 +71,8 @@ namespace CCNet.ProjectChecker
 			CheckWrongReleaseProperties();
 
 			CheckWrongManifestContents();
+
+			CheckWrongReferences();
 		}
 
 		/// <summary>
@@ -89,7 +92,7 @@ namespace CCNet.ProjectChecker
 		/// </summary>
 		private static void CheckWrongProjectFileLocation()
 		{
-			string[] files = Directory.GetFiles(Arguments.ProjectPath, "*.csproj", SearchOption.AllDirectories);
+			string[] files = Directory.GetFiles(Arguments.WorkingDirectorySource, "*.csproj", SearchOption.AllDirectories);
 			if (files.Length == 1)
 			{
 				if (files[0] == Paths.ProjectFile)
@@ -107,7 +110,7 @@ namespace CCNet.ProjectChecker
 			if (Arguments.ProjectType != ProjectType.ClickOnce)
 				return;
 
-			string[] files = Directory.GetFiles(Arguments.ProjectPath, "App.manifest", SearchOption.AllDirectories);
+			string[] files = Directory.GetFiles(Arguments.WorkingDirectorySource, "App.manifest", SearchOption.AllDirectories);
 			if (files.Length == 1)
 			{
 				if (files[0] == Paths.ManifestFile)
@@ -436,6 +439,63 @@ namespace CCNet.ProjectChecker
 				return;
 
 			RaiseError.WrongManifestContents(description);
+		}
+
+		#endregion
+
+		#region Checking project references
+
+		/// <summary>
+		/// Checks "WrongReferences" condition.
+		/// </summary>
+		public static void CheckWrongReferences()
+		{
+			StringBuilder message = new StringBuilder();
+			List<Reference> references = ProjectHelper.GetAllReferences();
+
+			foreach (Reference reference in references)
+			{
+				CheckDirectlySpecifiedProperties(reference, message);
+
+				if (reference.Version != null && reference.SpecificVersion != "False")
+				{
+					message.AppendLine(
+						Strings.DontUseSpecificVersion
+						.Display(reference.Name));
+				}
+			}
+
+			if (message.Length == 0)
+				return;
+
+			RaiseError.WrongReferences(message.ToString());
+		}
+
+		/// <summary>
+		/// Checks properties that should not be specified directly.
+		/// </summary>
+		private static void CheckDirectlySpecifiedProperties(Reference reference, StringBuilder message)
+		{
+			if (reference.Aliases != null)
+			{
+				message.AppendLine(
+					Strings.DontSpecifyPropertyDirectly
+					.Display(reference.Name, "Aliases"));
+			}
+
+			if (reference.Private != null)
+			{
+				message.AppendLine(
+					Strings.DontSpecifyPropertyDirectly
+					.Display(reference.Name, "Copy Local"));
+			}
+
+			if (reference.EmbedInteropTypes != null)
+			{
+				message.AppendLine(
+					Strings.DontSpecifyPropertyDirectly
+					.Display(reference.Name, "Embed Interop Types"));
+			}
 		}
 
 		#endregion

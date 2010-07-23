@@ -16,7 +16,7 @@ namespace CCNet.ProjectAdapter
 			get
 			{
 				string projectFile = "{0}.csproj".Display(Arguments.ProjectName);
-				return Path.Combine(Arguments.ProjectPath, projectFile);
+				return Path.Combine(Arguments.WorkingDirectorySource, projectFile);
 			}
 		}
 
@@ -27,7 +27,7 @@ namespace CCNet.ProjectAdapter
 		{
 			get
 			{
-				string propertiesPath = Path.Combine(Arguments.ProjectPath, "Properties");
+				string propertiesPath = Path.Combine(Arguments.WorkingDirectorySource, "Properties");
 				return Path.Combine(propertiesPath, "AssemblyInfo.cs");
 			}
 		}

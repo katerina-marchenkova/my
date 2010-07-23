@@ -22,14 +22,14 @@ namespace CCNet.ProjectChecker.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CCNet.ProjectChecker.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CCNet.ProjectChecker.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CCNet.ProjectChecker.Properties.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,33 +61,20 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;&lt;b&gt;Error in project structure&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;
-        ///&lt;p&gt;&lt;i&gt;You could contact Oleg Shuruev for details.&lt;/i&gt;&lt;/p&gt;.
+        ///   Looks up a localized string similar to - {0} should not specify &quot;{1}&quot; property directly.
         /// </summary>
-        internal static string DescriptionHtml {
+        internal static string DontSpecifyPropertyDirectly {
             get {
-                return ResourceManager.GetString("DescriptionHtml", resourceCulture);
+                return ResourceManager.GetString("DontSpecifyPropertyDirectly", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;&lt;b&gt;Checking process has failed&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;
-        ///&lt;p&gt;&lt;i&gt;Please report Oleg Shuruev about this issue.&lt;/i&gt;&lt;/p&gt;.
+        ///   Looks up a localized string similar to - {0} should not use specific version.
         /// </summary>
-        internal static string ExceptionHtml {
+        internal static string DontUseSpecificVersion {
             get {
-                return ResourceManager.GetString("ExceptionHtml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Checks project during build process.
-        ///
-        ///CCNet.ProjectChecker.exe [Property1=Value1] [Property2=Value2] ....
-        /// </summary>
-        internal static string UsageInfo {
-            get {
-                return ResourceManager.GetString("UsageInfo", resourceCulture);
+                return ResourceManager.GetString("DontUseSpecificVersion", resourceCulture);
             }
         }
     }

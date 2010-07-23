@@ -13,7 +13,7 @@ namespace CCNet.ProjectChecker
 		/// </summary>
 		private static string PropertiesFolder
 		{
-			get { return Path.Combine(Arguments.ProjectPath, "Properties"); }
+			get { return Path.Combine(Arguments.WorkingDirectorySource, "Properties"); }
 		}
 
 		/// <summary>
@@ -24,7 +24,7 @@ namespace CCNet.ProjectChecker
 			get
 			{
 				string projectFile = "{0}.csproj".Display(Arguments.ProjectName);
-				return Path.Combine(Arguments.ProjectPath, projectFile);
+				return Path.Combine(Arguments.WorkingDirectorySource, projectFile);
 			}
 		}
 

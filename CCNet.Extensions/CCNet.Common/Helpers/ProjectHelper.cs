@@ -211,5 +211,90 @@ namespace CCNet.Common
 		}
 
 		#endregion
+
+		#region Project references
+
+		/// <summary>
+		/// Gets all common properties.
+		/// </summary>
+		public static List<Reference> GetAllReferences()
+		{
+			List<Reference> references = new List<Reference>();
+
+			foreach (XmlNode node in SelectNodes("/ms:Project/ms:ItemGroup/ms:Reference"))
+			{
+				Reference reference = new Reference();
+
+				Dictionary<string, string> properties = PropertiesHelper.ParseFromXml(node);
+				if (properties.ContainsKey("/Reference[@Include]"))
+				{
+					string include = "Name={0}".Display(properties["/Reference[@Include]"]);
+					properties.Remove("/Reference[@Include]");
+
+					ArgumentProperties args = ArgumentProperties.Parse(include.Split(','));
+					reference.Name = GetFromArgument(args, "Name");
+					reference.Version = GetFromArgument(args, "Version");
+					reference.Culture = GetFromArgument(args, "Culture");
+					reference.PublicKeyToken = GetFromArgument(args, "PublicKeyToken");
+					reference.ProcessorArchitecture = GetFromArgument(args, "processorArchitecture");
+
+					if (args.Keys.Count > 0)
+					{
+						throw new InvalidOperationException(
+							"Unknown reference include properties: {0}."
+							.Display(String.Join(", ", args.Keys)));
+					}
+				}
+
+				reference.SpecificVersion = GetFromProperty(properties, "/Reference/SpecificVersion");
+				reference.HintPath = GetFromProperty(properties, "/Reference/HintPath");
+				reference.Private = GetFromProperty(properties, "/Reference/Private");
+				reference.Aliases = GetFromProperty(properties, "/Reference/Aliases");
+				reference.EmbedInteropTypes = GetFromProperty(properties, "/Reference/EmbedInteropTypes");
+
+				if (properties.Keys.Count > 0)
+				{
+					throw new InvalidOperationException(
+						"Unknown reference child properties: {0}."
+						.Display(String.Join(", ", properties.Keys)));
+				}
+
+				references.Add(reference);
+			}
+
+			return references;
+		}
+
+		/// <summary>
+		/// Gets reference field from an argument.
+		/// </summary>
+		private static string GetFromArgument(ArgumentProperties args, string key)
+		{
+			string result = null;
+			if (args.Contains(key))
+			{
+				result = args.GetValue(key);
+				args.Remove(key);
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Gets reference field from a property.
+		/// </summary>
+		private static string GetFromProperty(IDictionary<string, string> properties, string key)
+		{
+			string result = null;
+			if (properties.ContainsKey(key))
+			{
+				result = properties[key];
+				properties.Remove(key);
+			}
+
+			return result;
+		}
+
+		#endregion
 	}
 }

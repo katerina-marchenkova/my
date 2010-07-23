@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="ArgumentProperties.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Helpers\Reference.cs" />
     <Compile Include="Helpers\PropertiesHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Helpers\ProjectHelper.cs" />

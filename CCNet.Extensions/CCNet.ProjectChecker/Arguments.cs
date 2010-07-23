@@ -21,11 +21,27 @@ namespace CCNet.ProjectChecker
 		}
 
 		/// <summary>
-		/// Gets project path.
+		/// Gets path for project source.
 		/// </summary>
-		public static string ProjectPath
+		public static string WorkingDirectorySource
 		{
-			get { return Default.GetValue("ProjectPath"); }
+			get { return Default.GetValue("WorkingDirectorySource"); }
+		}
+
+		/// <summary>
+		/// Gets path for external references.
+		/// </summary>
+		public static string ExternalReferencesPath
+		{
+			get { return Default.GetValue("ExternalReferencesPath"); }
+		}
+
+		/// <summary>
+		/// Gets path for internal references.
+		/// </summary>
+		public static string InternalReferencesPath
+		{
+			get { return Default.GetValue("InternalReferencesPath"); }
 		}
 
 		/// <summary>

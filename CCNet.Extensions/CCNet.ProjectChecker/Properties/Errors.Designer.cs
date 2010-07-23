@@ -128,6 +128,17 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some project references seem not to conform the agreements:
+        ///{0}
+        ///Try to resolve errors by removing references and adding them again in the right way..
+        /// </summary>
+        internal static string WrongReferences {
+            get {
+                return ResourceManager.GetString("WrongReferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some project properties for Release configuration seem not to conform the agreements:
         ///{0}.
         /// </summary>

@@ -31,12 +31,22 @@ namespace CCNet.Common
 		/// <summary>
 		/// Adds a new property.
 		/// </summary>
-		private void Add(string key, string value)
+		public void Add(string key, string value)
 		{
 			Contract.Requires(!String.IsNullOrEmpty(key));
 			Contract.Requires(value != null);
 
 			m_values[key] = value;
+		}
+
+		/// <summary>
+		/// Removes specified property.
+		/// </summary>
+		public void Remove(string key)
+		{
+			Contract.Requires(!String.IsNullOrEmpty(key));
+
+			m_values.Remove(key);
 		}
 
 		/// <summary>
@@ -68,13 +78,21 @@ namespace CCNet.Common
 		#region Getting property values
 
 		/// <summary>
+		/// Checks whether specified property exists.
+		/// </summary>
+		public bool Contains(string key)
+		{
+			Contract.Requires(!String.IsNullOrEmpty(key));
+
+			return m_values.ContainsKey(key);
+		}
+
+		/// <summary>
 		/// Gets property value for specified key.
 		/// </summary>
 		public string GetValue(string key)
 		{
-			Contract.Requires(!String.IsNullOrEmpty(key));
-
-			if (!m_values.ContainsKey(key))
+			if (!Contains(key))
 				throw new ArgumentException(
 					"Property {0} is not specified."
 					.Display(key));

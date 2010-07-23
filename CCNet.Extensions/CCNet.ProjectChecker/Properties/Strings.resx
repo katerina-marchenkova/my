@@ -117,17 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionHtml" xml:space="preserve">
-    <value>&lt;p&gt;&lt;b&gt;Error in project structure&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;
-&lt;p&gt;&lt;i&gt;You could contact Oleg Shuruev for details.&lt;/i&gt;&lt;/p&gt;</value>
+  <data name="DontSpecifyPropertyDirectly" xml:space="preserve">
+    <value>- {0} should not specify "{1}" property directly</value>
   </data>
-  <data name="ExceptionHtml" xml:space="preserve">
-    <value>&lt;p&gt;&lt;b&gt;Checking process has failed&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;
-&lt;p&gt;&lt;i&gt;Please report Oleg Shuruev about this issue.&lt;/i&gt;&lt;/p&gt;</value>
-  </data>
-  <data name="UsageInfo" xml:space="preserve">
-    <value>Checks project during build process.
-
-CCNet.ProjectChecker.exe [Property1=Value1] [Property2=Value2] ...</value>
+  <data name="DontUseSpecificVersion" xml:space="preserve">
+    <value>- {0} should not use specific version</value>
   </data>
 </root>
