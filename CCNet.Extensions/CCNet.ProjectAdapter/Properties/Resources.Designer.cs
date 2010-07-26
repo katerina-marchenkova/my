@@ -70,29 +70,20 @@ namespace CCNet.ProjectAdapter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updated external reference at {0} with hint &quot;{1}&quot;..
-        /// </summary>
-        internal static string UpdateExternalReferencesDone {
-            get {
-                return ResourceManager.GetString("UpdateExternalReferencesDone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No external references found..
-        /// </summary>
-        internal static string UpdateExternalReferencesNotFound {
-            get {
-                return ResourceManager.GetString("UpdateExternalReferencesNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Updated publish versions at {0} with value &quot;{1}&quot;..
         /// </summary>
         internal static string UpdatePublishVersionsDone {
             get {
                 return ResourceManager.GetString("UpdatePublishVersionsDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated reference {0} with hint &quot;{1}&quot;..
+        /// </summary>
+        internal static string UpdateReferencesDone {
+            get {
+                return ResourceManager.GetString("UpdateReferencesDone", resourceCulture);
             }
         }
         

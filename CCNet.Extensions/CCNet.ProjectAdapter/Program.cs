@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,9 +22,11 @@ namespace CCNet.ProjectAdapter
 			/*xxxargs = new[]
 			{
 				@"ProjectName=VortexCommander",
-				@"ProjectPath=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\WorkingDirectory\Source",
-				@"ExternalPath=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\WorkingDirectory\External",
-				@"CurrentVersion=1.2.3"
+				@"CurrentVersion=1.2.3",
+				@"ReferencesDirectory=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\References",
+				@"WorkingDirectorySource=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\WorkingDirectory\Source",
+				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
+				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences"
 			};*/
 
 			if (args == null || args.Length == 0)
@@ -36,7 +39,7 @@ namespace CCNet.ProjectAdapter
 
 			UpdateAssemblyInfo();
 			UpdatePublishVersions();
-			UpdateExternalReferences();
+			UpdateReferences();
 		}
 
 		/// <summary>
@@ -91,17 +94,10 @@ namespace CCNet.ProjectAdapter
 		}
 
 		/// <summary>
-		/// Updates hint paths for external references.
+		/// Updates hint paths for references.
 		/// </summary>
-		private static void UpdateExternalReferences()
+		private static void UpdateReferences()
 		{
-			// xxx тут нужно будет не искать внешние зависимости по шаре, а копировать оттуда уже найденные
-			if (!Directory.Exists(Arguments.ExternalReferencesPath))
-			{
-				Console.WriteLine(Resources.UpdateExternalReferencesNotFound);
-				return;
-			}
-
 			string text = File.ReadAllText(Paths.ProjectFile);
 
 			XmlDocument doc = new XmlDocument();
@@ -110,15 +106,32 @@ namespace CCNet.ProjectAdapter
 			XmlNamespaceManager xnm = new XmlNamespaceManager(doc.NameTable);
 			xnm.AddNamespace("ms", "http://schemas.microsoft.com/developer/msbuild/2003");
 
-			foreach (string external in Directory.GetFiles(Arguments.ExternalReferencesPath))
-			{
-				if (!external.EndsWith("dll", StringComparison.OrdinalIgnoreCase))
-					continue;
+			List<ReferenceFile> allExternals = ReferenceFolder.GetAllFiles(Arguments.ExternalReferencesPath);
+			List<ReferenceFile> allInternals = ReferenceFolder.GetAllFiles(Arguments.InternalReferencesPath);
 
-				string name = Path.GetFileNameWithoutExtension(external);
+			UpdateHints(doc, xnm, allExternals);
+			UpdateHints(doc, xnm, allInternals);
+
+			using (XmlTextWriter xtw = new XmlTextWriter(Paths.ProjectFile, Encoding.UTF8))
+			{
+				xtw.Formatting = Formatting.Indented;
+				doc.WriteTo(xtw);
+			}
+		}
+
+		/// <summary>
+		/// Updates hint paths for resolved references.
+		/// </summary>
+		private static void UpdateHints(
+			XmlDocument doc,
+			XmlNamespaceManager xnm,
+			IEnumerable<ReferenceFile> references)
+		{
+			foreach (ReferenceFile reference in references)
+			{
 				XmlNode node = doc.SelectSingleNode(
 					"/ms:Project/ms:ItemGroup/ms:Reference[starts-with(@Include, '{0},')]"
-					.Display(name),
+					.Display(reference.AssemblyName),
 					xnm);
 
 				if (node == null)
@@ -129,20 +142,14 @@ namespace CCNet.ProjectAdapter
 					node.RemoveChild(hint);
 
 				hint = doc.CreateElement("HintPath", xnm.LookupNamespace("ms"));
-				hint.InnerXml = external;
+				hint.InnerXml = reference.FilePath;
 
 				node.AppendChild(hint);
 
 				Console.WriteLine(
-					Resources.UpdateExternalReferencesDone,
-					Paths.ProjectFile,
-					external);
-			}
-
-			using (XmlTextWriter xtw = new XmlTextWriter(Paths.ProjectFile, Encoding.UTF8))
-			{
-				xtw.Formatting = Formatting.Indented;
-				doc.WriteTo(xtw);
+					Resources.UpdateReferencesDone,
+					reference.AssemblyName,
+					reference.FilePath);
 			}
 		}
 

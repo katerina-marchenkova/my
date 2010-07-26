@@ -21,6 +21,14 @@ namespace CCNet.ProjectChecker
 		}
 
 		/// <summary>
+		/// Gets path for project references folder.
+		/// </summary>
+		public static string ReferencesDirectory
+		{
+			get { return Default.GetValue("ReferencesDirectory"); }
+		}
+
+		/// <summary>
 		/// Gets path for project source.
 		/// </summary>
 		public static string WorkingDirectorySource

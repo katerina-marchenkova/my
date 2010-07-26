@@ -71,5 +71,17 @@ namespace CCNet.Common
 		}
 
 		#endregion
+
+		#region DateTime extensions
+
+		/// <summary>
+		/// Get universal and sortable date/time string.
+		/// </summary>
+		public static string ToUniversalString(this DateTime dateTime)
+		{
+			return dateTime.ToString("yyyy-MM-dd HH.mm.ss", CultureInfo.InvariantCulture);
+		}
+
+		#endregion
 	}
 }

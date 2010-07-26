@@ -102,13 +102,13 @@ namespace CCNet.Common
 		#region Checking entries
 
 		/// <summary>
-		/// Checks text entries.
+		/// Checks collection entries.
 		/// Returns true if everything is correct.
 		/// </summary>
 		public static bool CheckEntries(
-			string text,
+			ICollection<string> items,
 			IEnumerable<string> required,
-			IEnumerable<string> forbidden,
+			IEnumerable<string> allowed,
 			out string description)
 		{
 			Contract.Ensures(
@@ -121,24 +121,31 @@ namespace CCNet.Common
 			description = null;
 			StringBuilder message = new StringBuilder();
 
-			foreach (string line in required)
+			foreach (string item in required)
 			{
-				if (!text.Contains(line))
+				if (!items.Contains(item))
 				{
 					message.AppendLine(
-						Resources.MissingRequiredProperty
-						.Display(line));
+						Resources.MissingRequiredEntry
+						.Display(item));
 				}
 			}
 
-			foreach (string line in forbidden)
+			foreach (string item in required)
 			{
-				if (text.Contains(line))
-				{
-					message.AppendLine(
-						Resources.ForbiddenEntry
-						.Display(line));
-				}
+				items.Remove(item);
+			}
+
+			foreach (string item in allowed)
+			{
+				items.Remove(item);
+			}
+
+			foreach (string item in items)
+			{
+				message.AppendLine(
+					Resources.UnexpectedEntry
+					.Display(item));
 			}
 
 			if (message.Length == 0)

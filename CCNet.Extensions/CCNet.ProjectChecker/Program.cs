@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using CCNet.Common;
@@ -20,16 +21,19 @@ namespace CCNet.ProjectChecker
 		{
 			/*xxxargs = new[]
 			{
-				@"ProjectName=ConsoleApplication1",
-				@"ProjectPath=C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\ConsoleApplication1\ConsoleApplication1",
+				@"ProjectName=VortexCommander",
+				@"ReferencesDirectory=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\References",
+				@"WorkingDirectorySource=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\WorkingDirectory\Source",
+				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
+				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
 				@"ProjectType=ClickOnce",
-				@"AssemblyName=ConsoleApplication12",
-				@"FriendlyName=123",
+				@"AssemblyName=VortexCommander",
+				@"FriendlyName=Vortex Commander",
 				@"DownloadZone=Public",
 				@"VisualStudioVersion=2010",
-				@"TargetFramework=Net40",
-				@"TargetPlatform=x86",
-				@"RootNamespace=ConsoleApplication1",
+				@"TargetFramework=Net20",
+				@"TargetPlatform=AnyCPU",
+				@"RootNamespace=VortexCommander",
 				@"SuppressWarnings="
 			};*/
 
@@ -453,6 +457,78 @@ namespace CCNet.ProjectChecker
 			StringBuilder message = new StringBuilder();
 			List<Reference> references = ProjectHelper.GetAllReferences();
 
+			CheckReferenceProperties(references, message);
+
+			List<ReferenceFile> allExternals = ReferenceFolder.GetAllFiles(Arguments.ExternalReferencesPath);
+			List<ReferenceFile> allInternals = ReferenceFolder.GetAllFiles(Arguments.InternalReferencesPath);
+			List<ReferenceFile> usedExternals = new List<ReferenceFile>();
+			List<ReferenceFile> usedInternals = new List<ReferenceFile>();
+			List<Reference> usedGac = new List<Reference>();
+
+			foreach (Reference reference in references)
+			{
+				ReferenceFile usedExternal = allExternals.Where(file => file.AssemblyName == reference.Name).FirstOrDefault();
+				ReferenceFile usedInternal = allInternals.Where(file => file.AssemblyName == reference.Name).FirstOrDefault();
+
+				if (usedExternal != null)
+				{
+					usedExternals.Add(usedExternal);
+				}
+				else if (usedInternal != null)
+				{
+					usedInternals.Add(usedInternal);
+				}
+				else
+				{
+					usedGac.Add(reference);
+				}
+			}
+
+			ReferenceMark.SetupActual(
+				ReferenceType.External,
+				Arguments.ReferencesDirectory,
+				usedExternals.Select(item => item.ProjectName).Distinct());
+
+			ReferenceMark.SetupActual(
+				ReferenceType.Internal,
+				Arguments.ReferencesDirectory,
+				usedInternals.Select(item => item.ProjectName).Distinct());
+
+			List<string> requiredGac = new List<string>();
+			List<string> allowedGac = new List<string>();
+			allowedGac.Add("System");
+			allowedGac.Add("System.Core");
+			allowedGac.Add("System.configuration");
+			allowedGac.Add("System.Data");
+			allowedGac.Add("System.Data.DataSetExtensions");
+			allowedGac.Add("System.Deployment");
+			allowedGac.Add("System.Drawing");
+			allowedGac.Add("System.Web.Services");
+			allowedGac.Add("System.Windows.Forms");
+			allowedGac.Add("System.Xml");
+			allowedGac.Add("System.Xml.Linq");
+
+			string entriesDescription;
+			if (!ValidationHelper.CheckEntries(
+				usedGac.Select(reference => reference.Name).ToList(),
+				requiredGac,
+				allowedGac,
+				out entriesDescription))
+			{
+				message.Append(entriesDescription);
+			}
+
+			if (message.Length == 0)
+				return;
+
+			RaiseError.WrongReferences(message.ToString());
+		}
+
+		/// <summary>
+		/// Checks properties that should not be specified directly.
+		/// </summary>
+		private static void CheckReferenceProperties(IEnumerable<Reference> references, StringBuilder message)
+		{
 			foreach (Reference reference in references)
 			{
 				CheckDirectlySpecifiedProperties(reference, message);
@@ -464,11 +540,6 @@ namespace CCNet.ProjectChecker
 						.Display(reference.Name));
 				}
 			}
-
-			if (message.Length == 0)
-				return;
-
-			RaiseError.WrongReferences(message.ToString());
 		}
 
 		/// <summary>
