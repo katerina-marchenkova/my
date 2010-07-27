@@ -17,14 +17,13 @@ namespace CCNet.ProjectAdapter
 		/// <summary>
 		/// Main program.
 		/// </summary>
-		public static void Main(string[] args)
+		public static int Main(string[] args)
 		{
 			/*xxxargs = new[]
 			{
 				@"ProjectName=VortexCommander",
 				@"CurrentVersion=1.2.3",
-				@"ReferencesDirectory=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\References",
-				@"WorkingDirectorySource=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\WorkingDirectory\Source",
+				@"WorkingDirectorySource=\\rufrt-vxbuild\e$\CCNET\VortexCommander\WorkingDirectory\Source",
 				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
 				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences"
 			};*/
@@ -32,14 +31,23 @@ namespace CCNet.ProjectAdapter
 			if (args == null || args.Length == 0)
 			{
 				DisplayUsage();
-				return;
+				return 0;
 			}
 
-			Arguments.Default = ArgumentProperties.Parse(args);
+			try
+			{
+				Arguments.Default = ArgumentProperties.Parse(args);
 
-			UpdateAssemblyInfo();
-			UpdatePublishVersions();
-			UpdateReferences();
+				UpdateAssemblyInfo();
+				UpdatePublishVersions();
+				UpdateReferences();
+			}
+			catch (Exception e)
+			{
+				return ErrorHandler.Runtime(e);
+			}
+
+			return 0;
 		}
 
 		/// <summary>
@@ -105,6 +113,11 @@ namespace CCNet.ProjectAdapter
 
 			XmlNamespaceManager xnm = new XmlNamespaceManager(doc.NameTable);
 			xnm.AddNamespace("ms", "http://schemas.microsoft.com/developer/msbuild/2003");
+
+			foreach (XmlNode node in doc.SelectNodes("/ms:Project/ms:ItemGroup/ms:Reference/ms:HintPath", xnm))
+			{
+				node.ParentNode.RemoveChild(node);
+			}
 
 			List<ReferenceFile> allExternals = ReferenceFolder.GetAllFiles(Arguments.ExternalReferencesPath);
 			List<ReferenceFile> allInternals = ReferenceFolder.GetAllFiles(Arguments.InternalReferencesPath);

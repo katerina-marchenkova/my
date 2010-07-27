@@ -28,18 +28,6 @@ namespace CCNet.ProjectChecker
 				message.ToHtml());
 		}
 
-		/// <summary>
-		/// Raises an error indicating runtime exception.
-		/// </summary>
-		public static void RuntimeException(Exception exception)
-		{
-			ExitCode = 1;
-
-			Console.Error.WriteLine(
-				Resources.ExceptionHtml,
-				exception.ToString().ToHtml());
-		}
-
 		#endregion
 
 		#region File structure errors

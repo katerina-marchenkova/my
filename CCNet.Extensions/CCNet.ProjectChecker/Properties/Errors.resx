@@ -143,7 +143,7 @@ Use standard configurations only: Debug and Release.</value>
     <value>Project file should be named as {0}.csproj and should be placed in project root folder.</value>
   </data>
   <data name="WrongReferences" xml:space="preserve">
-    <value>Some project references seem not to conform the agreements:
+    <value>Some references seem not to conform the agreements:
 {0}
 Try to resolve errors by removing references and adding them again in the right way.</value>
   </data>

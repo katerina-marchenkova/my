@@ -22,8 +22,8 @@ namespace CCNet.ProjectChecker
 			/*xxxargs = new[]
 			{
 				@"ProjectName=VortexCommander",
-				@"ReferencesDirectory=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\References",
-				@"WorkingDirectorySource=\\rufrt-vxbuild\d$\VSS\CCNET\VortexCommander\WorkingDirectory\Source",
+				@"ReferencesDirectory=\\rufrt-vxbuild\e$\CCNET\VortexCommander\References",
+				@"WorkingDirectorySource=\\rufrt-vxbuild\e$\CCNET\VortexCommander\WorkingDirectory\Source",
 				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
 				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
 				@"ProjectType=ClickOnce",
@@ -50,7 +50,7 @@ namespace CCNet.ProjectChecker
 			}
 			catch (Exception e)
 			{
-				RaiseError.RuntimeException(e);
+				return ErrorHandler.Runtime(e);
 			}
 
 			return RaiseError.ExitCode;
@@ -455,8 +455,15 @@ namespace CCNet.ProjectChecker
 		public static void CheckWrongReferences()
 		{
 			StringBuilder message = new StringBuilder();
-			List<Reference> references = ProjectHelper.GetAllReferences();
+			List<string> projects = ProjectHelper.GetProjectReferences();
+			foreach (string project in projects)
+			{
+				message.AppendLine(
+					Strings.DontUseProjectReference
+					.Display(project));
+			}
 
+			List<Reference> references = ProjectHelper.GetBinaryReferences();
 			CheckReferenceProperties(references, message);
 
 			List<ReferenceFile> allExternals = ReferenceFolder.GetAllFiles(Arguments.ExternalReferencesPath);

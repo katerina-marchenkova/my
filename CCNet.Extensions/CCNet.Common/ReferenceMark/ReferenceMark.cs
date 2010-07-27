@@ -44,9 +44,25 @@ namespace CCNet.Common
 		#region Setting marks
 
 		/// <summary>
+		/// Gets name for file that marks reference file.
+		/// </summary>
+		public static string GetReferenceMarkName(string referenceName)
+		{
+			return "{0}.txt".Display(referenceName);
+		}
+
+		/// <summary>
+		/// Gets name for file that marks reference folder.
+		/// </summary>
+		public static string GetFolderMarkName()
+		{
+			return "Update.txt";
+		}
+
+		/// <summary>
 		/// Marks specified file as updated.
 		/// </summary>
-		private static void MarkUpdatedFile(string fileName)
+		public static void MarkUpdatedFile(string fileName)
 		{
 			File.WriteAllText(fileName, DateTime.Now.ToUniversalString());
 		}
@@ -54,9 +70,9 @@ namespace CCNet.Common
 		/// <summary>
 		/// Marks reference file as updated.
 		/// </summary>
-		private static void MarkUpdatedReference(ReferenceType referenceType, string referencesDirectory, string referenceName)
+		public static void MarkUpdatedReference(ReferenceType referenceType, string referencesDirectory, string referenceName)
 		{
-			string fileName = "{0}.txt".Display(referenceName);
+			string fileName = GetReferenceMarkName(referenceName);
 			string path = GetEndPath(referenceType, referencesDirectory);
 			MarkUpdatedFile(Path.Combine(path, fileName));
 		}
@@ -66,7 +82,7 @@ namespace CCNet.Common
 		/// </summary>
 		private static void MarkUpdatedFolder(string referencesDirectory)
 		{
-			string fileName = "Update.txt";
+			string fileName = GetFolderMarkName();
 			MarkUpdatedFile(Path.Combine(referencesDirectory, fileName));
 		}
 

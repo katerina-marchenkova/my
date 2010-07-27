@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CCNet.Common
 {
+	/// <summary>
+	/// Contains extension methods.
+	/// </summary>
 	public static class Extensions
 	{
 		#region String extensions

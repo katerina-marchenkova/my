@@ -215,9 +215,9 @@ namespace CCNet.Common
 		#region Project references
 
 		/// <summary>
-		/// Gets all common properties.
+		/// Gets binary references.
 		/// </summary>
-		public static List<Reference> GetAllReferences()
+		public static List<Reference> GetBinaryReferences()
 		{
 			List<Reference> references = new List<Reference>();
 
@@ -293,6 +293,31 @@ namespace CCNet.Common
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Gets project references.
+		/// </summary>
+		public static List<string> GetProjectReferences()
+		{
+			List<string> references = new List<string>();
+
+			foreach (XmlNode node in SelectNodes("/ms:Project/ms:ItemGroup/ms:ProjectReference"))
+			{
+				string reference = Resources.Unknown;
+				if (node.Attributes != null)
+				{
+					XmlAttribute attr = node.Attributes["Include"];
+					if (attr != null)
+					{
+						reference = attr.Value;
+					}
+				}
+
+				references.Add(reference);
+			}
+
+			return references;
 		}
 
 		#endregion

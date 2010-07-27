@@ -117,13 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionHtml" xml:space="preserve">
-    <value>&lt;p&gt;&lt;b&gt;Error in project structure&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;
-&lt;p&gt;&lt;i&gt;You could contact Oleg Shuruev for details.&lt;/i&gt;&lt;/p&gt;</value>
+  <data name="PerformNotificationsDone" xml:space="preserve">
+    <value>Updated reference mark {0}.</value>
   </data>
   <data name="UsageInfo" xml:space="preserve">
-    <value>Checks project during build process.
+    <value>Notifies other projects about successful build.
 
-CCNet.ProjectChecker.exe [Property1=Value1] [Property2=Value2] ...</value>
+CCNet.ProjectNotifier.exe [Property1=Value1] [Property2=Value2] ...</value>
   </data>
 </root>

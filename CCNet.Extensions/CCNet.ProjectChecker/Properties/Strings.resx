@@ -120,6 +120,9 @@
   <data name="DontSpecifyPropertyDirectly" xml:space="preserve">
     <value>- {0} should not specify "{1}" property directly</value>
   </data>
+  <data name="DontUseProjectReference" xml:space="preserve">
+    <value>- {0} should be a reference to a binary, not to a project</value>
+  </data>
   <data name="DontUseSpecificVersion" xml:space="preserve">
     <value>- {0} should not use specific version</value>
   </data>

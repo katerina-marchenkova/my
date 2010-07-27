@@ -70,6 +70,15 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - {0} should be a reference to a binary, not to a project.
+        /// </summary>
+        internal static string DontUseProjectReference {
+            get {
+                return ResourceManager.GetString("DontUseProjectReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - {0} should not use specific version.
         /// </summary>
         internal static string DontUseSpecificVersion {

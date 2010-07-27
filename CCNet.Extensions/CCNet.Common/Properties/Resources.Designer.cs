@@ -61,6 +61,16 @@ namespace CCNet.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;&lt;b&gt;Running {0} has failed&lt;/b&gt;:&lt;br /&gt;{1}&lt;/p&gt;
+        ///&lt;p&gt;&lt;i&gt;Please report Oleg Shuruev about this issue.&lt;/i&gt;&lt;/p&gt;.
+        /// </summary>
+        internal static string ExceptionHtml {
+            get {
+                return ResourceManager.GetString("ExceptionHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - property {0} is supposed to have value &quot;{1}&quot;, but now it is &quot;{2}&quot;.
         /// </summary>
         internal static string InvalidPropertyValue {

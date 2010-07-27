@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCNet.ProjectChecker.Properties {
+namespace CCNet.ProjectNotifier.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CCNet.ProjectChecker.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CCNet.ProjectChecker.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CCNet.ProjectNotifier.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,19 +61,18 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;&lt;b&gt;Error in project structure&lt;/b&gt;:&lt;br /&gt;{0}&lt;/p&gt;
-        ///&lt;p&gt;&lt;i&gt;You could contact Oleg Shuruev for details.&lt;/i&gt;&lt;/p&gt;.
+        ///   Looks up a localized string similar to Updated reference mark {0}..
         /// </summary>
-        internal static string DescriptionHtml {
+        internal static string PerformNotificationsDone {
             get {
-                return ResourceManager.GetString("DescriptionHtml", resourceCulture);
+                return ResourceManager.GetString("PerformNotificationsDone", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checks project during build process.
+        ///   Looks up a localized string similar to Notifies other projects about successful build.
         ///
-        ///CCNet.ProjectChecker.exe [Property1=Value1] [Property2=Value2] ....
+        ///CCNet.ProjectNotifier.exe [Property1=Value1] [Property2=Value2] ....
         /// </summary>
         internal static string UsageInfo {
             get {
