@@ -178,7 +178,7 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			required.Add("AppDesignerFolder", "Properties");
+			allowed.Add("AppDesignerFolder", "Properties");
 
 			switch (Arguments.ProjectType)
 			{
@@ -191,9 +191,13 @@ namespace CCNet.ProjectChecker
 			}
 
 			required.Add("AssemblyName", Arguments.AssemblyName);
-			allowed.Add("AssemblyOriginatorKeyFile", null);
+			allowed.Add("AssemblyKeyContainerName", String.Empty);
+			allowed.Add("AssemblyOriginatorKeyFile", String.Empty);
 			allowed.Add("CodeContractsAssemblyMode", null);
 			allowed.Add("Configuration", null);
+			allowed.Add("DefaultClientScript", null);
+			allowed.Add("DefaultHTMLPageLayout", null);
+			allowed.Add("DefaultTargetSchema", null);
 			allowed.Add("DelaySign", "false");
 			allowed.Add("FileAlignment", "512");
 			allowed.Add("FileUpgradeFlags", null);
@@ -215,6 +219,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("PreBuildEvent", String.Empty);
 			allowed.Add("ProductVersion", null);
 			allowed.Add("ProjectGuid", null);
+			allowed.Add("ProjectType", "Local");
 			allowed.Add("PublishWizardCompleted", null);
 			required.Add("RootNamespace", Arguments.RootNamespace);
 			allowed.Add("RunPostBuildEvent", "OnBuildSuccess");
@@ -300,6 +305,9 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
+			allowed.Add("AllowUnsafeBlocks", "false");
+			allowed.Add("BaseAddress", "285212672");
+			allowed.Add("CheckForOverflowUnderflow", "false");
 			allowed.Add("CodeAnalysisRuleSet", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
@@ -322,16 +330,22 @@ namespace CCNet.ProjectChecker
 			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
 			allowed.Add("CodeContractsShowSquigglies", null);
 			allowed.Add("CodeContractsUseBaseLine", null);
+			allowed.Add("ConfigurationOverrideFile", String.Empty);
 			required.Add("DebugSymbols", "true");
 			required.Add("DebugType", "full");
 			required.Add("DefineConstants", "DEBUG;TRACE");
 			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.AssemblyName));
 			required.Add("ErrorReport", "prompt");
+			allowed.Add("FileAlignment", "512");
 			allowed.Add("FxCopRules", null);
+			allowed.Add("NoStdLib", "false");
 			allowed.Add("NoWarn", Arguments.SuppressWarnings);
 			required.Add("Optimize", "false");
 			required.Add("OutputPath", @"bin\Debug\");
 			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
+			allowed.Add("RegisterForComInterop", "false");
+			allowed.Add("RemoveIntegerChecks", "false");
+			allowed.Add("TreatWarningsAsErrors", "false");
 			required.Add("WarningLevel", "4");
 			allowed.Add("UseVSHostingProcess", null);
 
@@ -355,6 +369,9 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
+			allowed.Add("AllowUnsafeBlocks", "false");
+			allowed.Add("BaseAddress", "285212672");
+			allowed.Add("CheckForOverflowUnderflow", "false");
 			allowed.Add("CodeAnalysisRuleSet", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
@@ -377,16 +394,22 @@ namespace CCNet.ProjectChecker
 			allowed.Add("CodeContractsRuntimeThrowOnFailure", null);
 			allowed.Add("CodeContractsShowSquigglies", null);
 			allowed.Add("CodeContractsUseBaseLine", null);
+			allowed.Add("ConfigurationOverrideFile", String.Empty);
 			allowed.Add("DebugSymbols", "true");
 			required.Add("DebugType", "pdbonly");
 			required.Add("DefineConstants", "TRACE");
 			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.AssemblyName));
 			required.Add("ErrorReport", "prompt");
+			allowed.Add("FileAlignment", "512");
 			allowed.Add("FxCopRules", null);
+			allowed.Add("NoStdLib", "false");
 			allowed.Add("NoWarn", Arguments.SuppressWarnings);
 			required.Add("Optimize", "true");
 			required.Add("OutputPath", @"bin\Release\");
 			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
+			allowed.Add("RegisterForComInterop", "false");
+			allowed.Add("RemoveIntegerChecks", "false");
+			allowed.Add("TreatWarningsAsErrors", "false");
 			required.Add("WarningLevel", "4");
 			allowed.Add("UseVSHostingProcess", null);
 
@@ -503,15 +526,19 @@ namespace CCNet.ProjectChecker
 
 			List<string> requiredGac = new List<string>();
 			List<string> allowedGac = new List<string>();
+			allowedGac.Add("Microsoft.mshtml");
 			allowedGac.Add("System");
 			allowedGac.Add("System.Core");
+			allowedGac.Add("System.Configuration");
 			allowedGac.Add("System.configuration");
 			allowedGac.Add("System.Data");
 			allowedGac.Add("System.Data.DataSetExtensions");
 			allowedGac.Add("System.Deployment");
+			allowedGac.Add("System.Design");
 			allowedGac.Add("System.Drawing");
 			allowedGac.Add("System.Web.Services");
 			allowedGac.Add("System.Windows.Forms");
+			allowedGac.Add("System.XML");
 			allowedGac.Add("System.Xml");
 			allowedGac.Add("System.Xml.Linq");
 
