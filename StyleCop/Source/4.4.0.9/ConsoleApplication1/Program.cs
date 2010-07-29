@@ -1,43 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
 using Microsoft.StyleCop;
 
 namespace Shuruev.StyleCop.Run
 {
 	/// <summary>
-	/// Running StyleCop environment.
+	/// Simple example for running StyleCop environment.
 	/// </summary>
 	public class Program
 	{
-		private static readonly string basePath = AppDomain.CurrentDomain.BaseDirectory;
-		private static readonly string sourceFile = @"C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\Microsoft.StyleCop\ConsoleApplication1\Program.cs";
-
 		/// <summary>
 		/// Main program entry.
 		/// </summary>
 		public static void Main(string[] args)
 		{
-			StyleCopConsole console = new StyleCopConsole(
-				null,
-				false,
-				null,
-				new List<string>(new[] { basePath }),
-				true);
+			string projectPath = @"C:\Users\Public\GIT\My\StyleCop\Source\4.4.0.9\ConsoleApplication1";
+			string filePath = @"C:\Users\Public\GIT\My\StyleCop\Source\4.4.0.9\ConsoleApplication1\Class1.cs";
 
-			Configuration configuration = new Configuration(null);
-			CodeProject project = new CodeProject(0, basePath, configuration);
+			StyleCopConsole console = new StyleCopConsole(null, false, null, null, true);
+			CodeProject project = new CodeProject(0, projectPath, new Configuration(null));
 
-			console.Core.Environment.AddSourceCode(project, sourceFile, null);
-
-			List<CodeProject> projects = new List<CodeProject>();
-			projects.Add(project);
+			console.Core.Environment.AddSourceCode(project, filePath, null);
 
 			console.OutputGenerated += OnOutputGenerated;
 			console.ViolationEncountered += OnViolationEncountered;
-			console.Start(projects, true);
+			console.Start(new[] { project }, true);
 			console.OutputGenerated -= OnOutputGenerated;
 			console.ViolationEncountered -= OnViolationEncountered;
 			console.Dispose();
@@ -60,14 +46,6 @@ namespace Shuruev.StyleCop.Run
 		private static void OnViolationEncountered(object sender, ViolationEventArgs e)
 		{
 			Console.WriteLine("{0}: {1}", e.Violation.Rule.CheckId, e.Message);
-		}
-
-		/// <summary>
-		/// Test method.
-		/// </summary>
-		private static void Test1()
-		{
-			bool flag = (bool)typeof(Uri).InvokeMember(null, BindingFlags.Default, null, null, null);
 		}
 	}
 }
