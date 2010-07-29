@@ -6,13 +6,18 @@
 	public enum ProjectType
 	{
 		/// <summary>
+		/// ClickOnce application.
+		/// </summary>
+		ClickOnce,
+
+		/// <summary>
 		/// Console application.
 		/// </summary>
 		Console,
 
 		/// <summary>
-		/// ClickOnce application.
+		/// Class library.
 		/// </summary>
-		ClickOnce
+		Library
 	}
 }

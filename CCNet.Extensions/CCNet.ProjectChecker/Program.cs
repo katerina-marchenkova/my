@@ -37,6 +37,22 @@ namespace CCNet.ProjectChecker
 				@"SuppressWarnings="
 			};*/
 
+			/*xxxargs = new[]
+			{
+				@"ProjectName=VXStudioWindowsControls",
+				@"ReferencesDirectory=C:\Users\Public\VSS\SED\TFS\VXStudio\VXStudioWindowsControls-Refs",
+				@"WorkingDirectorySource=C:\Users\Public\VSS\SED\TFS\VXStudio\VXStudioWindowsControls",
+				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
+				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
+				@"ProjectType=Library",
+				@"AssemblyName=VXStudioWindowsControls",
+				@"VisualStudioVersion=2008",
+				@"TargetFramework=Net20",
+				@"TargetPlatform=AnyCPU",
+				@"RootNamespace=VX.Studio.WindowsControls",
+				@"SuppressWarnings=1591"
+			};*/
+
 			if (args == null || args.Length == 0)
 			{
 				DisplayUsage();
@@ -182,11 +198,11 @@ namespace CCNet.ProjectChecker
 
 			switch (Arguments.ProjectType)
 			{
-				case ProjectType.Console:
-					allowed.Add("ApplicationIcon", String.Empty);
-					break;
 				case ProjectType.ClickOnce:
 					required.Add("ApplicationIcon", null);
+					break;
+				case ProjectType.Console:
+					allowed.Add("ApplicationIcon", String.Empty);
 					break;
 			}
 
@@ -206,11 +222,14 @@ namespace CCNet.ProjectChecker
 
 			switch (Arguments.ProjectType)
 			{
+				case ProjectType.ClickOnce:
+					required.Add("OutputType", "WinExe");
+					break;
 				case ProjectType.Console:
 					required.Add("OutputType", "Exe");
 					break;
-				case ProjectType.ClickOnce:
-					required.Add("OutputType", "WinExe");
+				case ProjectType.Library:
+					required.Add("OutputType", "Library");
 					break;
 			}
 
@@ -260,7 +279,7 @@ namespace CCNet.ProjectChecker
 					required.Add("UseApplicationTrust", "false");
 					break;
 				default:
-					required.Add("GenerateManifests", "false");
+					allowed.Add("GenerateManifests", "false");
 					allowed.Add("SignManifests", "true");
 					break;
 			}
