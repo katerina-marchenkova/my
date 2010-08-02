@@ -62,6 +62,15 @@ namespace CCNet.ProjectNotifier
 			{
 				ReferenceMark.MarkUpdatedFile(file);
 
+				string path = Path.GetDirectoryName(file);
+				path = Path.GetDirectoryName(path);
+				path = Path.GetDirectoryName(path);
+				string projectName = Path.GetFileName(path);
+
+				Console.WriteLine(
+					Resources.LogReferencedBy,
+					projectName);
+
 				Console.WriteLine(
 					Resources.PerformNotificationsDone,
 					file);

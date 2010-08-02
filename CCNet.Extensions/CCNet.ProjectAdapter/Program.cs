@@ -21,11 +21,11 @@ namespace CCNet.ProjectAdapter
 		{
 			/*xxxargs = new[]
 			{
-				@"ProjectName=VortexCommander",
+				@"ProjectName=VXStudioWindowsControls",
 				@"CurrentVersion=1.2.3",
-				@"WorkingDirectorySource=\\rufrt-vxbuild\e$\CCNET\VortexCommander\WorkingDirectory\Source",
+				@"WorkingDirectorySource=C:\Users\Public\VSS\SED\TFS\VXStudio\VXStudioWindowsControls",
 				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
-				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences"
+				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
 			};*/
 
 			if (args == null || args.Length == 0)
@@ -158,6 +158,11 @@ namespace CCNet.ProjectAdapter
 				hint.InnerXml = reference.FilePath;
 
 				node.AppendChild(hint);
+
+				Console.WriteLine(
+					Resources.LogReferencesTo,
+					reference.ProjectName,
+					reference.Version);
 
 				Console.WriteLine(
 					Resources.UpdateReferencesDone,

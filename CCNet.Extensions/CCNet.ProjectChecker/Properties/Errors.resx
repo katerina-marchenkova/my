@@ -121,6 +121,13 @@
     <value>Found unknown configuration {0}.
 Use standard configurations only: Debug and Release.</value>
   </data>
+  <data name="WrongAssemblyInfoContents" xml:space="preserve">
+    <value>Some assembly information seem not to conform the agreements:
+{0}</value>
+  </data>
+  <data name="WrongAssemblyInfoFileLocation" xml:space="preserve">
+    <value>Assembly information file should be named as AssemblyInfo.cs and should be placed in Properties folder.</value>
+  </data>
   <data name="WrongCommonProperties" xml:space="preserve">
     <value>Some project properties seem not to conform the agreements:
 {0}</value>

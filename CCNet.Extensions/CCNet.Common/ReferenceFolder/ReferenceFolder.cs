@@ -9,6 +9,16 @@ namespace CCNet.Common
 	public static class ReferenceFolder
 	{
 		/// <summary>
+		/// Gets latest reference version.
+		/// </summary>
+		private static string GetLatestVersion(string referenceFolder, string referenceProject)
+		{
+			string path = Path.Combine(referenceFolder, referenceProject);
+			path = Path.Combine(path, "LatestLabel.txt");
+			return File.ReadAllText(path).Trim();
+		}
+
+		/// <summary>
 		/// Gets path for latest reference version.
 		/// </summary>
 		private static string GetLatestPath(string referenceFolder, string referenceProject)
@@ -26,6 +36,7 @@ namespace CCNet.Common
 
 			foreach (string dir in Directory.GetDirectories(referenceFolder))
 			{
+				string latestVersion = GetLatestVersion(referenceFolder, dir);
 				string latestPath = GetLatestPath(referenceFolder, dir);
 				foreach (string file in Directory.GetFiles(latestPath, "*.dll"))
 				{
@@ -33,7 +44,8 @@ namespace CCNet.Common
 					{
 						ProjectName = Path.GetFileName(dir),
 						FilePath = file,
-						AssemblyName = Path.GetFileNameWithoutExtension(file)
+						AssemblyName = Path.GetFileNameWithoutExtension(file),
+						Version = latestVersion
 					});
 				}
 			}

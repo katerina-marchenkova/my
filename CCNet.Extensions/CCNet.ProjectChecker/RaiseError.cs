@@ -50,6 +50,14 @@ namespace CCNet.ProjectChecker
 			RaiseInternal(Errors.WrongManifestFileLocation);
 		}
 
+		/// <summary>
+		/// Raises "WrongAssemblyInfoFileLocation" error.
+		/// </summary>
+		public static void WrongAssemblyInfoFileLocation()
+		{
+			RaiseInternal(Errors.WrongAssemblyInfoFileLocation);
+		}
+
 		#endregion
 
 		#region Project properties errors
@@ -125,6 +133,16 @@ namespace CCNet.ProjectChecker
 		{
 			RaiseInternal(
 				Errors.WrongManifestContents
+				.Display(description));
+		}
+
+		/// <summary>
+		/// Raises "WrongAssemblyInfoContents" error.
+		/// </summary>
+		public static void WrongAssemblyInfoContents(string description)
+		{
+			RaiseInternal(
+				Errors.WrongAssemblyInfoContents
 				.Display(description));
 		}
 

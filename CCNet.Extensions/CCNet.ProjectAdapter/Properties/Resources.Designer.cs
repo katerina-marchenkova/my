@@ -61,6 +61,15 @@ namespace CCNet.ProjectAdapter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [REFERENCES TO] {0} ({1}).
+        /// </summary>
+        internal static string LogReferencesTo {
+            get {
+                return ResourceManager.GetString("LogReferencesTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updated assembly info at {0} with value &quot;{1}&quot;..
         /// </summary>
         internal static string UpdateAssemblyInfoDone {

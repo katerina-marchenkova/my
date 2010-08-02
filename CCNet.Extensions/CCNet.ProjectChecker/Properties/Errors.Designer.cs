@@ -71,6 +71,25 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some assembly information seem not to conform the agreements:
+        ///{0}.
+        /// </summary>
+        internal static string WrongAssemblyInfoContents {
+            get {
+                return ResourceManager.GetString("WrongAssemblyInfoContents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assembly information file should be named as AssemblyInfo.cs and should be placed in Properties folder..
+        /// </summary>
+        internal static string WrongAssemblyInfoFileLocation {
+            get {
+                return ResourceManager.GetString("WrongAssemblyInfoFileLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some project properties seem not to conform the agreements:
         ///{0}.
         /// </summary>

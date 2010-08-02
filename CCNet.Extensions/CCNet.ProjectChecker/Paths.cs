@@ -23,8 +23,8 @@ namespace CCNet.ProjectChecker
 		{
 			get
 			{
-				string projectFile = "{0}.csproj".Display(Arguments.ProjectName);
-				return Path.Combine(Arguments.WorkingDirectorySource, projectFile);
+				string file = "{0}.csproj".Display(Arguments.ProjectName);
+				return Path.Combine(Arguments.WorkingDirectorySource, file);
 			}
 		}
 
@@ -35,8 +35,20 @@ namespace CCNet.ProjectChecker
 		{
 			get
 			{
-				string manifestFile = "App.manifest";
-				return Path.Combine(PropertiesFolder, manifestFile);
+				string file = "App.manifest";
+				return Path.Combine(PropertiesFolder, file);
+			}
+		}
+
+		/// <summary>
+		/// Gets assembly information file path.
+		/// </summary>
+		public static string AssemblyInfoFile
+		{
+			get
+			{
+				string file = "AssemblyInfo.cs";
+				return Path.Combine(PropertiesFolder, file);
 			}
 		}
 	}

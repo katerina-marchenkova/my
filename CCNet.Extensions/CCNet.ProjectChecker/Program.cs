@@ -34,7 +34,8 @@ namespace CCNet.ProjectChecker
 				@"TargetFramework=Net20",
 				@"TargetPlatform=AnyCPU",
 				@"RootNamespace=VortexCommander",
-				@"SuppressWarnings="
+				@"SuppressWarnings=",
+				@"ExpectedVersion=1.0.0.0"
 			};*/
 
 			/*xxxargs = new[]
@@ -50,7 +51,8 @@ namespace CCNet.ProjectChecker
 				@"TargetFramework=Net20",
 				@"TargetPlatform=AnyCPU",
 				@"RootNamespace=VX.Studio.WindowsControls",
-				@"SuppressWarnings=1591"
+				@"SuppressWarnings=1591",
+				@"ExpectedVersion=1.0.0.0"
 			};*/
 
 			if (args == null || args.Length == 0)
@@ -79,6 +81,7 @@ namespace CCNet.ProjectChecker
 		{
 			CheckWrongProjectFileLocation();
 			CheckWrongManifestFileLocation();
+			CheckWrongAssemblyInfoFileLocation();
 			if (RaiseError.ExitCode > 0)
 				return;
 
@@ -91,6 +94,7 @@ namespace CCNet.ProjectChecker
 			CheckWrongReleaseProperties();
 
 			CheckWrongManifestContents();
+			CheckWrongAssemblyInfoContents();
 
 			CheckWrongReferences();
 		}
@@ -138,6 +142,21 @@ namespace CCNet.ProjectChecker
 			}
 
 			RaiseError.WrongManifestFileLocation();
+		}
+
+		/// <summary>
+		/// Checks "WrongAssemblyInfoFileLocation" condition.
+		/// </summary>
+		private static void CheckWrongAssemblyInfoFileLocation()
+		{
+			string[] files = Directory.GetFiles(Arguments.WorkingDirectorySource, "AssemblyInfo.cs", SearchOption.AllDirectories);
+			if (files.Length == 1)
+			{
+				if (files[0] == Paths.AssemblyInfoFile)
+					return;
+			}
+
+			RaiseError.WrongAssemblyInfoFileLocation();
 		}
 
 		#endregion
@@ -485,6 +504,51 @@ namespace CCNet.ProjectChecker
 				return;
 
 			RaiseError.WrongManifestContents(description);
+		}
+
+		/// <summary>
+		/// Checks "WrongAssemblyInfoContents" condition.
+		/// </summary>
+		public static void CheckWrongAssemblyInfoContents()
+		{
+			string[] lines = File.ReadAllLines(Paths.AssemblyInfoFile);
+
+			Dictionary<string, string> properties = PropertiesHelper.ParseFromAssemblyInfo(lines);
+			Dictionary<string, string> required = new Dictionary<string, string>();
+			Dictionary<string, string> allowed = new Dictionary<string, string>();
+
+			if (Arguments.ProjectType == ProjectType.ClickOnce)
+			{
+				required.Add("AssemblyTitle", Arguments.FriendlyName);
+				required.Add("AssemblyProduct", Arguments.FriendlyName);
+			}
+			else
+			{
+				required.Add("AssemblyTitle", Arguments.AssemblyName);
+				required.Add("AssemblyProduct", Arguments.AssemblyName);
+			}
+
+			required.Add("AssemblyDescription", String.Empty);
+			required.Add("AssemblyConfiguration", String.Empty);
+			required.Add("AssemblyCompany", "CNET Content Solutions");
+			required.Add("AssemblyCopyright", "Copyright © CNET Content Solutions 2010");
+			required.Add("AssemblyTrademark", String.Empty);
+			required.Add("AssemblyCulture", String.Empty);
+			required.Add("AssemblyVersion", Arguments.ExpectedVersion);
+
+			allowed.Add("NeutralResourcesLanguage", "en");
+			allowed.Add("ComVisible", "false");
+			allowed.Add("Guid", null);
+
+			string description;
+			if (ValidationHelper.CheckProperties(
+				properties,
+				required,
+				allowed,
+				out description))
+				return;
+
+			RaiseError.WrongAssemblyInfoContents(description);
 		}
 
 		#endregion

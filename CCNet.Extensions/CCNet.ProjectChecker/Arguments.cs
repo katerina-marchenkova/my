@@ -123,5 +123,13 @@ namespace CCNet.ProjectChecker
 		{
 			get { return Default.GetValue("SuppressWarnings"); }
 		}
+
+		/// <summary>
+		/// Gets expected version.
+		/// </summary>
+		public static string ExpectedVersion
+		{
+			get { return Default.GetValue("ExpectedVersion"); }
+		}
 	}
 }

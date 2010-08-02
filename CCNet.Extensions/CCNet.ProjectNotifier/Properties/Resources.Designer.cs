@@ -61,6 +61,15 @@ namespace CCNet.ProjectNotifier.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [REFERENCED BY] {0}.
+        /// </summary>
+        internal static string LogReferencedBy {
+            get {
+                return ResourceManager.GetString("LogReferencedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updated reference mark {0}..
         /// </summary>
         internal static string PerformNotificationsDone {

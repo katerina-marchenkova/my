@@ -19,5 +19,10 @@
 		/// Assembly name.
 		/// </summary>
 		public string AssemblyName { get; set; }
+
+		/// <summary>
+		/// Version.
+		/// </summary>
+		public string Version { get; set; }
 	}
 }

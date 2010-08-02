@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace CCNet.Common
@@ -106,6 +107,60 @@ namespace CCNet.Common
 			{
 				node.RemoveChild(child);
 			}
+		}
+
+		#endregion
+
+		#region Parsing from assembly information file
+
+		private static readonly Regex s_usingRegex = new Regex(@"^using [\w.]+;$");
+		private static readonly Regex s_commentRegex = new Regex(@"^(//)|(// .*)$");
+		private static readonly Regex s_propertyRegex = new Regex(@"^\[assembly: (?<Name>\w+)\((?<Value>.*)\)]$");
+
+		/// <summary>
+		/// Gets properties collection from an assembly information file.
+		/// </summary>
+		public static Dictionary<string, string> ParseFromAssemblyInfo(IEnumerable<string> fileLines)
+		{
+			Contract.Requires(fileLines != null);
+			Contract.Requires(fileLines.Any());
+
+			Dictionary<string, string> properties = new Dictionary<string, string>();
+			foreach (string line in fileLines)
+			{
+				ResearchLine(properties, line);
+			}
+
+			return properties;
+		}
+
+		/// <summary>
+		/// Reseraches specified line.
+		/// </summary>
+		private static void ResearchLine(Dictionary<string, string> properties, string line)
+		{
+			if (String.IsNullOrWhiteSpace(line))
+				return;
+
+			if (s_usingRegex.IsMatch(line))
+				return;
+
+			if (s_commentRegex.IsMatch(line))
+				return;
+
+			if (s_propertyRegex.IsMatch(line))
+			{
+				Match match = s_propertyRegex.Match(line);
+				string name = match.Groups["Name"].Value;
+				string value = match.Groups["Value"].Value.Trim('"');
+				properties.Add(name, value);
+
+				return;
+			}
+
+			throw new InvalidOperationException(
+				"Line '{0}' was not expected in assembly information file."
+				.Display(line));
 		}
 
 		#endregion
