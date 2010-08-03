@@ -70,33 +70,6 @@ namespace CCNet.ProjectAdapter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updated assembly info at {0} with value &quot;{1}&quot;..
-        /// </summary>
-        internal static string UpdateAssemblyInfoDone {
-            get {
-                return ResourceManager.GetString("UpdateAssemblyInfoDone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updated publish versions at {0} with value &quot;{1}&quot;..
-        /// </summary>
-        internal static string UpdatePublishVersionsDone {
-            get {
-                return ResourceManager.GetString("UpdatePublishVersionsDone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updated reference {0} with hint &quot;{1}&quot;..
-        /// </summary>
-        internal static string UpdateReferencesDone {
-            get {
-                return ResourceManager.GetString("UpdateReferencesDone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Updates project during build process.
         ///
         ///CCNet.ProjectAdapter.exe [Property1=Value1] [Property2=Value2] ....

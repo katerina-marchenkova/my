@@ -16,6 +16,11 @@
 		public string FilePath { get; set; }
 
 		/// <summary>
+		/// File name.
+		/// </summary>
+		public string FileName { get; set; }
+
+		/// <summary>
 		/// Assembly name.
 		/// </summary>
 		public string AssemblyName { get; set; }

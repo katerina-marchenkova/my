@@ -44,6 +44,7 @@ namespace CCNet.Common
 					{
 						ProjectName = Path.GetFileName(dir),
 						FilePath = file,
+						FileName = Path.GetFileName(file),
 						AssemblyName = Path.GetFileNameWithoutExtension(file),
 						Version = latestVersion
 					});

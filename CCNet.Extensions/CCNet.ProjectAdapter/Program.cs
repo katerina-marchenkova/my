@@ -39,8 +39,8 @@ namespace CCNet.ProjectAdapter
 				Arguments.Default = ArgumentProperties.Parse(args);
 
 				UpdateAssemblyInfo();
-				UpdatePublishVersions();
-				UpdateReferences();
+				UpdateProjectProperties();
+				UpdateProjectReferences();
 			}
 			catch (Exception e)
 			{
@@ -73,17 +73,12 @@ namespace CCNet.ProjectAdapter
 			text = regex.Replace(text, "[assembly: AssemblyVersion(\"" + Arguments.CurrentVersion + "\")]");
 
 			File.WriteAllText(Paths.AssemblyInfoFile, text, Encoding.UTF8);
-
-			Console.WriteLine(
-				Resources.UpdateAssemblyInfoDone,
-				Paths.AssemblyInfoFile,
-				Arguments.CurrentVersion);
 		}
 
 		/// <summary>
-		/// Updates publish versions.
+		/// Updates project properties.
 		/// </summary>
-		private static void UpdatePublishVersions()
+		private static void UpdateProjectProperties()
 		{
 			string text = File.ReadAllText(Paths.ProjectFile);
 
@@ -93,18 +88,15 @@ namespace CCNet.ProjectAdapter
 			regex = new Regex("<ApplicationVersion>[0-9\\.\\*]+</ApplicationVersion>");
 			text = regex.Replace(text, "<ApplicationVersion>" + Arguments.CurrentVersion + "</ApplicationVersion>");
 
-			File.WriteAllText(Paths.ProjectFile, text, Encoding.UTF8);
+			text = text.Replace("<GenerateManifests>false</GenerateManifests>", "<GenerateManifests>true</GenerateManifests>");
 
-			Console.WriteLine(
-				Resources.UpdatePublishVersionsDone,
-				Paths.ProjectFile,
-				Arguments.CurrentVersion);
+			File.WriteAllText(Paths.ProjectFile, text, Encoding.UTF8);
 		}
 
 		/// <summary>
-		/// Updates hint paths for references.
+		/// Updates project references.
 		/// </summary>
-		private static void UpdateReferences()
+		private static void UpdateProjectReferences()
 		{
 			string text = File.ReadAllText(Paths.ProjectFile);
 
@@ -161,13 +153,8 @@ namespace CCNet.ProjectAdapter
 
 				Console.WriteLine(
 					Resources.LogReferencesTo,
-					reference.ProjectName,
+					reference.FileName,
 					reference.Version);
-
-				Console.WriteLine(
-					Resources.UpdateReferencesDone,
-					reference.AssemblyName,
-					reference.FilePath);
 			}
 		}
 

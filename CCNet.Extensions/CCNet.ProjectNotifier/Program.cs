@@ -70,10 +70,6 @@ namespace CCNet.ProjectNotifier
 				Console.WriteLine(
 					Resources.LogReferencedBy,
 					projectName);
-
-				Console.WriteLine(
-					Resources.PerformNotificationsDone,
-					file);
 			}
 		}
 

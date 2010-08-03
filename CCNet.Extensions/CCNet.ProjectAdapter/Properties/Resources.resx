@@ -120,15 +120,6 @@
   <data name="LogReferencesTo" xml:space="preserve">
     <value>[REFERENCES TO] {0} ({1})</value>
   </data>
-  <data name="UpdateAssemblyInfoDone" xml:space="preserve">
-    <value>Updated assembly info at {0} with value "{1}".</value>
-  </data>
-  <data name="UpdatePublishVersionsDone" xml:space="preserve">
-    <value>Updated publish versions at {0} with value "{1}".</value>
-  </data>
-  <data name="UpdateReferencesDone" xml:space="preserve">
-    <value>Updated reference {0} with hint "{1}".</value>
-  </data>
   <data name="UsageInfo" xml:space="preserve">
     <value>Updates project during build process.
 

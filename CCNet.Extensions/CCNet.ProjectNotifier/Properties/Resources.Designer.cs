@@ -70,15 +70,6 @@ namespace CCNet.ProjectNotifier.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updated reference mark {0}..
-        /// </summary>
-        internal static string PerformNotificationsDone {
-            get {
-                return ResourceManager.GetString("PerformNotificationsDone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Notifies other projects about successful build.
         ///
         ///CCNet.ProjectNotifier.exe [Property1=Value1] [Property2=Value2] ....

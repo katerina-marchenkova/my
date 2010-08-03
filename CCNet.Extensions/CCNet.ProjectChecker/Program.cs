@@ -275,7 +275,7 @@ namespace CCNet.ProjectChecker
 					required.Add("ApplicationRevision", "0");
 					required.Add("ApplicationVersion", "1.0.0.0");
 					required.Add("BootstrapperEnabled", "true");
-					required.Add("GenerateManifests", "true");
+					required.Add("GenerateManifests", "false");
 					required.Add("Install", "true");
 					required.Add("InstallFrom", "Web");
 					required.Add("InstallUrl", "http://download.cnetcontentsolutions.com/{0}/{1}/".Display(Arguments.DownloadZone, Arguments.AssemblyName));
