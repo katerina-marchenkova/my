@@ -220,7 +220,7 @@ namespace CCNet.ProjectChecker
 				case ProjectType.ClickOnce:
 					required.Add("ApplicationIcon", null);
 					break;
-				case ProjectType.Console:
+				default:
 					allowed.Add("ApplicationIcon", String.Empty);
 					break;
 			}
