@@ -1,0 +1,111 @@
+﻿body
+{
+}
+
+.Item
+{
+	border: 1px solid #808080;
+	margin: 4px 0px 4px 0px;
+}
+
+.Group
+{
+	background-color: #EEEEEE;
+}
+
+.Mkt
+{
+	background-color: #CEE7FE;
+}
+
+.Ksp
+{
+	background-color: #F3DADA;
+}
+
+.Image
+{
+	background-color: #FAF3C3;
+}
+
+.Attribute
+{
+	background-color: #C4F3C3;
+}
+
+.Content
+{
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border: 1px solid #C0C0C0;
+	padding: 2px 2px 2px 2px;
+	background-color: #FFFFFF;
+	white-space: nowrap;
+}
+
+.Double
+{
+	width: 110px;
+}
+
+.Triple
+{
+	width: 170px;
+}
+
+.Fourfold
+{
+	width: 230px;
+}
+
+.Icon
+{
+	margin-top: 2px;
+	margin-left: 1px;
+}
+
+.Mark
+{
+	background-color: #80A8F1;
+	color: #FFFFFF;
+	font-family: Sans-Serif;
+	font-size: 7pt;
+	text-align: center;
+}
+
+.Text
+{
+	font-family: Serif;
+	font-size: 10pt;
+	white-space: normal;
+}
+
+.Title
+{
+	font-family: Sans-Serif;
+	font-size: 7pt;
+	padding: 4px 2px 0px 2px;
+}
+
+.Description
+{
+	font-family: Sans-Serif;
+	font-size: 7pt;
+	padding: 2px 1px 0px 1px;
+	white-space: normal;
+}
+
+.Properties
+{
+	font-family: Sans-Serif;
+	font-size: 7pt;
+	padding: 0px 4px 0px 2px;
+	white-space: nowrap;
+}
+
+.Template
+{
+	text-decoration: underline;
+	text-align: center;
+}
