@@ -22,6 +22,7 @@ namespace SolutionHelper
 			CommandText = "Adjust Solution (Beta)";
 			CommandTooltip = "Adjusts solution according to the internal development practices";
 			CommandBarCode = "Solution";
+			IconBitmapCode = 1;
 		}
 	}
 }

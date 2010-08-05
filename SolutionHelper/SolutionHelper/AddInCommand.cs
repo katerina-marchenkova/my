@@ -40,6 +40,11 @@ namespace SolutionHelper
 		/// </summary>
 		public string CommandBarCode { get; protected set; }
 
+		/// <summary>
+		/// Gets command icon bitmap code.
+		/// </summary>
+		public int IconBitmapCode { get; protected set; }
+
 		#region Properties
 
 		/// <summary>
@@ -80,15 +85,12 @@ namespace SolutionHelper
 		private Command CreateCommand(AddIn addInInstance, Commands2 commands)
 		{
 			return commands.AddNamedCommand2(
-				AddInInstance: addInInstance,
-				Name: CommandName,
-				ButtonText: CommandText,
-				Tooltip: CommandTooltip,
-				MSOButton: true,
-				Bitmap: 62,
-				vsCommandStatusValue: (int)vsCommandStatus.vsCommandStatusSupported + (int)vsCommandStatus.vsCommandStatusEnabled,
-				CommandStyleFlags: (int)vsCommandStyle.vsCommandStylePictAndText,
-				ControlType: vsCommandControlType.vsCommandControlTypeButton);
+				addInInstance,
+				CommandName,
+				CommandText,
+				CommandTooltip,
+				false,
+				IconBitmapCode);
 		}
 
 		/// <summary>

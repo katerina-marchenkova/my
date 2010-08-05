@@ -60,6 +60,22 @@ namespace SolutionHelper.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _1 {
+            get {
+                object obj = ResourceManager.GetObject("1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your solution was successfully adjusted..
+        /// </summary>
+        internal static string AdjustDone {
+            get {
+                return ResourceManager.GetString("AdjustDone", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Project {0} references {1} as a project.
         ///Consider using binary reference instead..
@@ -67,6 +83,13 @@ namespace SolutionHelper.Properties {
         internal static string DontUseProjectReferences {
             get {
                 return ResourceManager.GetString("DontUseProjectReferences", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Logo {
+            get {
+                object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

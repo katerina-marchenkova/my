@@ -62,12 +62,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AddInCommand.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="ProjectExtensions.cs" />
     <Compile Include="ProjectAdapter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RunForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RunForm.Designer.cs">
+      <DependentUpon>RunForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +130,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\1.bmp" />
+    <None Include="Resources\Logo.png" />
     <Content Include="SolutionHelper.2008.AddIn">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -132,6 +151,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RunForm.resx">
+      <DependentUpon>RunForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />

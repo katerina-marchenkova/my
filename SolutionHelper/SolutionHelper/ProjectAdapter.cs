@@ -70,13 +70,13 @@ namespace SolutionHelper
 		/// <summary>
 		/// Analyzes and adjusts all solution projects.
 		/// </summary>
-		public void Adjust(DTE2 applicationObject)
+		public void Adjust(DTE2 applicationObject, string baseReferencePaths)
 		{
 			Initialize(applicationObject);
 
 			foreach (string assemblyName in m_projects.Keys)
 			{
-				SetupReferencePaths(assemblyName);
+				SetupReferencePaths(assemblyName, baseReferencePaths);
 				SetupDependencies(assemblyName);
 			}
 		}
@@ -84,7 +84,7 @@ namespace SolutionHelper
 		/// <summary>
 		/// Setups reference paths for specified project.
 		/// </summary>
-		private void SetupReferencePaths(string assemblyName)
+		private void SetupReferencePaths(string assemblyName, string baseReferencePaths)
 		{
 			Project project = m_projects[assemblyName];
 
@@ -94,8 +94,7 @@ namespace SolutionHelper
 				.Select(reference => m_projects[reference.Name])
 				.Select(refProj => refProj.GetDebugOutputPath()));
 
-			paths.Add(@"D:\references\Internal\");
-			paths.Add(@"D:\references\External\");
+			paths.Add(baseReferencePaths);
 
 			Property property = project.Properties.Item("ReferencePath");
 			property.Value = String.Join(";", paths.ToArray());
