@@ -1,0 +1,2 @@
+*\SolutionHelper.dll.config
+*\SolutionHelper.pdb
