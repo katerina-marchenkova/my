@@ -28,6 +28,15 @@ namespace CCNet.ProjectAdapter
 				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
 			};*/
 
+			/*xxxargs = new[]
+			{
+				@"ProjectName=QualityReviewManagementTool.Core",
+				@"CurrentVersion=10.8.9.12",
+				@"WorkingDirectorySource=\\rufrt-vxbuild\e$\CCNET\QualityReviewManagementTool.Core\WorkingDirectory\Source",
+				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
+				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
+			};*/
+
 			if (args == null || args.Length == 0)
 			{
 				DisplayUsage();
@@ -135,7 +144,7 @@ namespace CCNet.ProjectAdapter
 			foreach (ReferenceFile reference in references)
 			{
 				XmlNode node = doc.SelectSingleNode(
-					"/ms:Project/ms:ItemGroup/ms:Reference[starts-with(@Include, '{0},')]"
+					"/ms:Project/ms:ItemGroup/ms:Reference[starts-with(@Include, '{0}')]"
 					.Display(reference.AssemblyName),
 					xnm);
 
