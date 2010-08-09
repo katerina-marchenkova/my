@@ -11,6 +11,11 @@
 		ClickOnce,
 
 		/// <summary>
+		/// Web site.
+		/// </summary>
+		WebSite,
+
+		/// <summary>
 		/// Console application.
 		/// </summary>
 		Console,

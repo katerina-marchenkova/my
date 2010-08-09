@@ -54,5 +54,10 @@
 		/// Embedding options.
 		/// </summary>
 		public string EmbedInteropTypes { get; set; }
+
+		/// <summary>
+		/// Required target framework.
+		/// </summary>
+		public string RequiredTargetFramework { get; set; }
 	}
 }

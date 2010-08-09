@@ -251,6 +251,7 @@ namespace CCNet.Common
 				reference.Private = GetFromProperty(properties, "/Reference/Private");
 				reference.Aliases = GetFromProperty(properties, "/Reference/Aliases");
 				reference.EmbedInteropTypes = GetFromProperty(properties, "/Reference/EmbedInteropTypes");
+				reference.RequiredTargetFramework = GetFromProperty(properties, "/Reference/RequiredTargetFramework");
 
 				if (properties.Keys.Count > 0)
 				{

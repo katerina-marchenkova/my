@@ -237,6 +237,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("FileAlignment", "512");
 			allowed.Add("FileUpgradeFlags", null);
 			allowed.Add("GenerateResourceNeverLockTypeAssemblies", "true");
+			allowed.Add("MvcBuildViews", null);
 			allowed.Add("OldToolsVersion", null);
 
 			switch (Arguments.ProjectType)
@@ -247,6 +248,7 @@ namespace CCNet.ProjectChecker
 				case ProjectType.Console:
 					required.Add("OutputType", "Exe");
 					break;
+				case ProjectType.WebSite:
 				case ProjectType.Library:
 					required.Add("OutputType", "Library");
 					break;
@@ -258,6 +260,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("ProductVersion", null);
 			allowed.Add("ProjectGuid", null);
 			allowed.Add("ProjectType", "Local");
+			allowed.Add("ProjectTypeGuids", null);
 			allowed.Add("PublishWizardCompleted", null);
 			required.Add("RootNamespace", Arguments.RootNamespace);
 			allowed.Add("RunPostBuildEvent", "OnBuildSuccess");
@@ -372,14 +375,25 @@ namespace CCNet.ProjectChecker
 			required.Add("DebugSymbols", "true");
 			required.Add("DebugType", "full");
 			required.Add("DefineConstants", "DEBUG;TRACE");
-			required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.AssemblyName));
 			required.Add("ErrorReport", "prompt");
 			allowed.Add("FileAlignment", "512");
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoStdLib", "false");
 			allowed.Add("NoWarn", Arguments.SuppressWarnings);
 			required.Add("Optimize", "false");
-			required.Add("OutputPath", @"bin\Debug\");
+
+			switch (Arguments.ProjectType)
+			{
+				case ProjectType.WebSite:
+					required.Add("OutputPath", @"bin\");
+					required.Add("DocumentationFile", @"bin\{0}.xml".Display(Arguments.AssemblyName));
+					break;
+				default:
+					required.Add("OutputPath", @"bin\Debug\");
+					required.Add("DocumentationFile", @"bin\Debug\{0}.xml".Display(Arguments.AssemblyName));
+					break;
+			}
+
 			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
 			allowed.Add("RegisterForComInterop", "false");
 			allowed.Add("RemoveIntegerChecks", "false");
@@ -436,14 +450,25 @@ namespace CCNet.ProjectChecker
 			allowed.Add("DebugSymbols", "true");
 			required.Add("DebugType", "pdbonly");
 			required.Add("DefineConstants", "TRACE");
-			required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.AssemblyName));
 			required.Add("ErrorReport", "prompt");
 			allowed.Add("FileAlignment", "512");
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoStdLib", "false");
 			allowed.Add("NoWarn", Arguments.SuppressWarnings);
 			required.Add("Optimize", "true");
-			required.Add("OutputPath", @"bin\Release\");
+
+			switch (Arguments.ProjectType)
+			{
+				case ProjectType.WebSite:
+					required.Add("OutputPath", @"bin\");
+					required.Add("DocumentationFile", @"bin\{0}.xml".Display(Arguments.AssemblyName));
+					break;
+				default:
+					required.Add("OutputPath", @"bin\Release\");
+					required.Add("DocumentationFile", @"bin\Release\{0}.xml".Display(Arguments.AssemblyName));
+					break;
+			}
+
 			allowed.Add("PlatformTarget", Arguments.TargetPlatform);
 			allowed.Add("RegisterForComInterop", "false");
 			allowed.Add("RemoveIntegerChecks", "false");
@@ -609,9 +634,11 @@ namespace CCNet.ProjectChecker
 
 			List<string> requiredGac = new List<string>();
 			List<string> allowedGac = new List<string>();
+			allowedGac.Add("Microsoft.CSharp");
 			allowedGac.Add("Microsoft.mshtml");
 			allowedGac.Add("System");
 			allowedGac.Add("System.Core");
+			allowedGac.Add("System.ComponentModel.DataAnnotations");
 			allowedGac.Add("System.Configuration");
 			allowedGac.Add("System.configuration");
 			allowedGac.Add("System.Data");
@@ -619,6 +646,14 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Deployment");
 			allowedGac.Add("System.Design");
 			allowedGac.Add("System.Drawing");
+			allowedGac.Add("System.Web");
+			allowedGac.Add("System.Web.Abstractions");
+			allowedGac.Add("System.Web.ApplicationServices");
+			allowedGac.Add("System.Web.DynamicData");
+			allowedGac.Add("System.EnterpriseServices");
+			allowedGac.Add("System.Web.Entity");
+			allowedGac.Add("System.Web.Extensions");
+			allowedGac.Add("System.Web.Routing");
 			allowedGac.Add("System.Web.Services");
 			allowedGac.Add("System.Windows.Forms");
 			allowedGac.Add("System.XML");
