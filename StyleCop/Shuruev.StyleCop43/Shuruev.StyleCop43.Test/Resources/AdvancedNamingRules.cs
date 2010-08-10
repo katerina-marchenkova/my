@@ -55,6 +55,19 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
+//# [OK]
+//# Explicit interface implementation.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass : IDisposable
+	{
+		void IDisposable.Dispose()
+		{
+		}
+	}
+}
+//# [END]
+
 #endregion
 
 #region AdvancedNamingRules // Enumerations

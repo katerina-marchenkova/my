@@ -26,7 +26,7 @@ namespace Shuruev.StyleCop.Run
 				new List<string>(new[] { basePath }),
 				true);
 
-			/*StyleCopPlus styleCopPlus = null;
+			StyleCopPlus styleCopPlus = null;
 			foreach (SourceParser parser in console.Core.Parsers)
 			{
 				List<SourceAnalyzer> analyzersToRemove = new List<SourceAnalyzer>();
@@ -53,7 +53,7 @@ namespace Shuruev.StyleCop.Run
 			}
 
 			styleCopPlus.DisableAllRulesExcept.Clear();
-			styleCopPlus.DisableAllRulesExcept.Add("AdvancedNamingRules");*/
+			styleCopPlus.DisableAllRulesExcept.Add("AdvancedNamingRules");
 
 			CodeProject project = new CodeProject(
 				0,

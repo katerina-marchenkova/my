@@ -250,7 +250,12 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void AnalyzeNamespace(CurrentNamingSettings settings, CsElement element)
 		{
-			CheckDeclaration(settings, NamingSettings.Namespace, element);
+			string[] parts = element.Declaration.Name.Split('.');
+			foreach (string part in parts)
+			{
+				if (!CheckName(settings, NamingSettings.Namespace, element, part))
+					break;
+			}
 		}
 
 		/// <summary>
@@ -317,13 +322,8 @@ namespace Shuruev.StyleCop.CSharp
 			string settingName,
 			CsElement element)
 		{
-			string[] parts = element.Declaration.Name.Split('.');
-			foreach (string part in parts)
-			{
-				string name = CodeHelper.ExtractPureName(part);
-				if (!CheckName(settings, settingName, element, name))
-					break;
-			}
+			string name = CodeHelper.ExtractPureName(element.Declaration.Name);
+			CheckName(settings, settingName, element, name);
 		}
 
 		/// <summary>
@@ -365,11 +365,11 @@ namespace Shuruev.StyleCop.CSharp
 			string nameToCheck)
 		{
 			//xxx
-			lock (s_xxx)
+			/*xxxlock (s_xxx)
 			{
 				foreach (string word in SplitIntoWords(nameToCheck))
 					System.IO.File.AppendAllText(@"D:\Words.txt", word + Environment.NewLine);
-			}
+			}*/
 
 			Regex regex = settings.GetRegex(settingName);
 			if (regex == null)

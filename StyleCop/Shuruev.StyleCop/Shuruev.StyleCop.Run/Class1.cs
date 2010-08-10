@@ -1,46 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Shuruev.StyleCop.Test
 {
-	public class Class1
+	public class Class1 : IDisposable
 	{
-		private int m_field;
-
-		public int TestProperty1
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		void IDisposable.Dispose()
 		{
-			get { return m_field; }
-			set { m_field = value; }
+			throw new NotImplementedException();
 		}
-
-		public int TestProperty2
-		{
-			get
-			{
-				return m_field;
-			}
-			set
-			{
-				m_field = value;
-			}
-		}
-
-		public int TestProperty3
-		{
-			set
-			{
-				m_field = value;
-			}
-			get
-			{
-				return m_field;
-			}
-		}
-
-		/*public int TestProperty3 { get; set; }
-		public int TestProperty4 { get; set; }*/
-
-		public Class1()
-
-		{ }
 	}
 }

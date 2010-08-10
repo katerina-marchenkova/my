@@ -1,4 +1,44 @@
-﻿#region OpeningCurlyBracketsMustNotBePrecededByBlankLine // SP1509
+﻿#region ElementMustNotBeOnSingleLine // SP1502
+
+//# [OK]
+//# Well-formed example.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+		}
+	}
+}
+//# [END]
+
+//# [OK]
+//# Special style for constructors.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{ }
+	}
+}
+//# [END]
+
+//# [OK]
+//# Special style for constructors.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass() { }
+	}
+}
+//# [END]
+
+#endregion
+
+#region OpeningCurlyBracketsMustNotBePrecededByBlankLine // SP1509
 
 //# [OK]
 //# Well-formed example.
