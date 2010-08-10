@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <SourceAnalyzer Name="StyleCop+">
 	<Description>
-		Plug-in that extends original StyleCop features. Some settings for this plug-in are taken out to the separate StyleCop+ settings page.
+		Plug-in that extends original StyleCop features. See StyleCop+ tab for detailed settings.
 	</Description>
 	<Properties>
 		<StringProperty Name="AdvancedNaming_Abbreviations" DefaultValue="A B C ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
@@ -45,7 +45,7 @@
 	<Rules>
 		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
 			<Context>{0} name {1} doesn't conform the specified style: {2}.</Context>
-			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ settings page for details.</Description>
+			<Description>Provides wide and flexible variety of naming rules. See StyleCop+ tab for detailed settings.</Description>
 		</Rule>
 		<RuleGroup Name="Extended Original Rules">
 			<Rule Name="ElementMustNotBeOnSingleLine" CheckId="SP1502" DisabledByDefault="true">
