@@ -153,6 +153,10 @@ namespace CCNet.Common
 				Match match = s_propertyRegex.Match(line);
 				string name = match.Groups["Name"].Value;
 				string value = match.Groups["Value"].Value.Trim('"');
+
+				if (name == "InternalsVisibleTo")
+					return;
+
 				properties.Add(name, value);
 
 				return;

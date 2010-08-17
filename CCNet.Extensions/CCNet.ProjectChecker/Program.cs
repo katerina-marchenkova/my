@@ -40,13 +40,13 @@ namespace CCNet.ProjectChecker
 
 			/*xxxargs = new[]
 			{
-				@"ProjectName=VXStudioWindowsControls",
+				@"ProjectName=AggregatorWebClient",
 				@"ReferencesDirectory=C:\Users\Public\VSS\SED\TFS\VXStudio\VXStudioWindowsControls-Refs",
-				@"WorkingDirectorySource=C:\Users\Public\VSS\SED\TFS\VXStudio\VXStudioWindowsControls",
+				@"WorkingDirectorySource=C:\Users\Public\VSS\SED\TFS\Aggregator\AggregatorWebClient",
 				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
 				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
 				@"ProjectType=Library",
-				@"AssemblyName=VXStudioWindowsControls",
+				@"AssemblyName=AggregatorWebClient",
 				@"VisualStudioVersion=2008",
 				@"TargetFramework=Net20",
 				@"TargetPlatform=AnyCPU",
