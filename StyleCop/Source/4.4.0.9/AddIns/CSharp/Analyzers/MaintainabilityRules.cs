@@ -641,14 +641,6 @@ namespace Microsoft.StyleCop.CSharp
                 {
                     this.CheckArithmeticExpressionParenthesis(parentElement, (ArithmeticExpression)expression);
                 }
-				/*xxxelse if (expression.ExpressionType == ExpressionType.Checked)
-				{
-					CheckedExpression checkedExpression = (CheckedExpression)expression;
-					if (checkedExpression.InternalExpression.ExpressionType == ExpressionType.Arithmetic)
-					{
-						this.CheckArithmeticExpressionParenthesis(parentElement, (ArithmeticExpression)checkedExpression.InternalExpression);
-					}
-				}*/
 				else if (expression.ExpressionType == ExpressionType.ConditionalLogical)
                 {
                     this.CheckConditionalLogicalExpressionParenthesis(parentElement, (ConditionalLogicalExpression)expression);
