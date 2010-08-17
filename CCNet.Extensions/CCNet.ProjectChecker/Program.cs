@@ -680,6 +680,7 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Web.DynamicData");
 			allowedGac.Add("System.Web.Entity");
 			allowedGac.Add("System.Web.Extensions");
+			allowedGac.Add("System.Web.Mobile");
 			allowedGac.Add("System.Web.Routing");
 			allowedGac.Add("System.Web.Services");
 			allowedGac.Add("System.Windows.Forms");
