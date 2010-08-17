@@ -163,7 +163,8 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>XCOPY * "C:\Users\oshuruev\Documents\Visual Studio 2010\Addins\" /Y</PostBuildEvent>
+    <PostBuildEvent>XCOPY * "%25UserProfile%25\Documents\Visual Studio 2010\Addins\" /Y
+XCOPY * "%25UserProfile%25\Documents\Visual Studio 2008\Addins\" /Y</PostBuildEvent>
   </PropertyGroup>
   <ProjectExtensions />
   <Target Name="AfterBuild">

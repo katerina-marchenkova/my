@@ -34,6 +34,9 @@ namespace SolutionHelper
 				if (project.ConfigurationManager == null)
 					continue;
 
+				if (project.Kind == "{54435603-DBB4-11D2-8724-00A0C9A8B90C}")
+					continue;
+
 				string assemblyName = project.GetAssemblyName();
 
 				m_projects.Add(assemblyName, project);
