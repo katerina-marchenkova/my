@@ -11,6 +11,16 @@
 		ClickOnce,
 
 		/// <summary>
+		/// Windows service.
+		/// </summary>
+		WindowsService,
+
+		/// <summary>
+		/// Web service.
+		/// </summary>
+		WebService,
+
+		/// <summary>
 		/// Web site.
 		/// </summary>
 		WebSite,

@@ -246,8 +246,10 @@ namespace CCNet.ProjectChecker
 					required.Add("OutputType", "WinExe");
 					break;
 				case ProjectType.Console:
+				case ProjectType.WindowsService:
 					required.Add("OutputType", "Exe");
 					break;
+				case ProjectType.WebService:
 				case ProjectType.WebSite:
 				case ProjectType.Library:
 					required.Add("OutputType", "Library");
@@ -264,10 +266,10 @@ namespace CCNet.ProjectChecker
 			allowed.Add("PublishWizardCompleted", null);
 			required.Add("RootNamespace", Arguments.RootNamespace);
 			allowed.Add("RunPostBuildEvent", "OnBuildSuccess");
-			allowed.Add("SccAuxPath", null);
-			allowed.Add("SccLocalPath", null);
-			allowed.Add("SccProjectName", null);
-			allowed.Add("SccProvider", null);
+			required.Add("SccAuxPath", "SAK");
+			required.Add("SccLocalPath", "SAK");
+			required.Add("SccProjectName", "SAK");
+			required.Add("SccProvider", "SAK");
 			allowed.Add("SchemaVersion", null);
 			allowed.Add("SignAssembly", "false");
 
@@ -349,6 +351,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("AllowUnsafeBlocks", "false");
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
+			allowed.Add("CodeAnalysisRules", null);
 			allowed.Add("CodeAnalysisRuleSet", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
@@ -379,11 +382,22 @@ namespace CCNet.ProjectChecker
 			allowed.Add("FileAlignment", "512");
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoStdLib", "false");
-			allowed.Add("NoWarn", Arguments.SuppressWarnings);
+
+			if (String.IsNullOrEmpty(Arguments.SuppressWarnings))
+			{
+				allowed.Add("NoWarn", Arguments.SuppressWarnings);
+			}
+			else
+			{
+				required.Add("NoWarn", Arguments.SuppressWarnings);
+			}
+
 			required.Add("Optimize", "false");
+			allowed.Add("RunCodeAnalysis", null);
 
 			switch (Arguments.ProjectType)
 			{
+				case ProjectType.WebService:
 				case ProjectType.WebSite:
 					required.Add("OutputPath", @"bin\");
 					required.Add("DocumentationFile", @"bin\{0}.xml".Display(Arguments.AssemblyName));
@@ -454,11 +468,21 @@ namespace CCNet.ProjectChecker
 			allowed.Add("FileAlignment", "512");
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoStdLib", "false");
-			allowed.Add("NoWarn", Arguments.SuppressWarnings);
+
+			if (String.IsNullOrEmpty(Arguments.SuppressWarnings))
+			{
+				allowed.Add("NoWarn", Arguments.SuppressWarnings);
+			}
+			else
+			{
+				required.Add("NoWarn", Arguments.SuppressWarnings);
+			}
+
 			required.Add("Optimize", "true");
 
 			switch (Arguments.ProjectType)
 			{
+				case ProjectType.WebService:
 				case ProjectType.WebSite:
 					required.Add("OutputPath", @"bin\");
 					required.Add("DocumentationFile", @"bin\{0}.xml".Display(Arguments.AssemblyName));
@@ -641,16 +665,19 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.ComponentModel.DataAnnotations");
 			allowedGac.Add("System.Configuration");
 			allowedGac.Add("System.configuration");
+			allowedGac.Add("System.Configuration.Install");
 			allowedGac.Add("System.Data");
 			allowedGac.Add("System.Data.DataSetExtensions");
 			allowedGac.Add("System.Deployment");
 			allowedGac.Add("System.Design");
 			allowedGac.Add("System.Drawing");
+			allowedGac.Add("System.EnterpriseServices");
+			allowedGac.Add("System.Management");
+			allowedGac.Add("System.ServiceProcess");
 			allowedGac.Add("System.Web");
 			allowedGac.Add("System.Web.Abstractions");
 			allowedGac.Add("System.Web.ApplicationServices");
 			allowedGac.Add("System.Web.DynamicData");
-			allowedGac.Add("System.EnterpriseServices");
 			allowedGac.Add("System.Web.Entity");
 			allowedGac.Add("System.Web.Extensions");
 			allowedGac.Add("System.Web.Routing");
