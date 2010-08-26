@@ -230,7 +230,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [a-z0-9]+(([A-Z0-9][a-z0-9]+){0})*.
+        ///   Looks up a localized string similar to LOWER+((UPPERLOWER+)EXTENSION)*.
         /// </summary>
         internal static string MacroCamelRegular {
             get {
@@ -266,7 +266,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})(_(([A-Z0-9][a-z0-9]+){0}))*|[A-Z0-9].
+        ///   Looks up a localized string similar to ((UPPERLOWER+)EXTENSION)(_((UPPERLOWER+)EXTENSION))*|UPPER.
         /// </summary>
         internal static string MacroCapitalizedRegular {
             get {
@@ -302,7 +302,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [a-z0-9]+(_[a-z0-9]+)*.
+        ///   Looks up a localized string similar to LOWER+(_LOWER+)*.
         /// </summary>
         internal static string MacroLowerRegular {
             get {
@@ -338,7 +338,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (([A-Z0-9][a-z0-9]+){0})+|[A-Z0-9].
+        ///   Looks up a localized string similar to ((UPPERLOWER+)EXTENSION)+|UPPER.
         /// </summary>
         internal static string MacroPascalRegular {
             get {
@@ -374,7 +374,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [A-Z0-9]+(_[A-Z0-9]+)*.
+        ///   Looks up a localized string similar to UPPER+(_UPPER+)*.
         /// </summary>
         internal static string MacroUpperRegular {
             get {

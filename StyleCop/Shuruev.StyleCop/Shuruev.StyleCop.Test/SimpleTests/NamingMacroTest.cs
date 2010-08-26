@@ -156,6 +156,16 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("PreA_POST"));
 		}
 
+		[TestMethod]
+		public void Macro_Pascal_Unicode()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(AaBb)");
+			Assert.IsTrue(regex.IsMatch("СтайлКоп"));
+			Assert.IsFalse(regex.IsMatch("стайлКоп"));
+		}
+
 		#endregion
 
 		#region Macro "Camel"
@@ -226,6 +236,16 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsFalse(regex.IsMatch("PreA_POST"));
 		}
 
+		[TestMethod]
+		public void Macro_Camel_Unicode()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(aaBb)");
+			Assert.IsTrue(regex.IsMatch("стайлКоп"));
+			Assert.IsFalse(regex.IsMatch("СтайлКоп"));
+		}
+
 		#endregion
 
 		#region Macro "Upper"
@@ -279,6 +299,16 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("PreA_POST"));
 		}
 
+		[TestMethod]
+		public void Macro_Upper_Unicode()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(AA_BB)");
+			Assert.IsTrue(regex.IsMatch("СТАЙЛ_КОП"));
+			Assert.IsFalse(regex.IsMatch("стайл_коп"));
+		}
+
 		#endregion
 
 		#region Macro "Lower"
@@ -330,6 +360,16 @@ namespace Shuruev.StyleCop.Test
 			regex = BuildWithAbbreviations("Pre$(aa_bb)_POST", "A");
 			Assert.IsTrue(regex.IsMatch("Prea_POST"));
 			Assert.IsFalse(regex.IsMatch("PreA_POST"));
+		}
+
+		[TestMethod]
+		public void Macro_Lower_Unicode()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(aa_bb)");
+			Assert.IsTrue(regex.IsMatch("стайл_коп"));
+			Assert.IsFalse(regex.IsMatch("СТАЙЛ_КОП"));
 		}
 
 		#endregion
@@ -464,6 +504,16 @@ namespace Shuruev.StyleCop.Test
 			Assert.IsTrue(regex.IsMatch("Test_Fx_Cop_Features"));
 		}
 
+		[TestMethod]
+		public void Macro_Capitalized_Unicode()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(Aa_Bb)");
+			Assert.IsTrue(regex.IsMatch("Стайл_Коп"));
+			Assert.IsFalse(regex.IsMatch("стайл_Коп"));
+		}
+
 		#endregion
 
 		#region Macro "Any"
@@ -511,6 +561,16 @@ namespace Shuruev.StyleCop.Test
 			regex = BuildWithAbbreviations("Pre$(*)_POST", "A");
 			Assert.IsTrue(regex.IsMatch("Prea_POST"));
 			Assert.IsTrue(regex.IsMatch("PreA_POST"));
+		}
+
+		[TestMethod]
+		public void Macro_Any_Unicode()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(*)");
+			Assert.IsTrue(regex.IsMatch("Стайл_КОП"));
+			Assert.IsTrue(regex.IsMatch("стайл_Коп++СиШарп"));
 		}
 
 		#endregion

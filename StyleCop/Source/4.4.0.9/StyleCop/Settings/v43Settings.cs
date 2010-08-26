@@ -211,43 +211,47 @@ namespace Microsoft.StyleCop
 
             foreach (XmlNode propertyNode in propertyCollectionNode.ChildNodes)
             {
-                // Get the property name.
-                XmlAttribute propertyName = propertyNode.Attributes["Name"];
-                if (propertyName != null && !string.IsNullOrEmpty(propertyName.Value))
-                {
-                    // Prepend the rule name to the property name if necessary.
-                    string adjustedPropertyName = propertyName.InnerText;
+                // Ignore properties without attributes.
+                if (propertyNode.Attributes == null)
+                    continue;
 
-                    if (!string.IsNullOrEmpty(ruleName))
-                    {
-                        adjustedPropertyName = ruleName + "#" + propertyName.InnerText;
-                    }
+				// Ignore properties without a name attribute.
+				XmlAttribute propertyName = propertyNode.Attributes["Name"];
+				if (propertyName == null || string.IsNullOrEmpty(propertyName.Value))
+					continue;
 
-                    // Load the property.
-                    switch (propertyNode.Name)
-                    {
-                        case "BooleanProperty":
-                            LoadBooleanProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
-                            break;
+				// Prepend the rule name to the property name if necessary.
+				string adjustedPropertyName = propertyName.Value;
 
-                        case "IntegerProperty":
-                            LoadIntProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
-                            break;
+				if (!string.IsNullOrEmpty(ruleName))
+				{
+					adjustedPropertyName = ruleName + "#" + propertyName.Value;
+				}
 
-                        case "StringProperty":
-                            LoadStringProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
-                            break;
+				// Load the property.
+				switch (propertyNode.Name)
+				{
+					case "BooleanProperty":
+						LoadBooleanProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
+						break;
 
-                        case "CollectionProperty":
-                            LoadCollectionProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
-                            break;
+					case "IntegerProperty":
+						LoadIntProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
+						break;
 
-                        default:
-                            // Ignore any unexpected settings.
-                            break;
-                    }
-                }
-            }
+					case "StringProperty":
+						LoadStringProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
+						break;
+
+					case "CollectionProperty":
+						LoadCollectionProperty(adjustedPropertyName, propertyNode, properties, propertyDescriptors);
+						break;
+
+					default:
+						// Ignore any unexpected settings.
+						break;
+				}
+			}
         }
 
         /// <summary>
