@@ -566,15 +566,17 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			if (Arguments.ProjectType == ProjectType.ClickOnce)
+			switch (Arguments.ProjectType)
 			{
-				required.Add("AssemblyTitle", Arguments.FriendlyName);
-				required.Add("AssemblyProduct", Arguments.FriendlyName);
-			}
-			else
-			{
-				required.Add("AssemblyTitle", Arguments.AssemblyName);
-				required.Add("AssemblyProduct", Arguments.AssemblyName);
+				case ProjectType.ClickOnce:
+				case ProjectType.WindowsService:
+					required.Add("AssemblyTitle", Arguments.FriendlyName);
+					required.Add("AssemblyProduct", Arguments.FriendlyName);
+					break;
+				default:
+					required.Add("AssemblyTitle", Arguments.AssemblyName);
+					required.Add("AssemblyProduct", Arguments.AssemblyName);
+					break;
 			}
 
 			required.Add("AssemblyDescription", String.Empty);
