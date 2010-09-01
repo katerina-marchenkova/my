@@ -398,9 +398,10 @@ namespace Shuruev.StyleCop.CSharp
 			foreach (string key in GetKeys())
 			{
 				string markup = GetMarkup(key);
-				string regular = String.Format(
-					String.Format("({0})", GetRegular(key)),
-					extension);
+				string regular = "(" + GetRegular(key) + ")";
+				regular = regular.Replace("UPPER", "[\\p{Lu}\\p{Nd}]");
+				regular = regular.Replace("LOWER", "[\\p{Ll}\\p{Nd}]");
+				regular = regular.Replace("EXTENSION", extension);
 				pattern = pattern.Replace(markup, regular);
 			}
 

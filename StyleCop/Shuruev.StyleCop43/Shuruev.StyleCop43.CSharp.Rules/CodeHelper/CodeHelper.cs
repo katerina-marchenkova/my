@@ -276,6 +276,62 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
+		#region Working with local declarations
+
+		/// <summary>
+		/// Gets local declarations.
+		/// </summary>
+		public static List<LocalDeclaration> GetLocalDeclarations(CsElement element)
+		{
+			List<LocalDeclaration> result = new List<LocalDeclaration>();
+			element.WalkElement(null, GetLocalDeclarationsStatementVisitor, result);
+			return result;
+		}
+
+		/// <summary>
+		/// Analyzes statements for getting local declarations.
+		/// </summary>
+		private static bool GetLocalDeclarationsStatementVisitor(
+			Statement statement,
+			Expression parentExpression,
+			Statement parentStatement,
+			CsElement parentElement,
+			List<LocalDeclaration> declarations)
+		{
+			if (statement.StatementType == StatementType.Block)
+				return true;
+
+			if (statement.Variables.Count > 0)
+			{
+				foreach (Variable variable in statement.Variables)
+				{
+					declarations.Add(new LocalDeclaration
+					{
+						Name = variable.Name
+					});
+				}
+
+				return true;
+			}
+
+			if (statement.StatementType == StatementType.VariableDeclaration)
+			{
+				VariableDeclarationStatement declaration = (VariableDeclarationStatement)statement;
+				bool isConstant = declaration.Tokens.First.Value.CsTokenType == CsTokenType.Const;
+				foreach (VariableDeclaratorExpression declarator in declaration.Declarators)
+				{
+					declarations.Add(new LocalDeclaration
+					{
+						Name = declarator.Identifier.Text,
+						IsConstant = isConstant
+					});
+				}
+			}
+			return true;
+		}
+
+		#endregion
+
 		#region Working with node tree
 
 		/// <summary>

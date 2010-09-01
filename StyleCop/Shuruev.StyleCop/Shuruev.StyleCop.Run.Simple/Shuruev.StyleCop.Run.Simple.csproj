@@ -36,13 +36,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.StyleCop">
-      <HintPath>..\..\References\4.4.0.9\Microsoft.StyleCop.dll</HintPath>
+      <HintPath>.\Microsoft.StyleCop.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.StyleCop.CSharp">
-      <HintPath>..\..\References\4.4.0.9\Microsoft.StyleCop.CSharp.dll</HintPath>
+      <HintPath>.\Microsoft.StyleCop.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.StyleCop.CSharp.Rules">
-      <HintPath>..\..\References\4.4.0.9\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
+      <HintPath>.\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -105,7 +105,7 @@ namespace Shuruev.StyleCop.Test.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to #region OpeningCurlyBracketsMustNotBePrecededByBlankLine
+        ///   Looks up a localized string similar to #region ElementMustNotBeOnSingleLine // SP1502
         ///
         /////# [OK]
         /////# Well-formed example.
@@ -113,36 +113,35 @@ namespace Shuruev.StyleCop.Test.Properties {
         ///{
         ///	public class TestClass
         ///	{
-        ///		public void TestMethod()
+        ///		public TestClass()
         ///		{
-        ///			for (int i = 0; i &lt; 10; i++)
-        ///			{
-        ///			}
         ///		}
         ///	}
         ///}
         /////# [END]
         ///
-        /////# [ERROR]
-        /////# Excess blank line.
+        /////# [OK]
+        /////# Special style for constructors.
         ///namespace Shuruev.StyleCop.Test
         ///{
         ///	public class TestClass
         ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			for (int i = 0; i &lt; 10; i++)
-        ///
-        ///			{
-        ///			}
-        ///		}
+        ///		public TestClass()
+        ///		{ }
         ///	}
         ///}
         /////# [END]
         ///
-        /////# [ERROR]
-        /////# Excess blank line.
-        ///name [rest of string was truncated]&quot;;.
+        /////# [OK]
+        /////# Special style for constructors.
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class TestClass
+        ///	{
+        ///		public TestClass() { }
+        ///	}
+        ///}
+        /////# [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ExtendedOriginalRules {
             get {
@@ -188,45 +187,6 @@ namespace Shuruev.StyleCop.Test.Properties {
         internal static string MoreCustomRules {
             get {
                 return ResourceManager.GetString("MoreCustomRules", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to //# [ERROR]
-        /////# Method name starts with lower case letter.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void testMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [OK]
-        /////# Method name starts with upper case letter.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# Windows forms event handler is not private.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void  [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string SP1300 {
-            get {
-                return ResourceManager.GetString("SP1300", resourceCulture);
             }
         }
         

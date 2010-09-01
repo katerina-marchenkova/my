@@ -84,14 +84,19 @@
     <Compile Include="BlockItem.cs" />
     <None Include="Resources\MoreCustomRules.cs" />
     <None Include="Resources\ExtendedOriginalRules.cs" />
-    <Compile Include="SimpleTests\UnknownTest.cs" />
+    <None Include="CodeHelperTests\Source\PrivateEventHandlers.cs" />
+    <None Include="CodeHelperTests\Source\LocalDeclarations.cs" />
+    <Compile Include="CodeHelperTests\Source\Source.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Source.resx</DependentUpon>
+    </Compile>
     <Compile Include="StyleCopPlusTest.Modifier.cs" />
     <Compile Include="TestItem.cs" />
-    <Compile Include="SimpleTests\CodeHelperTest.cs" />
+    <Compile Include="CodeHelperTests\CodeHelperTest.cs" />
     <Compile Include="SimpleTests\NamingMacroTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Resources\SP1600.cs" />
-    <None Include="Resources\SP1300.cs" />
     <Compile Include="StyleCopPlusTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -107,6 +112,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CodeHelperTests\Source\Source.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Source.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Shuruev.StyleCop.Test.CodeHelperTests</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

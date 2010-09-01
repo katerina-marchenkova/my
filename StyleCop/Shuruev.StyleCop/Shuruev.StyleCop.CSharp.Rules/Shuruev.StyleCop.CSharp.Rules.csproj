@@ -112,7 +112,8 @@
     <Compile Include="Analyzers\ExtendedOriginalRules.Reflection.cs" />
     <Compile Include="Analyzers\StyleCopPlus.cs" />
     <Compile Include="Analyzers\CustomCsParser.cs" />
-    <Compile Include="Analyzers\CodeHelper.cs" />
+    <Compile Include="CodeHelper\CodeHelper.cs" />
+    <Compile Include="CodeHelper\LocalDeclaration.cs" />
     <Compile Include="Common\Native.cs" />
     <Compile Include="Common\HighlightTextBox.cs">
       <SubType>UserControl</SubType>

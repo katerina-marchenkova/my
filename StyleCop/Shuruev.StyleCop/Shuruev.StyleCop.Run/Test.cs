@@ -18,12 +18,5 @@ namespace Shuruev.StyleCop.Run
 		private void buttonStart_OnClick(object sender, EventArgs xe)
 		{
 		}
-
-		/*/// <summary>
-		/// Hello there.
-		/// </summary>*/
-		private void XXX()
-		{
-		}
 	}
 }

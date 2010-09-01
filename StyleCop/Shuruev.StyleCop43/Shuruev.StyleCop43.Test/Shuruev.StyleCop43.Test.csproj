@@ -50,8 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockItem.cs" />
+    <Compile Include="CodeHelperTests\CodeHelperTest.cs" />
+    <None Include="CodeHelperTests\Source\LocalDeclarations.cs" />
+    <None Include="CodeHelperTests\Source\PrivateEventHandlers.cs" />
+    <Compile Include="CodeHelperTests\Source\Source.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Source.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Resources\SP1300.cs" />
     <None Include="Resources\SP1600.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -61,7 +68,6 @@
     <None Include="Resources\AdvancedNamingRules.cs" />
     <None Include="Resources\ExtendedOriginalRules.cs" />
     <None Include="Resources\MoreCustomRules.cs" />
-    <Compile Include="SimpleTests\CodeHelperTest.cs" />
     <Compile Include="SimpleTests\NamingMacroTest.cs" />
     <Compile Include="StyleCopPlusRunner.cs" />
     <Compile Include="StyleCopPlusTest.cs" />
@@ -75,6 +81,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CodeHelperTests\Source\Source.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

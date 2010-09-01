@@ -143,7 +143,7 @@ Please check that:
     <value>camelNamingStyle</value>
   </data>
   <data name="MacroCamelRegular" xml:space="preserve">
-    <value>[a-z0-9]+(([A-Z0-9][a-z0-9]+){0})*</value>
+    <value>LOWER+((UPPERLOWER+)EXTENSION)*</value>
   </data>
   <data name="MacroCamelSample" xml:space="preserve">
     <value>sampleName</value>
@@ -155,7 +155,7 @@ Please check that:
     <value>All_Words_Capitalized</value>
   </data>
   <data name="MacroCapitalizedRegular" xml:space="preserve">
-    <value>(([A-Z0-9][a-z0-9]+){0})(_(([A-Z0-9][a-z0-9]+){0}))*|[A-Z0-9]</value>
+    <value>((UPPERLOWER+)EXTENSION)(_((UPPERLOWER+)EXTENSION))*|UPPER</value>
   </data>
   <data name="MacroCapitalizedSample" xml:space="preserve">
     <value>Sample_Name</value>
@@ -167,7 +167,7 @@ Please check that:
     <value>all_words_lower</value>
   </data>
   <data name="MacroLowerRegular" xml:space="preserve">
-    <value>[a-z0-9]+(_[a-z0-9]+)*</value>
+    <value>LOWER+(_LOWER+)*</value>
   </data>
   <data name="MacroLowerSample" xml:space="preserve">
     <value>sample_name</value>
@@ -179,7 +179,7 @@ Please check that:
     <value>PascalNamingStyle</value>
   </data>
   <data name="MacroPascalRegular" xml:space="preserve">
-    <value>(([A-Z0-9][a-z0-9]+){0})+|[A-Z0-9]</value>
+    <value>((UPPERLOWER+)EXTENSION)+|UPPER</value>
   </data>
   <data name="MacroPascalSample" xml:space="preserve">
     <value>SampleName</value>
@@ -191,7 +191,7 @@ Please check that:
     <value>ALL_WORDS_UPPER</value>
   </data>
   <data name="MacroUpperRegular" xml:space="preserve">
-    <value>[A-Z0-9]+(_[A-Z0-9]+)*</value>
+    <value>UPPER+(_UPPER+)*</value>
   </data>
   <data name="MacroUpperSample" xml:space="preserve">
     <value>SAMPLE_NAME</value>
