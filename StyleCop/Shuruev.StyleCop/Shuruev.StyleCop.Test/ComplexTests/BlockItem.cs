@@ -1,4 +1,4 @@
-﻿namespace Shuruev.StyleCop.Test
+﻿namespace Shuruev.StyleCop.Test.ComplexTests
 {
 	/// <summary>
 	/// Block in test definition file.
@@ -9,6 +9,11 @@
 		/// Rule being tested at the block.
 		/// </summary>
 		public string Rule;
+
+		/// <summary>
+		/// Rule comment.
+		/// </summary>
+		public string Comment;
 
 		/// <summary>
 		/// Block content.

@@ -1,10 +1,18 @@
 ﻿namespace Test
 {
-	internal class TestClass
+	public class Test_Class
 	{
 		public void TestMethod()
 		{
-			long l = (long)checked(((0.1f / 0.2f)));
+			for (int i = 0; i < 10; i++)
+
+			{
+			}
+
+			int[] u = new int[]
+
+            {
+            };
 		}
 	}
 }

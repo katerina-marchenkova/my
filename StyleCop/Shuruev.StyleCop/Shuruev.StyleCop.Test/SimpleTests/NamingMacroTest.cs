@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shuruev.StyleCop.CSharp;
 
-namespace Shuruev.StyleCop.Test
+namespace Shuruev.StyleCop.Test.SimpleTests
 {
 	/// <summary>
 	/// Testing naming macros work.

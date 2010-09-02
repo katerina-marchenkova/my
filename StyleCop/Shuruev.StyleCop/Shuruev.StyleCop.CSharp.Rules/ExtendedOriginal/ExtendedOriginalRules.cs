@@ -18,9 +18,9 @@ namespace Shuruev.StyleCop.CSharp
 		private readonly StyleCopPlus m_parent;
 
 		private StyleCopCore m_customCore;
-		private NamingRules m_customNamingAnalyzer;
-		private LayoutRules m_customLayoutAnalyzer;
-		private DocumentationRules m_customDocumentationAnalyzer;
+		private CustomNamingRules m_customNamingAnalyzer;
+		private CustomLayoutRules m_customLayoutAnalyzer;
+		private CustomDocumentationRules m_customDocumentationAnalyzer;
 
 		/// <summary>
 		/// Initializes a new instance.
@@ -43,9 +43,9 @@ namespace Shuruev.StyleCop.CSharp
 			m_customCore = new StyleCopCore();
 			m_customCore.ViolationEncountered += OnCustomViolationEncountered;
 
-			m_customNamingAnalyzer = new NamingRules();
-			m_customLayoutAnalyzer = new LayoutRules();
-			m_customDocumentationAnalyzer = new DocumentationRules();
+			m_customNamingAnalyzer = new CustomNamingRules();
+			m_customLayoutAnalyzer = new CustomLayoutRules();
+			m_customDocumentationAnalyzer = new CustomDocumentationRules();
 
 			InitializeCustomAnalyzer(
 				m_parent.Core,
@@ -278,9 +278,6 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void CheckOriginalRule(CodeDocument document, string analyzerName, Rules rule)
 		{
-			if (m_parent.DisableAllRulesExcept.Count > 0)
-				return;
-
 			string ruleName = rule.ToString();
 
 			if (!m_parent.IsRuleEnabled(document, ruleName))
@@ -289,8 +286,18 @@ namespace Shuruev.StyleCop.CSharp
 			string fullName = String.Format("Microsoft.StyleCop.CSharp.{0}", analyzerName);
 			SourceAnalyzer analyzer = m_parent.Core.GetAnalyzer(fullName);
 
-			if (!analyzer.IsRuleEnabled(document, ruleName))
-				return;
+			if (CodeHelper.IsStyleCop43())
+			{
+				string settingName = String.Format("{0}#Enabled", rule);
+				BooleanProperty enabled = (BooleanProperty)analyzer.GetSetting(document.Settings, settingName);
+				if (!enabled.Value)
+					return;
+			}
+			else
+			{
+				if (!analyzer.IsRuleEnabled(document, ruleName))
+					return;
+			}
 
 			string message = String.Format(
 				Resources.ExtendedRuleConflictError,

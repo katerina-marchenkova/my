@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shuruev.StyleCop.Test.Properties;
 
-namespace Shuruev.StyleCop.Test
+namespace Shuruev.StyleCop.Test.ComplexTests
 {
 	/// <summary>
-	/// Testing StyleCop+ plug-in.
+	/// Running complex batch tests for StyleCop+ plug-in.
 	/// </summary>
 	[TestClass]
-	public partial class StyleCopPlusTest
+	public partial class ComplexTest
 	{
 		private readonly string m_tempFileName;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public StyleCopPlusTest()
+		public ComplexTest()
 		{
 			m_tempFileName = Path.Combine(
 				AppDomain.CurrentDomain.BaseDirectory,
@@ -26,21 +25,27 @@ namespace Shuruev.StyleCop.Test
 		}
 
 		[TestMethod]
-		public void Advanced_Naming_Rules_Batch_Tests()
+		public void One_Run_Complex_Tests()
 		{
-			RunTests(Resources.AdvancedNamingRules);
+			RunTests(Source.OneRun);
 		}
 
 		[TestMethod]
-		public void Extended_Original_Rules_Batch_Tests()
+		public void Advanced_Naming_Rules_Complex_Tests()
 		{
-			RunTests(Resources.ExtendedOriginalRules);
+			RunTests(Source.AdvancedNamingRules);
 		}
 
 		[TestMethod]
-		public void More_Custom_Rules_Batch_Tests()
+		public void Extended_Original_Rules_Complex_Tests()
 		{
-			RunTests(Resources.MoreCustomRules);
+			RunTests(Source.ExtendedOriginalRules);
+		}
+
+		[TestMethod]
+		public void More_Custom_Rules_Complex_Tests()
+		{
+			RunTests(Source.MoreCustomRules);
 		}
 
 		#region Reading test definition file
@@ -54,6 +59,7 @@ namespace Shuruev.StyleCop.Test
 
 			StringBuilder sb = new StringBuilder();
 			string rule = null;
+			string comment = null;
 
 			string[] lines = allText.Split(new[] { "\r\n" }, StringSplitOptions.None);
 
@@ -61,9 +67,13 @@ namespace Shuruev.StyleCop.Test
 			{
 				if (line.StartsWith("#region "))
 				{
-					rule = line.Substring(8).Split('/', ' ')[0];
-					if (String.IsNullOrEmpty(rule))
+					string[] parts = line.Substring(8).Split(new[] { " // " }, StringSplitOptions.None);
+					if (parts.Length == 0 || String.IsNullOrEmpty(parts[0]))
 						ThrowWrongTestFile();
+
+					rule = parts[0];
+					if (parts.Length > 1)
+						comment = parts[1];
 
 					continue;
 				}
@@ -73,12 +83,14 @@ namespace Shuruev.StyleCop.Test
 					BlockItem block = new BlockItem
 					{
 						Rule = rule,
+						Comment = comment,
 						Content = sb.ToString()
 					};
 					blocks.Add(block);
 
-					rule = null;
 					sb.Length = 0;
+					rule = null;
+					comment = null;
 					continue;
 				}
 
@@ -135,31 +147,32 @@ namespace Shuruev.StyleCop.Test
 			if (!headerLine.StartsWith("//# ["))
 				ThrowWrongTestFile();
 
-			if (headerLine == "//# [OK]")
+			if (headerLine.Contains("xxx"))
+			{
+				test.Skip = true;
+			}
+			else if (headerLine == "//# [OK]")
 			{
 				test.ErrorCount = 0;
 			}
+			else if (headerLine == "//# [ERROR]")
+			{
+				test.ErrorCount = 1;
+			}
 			else
 			{
-				if (headerLine == "//# [ERROR]")
-				{
-					test.ErrorCount = 1;
-				}
-				else
-				{
-					if (!headerLine.StartsWith("//# [ERROR:"))
-						ThrowWrongTestFile();
+				if (!headerLine.StartsWith("//# [ERROR:"))
+					ThrowWrongTestFile();
 
-					string[] parts = headerLine.Split(
-						new[] { "//# [ERROR:", "]" },
-						StringSplitOptions.RemoveEmptyEntries);
+				string[] parts = headerLine.Split(
+					new[] { "//# [ERROR:", "]" },
+					StringSplitOptions.RemoveEmptyEntries);
 
-					if (parts.Length != 1)
-						ThrowWrongTestFile();
+				if (parts.Length != 1)
+					ThrowWrongTestFile();
 
-					if (!Int32.TryParse(parts[0], out test.ErrorCount))
-						ThrowWrongTestFile();
-				}
+				if (!Int32.TryParse(parts[0], out test.ErrorCount))
+					ThrowWrongTestFile();
 			}
 
 			string descriptionLine = lines[1];
@@ -200,6 +213,9 @@ namespace Shuruev.StyleCop.Test
 				List<TestItem> tests = ParseTests(block.Content);
 				foreach (TestItem test in tests)
 				{
+					if (test.Skip)
+						continue;
+
 					RunTest(
 						block.Rule,
 						test.ErrorCount,

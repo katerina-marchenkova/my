@@ -50,49 +50,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
     <Compile Include="AdvancedNaming\AbbreviationsSpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\AdvancedNamingRules.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AdvancedNaming\CurrentNamingSettings.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="AdvancedNaming\WordsSpecialSetting.cs" />
     <Compile Include="AdvancedNaming\DerivingsSpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\IAdvancedNamingEditor.cs" />
+    <Compile Include="AdvancedNaming\SimpleSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\ITextValidator.cs" />
     <Compile Include="AdvancedNaming\ICharValidator.cs" />
     <Compile Include="AdvancedNaming\ISpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\ITextValidator.cs" />
-    <Compile Include="AdvancedNaming\NamingMacro.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AdvancedNaming\NamingRuleEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdvancedNaming\NamingRuleEditor.designer.cs">
-      <DependentUpon>NamingRuleEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AdvancedNaming\NamingRulesPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AdvancedNaming\NamingRulesPage.designer.cs">
-      <DependentUpon>NamingRulesPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AdvancedNaming\SimpleSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\IAdvancedNamingEditor.cs" />
     <Compile Include="AdvancedNaming\SpecialSettingEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdvancedNaming\SpecialSettingEditor.Designer.cs">
       <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdvancedNaming\WordsSpecialSetting.cs" />
-    <Compile Include="Analyzers\CustomCsParser.cs" />
-    <Compile Include="Analyzers\ExtendedOriginalRules.cs" />
-    <Compile Include="Analyzers\ExtendedOriginalRules.Reflection.cs" />
-    <Compile Include="Analyzers\MoreCustomRules.cs" />
+    <Compile Include="AdvancedNaming\NamingMacro.cs" />
+    <Compile Include="AdvancedNaming\NamingRuleEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRuleEditor.Designer.cs">
+      <DependentUpon>NamingRuleEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRulesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdvancedNaming\NamingRulesPage.Designer.cs">
+      <DependentUpon>NamingRulesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
+    <Compile Include="ExtendedOriginal\CustomDocumentationRules.cs" />
+    <Compile Include="ExtendedOriginal\CustomLayoutRules.cs" />
+    <Compile Include="ExtendedOriginal\CustomNamingRules.cs" />
+    <Compile Include="ExtendedOriginal\ExtendedOriginalRules.Reflection.cs" />
     <Compile Include="Analyzers\StyleCopPlus.cs" />
+    <Compile Include="ExtendedOriginal\CustomCsParser.cs" />
     <Compile Include="CodeHelper\CodeHelper.cs" />
     <Compile Include="CodeHelper\LocalDeclaration.cs" />
-    <Compile Include="Common\Colors.cs" />
+    <Compile Include="Common\Native.cs" />
     <Compile Include="Common\HighlightTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,23 +95,25 @@
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Messages.cs" />
-    <Compile Include="Common\Native.cs" />
+    <Compile Include="Common\Colors.cs" />
     <Compile Include="Common\Pictures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Analyzers\MoreCustomRules.cs" />
+    <Compile Include="ExtendedOriginal\ExtendedOriginalRules.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PropertyPage\SettingTag.cs" />
     <Compile Include="PropertyPage\NamingSettings.cs" />
+    <Compile Include="PropertyPage\SettingsManager.cs" />
     <Compile Include="PropertyPage\PropertyPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PropertyPage\PropertyPage.designer.cs">
+    <Compile Include="PropertyPage\PropertyPage.Designer.cs">
       <DependentUpon>PropertyPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="PropertyPage\SettingsManager.cs" />
-    <Compile Include="PropertyPage\SettingTag.cs" />
     <Compile Include="Rules.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +122,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdvancedNaming\NamingRulesPage.resx">
       <DependentUpon>NamingRulesPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AdvancedNaming\SpecialSettingEditor.resx">
-      <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\HighlightTextBox.resx">
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
@@ -140,15 +134,32 @@
     <EmbeddedResource Include="PropertyPage\PropertyPage.resx">
       <DependentUpon>PropertyPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StyleCopPlus.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AdvancedNaming\SpecialSettingEditor.resx">
+      <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StyleCopPlus.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StyleCopPlusLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StyleCopPlusTitle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RuleDisabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RuleEnabled.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CapitalLetter.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\RightArrow.png" />
-    <None Include="Resources\RuleDisabled.png" />
-    <None Include="Resources\RuleEnabled.png" />
-    <None Include="Resources\StyleCopPlusLogo.png" />
-    <None Include="Resources\StyleCopPlusTitle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,5 +5,8 @@ Resources.Designer.cs
 \obj\
 AssemblyInfo.cs
 CustomCsParser.cs
+CustomNamingRules.cs
+CustomLayoutRules.cs
+CustomDocumentationRules.cs
 ExtendedOriginalRules.Reflection.cs
-StyleCopPlusTest.Modifier.cs
+ComplexTest.Modifier.cs

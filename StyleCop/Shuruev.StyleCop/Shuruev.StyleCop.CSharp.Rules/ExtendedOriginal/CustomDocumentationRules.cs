@@ -4,9 +4,9 @@ using Microsoft.StyleCop.CSharp;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// C# parser used for running default analyzers in custom mode.
+	/// Overriding documentation rules analyzer for running in custom mode.
 	/// </summary>
-	public class CustomCsParser : CsParser
+	internal class CustomDocumentationRules : DocumentationRules
 	{
 		/// <summary>
 		/// Checks whether specified rule is enabled.

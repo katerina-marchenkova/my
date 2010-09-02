@@ -26,7 +26,7 @@ namespace Shuruev.StyleCop.Run
 				new List<string>(new[] { basePath }),
 				true);
 
-			StyleCopPlus styleCopPlus = null;
+			/*xxxStyleCopPlus styleCopPlus = null;
 			foreach (SourceParser parser in console.Core.Parsers)
 			{
 				List<SourceAnalyzer> analyzersToRemove = new List<SourceAnalyzer>();
@@ -50,10 +50,10 @@ namespace Shuruev.StyleCop.Run
 			if (styleCopPlus == null)
 			{
 				throw new InvalidOperationException("StyleCopPlus was not found.");
-			}
+			}*/
 
-			styleCopPlus.DisableAllRulesExcept.Clear();
-			styleCopPlus.DisableAllRulesExcept.Add("AdvancedNamingRules");
+			/*xxxstyleCopPlus.DisableAllRulesExcept.Clear();
+			styleCopPlus.DisableAllRulesExcept.Add("AdvancedNamingRules");*/
 
 			CodeProject project = new CodeProject(
 				0,
@@ -65,6 +65,16 @@ namespace Shuruev.StyleCop.Run
 			console.OutputGenerated += OnOutputGenerated;
 			console.ViolationEncountered += OnViolationEncountered;
 			console.Start(new[] { project }, true);
+
+			foreach (SourceParser parser in console.Core.Parsers)
+			{
+				Console.WriteLine("Parser: {0}", parser.Name);
+				foreach (SourceAnalyzer analyzer in parser.Analyzers)
+				{
+					Console.WriteLine("Analyzer: {0}", analyzer.Name);
+				}
+			}
+
 			console.OutputGenerated -= OnOutputGenerated;
 			console.ViolationEncountered -= OnViolationEncountered;
 			console.Dispose();

@@ -1,9 +1,9 @@
-﻿namespace Shuruev.StyleCop.Test
+﻿namespace Shuruev.StyleCop.Test.ComplexTests
 {
 	/// <summary>
-	/// Testing StyleCop+ plug-in.
+	/// Running complex batch tests for StyleCop+ plug-in.
 	/// </summary>
-	public partial class StyleCopPlusTest
+	public partial class ComplexTest
 	{
 		/// <summary>
 		/// Modifies source code before running a test.

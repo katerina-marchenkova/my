@@ -1,23 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.StyleCop;
 using Shuruev.StyleCop.CSharp;
 
-namespace Shuruev.StyleCop.Test
+namespace Shuruev.StyleCop.Test.ComplexTests
 {
 	/// <summary>
 	/// Runs StyleCop+ with specified settings.
 	/// </summary>
 	public class StyleCopPlusRunner
 	{
-		public List<string> Violations { get; set; }
+		/// <summary>
+		/// Gets a list of violations.
+		/// </summary>
+		public List<string> Violations { get; private set; }
+
+		/// <summary>
+		/// Gets an output text.
+		/// </summary>
+		public StringBuilder Output { get; private set; }
+
+		/// <summary>
+		/// Initializes a new instance.
+		/// </summary>
+		public StyleCopPlusRunner()
+		{
+			Violations = new List<string>();
+			Output = new StringBuilder();
+		}
 
 		/// <summary>
 		/// Runs StyleCop+ for specified file.
 		/// </summary>
 		public void Run(string sourceFile, string targetRule)
 		{
-			Violations = new List<string>();
+			Violations.Clear();
+			Output.Length = 0;
 
 			string basePath = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -45,9 +64,19 @@ namespace Shuruev.StyleCop.Test
 			console.Core.Environment.AddSourceCode(project, sourceFile, null);
 
 			console.ViolationEncountered += OnViolationEncountered;
+			console.OutputGenerated += OnOutputGenerated;
 			console.Start(new[] { project }, true);
+			console.OutputGenerated -= OnOutputGenerated;
 			console.ViolationEncountered -= OnViolationEncountered;
 			console.Dispose();
+		}
+
+		/// <summary>
+		/// Handles generated output.
+		/// </summary>
+		private void OnOutputGenerated(object sender, OutputEventArgs e)
+		{
+			Output.AppendLine(e.Output);
 		}
 
 		/// <summary>
@@ -69,7 +98,7 @@ namespace Shuruev.StyleCop.Test
 				List<SourceAnalyzer> analyzersToRemove = new List<SourceAnalyzer>();
 				foreach (SourceAnalyzer analyzer in parser.Analyzers)
 				{
-					if (analyzer.GetType() == typeof(StyleCopPlus))
+					if (typeof(StyleCopPlus) == analyzer.GetType())
 					{
 						styleCopPlus = (StyleCopPlus)analyzer;
 						break;

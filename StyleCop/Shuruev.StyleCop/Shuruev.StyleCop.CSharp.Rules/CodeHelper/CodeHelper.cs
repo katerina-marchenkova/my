@@ -22,7 +22,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static bool IsStyleCop43()
 		{
-			Assembly assembly = (typeof(StyleCopCore)).Assembly;
+			Assembly assembly = typeof(StyleCopCore).Assembly;
 			Version version = assembly.GetName().Version;
 			return version.Major == 4 && version.Minor == 3;
 		}

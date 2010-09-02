@@ -13,8 +13,8 @@ namespace Shuruev.StyleCop.Run.Simple
 		/// </summary>
 		public static void Main(string[] args)
 		{
-			string projectPath = @"C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\TestProject\TestProject";
-			string filePath = @"C:\Users\oshuruev\Documents\Visual Studio 2010\Projects\TestProject\TestProject\Class1.cs";
+			string projectPath = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run";
+			string filePath = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class1.cs";
 
 			StyleCopConsole console = new StyleCopConsole(null, false, null, null, true);
 			CodeProject project = new CodeProject(0, projectPath, new Configuration(null));
@@ -24,6 +24,16 @@ namespace Shuruev.StyleCop.Run.Simple
 			console.OutputGenerated += OnOutputGenerated;
 			console.ViolationEncountered += OnViolationEncountered;
 			console.Start(new[] { project }, true);
+
+			foreach (SourceParser parser in console.Core.Parsers)
+			{
+				Console.WriteLine("Parser: {0}", parser.Name);
+				foreach (SourceAnalyzer analyzer in parser.Analyzers)
+				{
+					Console.WriteLine("Analyzer: {0}", analyzer.Name);
+				}
+			}
+
 			console.OutputGenerated -= OnOutputGenerated;
 			console.ViolationEncountered -= OnViolationEncountered;
 			console.Dispose();

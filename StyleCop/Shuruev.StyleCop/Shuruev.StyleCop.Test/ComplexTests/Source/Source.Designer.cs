@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shuruev.StyleCop.Test.Properties {
+namespace Shuruev.StyleCop.Test.ComplexTests {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Shuruev.StyleCop.Test.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class Source {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Source() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Shuruev.StyleCop.Test.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shuruev.StyleCop.Test.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shuruev.StyleCop.Test.ComplexTests.Source.Source", typeof(Source).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -191,42 +191,11 @@ namespace Shuruev.StyleCop.Test.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to //# [ERROR]
-        /////# Public class doesn&apos;t have summary.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [ERROR]
-        /////# Public method doesn&apos;t have summary.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	/// &lt;summary&gt;
-        ///	/// Hello there.
-        ///	/// &lt;/summary&gt;
-        ///	public class TestClass
-        ///	{
-        ///		public void TestMethod()
-        ///		{
-        ///			int a = 10;
-        ///		}
-        ///	}
-        ///}
-        /////# [OK]
-        /////# Both class and method have summary.
-        ///namespace Shuruev.StyleCop.Test
-        ///{
-        ///	/// &lt;summary&gt; [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string SP1600 {
+        internal static string OneRun {
             get {
-                return ResourceManager.GetString("SP1600", resourceCulture);
+                return ResourceManager.GetString("OneRun", resourceCulture);
             }
         }
     }
