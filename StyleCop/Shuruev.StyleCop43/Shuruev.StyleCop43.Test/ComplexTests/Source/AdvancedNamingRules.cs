@@ -429,3 +429,270 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 #endregion
+
+#region AdvancedNamingRules // Local variables
+
+//# (AdvancedNaming_LocalVariable = A:B:t)
+
+//# [OK]
+//# All local variable names are correct.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			int A = 10;
+		}
+
+		public int this[int index]
+		{
+			get
+			{
+				int A = 10;
+				return 0;
+			}
+		}
+
+		public void TestMethod()
+		{
+			int A = 10;
+			Thread t = new Thread(() =>
+			{
+				int B = 20;
+			});
+		}
+
+		public static explicit operator Foo(int x)
+		{
+			int A = 10;
+			return null;
+		}
+
+		public static implicit operator int(Foo x)
+		{
+			int A = 10;
+			return 0;
+		}
+
+		public static bool operator +(Foo a, Foo b)
+		{
+			int A = 10;
+			return false;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid local variable name in constructor.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			int X = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid local variable name in indexer.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int this[int index]
+		{
+			get
+			{
+				int X = 10;
+				return 0;
+			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid local variable names in method.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			int X = 10;
+			Thread t = new Thread(() =>
+			{
+				int Z = 20;
+			});
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:3]
+//# Invalid local variable names in operators.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public static explicit operator Foo(int x)
+		{
+			int X = 10;
+			return null;
+		}
+
+		public static implicit operator int(Foo x)
+		{
+			int X = 10;
+			return 0;
+		}
+
+		public static bool operator +(Foo a, Foo b)
+		{
+			int X = 10;
+			return false;
+		}
+	}
+}
+//# [END]
+
+#endregion
+
+#region AdvancedNamingRules // Local constants
+
+//# (AdvancedNaming_LocalVariable = t)
+//# (AdvancedNaming_LocalConstant = A:B)
+
+//# [OK]
+//# All local constant names are correct.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			const int A = 10;
+		}
+
+		public int this[int index]
+		{
+			get
+			{
+				const int A = 10;
+				return 0;
+			}
+		}
+
+		public void TestMethod()
+		{
+			const int A = 10;
+			Thread t = new Thread(() =>
+			{
+				const int B = 20;
+			});
+		}
+
+		public static explicit operator Foo(int x)
+		{
+			const int A = 10;
+			return null;
+		}
+
+		public static implicit operator int(Foo x)
+		{
+			const int A = 10;
+			return 0;
+		}
+
+		public static bool operator +(Foo a, Foo b)
+		{
+			const int A = 10;
+			return false;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid local constant name in constructor.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			const int X = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid local constant name in indexer.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int this[int index]
+		{
+			get
+			{
+				const int X = 10;
+				return 0;
+			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid local constant names in method.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			const int X = 10;
+			Thread t = new Thread(() =>
+			{
+				const int Z = 20;
+			});
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:3]
+//# Invalid local constant names in operators.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public static explicit operator Foo(int x)
+		{
+			const int X = 10;
+			return null;
+		}
+
+		public static implicit operator int(Foo x)
+		{
+			const int X = 10;
+			return 0;
+		}
+
+		public static bool operator +(Foo a, Foo b)
+		{
+			const int X = 10;
+			return false;
+		}
+	}
+}
+//# [END]
+
+#endregion

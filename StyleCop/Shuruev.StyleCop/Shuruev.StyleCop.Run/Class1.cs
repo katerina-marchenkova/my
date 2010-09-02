@@ -11,9 +11,11 @@ namespace Shuruev.StyleCop.Test
 		/// </summary>
 		void IDisposable.Dispose()
 		{
+			label2:
 			for (int i = 0; i < 10; i++)
 
 			{
+				goto label2;
 			}
 		}
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shuruev.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.Test.ComplexTests
 {
@@ -10,7 +11,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 	/// Running complex batch tests for StyleCop+ plug-in.
 	/// </summary>
 	[TestClass]
-	public partial class ComplexTest
+	public class ComplexTest
 	{
 		private readonly string m_tempFileName;
 
@@ -58,8 +59,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 			List<BlockItem> blocks = new List<BlockItem>();
 
 			StringBuilder sb = new StringBuilder();
-			string rule = null;
-			string comment = null;
+			BlockItem block = new BlockItem();
 
 			string[] lines = allText.Split(new[] { "\r\n" }, StringSplitOptions.None);
 
@@ -71,26 +71,39 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 					if (parts.Length == 0 || String.IsNullOrEmpty(parts[0]))
 						ThrowWrongTestFile();
 
-					rule = parts[0];
+					block.Rule = parts[0];
 					if (parts.Length > 1)
-						comment = parts[1];
+						block.Comment = parts[1];
 
 					continue;
 				}
 
 				if (line.StartsWith("#endregion"))
 				{
-					BlockItem block = new BlockItem
-					{
-						Rule = rule,
-						Comment = comment,
-						Content = sb.ToString()
-					};
+					block.Content = sb.ToString();
 					blocks.Add(block);
 
 					sb.Length = 0;
-					rule = null;
-					comment = null;
+					block = new BlockItem();
+					continue;
+				}
+
+				if (line.StartsWith("//# ("))
+				{
+					string setting = line.Substring(5, line.Length - 6);
+					string[] parts = setting.Split(new[] { " = " }, 2, StringSplitOptions.None);
+					if (parts.Length != 2)
+						ThrowWrongTestFile();
+
+					string settingName = parts[0];
+					object settingValue = parts[1];
+
+					bool booleanValue;
+					if (Boolean.TryParse(parts[1], out booleanValue))
+						settingValue = booleanValue;
+
+					block.CustomSettings.Add(settingName, settingValue);
+
 					continue;
 				}
 
@@ -147,7 +160,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 			if (!headerLine.StartsWith("//# ["))
 				ThrowWrongTestFile();
 
-			if (headerLine.Contains("xxx"))
+			if (headerLine.Contains("-- SKIP"))
 			{
 				test.Skip = true;
 			}
@@ -218,6 +231,8 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 
 					RunTest(
 						block.Rule,
+						block.Comment,
+						block.CustomSettings,
 						test.ErrorCount,
 						test.Description,
 						test.SourceCode);
@@ -230,6 +245,8 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 		/// </summary>
 		private void RunTest(
 			string targetRule,
+			string comment,
+			Dictionary<string, object> customSettings,
 			int errorCount,
 			string description,
 			string sourceCode)
@@ -239,14 +256,21 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 				File.Delete(m_tempFileName);
 			}
 
-			File.WriteAllText(m_tempFileName, ModifySource(sourceCode));
+			File.WriteAllText(m_tempFileName, StyleCop43Compatibility.ModifySourceForTest(sourceCode));
 
 			StyleCopPlusRunner runner = new StyleCopPlusRunner();
-			runner.Run(m_tempFileName, targetRule);
+			runner.Run(
+				m_tempFileName,
+				new SpecialRunningParameters
+				{
+					OnlyEnabledRule = targetRule,
+					CustomSettings = customSettings
+				});
 
 			string message = String.Format(
-				"{0}: {1}",
+				"{0} ({1}): {2}",
 				targetRule,
+				comment,
 				description);
 
 			Assert.AreEqual(

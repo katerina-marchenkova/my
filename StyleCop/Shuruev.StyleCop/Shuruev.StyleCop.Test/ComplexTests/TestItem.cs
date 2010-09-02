@@ -1,9 +1,11 @@
-﻿namespace Shuruev.StyleCop.Test.ComplexTests
+﻿using System;
+
+namespace Shuruev.StyleCop.Test.ComplexTests
 {
 	/// <summary>
 	/// Test in test definition file.
 	/// </summary>
-	public struct TestItem
+	public class TestItem
 	{
 		/// <summary>
 		/// A value indicating whether test should be temporarily skipped.
@@ -16,13 +18,13 @@
 		public int ErrorCount;
 
 		/// <summary>
-		/// A list of expected violations.
+		/// Test description.
 		/// </summary>
-		public string Description;
+		public string Description = String.Empty;
 
 		/// <summary>
 		/// Source code.
 		/// </summary>
-		public string SourceCode;
+		public string SourceCode = String.Empty;
 	}
 }

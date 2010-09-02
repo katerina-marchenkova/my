@@ -36,12 +36,12 @@ namespace Shuruev.StyleCop.CSharp
 			m_regulars.Clear();
 			m_derivings.Clear();
 
-			string abbreviations = SettingsManager.GetStringValue(
+			string abbreviations = SettingsManager.GetValue<string>(
 				analyzer,
 				document.Settings,
 				NamingSettings.Abbreviations);
 
-			string words = SettingsManager.GetStringValue(
+			string words = SettingsManager.GetValue<string>(
 				analyzer,
 				document.Settings,
 				NamingSettings.Words);
@@ -51,7 +51,7 @@ namespace Shuruev.StyleCop.CSharp
 				string name = SettingsManager.GetFriendlyName(analyzer, setting);
 				m_names.Add(setting, name);
 
-				string value = SettingsManager.GetStringValue(analyzer, document.Settings, setting);
+				string value = SettingsManager.GetValue<string>(analyzer, document.Settings, setting);
 				if (String.IsNullOrEmpty(value))
 				{
 					m_examples.Add(setting, null);
@@ -67,7 +67,7 @@ namespace Shuruev.StyleCop.CSharp
 				}
 			}
 
-			string derivings = SettingsManager.GetStringValue(
+			string derivings = SettingsManager.GetValue<string>(
 				analyzer,
 				document.Settings,
 				NamingSettings.Derivings);

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using Microsoft.StyleCop;
@@ -15,20 +14,6 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public static class CodeHelper
 	{
-		#region Compatibility helpers
-
-		/// <summary>
-		/// Checks whether we are working with old StyleCop version.
-		/// </summary>
-		public static bool IsStyleCop43()
-		{
-			Assembly assembly = typeof(StyleCopCore).Assembly;
-			Version version = assembly.GetName().Version;
-			return version.Major == 4 && version.Minor == 3;
-		}
-
-		#endregion
-
 		#region Identifying elements
 
 		/// <summary>
@@ -236,7 +221,7 @@ namespace Shuruev.StyleCop.CSharp
 					|| node.Value.CsTokenType == CsTokenType.Where)
 					break;
 
-				if (IsStyleCop43())
+				if (StyleCop43Compatibility.IsStyleCop43())
 				{
 					if (node.Value.Text == "where")
 						break;
@@ -307,7 +292,8 @@ namespace Shuruev.StyleCop.CSharp
 				{
 					declarations.Add(new LocalDeclaration
 					{
-						Name = variable.Name
+						Name = variable.Name,
+						LineNumber = StyleCop43Compatibility.GetVariableLineNumber(variable)
 					});
 				}
 
@@ -323,7 +309,8 @@ namespace Shuruev.StyleCop.CSharp
 					declarations.Add(new LocalDeclaration
 					{
 						Name = declarator.Identifier.Text,
-						IsConstant = isConstant
+						IsConstant = isConstant,
+						LineNumber = declarator.LineNumber
 					});
 				}
 			}

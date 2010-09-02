@@ -79,10 +79,10 @@
       <DependentUpon>NamingRulesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
+    <Compile Include="Analyzers\SpecialRunningParameters.cs" />
     <Compile Include="ExtendedOriginal\CustomDocumentationRules.cs" />
     <Compile Include="ExtendedOriginal\CustomLayoutRules.cs" />
     <Compile Include="ExtendedOriginal\CustomNamingRules.cs" />
-    <Compile Include="ExtendedOriginal\ExtendedOriginalRules.Reflection.cs" />
     <Compile Include="Analyzers\StyleCopPlus.cs" />
     <Compile Include="ExtendedOriginal\CustomCsParser.cs" />
     <Compile Include="CodeHelper\CodeHelper.cs" />
@@ -115,6 +115,7 @@
       <DependentUpon>PropertyPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Rules.cs" />
+    <Compile Include="StyleCop43Compatibility.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AdvancedNaming\NamingRuleEditor.resx">

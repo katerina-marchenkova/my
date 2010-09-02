@@ -33,7 +33,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 		/// <summary>
 		/// Runs StyleCop+ for specified file.
 		/// </summary>
-		public void Run(string sourceFile, string targetRule)
+		public void Run(string sourceFile, SpecialRunningParameters specialRunningParameters)
 		{
 			Violations.Clear();
 			Output.Length = 0;
@@ -53,8 +53,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 				throw new InvalidOperationException("StyleCopPlus was not found.");
 			}
 
-			styleCopPlus.DisableAllRulesExcept.Clear();
-			styleCopPlus.DisableAllRulesExcept.Add(targetRule);
+			styleCopPlus.SpecialRunningParameters = specialRunningParameters;
 
 			CodeProject project = new CodeProject(
 				0,
@@ -66,6 +65,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 			console.ViolationEncountered += OnViolationEncountered;
 			console.OutputGenerated += OnOutputGenerated;
 			console.Start(new[] { project }, true);
+
 			console.OutputGenerated -= OnOutputGenerated;
 			console.ViolationEncountered -= OnViolationEncountered;
 			console.Dispose();

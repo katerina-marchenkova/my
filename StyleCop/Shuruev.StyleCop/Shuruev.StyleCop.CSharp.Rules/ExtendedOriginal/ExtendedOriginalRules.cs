@@ -8,7 +8,7 @@ namespace Shuruev.StyleCop.CSharp
 	/// <summary>
 	/// Rules that are based on the original ones with adding some exception cases.
 	/// </summary>
-	public partial class ExtendedOriginalRules
+	public class ExtendedOriginalRules
 	{
 		internal const string AllowConstructorsFor1502 = "SP1502_AllowConstructors";
 		internal const string AllowNestedCodeBlocksFor1509 = "SP1509_AllowNestedCodeBlocks";
@@ -47,19 +47,19 @@ namespace Shuruev.StyleCop.CSharp
 			m_customLayoutAnalyzer = new CustomLayoutRules();
 			m_customDocumentationAnalyzer = new CustomDocumentationRules();
 
-			InitializeCustomAnalyzer(
+			StyleCop43Compatibility.InitializeCustomAnalyzer(
 				m_parent.Core,
 				m_customCore,
 				"Microsoft.StyleCop.CSharp.NamingRules",
 				m_customNamingAnalyzer);
 
-			InitializeCustomAnalyzer(
+			StyleCop43Compatibility.InitializeCustomAnalyzer(
 				m_parent.Core,
 				m_customCore,
 				"Microsoft.StyleCop.CSharp.LayoutRules",
 				m_customLayoutAnalyzer);
 
-			InitializeCustomAnalyzer(
+			StyleCop43Compatibility.InitializeCustomAnalyzer(
 				m_parent.Core,
 				m_customCore,
 				"Microsoft.StyleCop.CSharp.DocumentationRules",
@@ -86,7 +86,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void OnCustomViolationEncountered(object sender, ViolationEventArgs e)
 		{
-			RemoveCustomViolation(e);
+			StyleCop43Compatibility.RemoveCustomViolation(e);
 
 			switch (e.Violation.Rule.CheckId)
 			{
@@ -178,7 +178,7 @@ namespace Shuruev.StyleCop.CSharp
 				if (element.ElementType == ElementType.Accessor)
 					return;
 
-				if (CodeHelper.IsStyleCop43())
+				if (StyleCop43Compatibility.IsStyleCop43())
 				{
 					Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
 					if (node != null)
@@ -213,7 +213,7 @@ namespace Shuruev.StyleCop.CSharp
 				if (element.ElementType == ElementType.Accessor)
 					return;
 
-				if (CodeHelper.IsStyleCop43())
+				if (StyleCop43Compatibility.IsStyleCop43())
 				{
 					Node<CsToken> node = CodeHelper.GetNodeByLine((CsDocument)element.Document, e.LineNumber);
 					if (node != null)
@@ -249,7 +249,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_parent.AddViolation(
 				element,
 				Rules.ConstructorSummaryDocumentationMustBeginWithStandardText,
-				new object[] { GetExampleSummaryTextForConstructor(element) });
+				new object[] { StyleCop43Compatibility.GetExampleSummaryTextForConstructor(m_customDocumentationAnalyzer, element) });
 		}
 
 		/// <summary>
@@ -266,7 +266,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_parent.AddViolation(
 				element,
 				Rules.DestructorSummaryDocumentationMustBeginWithStandardText,
-				new object[] { GetExampleSummaryTextForDestructor() });
+				new object[] { StyleCop43Compatibility.GetExampleSummaryTextForDestructor(m_customDocumentationAnalyzer) });
 		}
 
 		#endregion
@@ -286,7 +286,7 @@ namespace Shuruev.StyleCop.CSharp
 			string fullName = String.Format("Microsoft.StyleCop.CSharp.{0}", analyzerName);
 			SourceAnalyzer analyzer = m_parent.Core.GetAnalyzer(fullName);
 
-			if (CodeHelper.IsStyleCop43())
+			if (StyleCop43Compatibility.IsStyleCop43())
 			{
 				string settingName = String.Format("{0}#Enabled", rule);
 				BooleanProperty enabled = (BooleanProperty)analyzer.GetSetting(document.Settings, settingName);
@@ -312,7 +312,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private bool ReadSetting(ViolationEventArgs e, string settingName)
 		{
-			return SettingsManager.GetBooleanValue(
+			return SettingsManager.GetValue<bool>(
 				m_parent,
 				e.Element.Document.Settings,
 				settingName);

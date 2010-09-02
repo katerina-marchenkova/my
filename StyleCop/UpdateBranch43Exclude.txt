@@ -8,5 +8,4 @@ CustomCsParser.cs
 CustomNamingRules.cs
 CustomLayoutRules.cs
 CustomDocumentationRules.cs
-ExtendedOriginalRules.Reflection.cs
-ComplexTest.Modifier.cs
+StyleCop43Compatibility.cs

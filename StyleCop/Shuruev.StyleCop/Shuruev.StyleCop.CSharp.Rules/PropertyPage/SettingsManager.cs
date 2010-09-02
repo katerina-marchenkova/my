@@ -13,19 +13,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets property descriptor with existing check.
 		/// </summary>
-		public static PropertyDescriptor<T> GetPropertyDescriptor<T>(SourceAnalyzer analyzer, string settingName)
-		{
-			PropertyDescriptor<T> descriptor = (PropertyDescriptor<T>)analyzer.PropertyDescriptors[settingName];
-			if (descriptor == null)
-				throw new InvalidDataException("Setting " + settingName + " is not registered as a known one.");
-
-			return descriptor;
-		}
-
-		/// <summary>
-		/// Gets property descriptor with existing check.
-		/// </summary>
-		public static PropertyDescriptor GetPropertyDescriptor(SourceAnalyzer analyzer, string settingName)
+		private static PropertyDescriptor GetDescriptor(SourceAnalyzer analyzer, string settingName)
 		{
 			PropertyDescriptor descriptor = analyzer.PropertyDescriptors[settingName];
 			if (descriptor == null)
@@ -35,14 +23,20 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Gets a string value for specified setting.
+		/// Gets property value for specified setting.
 		/// </summary>
-		public static string GetStringValue(SourceAnalyzer analyzer, Settings settings, string settingName)
+		public static T GetValue<T>(SourceAnalyzer analyzer, Settings settings, string settingName)
 		{
-			StringProperty setting = (StringProperty)analyzer.GetSetting(settings, settingName);
+			T customValue;
+			if (GetCustomValue(analyzer, settingName, out customValue))
+			{
+				return customValue;
+			}
+
+			PropertyValue<T> setting = (PropertyValue<T>)analyzer.GetSetting(settings, settingName);
 			if (setting == null)
 			{
-				PropertyDescriptor<string> descriptor = GetPropertyDescriptor<string>(analyzer, settingName);
+				PropertyDescriptor<T> descriptor = (PropertyDescriptor<T>)GetDescriptor(analyzer, settingName);
 				return descriptor.DefaultValue;
 			}
 
@@ -50,18 +44,28 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Gets a string value for specified setting.
+		/// Gets customized value if it is possible.
 		/// </summary>
-		public static bool GetBooleanValue(SourceAnalyzer analyzer, Settings settings, string settingName)
+		private static bool GetCustomValue<T>(SourceAnalyzer analyzer, string settingName, out T value)
 		{
-			BooleanProperty setting = (BooleanProperty)analyzer.GetSetting(settings, settingName);
-			if (setting == null)
+			if (analyzer is StyleCopPlus)
 			{
-				PropertyDescriptor<bool> descriptor = GetPropertyDescriptor<bool>(analyzer, settingName);
-				return descriptor.DefaultValue;
+				StyleCopPlus styleCopPlus = (StyleCopPlus)analyzer;
+				if (styleCopPlus.SpecialRunningParameters != null)
+				{
+					if (styleCopPlus.SpecialRunningParameters.CustomSettings != null)
+					{
+						if (styleCopPlus.SpecialRunningParameters.CustomSettings.ContainsKey(settingName))
+						{
+							value = (T)styleCopPlus.SpecialRunningParameters.CustomSettings[settingName];
+							return true;
+						}
+					}
+				}
 			}
 
-			return setting.Value;
+			value = default(T);
+			return false;
 		}
 
 		/// <summary>
@@ -69,7 +73,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetFriendlyName(SourceAnalyzer analyzer, string settingName)
 		{
-			PropertyDescriptor descriptor = GetPropertyDescriptor(analyzer, settingName);
+			PropertyDescriptor descriptor = GetDescriptor(analyzer, settingName);
 			return descriptor.FriendlyName;
 		}
 
@@ -90,7 +94,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetMergedValue(PropertyPage page, string settingName)
 		{
-			return GetStringValue(page.Analyzer, page.TabControl.MergedSettings, settingName);
+			return GetValue<string>(page.Analyzer, page.TabControl.MergedSettings, settingName);
 		}
 
 		/// <summary>
@@ -98,7 +102,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string GetInheritedValue(PropertyPage page, string settingName)
 		{
-			return GetStringValue(page.Analyzer, page.TabControl.ParentSettings, settingName);
+			return GetValue<string>(page.Analyzer, page.TabControl.ParentSettings, settingName);
 		}
 
 		/// <summary>

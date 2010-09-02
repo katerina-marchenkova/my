@@ -6,16 +6,52 @@ using Microsoft.StyleCop.CSharp;
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Rules that are based on the original ones with adding some exception cases.
+	/// Contains different methods for compatibility with StyleCop 4.3.
 	/// </summary>
-	public partial class ExtendedOriginalRules
+	public static class StyleCop43Compatibility
 	{
+		#region Common methods
+
+		/// <summary>
+		/// Checks whether we are working with old StyleCop version.
+		/// </summary>
+		public static bool IsStyleCop43()
+		{
+			return true;
+		}
+
+		/// <summary>
+		/// Modifies source code before running a test.
+		/// </summary>
+		public static string ModifySourceForTest(string sourceCode)
+		{
+			sourceCode = sourceCode.Replace("in TInput", "TInput");
+			sourceCode = sourceCode.Replace("out TOutput", "TOutput");
+			sourceCode = sourceCode.Replace("in Input", "Input");
+			sourceCode = sourceCode.Replace("out Output", "Output");
+			return sourceCode;
+		}
+
+		#endregion
+
+		#region Working with code elements
+
+		/// <summary>
+		/// Gets line number for variable.
+		/// </summary>
+		public static int? GetVariableLineNumber(Variable variable)
+		{
+			return null;
+		}
+
+		#endregion
+
 		#region Running original analyzers
 
 		/// <summary>
 		/// Initializes custom analyzer based on the standard one.
 		/// </summary>
-		private static void InitializeCustomAnalyzer(
+		public static void InitializeCustomAnalyzer(
 			StyleCopCore originalCore,
 			StyleCopCore customCore,
 			string originalAnalyzerCode,
@@ -77,7 +113,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Removes violation got from the custom analyzer.
 		/// </summary>
-		private static void RemoveCustomViolation(ViolationEventArgs e)
+		public static void RemoveCustomViolation(ViolationEventArgs e)
 		{
 			string key = (string)typeof(Violation).InvokeMember(
 				"Key",
@@ -103,27 +139,27 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets example summary text for constructor.
 		/// </summary>
-		private string GetExampleSummaryTextForConstructor(ICodeUnit constructor)
+		public static string GetExampleSummaryTextForConstructor(SourceAnalyzer customDocumentationAnalyzer, ICodeUnit constructor)
 		{
 			string type = (constructor.Parent is Struct) ? "struct" : "class";
 			return (string)typeof(DocumentationRules).InvokeMember(
 				"GetExampleSummaryTextForConstructorType",
 				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
 				null,
-				m_customDocumentationAnalyzer,
+				customDocumentationAnalyzer,
 				new object[] { constructor, type });
 		}
 
 		/// <summary>
 		/// Gets example summary text for destructor.
 		/// </summary>
-		private string GetExampleSummaryTextForDestructor()
+		public static string GetExampleSummaryTextForDestructor(SourceAnalyzer customDocumentationAnalyzer)
 		{
 			return (string)typeof(DocumentationRules).InvokeMember(
 				"GetExampleSummaryTextForDestructor",
 				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
 				null,
-				m_customDocumentationAnalyzer,
+				customDocumentationAnalyzer,
 				null);
 		}
 

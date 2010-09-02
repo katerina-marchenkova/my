@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
@@ -14,7 +15,10 @@ namespace Shuruev.StyleCop.CSharp
 		private readonly ExtendedOriginalRules m_extendedOriginalRules;
 		private readonly MoreCustomRules m_moreCustomRules;
 
-		private readonly List<string> m_disableAllRulesExcept;
+		/// <summary>
+		/// Gets or sets special running parameters.
+		/// </summary>
+		public SpecialRunningParameters SpecialRunningParameters;
 
 		/// <summary>
 		/// Initializes a new instance.
@@ -24,8 +28,6 @@ namespace Shuruev.StyleCop.CSharp
 			m_advancedNamingRules = new AdvancedNamingRules(this);
 			m_extendedOriginalRules = new ExtendedOriginalRules(this);
 			m_moreCustomRules = new MoreCustomRules(this);
-
-			m_disableAllRulesExcept = new List<string>();
 		}
 
 		#region Properties
@@ -41,17 +43,6 @@ namespace Shuruev.StyleCop.CSharp
 			}
 		}
 
-		/// <summary>
-		/// Gets a set of rules that are enabled in the current instance.
-		/// </summary>
-		public List<string> DisableAllRulesExcept
-		{
-			get
-			{
-				return m_disableAllRulesExcept;
-			}
-		}
-
 		#endregion
 
 		#region Analyzer methods
@@ -61,10 +52,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public override bool IsRuleEnabled(CodeDocument document, string ruleName)
 		{
-			if (m_disableAllRulesExcept.Count == 0)
-				return base.IsRuleEnabled(document, ruleName);
+			if (SpecialRunningParameters != null)
+			{
+				if (!String.IsNullOrEmpty(SpecialRunningParameters.OnlyEnabledRule))
+				{
+					return ruleName == SpecialRunningParameters.OnlyEnabledRule;
+				}
+			}
 
-			return m_disableAllRulesExcept.Contains(ruleName);
+			return base.IsRuleEnabled(document, ruleName);
 		}
 
 		/// <summary>

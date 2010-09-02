@@ -1,23 +1,31 @@
-﻿namespace Shuruev.StyleCop.Test.ComplexTests
+﻿using System;
+using System.Collections.Generic;
+
+namespace Shuruev.StyleCop.Test.ComplexTests
 {
 	/// <summary>
 	/// Block in test definition file.
 	/// </summary>
-	public struct BlockItem
+	public class BlockItem
 	{
 		/// <summary>
 		/// Rule being tested at the block.
 		/// </summary>
-		public string Rule;
+		public string Rule = String.Empty;
 
 		/// <summary>
 		/// Rule comment.
 		/// </summary>
-		public string Comment;
+		public string Comment = String.Empty;
+
+		/// <summary>
+		/// Custom settings.
+		/// </summary>
+		public Dictionary<string, object> CustomSettings = new Dictionary<string, object>();
 
 		/// <summary>
 		/// Block content.
 		/// </summary>
-		public string Content;
+		public string Content = String.Empty;
 	}
 }
