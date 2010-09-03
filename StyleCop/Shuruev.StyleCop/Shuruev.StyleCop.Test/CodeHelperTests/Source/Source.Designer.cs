@@ -152,6 +152,51 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         
         /// <summary>
         ///   Looks up a localized string similar to using System;
+        ///using System.IO;
+        ///using System.Threading;
+        ///
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class Class1
+        ///	{
+        ///		private int m_field = 5;
+        ///
+        ///		public Class1()
+        ///		{
+        ///			try
+        ///			{
+        ///lab1:			m_field = 6;
+        ///			}
+        ///			catch (Exception ex)
+        ///			{
+        ///				throw;
+        ///			}
+        ///
+        ///			for (int i = 0; i &lt; 10; i++)
+        ///			{
+        ///lab2:			m_field = 6;
+        ///			}
+        ///
+        ///			foreach (string s in new[] { &quot;1&quot;, &quot;2&quot; })
+        ///			{
+        ///lab3:			m_field = 6;
+        ///			}
+        ///
+        ///			using (MemoryStream ms = new MemoryStream())
+        ///			{
+        ///lab4:			m_field = 6;
+        ///			}
+        ///
+        ///			goto  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Parameters {
+            get {
+                return ResourceManager.GetString("Parameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using System;
         ///
         ///namespace Shuruev.StyleCop.Test
         ///{

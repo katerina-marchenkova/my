@@ -1,6 +1,5 @@
 .csproj
 .user
-Resources.Designer.cs
 \bin\
 \obj\
 AssemblyInfo.cs

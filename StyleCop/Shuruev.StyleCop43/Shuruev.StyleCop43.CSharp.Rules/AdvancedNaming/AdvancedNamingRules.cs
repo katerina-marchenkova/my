@@ -128,6 +128,7 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeConstructor(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckParameters(element, settings);
+			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
 		}
 
@@ -137,8 +138,8 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeDelegate(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckDeclaration(element, settings, NamingSettings.Delegate);
-			CheckTypeParameters(element, settings);
 			CheckParameters(element, settings);
+			CheckTypeParameters(element, settings);
 		}
 
 		/// <summary>
@@ -209,6 +210,7 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeIndexer(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckParameters(element, settings);
+			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
 		}
 
@@ -241,8 +243,8 @@ namespace Shuruev.StyleCop.CSharp
 				}
 			}
 
-			CheckTypeParameters(element, settings);
 			CheckParameters(element, settings);
+			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
 		}
 
@@ -265,6 +267,8 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeProperty(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckDeclaration(element, settings, NamingSettings.Property);
+			CheckParameters(element, settings);
+			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
 		}
 
@@ -329,11 +333,14 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void CheckParameters(CsElement element, CurrentNamingSettings settings)
 		{
-			foreach (Parameter parameter in CodeHelper.GetParameters(element))
+			foreach (ParameterItem parameter in CodeHelper.GetParameters(element))
 			{
-				string name = parameter.Name;
-				if (!CheckName(element, parameter.LineNumber, settings, NamingSettings.Parameter, name))
-					break;
+				CheckName(
+					element,
+					parameter.LineNumber,
+					settings,
+					NamingSettings.Parameter,
+					parameter.Name);
 			}
 		}
 
@@ -342,10 +349,14 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void CheckTypeParameters(CsElement element, CurrentNamingSettings settings)
 		{
-			foreach (string name in CodeHelper.GetTypeParameters(element))
+			foreach (TypeParameterItem parameter in CodeHelper.GetTypeParameters(element))
 			{
-				if (!CheckName(element, null, settings, NamingSettings.TypeParameter, name))
-					break;
+				CheckName(
+					element,
+					parameter.LineNumber,
+					settings,
+					NamingSettings.TypeParameter,
+					parameter.Name);
 			}
 		}
 

@@ -110,6 +110,8 @@
     </Compile>
     <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
     <Compile Include="Analyzers\SpecialRunningParameters.cs" />
+    <Compile Include="CodeHelper\TypeParameterItem.cs" />
+    <Compile Include="CodeHelper\ParameterItem.cs" />
     <Compile Include="CodeHelper\LabelItem.cs" />
     <Compile Include="StyleCop43Compatibility.cs" />
     <Compile Include="ExtendedOriginal\CustomDocumentationRules.cs" />

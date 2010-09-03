@@ -124,6 +124,9 @@
   <data name="LocalDeclarations" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>LocalDeclarations.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Parameters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Parameters.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="PrivateEventHandlers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>PrivateEventHandlers.cs;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

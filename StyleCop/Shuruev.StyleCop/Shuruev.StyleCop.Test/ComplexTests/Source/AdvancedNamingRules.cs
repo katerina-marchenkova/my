@@ -94,71 +94,47 @@ namespace Shuruev.StyleCop.Test
 
 #region AdvancedNamingRules // Parameters
 
-//# [OK]
-//# There are no parameters at all.
-namespace Shuruev.StyleCop.Test
-{
-	public delegate bool TestDelegate();
-
-	public class TestClass
-	{
-		public TestClass()
-		{
-		}
-
-		public void TestMethod()
-		{
-		}
-	}
-}
-//# [END]
+//# (AdvancedNaming_Parameter = A:B:X:Y)
 
 //# [OK]
 //# All parameter names are correct.
 namespace Shuruev.StyleCop.Test
 {
-	public delegate bool TestDelegate(IEnumerable<int> list);
+	public delegate bool TestDelegate(int X, int Y);
 
 	public class TestClass
 	{
-		public TestClass(int a)
+		public TestClass(int X)
 		{
+			TestDelegate lambda = (A, B) => A == B;
 		}
 
-		public int this[int index]
+		public int Count
 		{
-			get { return 0; }
+			get
+			{
+				TestDelegate lambda = (A, B) => A == B;
+				return 0;
+			}
 		}
 
-		public void TestMethod(int count)
+		public int this[int Y]
 		{
+			get
+			{
+				TestDelegate lambda = (A, B) => A == B;
+				return 0;
+			}
 		}
 
-		public void TestMethod(ref byte size)
+		public void TestMethod(int X, params string[] Y)
 		{
+			TestDelegate lambda = (A, B) => A == B;
 		}
 
-		public void TestMethod(out string text)
+		public static bool operator +(TestClass X, TestClass Y)
 		{
-			text = null;
-		}
-
-		public void TestMethod(params string[] args)
-		{
-		}
-
-		public static explicit operator Foo(int x)
-		{
-			return null;
-		}
-
-		public static implicit operator int(Foo x)
-		{
-			return 0;
-		}
-
-		public static bool operator +(Foo a, Foo b)
-		{
+			TestDelegate lambda = (A, B) => A == B;
 			return false;
 		}
 	}
@@ -166,112 +142,86 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 //# [ERROR]
-//# Invalid parameter name in constructor.
+//# Invalid parameter names in delegate.
+namespace Shuruev.StyleCop.Test
+{
+	public delegate bool TestDelegate(int X1, int Y1);
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid parameter names in constructor.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public TestClass(int A)
+		public TestClass(int X1)
 		{
+			TestDelegate lambda = (A1, B1) => A1 == B1;
 		}
 	}
 }
 //# [END]
 
 //# [ERROR]
-//# Invalid parameter name in delegate.
-namespace Shuruev.StyleCop.Test
-{
-	public delegate bool TestDelegate(IEnumerable<int> List);
-}
-//# [END]
-
-//# [ERROR]
-//# Invalid parameter name in indexer.
+//# Invalid parameter names in property.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public int this[int Index]
+		public int Count
 		{
-			get { return 0; }
+			get
+			{
+				TestDelegate lambda = (A1, B1) => A1 == B1;
+				return 0;
+			}
 		}
 	}
 }
 //# [END]
 
-//# [ERROR:4]
-//# Invalid parameter names in methods.
+//# [ERROR:2]
+//# Invalid parameter names in indexer.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public void TestMethod(int Count)
+		public int this[int Y1]
 		{
-		}
-
-		public void TestMethod(ref byte Size)
-		{
-		}
-
-		public void TestMethod(out string Text)
-		{
-			Text = null;
-		}
-
-		public void TestMethod(params string[] Args)
-		{
+			get
+			{
+				TestDelegate lambda = (A1, B1) => A1 == B1;
+				return 0;
+			}
 		}
 	}
 }
 //# [END]
 
-//# [ERROR:3]
-//# Invalid parameter names in operators.
+//# [ERROR:2]
+//# Invalid parameter names in method.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public static explicit operator Foo(int X)
+		public void TestMethod(int X1, params string[] Y1)
 		{
-			return null;
-		}
-
-		public static implicit operator int(Foo Y)
-		{
-			return 0;
-		}
-
-		public static bool operator +(Foo A, Foo B)
-		{
-			return false;
+			TestDelegate lambda = (A1, B1) => A1 == B1;
 		}
 	}
 }
 //# [END]
 
-//# [ERROR]
-//# Only first parameter is invalid.
+//# [ERROR:2]
+//# Invalid parameter names in operator.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public static bool operator +(Foo A, Foo b)
+		public static bool operator +(TestClass X1, TestClass Y1)
 		{
-			return false;
-		}
-	}
-}
-//# [END]
-
-//# [ERROR]
-//# Only second parameter is invalid.
-namespace Shuruev.StyleCop.Test
-{
-	public class TestClass
-	{
-		public static bool operator +(Foo a, Foo B)
-		{
+			TestDelegate lambda = (A1, B1) => A1 == B1;
 			return false;
 		}
 	}
@@ -280,7 +230,7 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region AdvancedNamingRules // Type parameters
+#region AdvancedNamingRules // Type parameters xxx rewrite
 
 //# [OK]
 //# All type parameter names are correct.
@@ -445,6 +395,15 @@ namespace Shuruev.StyleCop.Test
 			int A = 10;
 		}
 
+		public int Count
+		{
+			get
+			{
+				int A = 10;
+				return 0;
+			}
+		}
+
 		public int this[int index]
 		{
 			get
@@ -463,19 +422,7 @@ namespace Shuruev.StyleCop.Test
 			});
 		}
 
-		public static explicit operator Foo(int x)
-		{
-			int A = 10;
-			return null;
-		}
-
-		public static implicit operator int(Foo x)
-		{
-			int A = 10;
-			return 0;
-		}
-
-		public static bool operator +(Foo a, Foo b)
+		public static bool operator +(TestClass a, TestClass b)
 		{
 			int A = 10;
 			return false;
@@ -493,6 +440,24 @@ namespace Shuruev.StyleCop.Test
 		public TestClass()
 		{
 			int X = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid local variable name in property.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int Count
+		{
+			get
+			{
+				int X = 10;
+				return 0;
+			}
 		}
 	}
 }
@@ -534,25 +499,13 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
-//# [ERROR:3]
-//# Invalid local variable names in operators.
+//# [ERROR]
+//# Invalid local variable names in operator.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public static explicit operator Foo(int x)
-		{
-			int X = 10;
-			return null;
-		}
-
-		public static implicit operator int(Foo x)
-		{
-			int X = 10;
-			return 0;
-		}
-
-		public static bool operator +(Foo a, Foo b)
+		public static bool operator +(TestClass a, TestClass b)
 		{
 			int X = 10;
 			return false;
@@ -579,6 +532,15 @@ namespace Shuruev.StyleCop.Test
 			const int A = 10;
 		}
 
+		public int Count
+		{
+			get
+			{
+				const int A = 10;
+				return 0;
+			}
+		}
+
 		public int this[int index]
 		{
 			get
@@ -597,19 +559,7 @@ namespace Shuruev.StyleCop.Test
 			});
 		}
 
-		public static explicit operator Foo(int x)
-		{
-			const int A = 10;
-			return null;
-		}
-
-		public static implicit operator int(Foo x)
-		{
-			const int A = 10;
-			return 0;
-		}
-
-		public static bool operator +(Foo a, Foo b)
+		public static bool operator +(TestClass a, TestClass b)
 		{
 			const int A = 10;
 			return false;
@@ -627,6 +577,24 @@ namespace Shuruev.StyleCop.Test
 		public TestClass()
 		{
 			const int X = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid local constant name in property.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int Count
+		{
+			get
+			{
+				const int X = 10;
+				return 0;
+			}
 		}
 	}
 }
@@ -668,25 +636,13 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
-//# [ERROR:3]
-//# Invalid local constant names in operators.
+//# [ERROR]
+//# Invalid local constant names in operator.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
-		public static explicit operator Foo(int x)
-		{
-			const int X = 10;
-			return null;
-		}
-
-		public static implicit operator int(Foo x)
-		{
-			const int X = 10;
-			return 0;
-		}
-
-		public static bool operator +(Foo a, Foo b)
+		public static bool operator +(TestClass a, TestClass b)
 		{
 			const int X = 10;
 			return false;

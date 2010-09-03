@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
@@ -186,32 +185,81 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets a list of parameters for an element.
 		/// </summary>
-		public static IList<Parameter> GetParameters(CsElement element)
+		public static List<ParameterItem> GetParameters(CsElement element)
 		{
+			IEnumerable<Parameter> ownParameters = new List<Parameter>();
 			switch (element.ElementType)
 			{
 				case ElementType.Constructor:
-					return ((Constructor)element).Parameters;
+					ownParameters = ((Constructor)element).Parameters;
+					break;
 				case ElementType.Delegate:
-					return ((Delegate)element).Parameters;
+					ownParameters = ((Delegate)element).Parameters;
+					break;
 				case ElementType.Indexer:
-					return ((Indexer)element).Parameters;
+					ownParameters = ((Indexer)element).Parameters;
+					break;
 				case ElementType.Method:
-					return ((Method)element).Parameters;
-				default:
-					throw new InvalidOperationException(
-						String.Format(
-							"Can't find parameters for a {0} element.",
-							element.FriendlyTypeText));
+					ownParameters = ((Method)element).Parameters;
+					break;
 			}
+
+			List<ParameterItem> result = ConvertParameters(ownParameters);
+			element.WalkElement(null, null, GetParametersExpressionVisitor, result);
+			return result;
+		}
+
+		/// <summary>
+		/// Converts native parameters to parameter items.
+		/// </summary>
+		private static List<ParameterItem> ConvertParameters(IEnumerable<Parameter> parameters)
+		{
+			List<ParameterItem> result = new List<ParameterItem>();
+			foreach (Parameter parameter in parameters)
+			{
+				result.Add(new ParameterItem
+					{
+						Name = parameter.Name,
+						LineNumber = parameter.LineNumber
+					});
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Analyzes expression for getting parameters.
+		/// </summary>
+		private static bool GetParametersExpressionVisitor(
+			Expression expression,
+			Expression parentExpression,
+			Statement parentStatement,
+			CsElement parentElement,
+			List<ParameterItem> result)
+		{
+			IEnumerable<Parameter> innerParameters;
+			switch (expression.ExpressionType)
+			{
+				case ExpressionType.AnonymousMethod:
+					innerParameters = ((AnonymousMethodExpression)expression).Parameters;
+					break;
+				case ExpressionType.Lambda:
+					innerParameters = ((LambdaExpression)expression).Parameters;
+					break;
+				default:
+					return true;
+			}
+
+			result.AddRange(ConvertParameters(innerParameters));
+			return true;
 		}
 
 		/// <summary>
 		/// Gets a list of type parameters for an element.
 		/// </summary>
-		public static List<string> GetTypeParameters(CsElement element)
+		public static List<TypeParameterItem> GetTypeParameters(CsElement element)
 		{
-			List<string> names = new List<string>();
+			List<TypeParameterItem> result = new List<TypeParameterItem>();
 
 			for (Node<CsToken> node = element.Tokens.First; node != null; node = node.Next)
 			{
@@ -249,14 +297,17 @@ namespace Shuruev.StyleCop.CSharp
 					{
 						if (inner.Value.CsTokenClass == CsTokenClass.Type)
 						{
-							string name = inner.Value.Text;
-							names.Add(name);
+							result.Add(new TypeParameterItem
+								{
+									Name = inner.Value.Text,
+									LineNumber = inner.Value.LineNumber
+								});
 						}
 					}
 				}
 			}
 
-			return names;
+			return result;
 		}
 
 		#endregion
@@ -303,13 +354,12 @@ namespace Shuruev.StyleCop.CSharp
 			if (statement.StatementType == StatementType.VariableDeclaration)
 			{
 				VariableDeclarationStatement declaration = (VariableDeclarationStatement)statement;
-				bool isConstant = declaration.Tokens.First.Value.CsTokenType == CsTokenType.Const;
 				foreach (VariableDeclaratorExpression declarator in declaration.Declarators)
 				{
 					declarations.Add(new LocalDeclarationItem
 						{
 							Name = declarator.Identifier.Text,
-							IsConstant = isConstant,
+							IsConstant = declaration.Constant,
 							LineNumber = declarator.LineNumber
 						});
 				}

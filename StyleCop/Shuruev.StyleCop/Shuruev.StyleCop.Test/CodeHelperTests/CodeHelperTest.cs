@@ -62,6 +62,23 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 			return null;
 		}
 
+		#endregion
+
+		#region Special assert methods
+
+		/// <summary>
+		/// Checks specified parameter.
+		/// </summary>
+		private static void AssertParameter(
+			string expectedName,
+			int expectedLineNumber,
+			ParameterItem parameter)
+		{
+			Assert.AreEqual(expectedName, parameter.Name);
+			Assert.IsTrue(parameter.LineNumber.HasValue);
+			Assert.AreEqual(expectedLineNumber, parameter.LineNumber);
+		}
+
 		/// <summary>
 		/// Checks specified local declaration.
 		/// </summary>
@@ -82,7 +99,7 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 		}
 
 		/// <summary>
-		/// Checks specified labels.
+		/// Checks specified label.
 		/// </summary>
 		private static void AssertLabel(
 			string expectedName,
@@ -142,6 +159,88 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 
 			name = "@value";
 			Assert.AreEqual("value", CodeHelper.ExtractPureName(name));
+		}
+
+		#endregion
+
+		#region Working with parameters
+
+		[TestMethod]
+		public void Get_Parameters()
+		{
+			List<ParameterItem> parameters;
+			CsDocument document = BuildCodeDocument(Source.Parameters);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "delegate Delegate1"));
+			Assert.AreEqual(2, parameters.Count);
+			AssertParameter("x", 9, parameters[0]);
+			AssertParameter("y", 9, parameters[1]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "constructor Class1"));
+			Assert.AreEqual(10, parameters.Count);
+			AssertParameter("list", 12, parameters[0]);
+			AssertParameter("comparer", 13, parameters[1]);
+			AssertParameter("a", 16, parameters[2]);
+			AssertParameter("b", 17, parameters[3]);
+			AssertParameter("a", 21, parameters[4]);
+			AssertParameter("b", 22, parameters[5]);
+			AssertParameter("a", 25, parameters[6]);
+			AssertParameter("b", 26, parameters[7]);
+			AssertParameter("a", 30, parameters[8]);
+			AssertParameter("b", 31, parameters[9]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "property Property1"));
+			Assert.AreEqual(4, parameters.Count);
+			AssertParameter("a", 38, parameters[0]);
+			AssertParameter("b", 38, parameters[1]);
+			AssertParameter("a", 43, parameters[2]);
+			AssertParameter("b", 43, parameters[3]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "indexer this"));
+			Assert.AreEqual(5, parameters.Count);
+			AssertParameter("index", 47, parameters[0]);
+			AssertParameter("a", 51, parameters[1]);
+			AssertParameter("b", 51, parameters[2]);
+			AssertParameter("a", 56, parameters[3]);
+			AssertParameter("b", 56, parameters[4]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "method Method1"));
+			Assert.AreEqual(5, parameters.Count);
+			AssertParameter("count", 61, parameters[0]);
+			AssertParameter("size", 62, parameters[1]);
+			AssertParameter("text", 63, parameters[2]);
+			AssertParameter("a", 65, parameters[3]);
+			AssertParameter("b", 65, parameters[4]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "method Method2"));
+			Assert.AreEqual(2, parameters.Count);
+			AssertParameter("args", 69, parameters[0]);
+			AssertParameter("obj", 72, parameters[1]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "method Method3"));
+			Assert.AreEqual(3, parameters.Count);
+			AssertParameter("format", 78, parameters[0]);
+			AssertParameter("args", 78, parameters[1]);
+			AssertParameter("obj", 81, parameters[2]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "method operator Class1"));
+			Assert.AreEqual(3, parameters.Count);
+			AssertParameter("x", 87, parameters[0]);
+			AssertParameter("a", 89, parameters[1]);
+			AssertParameter("b", 89, parameters[2]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "method operator int"));
+			Assert.AreEqual(3, parameters.Count);
+			AssertParameter("x", 93, parameters[0]);
+			AssertParameter("a", 95, parameters[1]);
+			AssertParameter("b", 95, parameters[2]);
+
+			parameters = CodeHelper.GetParameters(GetElementByName(document, "method operator +"));
+			Assert.AreEqual(4, parameters.Count);
+			AssertParameter("x", 99, parameters[0]);
+			AssertParameter("y", 99, parameters[1]);
+			AssertParameter("a", 101, parameters[2]);
+			AssertParameter("b", 101, parameters[3]);
 		}
 
 		#endregion
