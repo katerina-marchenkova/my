@@ -152,42 +152,34 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         
         /// <summary>
         ///   Looks up a localized string similar to using System;
-        ///using System.IO;
+        ///using System.Collections.Generic;
         ///using System.Threading;
         ///
         ///namespace Shuruev.StyleCop.Test
         ///{
         ///	public class Class1
         ///	{
-        ///		private int m_field = 5;
+        ///		public delegate bool Delegate1(int x, int y);
         ///
-        ///		public Class1()
+        ///		public Class1(
+        ///			IEnumerable&lt;int&gt; list,
+        ///			IComparable&lt;string&gt; comparer)
         ///		{
-        ///			try
-        ///			{
-        ///lab1:			m_field = 6;
-        ///			}
-        ///			catch (Exception ex)
-        ///			{
-        ///				throw;
-        ///			}
+        ///			Delegate1 del = delegate(
+        ///				int a,
+        ///				int b)
+        ///				{ return a == b; };
         ///
-        ///			for (int i = 0; i &lt; 10; i++)
-        ///			{
-        ///lab2:			m_field = 6;
-        ///			}
+        ///			Delegate1 lambda = (
+        ///				a,
+        ///				b) =&gt; a == b;
         ///
-        ///			foreach (string s in new[] { &quot;1&quot;, &quot;2&quot; })
-        ///			{
-        ///lab3:			m_field = 6;
-        ///			}
+        ///			new Delegate1(delegate(
+        ///				int a,
+        ///				int b)
+        ///				{ return a == b; }).GetHashCode();
         ///
-        ///			using (MemoryStream ms = new MemoryStream())
-        ///			{
-        ///lab4:			m_field = 6;
-        ///			}
-        ///
-        ///			goto  [rest of string was truncated]&quot;;.
+        ///			new De [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Parameters {
             get {
@@ -224,6 +216,30 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         internal static string PrivateEventHandlers {
             get {
                 return ResourceManager.GetString("PrivateEventHandlers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using System.Collections.Generic;
+        ///
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class Class1
+        ///	{
+        ///		public delegate TOutput Delegate1&lt;TInput, TOutput&gt;(TInput args)
+        ///			where TInput : IEnumerable&lt;int&gt;
+        ///			where TOutput : IEnumerable&lt;int&gt;;
+        ///
+        ///		public delegate TOutput Delegate2&lt;in TInput, out TOutput&gt;(TInput args)
+        ///			where TInput : IEnumerable&lt;int&gt;
+        ///			where TOutput : IEnumerable&lt;int&gt;;
+        ///	}
+        ///}
+        ///.
+        /// </summary>
+        internal static string TypeParameters {
+            get {
+                return ResourceManager.GetString("TypeParameters", resourceCulture);
             }
         }
     }

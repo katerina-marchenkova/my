@@ -83,7 +83,7 @@
     <None Include="ComplexTests\Source\AdvancedNamingRules.cs" />
     <None Include="CodeHelperTests\Source\Labels.cs" />
     <None Include="CodeHelperTests\Source\Parameters.cs" />
-    <Compile Include="CodeHelperTests\Source\TypeParameters.cs" />
+    <None Include="CodeHelperTests\Source\TypeParameters.cs" />
     <Compile Include="ComplexTests\BlockItem.cs" />
     <None Include="ComplexTests\Source\MoreCustomRules.cs" />
     <None Include="ComplexTests\Source\ExtendedOriginalRules.cs" />
@@ -94,7 +94,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Source.resx</DependentUpon>
     </Compile>
-    <None Include="ComplexTests\Source\OneRun.cs" />
+    <Compile Include="ComplexTests\Source\OneRun.cs" />
     <Compile Include="ComplexTests\Source\Source.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

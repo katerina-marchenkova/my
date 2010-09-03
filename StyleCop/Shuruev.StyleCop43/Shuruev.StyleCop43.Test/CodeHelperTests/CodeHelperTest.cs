@@ -22,7 +22,7 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 		private static CsDocument BuildCodeDocument(string sourceCode)
 		{
 			string tempFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CodeHelperTest.cs");
-			File.WriteAllText(tempFile, sourceCode);
+			File.WriteAllText(tempFile, StyleCop43Compatibility.ModifySourceForTest(sourceCode));
 
 			CodeProject project = new CodeProject(0, string.Empty, new Configuration(null));
 			CsParser parser = new CsParser();
@@ -41,7 +41,7 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 		/// </summary>
 		private static CsElement GetElementByName(CsDocument document, string name)
 		{
-			return GetElementByName(document.RootElement.ChildElements, name);
+			return GetElementByName(document.RootElement.ChildElements, StyleCop43Compatibility.ModifySourceForTest(name));
 		}
 
 		/// <summary>
@@ -73,6 +73,19 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 			string expectedName,
 			int expectedLineNumber,
 			ParameterItem parameter)
+		{
+			Assert.AreEqual(expectedName, parameter.Name);
+			Assert.IsTrue(parameter.LineNumber.HasValue);
+			Assert.AreEqual(expectedLineNumber, parameter.LineNumber);
+		}
+
+		/// <summary>
+		/// Checks specified type parameter.
+		/// </summary>
+		private static void AssertTypeParameter(
+			string expectedName,
+			int expectedLineNumber,
+			TypeParameterItem parameter)
 		{
 			Assert.AreEqual(expectedName, parameter.Name);
 			Assert.IsTrue(parameter.LineNumber.HasValue);
@@ -173,8 +186,8 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 
 			parameters = CodeHelper.GetParameters(GetElementByName(document, "delegate Delegate1"));
 			Assert.AreEqual(2, parameters.Count);
-			AssertParameter("x", 9, parameters[0]);
-			AssertParameter("y", 9, parameters[1]);
+			AssertParameter("x", 7, parameters[0]);
+			AssertParameter("y", 7, parameters[1]);
 
 			parameters = CodeHelper.GetParameters(GetElementByName(document, "constructor Class1"));
 			Assert.AreEqual(10, parameters.Count);
@@ -241,6 +254,39 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 			AssertParameter("y", 99, parameters[1]);
 			AssertParameter("a", 101, parameters[2]);
 			AssertParameter("b", 101, parameters[3]);
+		}
+
+		[TestMethod]
+		public void Get_Type_Parameters()
+		{
+			List<TypeParameterItem> parameters;
+			CsDocument document = BuildCodeDocument(Source.TypeParameters);
+
+			parameters = CodeHelper.GetTypeParameters(GetElementByName(document, "delegate Delegate1<TInput,TOutput>"));
+			Assert.AreEqual(2, parameters.Count);
+			AssertTypeParameter("TInput", 6, parameters[0]);
+			AssertTypeParameter("TOutput", 7, parameters[1]);
+
+			parameters = CodeHelper.GetTypeParameters(GetElementByName(document, "delegate Delegate2<in TInput,out TOutput>"));
+			Assert.AreEqual(2, parameters.Count);
+			AssertTypeParameter("TInput", 12, parameters[0]);
+			AssertTypeParameter("TOutput", 13, parameters[1]);
+
+			parameters = CodeHelper.GetTypeParameters(GetElementByName(document, "delegate Delegate3<in TInput>"));
+			Assert.AreEqual(1, parameters.Count);
+			AssertTypeParameter("TInput", 17, parameters[0]);
+
+			parameters = CodeHelper.GetTypeParameters(GetElementByName(document, "delegate Delegate4<out TOutput>"));
+			Assert.AreEqual(1, parameters.Count);
+			AssertTypeParameter("TOutput", 20, parameters[0]);
+
+			parameters = CodeHelper.GetTypeParameters(GetElementByName(document, "class Class1<TKeys>"));
+			Assert.AreEqual(1, parameters.Count);
+			AssertTypeParameter("TKeys", 23, parameters[0]);
+
+			parameters = CodeHelper.GetTypeParameters(GetElementByName(document, "method Method1<TResult>"));
+			Assert.AreEqual(1, parameters.Count);
+			AssertTypeParameter("TResult", 25, parameters[0]);
 		}
 
 		#endregion

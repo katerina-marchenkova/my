@@ -72,20 +72,29 @@ namespace Shuruev.StyleCop.Test
 
 #region AdvancedNamingRules // Enumerations
 
-//# [ERROR:3]
-//# Some enumeration and enumeration item names are incorrect.
+// (AdvancedNaming_Enum = Test$(AaBb))
+// (AdvancedNaming_EnumItem = Test$(AaBb))
+
+//# [OK]
+//# All enumeration and enumeration item names are correct.
 namespace Shuruev.StyleCop.Test
 {
-	public enum TestENUM
+	public enum TestEnum
+	{
+		TestItem1,
+		TestItem2
+	}
+}
+//# [END]
+
+//# [ERROR:3]
+//# All enumeration and enumeration item names are incorrect.
+namespace Shuruev.StyleCop.Test
+{
+	public enum TESTENUM
 	{
 		ITEM1,
 		ITEM2
-	}
-
-	public enum TestEnum
-	{
-		Item1,
-		Item2
 	}
 }
 //# [END]
@@ -230,7 +239,9 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region AdvancedNamingRules // Type parameters xxx rewrite
+#region AdvancedNamingRules // Type parameters
+
+// (AdvancedNaming_TypeParameter = T:T$(AaBb))
 
 //# [OK]
 //# All type parameter names are correct.
@@ -645,6 +656,146 @@ namespace Shuruev.StyleCop.Test
 		public static bool operator +(TestClass a, TestClass b)
 		{
 			const int X = 10;
+			return false;
+		}
+	}
+}
+//# [END]
+
+#endregion
+
+#region AdvancedNamingRules // Labels
+
+//# (AdvancedNaming_Label = LAB$(*))
+
+//# [OK]
+//# All label names are correct.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			LAB1:
+			int a = 10;
+		}
+
+		public int Count
+		{
+			get
+			{
+				LAB2:
+				return 0;
+			}
+		}
+
+		public int this[int index]
+		{
+			get
+			{
+				LAB3:
+				return 0;
+			}
+		}
+
+		public void TestMethod()
+		{
+			LAB4:
+			Thread t = new Thread(() =>
+			{
+				LAB5:
+				int a = 10;
+			});
+		}
+
+		public static bool operator +(TestClass a, TestClass b)
+		{
+			LAB6:
+			return false;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid label name in constructor.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			lab1:
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid label name in property.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int Count
+		{
+			get
+			{
+				lab2:
+				return 0;
+			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid label name in indexer.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int this[int index]
+		{
+			get
+			{
+				lab3:
+				return 0;
+			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid label names in method.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			lab4:
+			Thread t = new Thread(() =>
+			{
+				lab5:
+				int a = 10;
+			});
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Invalid label names in operator.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public static bool operator +(TestClass a, TestClass b)
+		{
+			lab6:
 			return false;
 		}
 	}

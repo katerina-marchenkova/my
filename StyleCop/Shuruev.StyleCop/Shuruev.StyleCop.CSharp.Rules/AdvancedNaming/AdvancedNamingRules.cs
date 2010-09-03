@@ -128,8 +128,8 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeConstructor(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckParameters(element, settings);
-			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
+			CheckLabels(element, settings);
 		}
 
 		/// <summary>
@@ -138,8 +138,8 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeDelegate(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckDeclaration(element, settings, NamingSettings.Delegate);
-			CheckParameters(element, settings);
 			CheckTypeParameters(element, settings);
+			CheckParameters(element, settings);
 		}
 
 		/// <summary>
@@ -210,8 +210,8 @@ namespace Shuruev.StyleCop.CSharp
 		private void AnalyzeIndexer(CsElement element, CurrentNamingSettings settings)
 		{
 			CheckParameters(element, settings);
-			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
+			CheckLabels(element, settings);
 		}
 
 		/// <summary>
@@ -243,9 +243,10 @@ namespace Shuruev.StyleCop.CSharp
 				}
 			}
 
-			CheckParameters(element, settings);
 			CheckTypeParameters(element, settings);
+			CheckParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
+			CheckLabels(element, settings);
 		}
 
 		/// <summary>
@@ -268,8 +269,8 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			CheckDeclaration(element, settings, NamingSettings.Property);
 			CheckParameters(element, settings);
-			CheckTypeParameters(element, settings);
 			CheckLocalDeclarations(element, settings);
+			CheckLabels(element, settings);
 		}
 
 		/// <summary>
@@ -385,6 +386,22 @@ namespace Shuruev.StyleCop.CSharp
 						NamingSettings.LocalVariable,
 						declaration.Name);
 				}
+			}
+		}
+
+		/// <summary>
+		/// Checks labels naming.
+		/// </summary>
+		private void CheckLabels(CsElement element, CurrentNamingSettings settings)
+		{
+			foreach (LabelItem label in CodeHelper.GetLabels(element))
+			{
+				CheckName(
+					element,
+					label.LineNumber,
+					settings,
+					NamingSettings.Label,
+					label.Name);
 			}
 		}
 

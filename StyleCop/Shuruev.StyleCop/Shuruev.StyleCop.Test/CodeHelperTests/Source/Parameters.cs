@@ -4,10 +4,10 @@ using System.Threading;
 
 namespace Shuruev.StyleCop.Test
 {
+	public delegate bool Delegate1(int x, int y);
+
 	public class Class1
 	{
-		public delegate bool Delegate1(int x, int y);
-
 		public Class1(
 			IEnumerable<int> list,
 			IComparable<string> comparer)
