@@ -37,6 +37,7 @@
 		<StringProperty Name="AdvancedNaming_TypeParameter" DefaultValue="T:T$(AaBb)" FriendlyName="Type parameter" Description="Naming rules for type parameter." />
 		<StringProperty Name="AdvancedNaming_LocalVariable" DefaultValue="$(aaBb)" FriendlyName="Local variable" Description="Naming rules for local variable." />
 		<StringProperty Name="AdvancedNaming_LocalConstant" DefaultValue="$(aaBb)" FriendlyName="Local constant" Description="Naming rules for local constant." />
+		<StringProperty Name="AdvancedNaming_Label" DefaultValue="$(aaBb)" FriendlyName="Label" Description="Naming rules for labels." />
 		<BooleanProperty Name="SP1502_AllowConstructors" DefaultValue="True" FriendlyName="SP1502: Allow for constructors" Description="Allows constructors to be placed on a single line (for SP1502 rule)." />
 		<BooleanProperty Name="SP1509_AllowNestedCodeBlocks" DefaultValue="True" FriendlyName="SP1509: Allow nested code blocks" Description="Allows using nested code blocks (for SP1509 rule)." />
 		<BooleanProperty Name="SP1513_AllowJoinedAccessors" DefaultValue="True" FriendlyName="SP1513: Allow joined property accessors" Description="Allows placing property getters and setters close to each other (for SP1513 rule)." />

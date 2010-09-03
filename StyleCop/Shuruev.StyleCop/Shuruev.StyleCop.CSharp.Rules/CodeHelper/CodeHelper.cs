@@ -167,7 +167,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static string ExtractPureName(string declarationName)
 		{
-			string text = declarationName;
+			string text = declarationName.TrimStart('@');
 
 			string[] parts = text.Split('.');
 			text = parts[parts.Length - 1];
@@ -261,14 +261,14 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
-		#region Working with local declarations
+		#region Working with local declarations and labels
 
 		/// <summary>
 		/// Gets local declarations.
 		/// </summary>
-		public static List<LocalDeclaration> GetLocalDeclarations(CsElement element)
+		public static List<LocalDeclarationItem> GetLocalDeclarations(CsElement element)
 		{
-			List<LocalDeclaration> result = new List<LocalDeclaration>();
+			List<LocalDeclarationItem> result = new List<LocalDeclarationItem>();
 			element.WalkElement(null, GetLocalDeclarationsStatementVisitor, result);
 			return result;
 		}
@@ -281,7 +281,7 @@ namespace Shuruev.StyleCop.CSharp
 			Expression parentExpression,
 			Statement parentStatement,
 			CsElement parentElement,
-			List<LocalDeclaration> declarations)
+			List<LocalDeclarationItem> declarations)
 		{
 			if (statement.StatementType == StatementType.Block)
 				return true;
@@ -290,11 +290,11 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				foreach (Variable variable in statement.Variables)
 				{
-					declarations.Add(new LocalDeclaration
-					{
-						Name = variable.Name,
-						LineNumber = StyleCop43Compatibility.GetVariableLineNumber(variable)
-					});
+					declarations.Add(new LocalDeclarationItem
+						{
+							Name = variable.Name,
+							LineNumber = StyleCop43Compatibility.GetVariableLineNumber(variable)
+						});
 				}
 
 				return true;
@@ -306,14 +306,48 @@ namespace Shuruev.StyleCop.CSharp
 				bool isConstant = declaration.Tokens.First.Value.CsTokenType == CsTokenType.Const;
 				foreach (VariableDeclaratorExpression declarator in declaration.Declarators)
 				{
-					declarations.Add(new LocalDeclaration
-					{
-						Name = declarator.Identifier.Text,
-						IsConstant = isConstant,
-						LineNumber = declarator.LineNumber
-					});
+					declarations.Add(new LocalDeclarationItem
+						{
+							Name = declarator.Identifier.Text,
+							IsConstant = isConstant,
+							LineNumber = declarator.LineNumber
+						});
 				}
 			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Gets labels.
+		/// </summary>
+		public static List<LabelItem> GetLabels(CsElement element)
+		{
+			List<LabelItem> result = new List<LabelItem>();
+			element.WalkElement(null, GetLabelsStatementVisitor, result);
+			return result;
+		}
+
+		/// <summary>
+		/// Analyzes statements for getting labels.
+		/// </summary>
+		private static bool GetLabelsStatementVisitor(
+			Statement statement,
+			Expression parentExpression,
+			Statement parentStatement,
+			CsElement parentElement,
+			List<LabelItem> result)
+		{
+			if (statement.StatementType != StatementType.Label)
+				return true;
+
+			LabelStatement label = (LabelStatement)statement;
+			result.Add(new LabelItem
+				{
+					Name = label.Identifier.Text,
+					LineNumber = label.LineNumber
+				});
+
 			return true;
 		}
 

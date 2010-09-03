@@ -1,9 +1,9 @@
 ﻿namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Local declaration object.
+	/// Local declaration item.
 	/// </summary>
-	public class LocalDeclaration
+	public class LocalDeclarationItem
 	{
 		/// <summary>
 		/// Gets or sets local declaration name.

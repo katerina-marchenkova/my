@@ -26,8 +26,16 @@ namespace Shuruev.StyleCop.Test
 				throw;
 			}
 
-			for (int i1, i2 = 0, i3 = 1; i2 < 10; i2++)
-			for (int j1, j2 = 0, j3 = 1; j2 < 10; j2++)
+			for (int
+				i1,
+				i2 = 0,
+				i3 = 1;
+				i2 < 10;
+				i2++)
+			for (int j1, j2 = 0,
+				j3 = 1;
+				j2 < 10;
+				j2++)
 			{
 				int a1, a2 = 10, a3 = 20;
 				const int b1 = 30, b2 = 40;
@@ -54,23 +62,34 @@ namespace Shuruev.StyleCop.Test
 				m_field = 6;
 			}
 
-			int c1, c2 = 10, c3 = 20;
-			const int d1 = 30, d2 = 40;
+			int
+				c1, c2 = 10,
+				c3 = 20;
+			const int
+				d1 = 30,
+				d2 = 40;
 
 			m_field = 6;
 
 			Thread thread1 = new Thread(delegate()
 				{
-					int a1, a2 = 10, a3 = 20;
-					const int b1 = 30, b2 = 40;
+					int
+						a1,
+						a2 = 10,
+						a3 = 20;
+					const int
+						b1 = 30,
+						b2 = 40;
 
 					m_field = 6;
 				});
 
 			Thread thread2 = new Thread(() =>
 				{
-					int a1, a2 = 10, a3 = 20;
-					const int b1 = 30, b2 = 40;
+					int a1, a2 = 10,
+						a3 = 20;
+					const int b1 = 30,
+						b2 = 40;
 
 					m_field = 6;
 				});

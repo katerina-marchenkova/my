@@ -37,7 +37,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static int? GetVariableLineNumber(Variable variable)
 		{
-			return variable.LineNumber;
+			return variable.Location.LineNumber + variable.Location.LineSpan - 1;
 		}
 
 		#endregion

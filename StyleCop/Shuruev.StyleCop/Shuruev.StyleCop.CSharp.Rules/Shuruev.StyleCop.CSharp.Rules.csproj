@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="AdvancedNaming\CurrentNamingSettings.cs" />
     <Compile Include="Analyzers\SpecialRunningParameters.cs" />
+    <Compile Include="CodeHelper\LabelItem.cs" />
     <Compile Include="StyleCop43Compatibility.cs" />
     <Compile Include="ExtendedOriginal\CustomDocumentationRules.cs" />
     <Compile Include="ExtendedOriginal\CustomLayoutRules.cs" />
@@ -117,7 +118,7 @@
     <Compile Include="Analyzers\StyleCopPlus.cs" />
     <Compile Include="ExtendedOriginal\CustomCsParser.cs" />
     <Compile Include="CodeHelper\CodeHelper.cs" />
-    <Compile Include="CodeHelper\LocalDeclaration.cs" />
+    <Compile Include="CodeHelper\LocalDeclarationItem.cs" />
     <Compile Include="Common\Native.cs" />
     <Compile Include="Common\HighlightTextBox.cs">
       <SubType>UserControl</SubType>

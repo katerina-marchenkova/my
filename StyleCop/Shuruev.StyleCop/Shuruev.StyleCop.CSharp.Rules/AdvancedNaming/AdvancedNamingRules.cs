@@ -321,8 +321,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void CheckDeclaration(CsElement element, CurrentNamingSettings settings, string settingName)
 		{
-			string name = CodeHelper.ExtractPureName(element.Declaration.Name);
-			CheckName(element, null, settings, settingName, name);
+			CheckName(element, null, settings, settingName, element.Declaration.Name);
 		}
 
 		/// <summary>
@@ -355,15 +354,25 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void CheckLocalDeclarations(CsElement element, CurrentNamingSettings settings)
 		{
-			foreach (LocalDeclaration declaration in CodeHelper.GetLocalDeclarations(element))
+			foreach (LocalDeclarationItem declaration in CodeHelper.GetLocalDeclarations(element))
 			{
 				if (declaration.IsConstant)
 				{
-					CheckName(element, declaration.LineNumber, settings, NamingSettings.LocalConstant, declaration.Name);
+					CheckName(
+						element,
+						declaration.LineNumber,
+						settings,
+						NamingSettings.LocalConstant,
+						declaration.Name);
 				}
 				else
 				{
-					CheckName(element, declaration.LineNumber, settings, NamingSettings.LocalVariable, declaration.Name);
+					CheckName(
+						element,
+						declaration.LineNumber,
+						settings,
+						NamingSettings.LocalVariable,
+						declaration.Name);
 				}
 			}
 		}
@@ -382,6 +391,7 @@ namespace Shuruev.StyleCop.CSharp
 			if (regex == null)
 				return true;
 
+			nameToCheck = CodeHelper.ExtractPureName(nameToCheck);
 			if (regex.IsMatch(nameToCheck))
 				return true;
 

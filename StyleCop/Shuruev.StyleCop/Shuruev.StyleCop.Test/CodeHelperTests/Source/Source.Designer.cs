@@ -63,6 +63,52 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         /// <summary>
         ///   Looks up a localized string similar to using System;
         ///using System.IO;
+        ///using System.Threading;
+        ///
+        ///namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class Class1
+        ///	{
+        ///		private int m_field = 5;
+        ///
+        ///		public Class1()
+        ///		{
+        ///			try
+        ///			{
+        ///lab1:			m_field = 6;
+        ///			}
+        ///			catch (Exception ex)
+        ///			{
+        ///				throw;
+        ///			}
+        ///
+        ///			for (int i = 0; i &lt; 10; i++)
+        ///			{
+        ///lab2:			m_field = 6;
+        ///			}
+        ///
+        ///			foreach (string s in new[] { &quot;1&quot;, &quot;2&quot; })
+        ///			{
+        ///lab3:			m_field = 6;
+        ///			}
+        ///
+        ///			using (MemoryStream ms = new MemoryStream())
+        ///			{
+        ///lab4:			m_field = 6;
+        ///			}
+        ///
+        ///			goto  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Labels {
+            get {
+                return ResourceManager.GetString("Labels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using System;
+        ///using System.IO;
+        ///using System.Threading;
         ///
         ///namespace Shuruev.StyleCop.Test
         ///{
@@ -88,11 +134,15 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         ///				throw;
         ///			}
         ///
-        ///			for (int i1, i2 = 0, i3 = 1; i2 &lt; 10; i2++)
-        ///			for (int j1, j2 = 0, j3 = 1; j2 &lt; 10; j2++)
-        ///			{
-        ///				int a1, a2 = 10, a3 = 20;
-        ///				const i [rest of string was truncated]&quot;;.
+        ///			for (int
+        ///				i1,
+        ///				i2 = 0,
+        ///				i3 = 1;
+        ///				i2 &lt; 10;
+        ///				i2++)
+        ///			for (int j1, j2 = 0,
+        ///				j3 = 1;
+        ///				j2 &lt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string LocalDeclarations {
             get {

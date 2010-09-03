@@ -45,6 +45,7 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string TypeParameter = "AdvancedNaming_TypeParameter";
 		internal const string LocalVariable = "AdvancedNaming_LocalVariable";
 		internal const string LocalConstant = "AdvancedNaming_LocalConstant";
+		internal const string Label = "AdvancedNaming_Label";
 
 		private static readonly List<string> s_groups = new List<string>();
 		private static readonly List<string> s_commons = new List<string>();
@@ -89,6 +90,7 @@ namespace Shuruev.StyleCop.CSharp
 			Add(TypeParameter, true, Resources.GroupParameters);
 			Add(LocalVariable, true, Resources.GroupParameters);
 			Add(LocalConstant, true, Resources.GroupParameters);
+			Add(Label, true, Resources.GroupParameters);
 		}
 
 		/// <summary>

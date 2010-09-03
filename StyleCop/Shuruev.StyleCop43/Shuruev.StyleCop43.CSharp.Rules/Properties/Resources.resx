@@ -280,7 +280,7 @@ Please check that:
     <value>Methods, Events and Delegates</value>
   </data>
   <data name="GroupParameters" xml:space="preserve">
-    <value>Parameters and Variables</value>
+    <value>Parameters, Variables and Labels</value>
   </data>
   <data name="SpecialSettingEditorHelpAbbreviations" xml:space="preserve">
     <value>Please specify a list of naming abbreviations, that should be considered

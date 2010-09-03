@@ -158,7 +158,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters and Variables.
+        ///   Looks up a localized string similar to Parameters, Variables and Labels.
         /// </summary>
         internal static string GroupParameters {
             get {

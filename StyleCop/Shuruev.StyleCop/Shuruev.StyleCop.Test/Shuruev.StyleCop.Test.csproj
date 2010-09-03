@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ComplexTests\Source\AdvancedNamingRules.cs" />
+    <None Include="CodeHelperTests\Source\Labels.cs" />
     <Compile Include="ComplexTests\BlockItem.cs" />
     <None Include="ComplexTests\Source\MoreCustomRules.cs" />
     <None Include="ComplexTests\Source\ExtendedOriginalRules.cs" />
