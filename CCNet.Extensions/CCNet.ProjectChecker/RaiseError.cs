@@ -161,5 +161,19 @@ namespace CCNet.ProjectChecker
 		}
 
 		#endregion
+
+		#region Project items errors
+
+		/// <summary>
+		/// Raises "WrongFileSet" error.
+		/// </summary>
+		public static void WrongFileSet(string description)
+		{
+			RaiseInternal(
+				Errors.WrongFileSet
+				.Display(description));
+		}
+
+		#endregion
 	}
 }

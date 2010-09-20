@@ -110,6 +110,17 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All files under source control should match the files included into project:
+        ///{0}
+        ///Include necessary files into project or remove them from source control..
+        /// </summary>
+        internal static string WrongFileSet {
+            get {
+                return ResourceManager.GetString("WrongFileSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some manifest file contents seem not to conform the agreements:
         ///{0}.
         /// </summary>

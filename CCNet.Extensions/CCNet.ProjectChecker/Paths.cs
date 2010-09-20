@@ -51,5 +51,29 @@ namespace CCNet.ProjectChecker
 				return Path.Combine(PropertiesFolder, file);
 			}
 		}
+
+		/// <summary>
+		/// Gets source code control file path.
+		/// </summary>
+		public static string SourceCodeControlFile
+		{
+			get
+			{
+				string file = "mssccprj.scc";
+				return Path.Combine(Arguments.WorkingDirectorySource, file);
+			}
+		}
+
+		/// <summary>
+		/// Gets source control project metadata file path.
+		/// </summary>
+		public static string SourceControlProjectMetadataFile
+		{
+			get
+			{
+				string file = "{0}.csproj.vspscc".Display(Arguments.ProjectName);
+				return Path.Combine(Arguments.WorkingDirectorySource, file);
+			}
+		}
 	}
 }

@@ -97,6 +97,8 @@ namespace CCNet.ProjectChecker
 			CheckWrongAssemblyInfoContents();
 
 			CheckWrongReferences();
+
+			CheckWrongFileSet();
 		}
 
 		/// <summary>
@@ -303,8 +305,23 @@ namespace CCNet.ProjectChecker
 					required.Add("UseApplicationTrust", "false");
 					break;
 				default:
+					allowed.Add("ApplicationRevision", "0");
+					allowed.Add("ApplicationVersion", "1.0.0.%2a");
+					allowed.Add("BootstrapperEnabled", "true");
+					allowed.Add("Install", "true");
+					allowed.Add("InstallFrom", "Disk");
+					allowed.Add("IsWebBootstrapper", "false");
+					allowed.Add("PublishUrl", @"publish\");
 					allowed.Add("GenerateManifests", "false");
+					allowed.Add("MapFileExtensions", "true");
 					allowed.Add("SignManifests", "true");
+					allowed.Add("UpdateEnabled", "false");
+					allowed.Add("UpdateInterval", null);
+					allowed.Add("UpdateIntervalUnits", null);
+					allowed.Add("UpdateMode", "Foreground");
+					allowed.Add("UpdatePeriodically", "false");
+					allowed.Add("UpdateRequired", "false");
+					allowed.Add("UseApplicationTrust", "false");
 					break;
 			}
 
@@ -586,6 +603,7 @@ namespace CCNet.ProjectChecker
 			required.Add("AssemblyTrademark", String.Empty);
 			required.Add("AssemblyCulture", String.Empty);
 			required.Add("AssemblyVersion", Arguments.ExpectedVersion);
+			allowed.Add("AssemblyFileVersion", Arguments.ExpectedVersion);
 
 			allowed.Add("NeutralResourcesLanguage", "en");
 			allowed.Add("ComVisible", "false");
@@ -660,6 +678,7 @@ namespace CCNet.ProjectChecker
 
 			List<string> requiredGac = new List<string>();
 			List<string> allowedGac = new List<string>();
+			allowedGac.Add("Microsoft.Contracts");
 			allowedGac.Add("Microsoft.CSharp");
 			allowedGac.Add("Microsoft.mshtml");
 			allowedGac.Add("System");
@@ -670,12 +689,19 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Configuration.Install");
 			allowedGac.Add("System.Data");
 			allowedGac.Add("System.Data.DataSetExtensions");
+			allowedGac.Add("System.Data.Entity");
+			allowedGac.Add("System.Data.Linq");
 			allowedGac.Add("System.Deployment");
 			allowedGac.Add("System.Design");
 			allowedGac.Add("System.Drawing");
 			allowedGac.Add("System.EnterpriseServices");
 			allowedGac.Add("System.Management");
+			allowedGac.Add("System.Runtime.Serialization");
+			allowedGac.Add("System.Runtime.Serialization.Formatters.Soap");
+			allowedGac.Add("System.Security");
+			allowedGac.Add("System.ServiceModel.Web");
 			allowedGac.Add("System.ServiceProcess");
+			allowedGac.Add("System.Transactions");
 			allowedGac.Add("System.Web");
 			allowedGac.Add("System.Web.Abstractions");
 			allowedGac.Add("System.Web.ApplicationServices");
@@ -749,6 +775,49 @@ namespace CCNet.ProjectChecker
 					Strings.DontSpecifyPropertyDirectly
 					.Display(reference.Name, "Embed Interop Types"));
 			}
+		}
+
+		#endregion
+
+		#region Checking project items
+
+		/// <summary>
+		/// Checks "WrongFileSet" condition.
+		/// </summary>
+		public static void CheckWrongFileSet()
+		{
+			StringBuilder message = new StringBuilder();
+
+			List<string> items = Directory.GetFiles(Arguments.WorkingDirectorySource, "*", SearchOption.AllDirectories)
+				.Where(item => Path.GetFileName(item) != "vssver2.scc")
+				.Select(item => item.Replace(Arguments.WorkingDirectorySource, String.Empty).TrimStart('\\'))
+				.ToList();
+
+			List<string> required = ProjectHelper.GetProjectItems()
+				.Select(item => item.FullName)
+				.Union(new[]
+					{
+						Paths.ProjectFile,
+						Paths.SourceCodeControlFile,
+						Paths.SourceControlProjectMetadataFile
+					})
+				.Select(item => item.Replace(Arguments.WorkingDirectorySource, String.Empty).TrimStart('\\'))
+				.ToList();
+
+			string entriesDescription;
+			if (!ValidationHelper.CheckEntries(
+				items,
+				required,
+				new string[] { },
+				out entriesDescription))
+			{
+				message.Append(entriesDescription);
+			}
+
+			if (message.Length == 0)
+				return;
+
+			RaiseError.WrongFileSet(message.ToString());
 		}
 
 		#endregion

@@ -121,6 +121,10 @@ namespace CCNet.Common
 				result.Add(value);
 			}
 
+			string configuration = SelectSingleNode("/ms:Project/ms:PropertyGroup/ms:Configuration").InnerText;
+			string platform = SelectSingleNode("/ms:Project/ms:PropertyGroup/ms:Platform").InnerText;
+			result.Add("{0}|{1}".Display(configuration, platform));
+
 			return result;
 		}
 
@@ -319,6 +323,58 @@ namespace CCNet.Common
 			}
 
 			return references;
+		}
+
+		#endregion
+
+		#region Project items
+
+		/// <summary>
+		/// Gets project items.
+		/// </summary>
+		public static List<ProjectItem> GetProjectItems()
+		{
+			List<XmlNode> nodes = new List<XmlNode>();
+
+			nodes.AddRange(SelectNodes("/ms:Project/ms:ItemGroup/ms:None").Cast<XmlNode>());
+			nodes.AddRange(SelectNodes("/ms:Project/ms:ItemGroup/ms:Compile").Cast<XmlNode>());
+			nodes.AddRange(SelectNodes("/ms:Project/ms:ItemGroup/ms:Content").Cast<XmlNode>());
+			nodes.AddRange(SelectNodes("/ms:Project/ms:ItemGroup/ms:EmbeddedResource").Cast<XmlNode>());
+
+			return nodes.Select(GetProjectItem).ToList();
+		}
+
+		/// <summary>
+		/// Gets project item from an XML node.
+		/// </summary>
+		private static ProjectItem GetProjectItem(XmlNode node)
+		{
+			ProjectItemType type;
+			switch (node.Name)
+			{
+				case "None":
+					type = ProjectItemType.None;
+					break;
+				case "Compile":
+					type = ProjectItemType.Compile;
+					break;
+				case "Content":
+					type = ProjectItemType.Content;
+					break;
+				case "EmbeddedResource":
+					type = ProjectItemType.EmbeddedResource;
+					break;
+				default:
+					throw new InvalidOperationException(
+						String.Format("Unknown project node name: {0}.", node.Name));
+			}
+
+			string fullName = node.Attributes["Include"].Value;
+			return new ProjectItem
+				{
+					FullName = fullName,
+					Type = type
+				};
 		}
 
 		#endregion
