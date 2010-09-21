@@ -40,17 +40,17 @@ namespace CCNet.ProjectChecker
 
 			/*xxxargs = new[]
 			{
-				@"ProjectName=AggregatorWebClient",
-				@"ReferencesDirectory=C:\Users\Public\VSS\SED\TFS\VXStudio\VXStudioWindowsControls-Refs",
-				@"WorkingDirectorySource=C:\Users\Public\VSS\SED\TFS\Aggregator\AggregatorWebClient",
+				@"ProjectName=UDBClientLib",
+				@"ReferencesDirectory=\\rufrt-vxbuild\e$\CCNET\UDBClientLib\References",
+				@"WorkingDirectorySource=\\rufrt-vxbuild\e$\CCNET\UDBClientLib\WorkingDirectory\Source",
 				@"ExternalReferencesPath=\\rufrt-vxbuild\ExternalReferences",
 				@"InternalReferencesPath=\\rufrt-vxbuild\InternalReferences",
 				@"ProjectType=Library",
-				@"AssemblyName=AggregatorWebClient",
+				@"AssemblyName=UDBClientLib",
 				@"VisualStudioVersion=2008",
 				@"TargetFramework=Net20",
 				@"TargetPlatform=AnyCPU",
-				@"RootNamespace=VX.Studio.WindowsControls",
+				@"RootNamespace=VX.UDB",
 				@"SuppressWarnings=1591",
 				@"ExpectedVersion=1.0.0.0"
 			};*/
@@ -344,6 +344,9 @@ namespace CCNet.ProjectChecker
 			allowed.Add("TargetZone", null);
 			allowed.Add("UpgradeBackupLocation", null);
 			allowed.Add("Win32Resource", String.Empty);
+			allowed.Add("WebReference_EnableLegacyEventingModel", null);
+			allowed.Add("WebReference_EnableProperties", null);
+			allowed.Add("WebReference_EnableSQLTypes", null);
 
 			string description;
 			if (ValidationHelper.CheckProperties(
