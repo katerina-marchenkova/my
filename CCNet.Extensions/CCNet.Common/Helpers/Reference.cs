@@ -59,5 +59,10 @@
 		/// Gets or sets required target framework.
 		/// </summary>
 		public string RequiredTargetFramework { get; set; }
+
+		/// <summary>
+		/// Gets or sets executable extension.
+		/// </summary>
+		public string ExecutableExtension { get; set; }
 	}
 }

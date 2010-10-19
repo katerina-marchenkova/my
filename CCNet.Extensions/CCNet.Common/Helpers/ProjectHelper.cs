@@ -256,6 +256,7 @@ namespace CCNet.Common
 				reference.Aliases = GetFromProperty(properties, "/Reference/Aliases");
 				reference.EmbedInteropTypes = GetFromProperty(properties, "/Reference/EmbedInteropTypes");
 				reference.RequiredTargetFramework = GetFromProperty(properties, "/Reference/RequiredTargetFramework");
+				reference.ExecutableExtension = GetFromProperty(properties, "/Reference/ExecutableExtension");
 
 				if (properties.Keys.Count > 0)
 				{

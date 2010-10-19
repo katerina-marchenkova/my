@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CCNet.Common
 {
@@ -38,7 +39,8 @@ namespace CCNet.Common
 			{
 				string latestVersion = GetLatestVersion(referenceFolder, dir);
 				string latestPath = GetLatestPath(referenceFolder, dir);
-				foreach (string file in Directory.GetFiles(latestPath, "*.dll"))
+				foreach (string file in Directory.GetFiles(latestPath, "*.dll")
+					.Union(Directory.GetFiles(latestPath, "*.exe")))
 				{
 					files.Add(new ReferenceFile
 					{
