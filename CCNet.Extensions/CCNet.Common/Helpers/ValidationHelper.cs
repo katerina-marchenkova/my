@@ -22,6 +22,8 @@ namespace CCNet.Common
 			IDictionary<string, string> allowed,
 			out string description)
 		{
+			Contract.Requires(properties != null);
+
 			Contract.Ensures(
 				(Contract.Result<bool>() == true
 					&& Contract.ValueAtReturn(out description) == null)
@@ -111,6 +113,8 @@ namespace CCNet.Common
 			IEnumerable<string> allowed,
 			out string description)
 		{
+			Contract.Requires(items != null);
+
 			Contract.Ensures(
 				(Contract.Result<bool>() == true
 					&& Contract.ValueAtReturn(out description) == null)
@@ -146,6 +150,44 @@ namespace CCNet.Common
 				message.AppendLine(
 					Resources.UnexpectedEntry
 					.Display(item));
+			}
+
+			if (message.Length == 0)
+				return true;
+
+			description = message.ToString();
+			return false;
+		}
+
+		/// <summary>
+		/// Checks collection entries.
+		/// Returns true if everything is correct.
+		/// </summary>
+		public static bool CheckEntries(
+			ICollection<string> items,
+			IEnumerable<string> forbidden,
+			out string description)
+		{
+			Contract.Requires(items != null);
+
+			Contract.Ensures(
+				(Contract.Result<bool>() == true
+					&& Contract.ValueAtReturn(out description) == null)
+				|| (Contract.Result<bool>() == false
+					&& Contract.ValueAtReturn(out description) != null
+					&& Contract.ValueAtReturn(out description).Length > 0));
+
+			description = null;
+			StringBuilder message = new StringBuilder();
+
+			foreach (string item in forbidden)
+			{
+				if (items.Contains(item))
+				{
+					message.AppendLine(
+						Resources.ForbiddenEntry
+						.Display(item));
+				}
 			}
 
 			if (message.Length == 0)

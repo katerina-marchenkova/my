@@ -61,6 +61,17 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following files were considered as forbidden by some reason:
+        ///{0}
+        ///Please do not use them in your project..
+        /// </summary>
+        internal static string ForbiddenFiles {
+            get {
+                return ResourceManager.GetString("ForbiddenFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found unknown configuration {0}.
         ///Use standard configurations only: Debug and Release..
         /// </summary>

@@ -99,6 +99,7 @@ namespace CCNet.ProjectChecker
 			CheckWrongReferences();
 
 			CheckWrongFileSet();
+			CheckForbiddenFiles();
 		}
 
 		/// <summary>
@@ -287,8 +288,8 @@ namespace CCNet.ProjectChecker
 					required.Add("InstallFrom", "Web");
 					required.Add("InstallUrl", "http://download.cnetcontentsolutions.com/{0}/{1}/".Display(Arguments.DownloadZone, Arguments.AssemblyName));
 					required.Add("IsWebBootstrapper", "true");
-					required.Add("ManifestCertificateThumbprint", "51C48C1CDB83928A3A6F46ED8865E80BF5D0B5EF");
-					required.Add("ManifestKeyFile", "vortex.pfx");
+					required.Add("ManifestCertificateThumbprint", "915AA1047421A53FB187293AB3E39E5FAC62E4D9");
+					required.Add("ManifestKeyFile", "SignCode.pfx");
 					required.Add("ManifestTimestampUrl", "http://timestamp.comodoca.com/authenticode");
 					required.Add("MapFileExtensions", "true");
 					required.Add("MinimumRequiredVersion", "1.0.0.0");
@@ -371,8 +372,10 @@ namespace CCNet.ProjectChecker
 			allowed.Add("AllowUnsafeBlocks", "false");
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
+			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
 			allowed.Add("CodeAnalysisRules", null);
 			allowed.Add("CodeAnalysisRuleSet", null);
+			allowed.Add("CodeAnalysisUseTypeNameInSuppression", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
 			allowed.Add("CodeContractsBoundsObligations", null);
@@ -458,7 +461,10 @@ namespace CCNet.ProjectChecker
 			allowed.Add("AllowUnsafeBlocks", "false");
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
+			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
+			allowed.Add("CodeAnalysisRules", null);
 			allowed.Add("CodeAnalysisRuleSet", null);
+			allowed.Add("CodeAnalysisUseTypeNameInSuppression", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
 			allowed.Add("CodeContractsBoundsObligations", null);
@@ -719,14 +725,14 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Xml");
 			allowedGac.Add("System.Xml.Linq");
 
-			string entriesDescription;
+			string description;
 			if (!ValidationHelper.CheckEntries(
 				usedGac.Select(reference => reference.Name).ToList(),
 				requiredGac,
 				allowedGac,
-				out entriesDescription))
+				out description))
 			{
-				message.Append(entriesDescription);
+				message.Append(description);
 			}
 
 			if (message.Length == 0)
@@ -807,20 +813,53 @@ namespace CCNet.ProjectChecker
 				.Select(item => item.Replace(Arguments.WorkingDirectorySource, String.Empty).TrimStart('\\'))
 				.ToList();
 
-			string entriesDescription;
+			string description;
 			if (!ValidationHelper.CheckEntries(
 				items,
 				required,
 				new string[] { },
-				out entriesDescription))
+				out description))
 			{
-				message.Append(entriesDescription);
+				message.Append(description);
 			}
 
 			if (message.Length == 0)
 				return;
 
 			RaiseError.WrongFileSet(message.ToString());
+		}
+
+		/// <summary>
+		/// Checks "ForbiddenFiles" condition.
+		/// </summary>
+		public static void CheckForbiddenFiles()
+		{
+			StringBuilder message = new StringBuilder();
+
+			List<string> forbidden = new List<string>();
+			forbidden.Add("ivy.xml");
+			forbidden.Add("publish.bat");
+			forbidden.Add("publish.cmd");
+			forbidden.Add("Web.Debug.config");
+			forbidden.Add("Web.Release.config");
+
+			List<string> items = ProjectHelper.GetProjectItems()
+				.Select(item => Path.GetFileName(item.FullName))
+				.ToList();
+
+			string description;
+			if (!ValidationHelper.CheckEntries(
+				items,
+				forbidden,
+				out description))
+			{
+				message.Append(description);
+			}
+
+			if (message.Length == 0)
+				return;
+
+			RaiseError.ForbiddenFiles(message.ToString());
 		}
 
 		#endregion

@@ -121,6 +121,9 @@
     <value>&lt;p&gt;&lt;b&gt;Running {0} has failed&lt;/b&gt;:&lt;br /&gt;{1}&lt;/p&gt;
 &lt;p&gt;&lt;i&gt;Please report Oleg Shuruev about this issue.&lt;/i&gt;&lt;/p&gt;</value>
   </data>
+  <data name="ForbiddenEntry" xml:space="preserve">
+    <value>- found forbidden entry "{0}"</value>
+  </data>
   <data name="InvalidPropertyValue" xml:space="preserve">
     <value>- property {0} is supposed to have value "{1}", but now it is "{2}"</value>
   </data>

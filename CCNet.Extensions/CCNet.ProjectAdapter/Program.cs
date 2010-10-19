@@ -78,8 +78,11 @@ namespace CCNet.ProjectAdapter
 		{
 			string text = File.ReadAllText(Paths.AssemblyInfoFile);
 
-			Regex regex = new Regex("\\[assembly: AssemblyVersion\\(\"[0-9\\.\\*]+\"\\)]");
-			text = regex.Replace(text, "[assembly: AssemblyVersion(\"" + Arguments.CurrentVersion + "\")]");
+			text = new Regex("\\[assembly: AssemblyVersion\\(\"[0-9\\.\\*]+\"\\)]")
+				.Replace(text, "[assembly: AssemblyVersion(\"" + Arguments.CurrentVersion + "\")]");
+
+			text = new Regex("\\[assembly: AssemblyFileVersion\\(\"[0-9\\.\\*]+\"\\)]")
+				.Replace(text, "[assembly: AssemblyFileVersion(\"" + Arguments.CurrentVersion + "\")]");
 
 			File.WriteAllText(Paths.AssemblyInfoFile, text, Encoding.UTF8);
 		}

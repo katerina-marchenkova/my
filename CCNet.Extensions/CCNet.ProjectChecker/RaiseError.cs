@@ -174,6 +174,16 @@ namespace CCNet.ProjectChecker
 				.Display(description));
 		}
 
+		/// <summary>
+		/// Raises "ForbiddenFiles" error.
+		/// </summary>
+		public static void ForbiddenFiles(string description)
+		{
+			RaiseInternal(
+				Errors.ForbiddenFiles
+				.Display(description));
+		}
+
 		#endregion
 	}
 }
