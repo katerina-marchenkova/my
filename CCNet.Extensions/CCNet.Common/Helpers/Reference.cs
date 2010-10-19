@@ -6,57 +6,57 @@
 	public class Reference
 	{
 		/// <summary>
-		/// Assembly name.
+		/// Gets or sets assembly name.
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Assembly version.
+		/// Gets or sets assembly version.
 		/// </summary>
 		public string Version { get; set; }
 
 		/// <summary>
-		/// Assembly culture.
+		/// Gets or sets assembly culture.
 		/// </summary>
 		public string Culture { get; set; }
 
 		/// <summary>
-		/// Public key token.
+		/// Gets or sets public key token.
 		/// </summary>
 		public string PublicKeyToken { get; set; }
 
 		/// <summary>
-		/// Processor architecture.
+		/// Gets or sets processor architecture.
 		/// </summary>
 		public string ProcessorArchitecture { get; set; }
 
 		/// <summary>
-		/// Specific version.
+		/// Gets or sets specific version.
 		/// </summary>
 		public string SpecificVersion { get; set; }
 
 		/// <summary>
-		/// Hint path.
+		/// Gets or sets hint path.
 		/// </summary>
 		public string HintPath { get; set; }
 
 		/// <summary>
-		/// Private property.
+		/// Gets or sets private property.
 		/// </summary>
 		public string Private { get; set; }
 
 		/// <summary>
-		/// Aliases property.
+		/// Gets or sets aliases property.
 		/// </summary>
 		public string Aliases { get; set; }
 
 		/// <summary>
-		/// Embedding options.
+		/// Gets or sets embedding options.
 		/// </summary>
 		public string EmbedInteropTypes { get; set; }
 
 		/// <summary>
-		/// Required target framework.
+		/// Gets or sets required target framework.
 		/// </summary>
 		public string RequiredTargetFramework { get; set; }
 	}

@@ -33,6 +33,11 @@
 		/// <summary>
 		/// Class library.
 		/// </summary>
-		Library
+		Library,
+
+		/// <summary>
+		/// Test project.
+		/// </summary>
+		Test
 	}
 }

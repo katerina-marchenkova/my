@@ -255,6 +255,7 @@ namespace CCNet.ProjectChecker
 				case ProjectType.WebService:
 				case ProjectType.WebSite:
 				case ProjectType.Library:
+				case ProjectType.Test:
 					required.Add("OutputType", "Library");
 					break;
 			}
@@ -406,13 +407,22 @@ namespace CCNet.ProjectChecker
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoStdLib", "false");
 
-			if (String.IsNullOrEmpty(Arguments.SuppressWarnings))
+			switch (Arguments.ProjectType)
 			{
-				allowed.Add("NoWarn", Arguments.SuppressWarnings);
-			}
-			else
-			{
-				required.Add("NoWarn", Arguments.SuppressWarnings);
+				case ProjectType.Test:
+					allowed.Add("NoWarn", null);
+					break;
+				default:
+					if (String.IsNullOrEmpty(Arguments.SuppressWarnings))
+					{
+						allowed.Add("NoWarn", Arguments.SuppressWarnings);
+					}
+					else
+					{
+						required.Add("NoWarn", Arguments.SuppressWarnings);
+					}
+
+					break;
 			}
 
 			required.Add("Optimize", "false");
@@ -424,6 +434,10 @@ namespace CCNet.ProjectChecker
 				case ProjectType.WebSite:
 					required.Add("OutputPath", @"bin\");
 					required.Add("DocumentationFile", @"bin\{0}.xml".Display(Arguments.AssemblyName));
+					break;
+				case ProjectType.Test:
+					required.Add("OutputPath", @"bin\Debug\");
+					allowed.Add("DocumentationFile", null);
 					break;
 				default:
 					required.Add("OutputPath", @"bin\Debug\");
@@ -495,13 +509,22 @@ namespace CCNet.ProjectChecker
 			allowed.Add("FxCopRules", null);
 			allowed.Add("NoStdLib", "false");
 
-			if (String.IsNullOrEmpty(Arguments.SuppressWarnings))
+			switch (Arguments.ProjectType)
 			{
-				allowed.Add("NoWarn", Arguments.SuppressWarnings);
-			}
-			else
-			{
-				required.Add("NoWarn", Arguments.SuppressWarnings);
+				case ProjectType.Test:
+					allowed.Add("NoWarn", null);
+					break;
+				default:
+					if (String.IsNullOrEmpty(Arguments.SuppressWarnings))
+					{
+						allowed.Add("NoWarn", Arguments.SuppressWarnings);
+					}
+					else
+					{
+						required.Add("NoWarn", Arguments.SuppressWarnings);
+					}
+
+					break;
 			}
 
 			required.Add("Optimize", "true");
@@ -512,6 +535,10 @@ namespace CCNet.ProjectChecker
 				case ProjectType.WebSite:
 					required.Add("OutputPath", @"bin\");
 					required.Add("DocumentationFile", @"bin\{0}.xml".Display(Arguments.AssemblyName));
+					break;
+				case ProjectType.Test:
+					required.Add("OutputPath", @"bin\Release\");
+					allowed.Add("DocumentationFile", null);
 					break;
 				default:
 					required.Add("OutputPath", @"bin\Release\");
@@ -690,6 +717,7 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("Microsoft.Contracts");
 			allowedGac.Add("Microsoft.CSharp");
 			allowedGac.Add("Microsoft.mshtml");
+			allowedGac.Add("Microsoft.VisualStudio.QualityTools.UnitTestFramework");
 			allowedGac.Add("System");
 			allowedGac.Add("System.Core");
 			allowedGac.Add("System.ComponentModel.DataAnnotations");

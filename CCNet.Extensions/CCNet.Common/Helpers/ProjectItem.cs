@@ -6,12 +6,12 @@
 	public class ProjectItem
 	{
 		/// <summary>
-		/// Full item name.
+		/// Gets or sets full item name.
 		/// </summary>
 		public string FullName { get; set; }
 
 		/// <summary>
-		/// Assembly name.
+		/// Gets or sets assembly name.
 		/// </summary>
 		public ProjectItemType Type { get; set; }
 	}

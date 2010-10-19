@@ -6,27 +6,27 @@
 	public class ReferenceFile
 	{
 		/// <summary>
-		/// Project name.
+		/// Gets or sets project name.
 		/// </summary>
 		public string ProjectName { get; set; }
 
 		/// <summary>
-		/// File path.
+		/// Gets or sets file path.
 		/// </summary>
 		public string FilePath { get; set; }
 
 		/// <summary>
-		/// File name.
+		/// Gets or sets file name.
 		/// </summary>
 		public string FileName { get; set; }
 
 		/// <summary>
-		/// Assembly name.
+		/// Gets or sets assembly name.
 		/// </summary>
 		public string AssemblyName { get; set; }
 
 		/// <summary>
-		/// Version.
+		/// Gets or sets version.
 		/// </summary>
 		public string Version { get; set; }
 	}
