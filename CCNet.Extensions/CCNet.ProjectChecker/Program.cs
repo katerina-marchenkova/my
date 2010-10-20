@@ -774,9 +774,16 @@ namespace CCNet.ProjectChecker
 		/// </summary>
 		private static void CheckReferenceProperties(IEnumerable<Reference> references, StringBuilder message)
 		{
+			List<string> exceptions = new List<string>();
+			exceptions.Add("Microsoft.VisualStudio.QualityTools.UnitTestFramework");
+			exceptions.Add("System.Web.Mvc");
+
 			foreach (Reference reference in references)
 			{
 				CheckDirectlySpecifiedProperties(reference, message);
+
+				if (exceptions.Contains(reference.Name))
+					continue;
 
 				if (reference.Version != null && reference.SpecificVersion != "False")
 				{
