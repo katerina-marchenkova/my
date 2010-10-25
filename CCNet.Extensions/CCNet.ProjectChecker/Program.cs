@@ -726,6 +726,8 @@ namespace CCNet.ProjectChecker
 
 			List<string> requiredGac = new List<string>();
 			List<string> allowedGac = new List<string>();
+			allowedGac.Add("envdte");
+			allowedGac.Add("envdte80");
 			allowedGac.Add("Microsoft.Contracts");
 			allowedGac.Add("Microsoft.CSharp");
 			allowedGac.Add("Microsoft.mshtml");
@@ -750,6 +752,7 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Runtime.Serialization");
 			allowedGac.Add("System.Runtime.Serialization.Formatters.Soap");
 			allowedGac.Add("System.Security");
+			allowedGac.Add("System.ServiceModel");
 			allowedGac.Add("System.ServiceModel.Web");
 			allowedGac.Add("System.ServiceProcess");
 			allowedGac.Add("System.Transactions");
