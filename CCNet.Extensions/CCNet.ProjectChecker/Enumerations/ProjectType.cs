@@ -11,6 +11,11 @@
 		ClickOnce,
 
 		/// <summary>
+		/// System tool.
+		/// </summary>
+		SystemTool,
+
+		/// <summary>
 		/// Windows service.
 		/// </summary>
 		WindowsService,

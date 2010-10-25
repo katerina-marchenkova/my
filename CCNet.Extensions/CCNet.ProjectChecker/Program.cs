@@ -246,6 +246,7 @@ namespace CCNet.ProjectChecker
 			switch (Arguments.ProjectType)
 			{
 				case ProjectType.ClickOnce:
+				case ProjectType.SystemTool:
 					required.Add("OutputType", "WinExe");
 					break;
 				case ProjectType.Console:
@@ -374,8 +375,13 @@ namespace CCNet.ProjectChecker
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
 			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
+			allowed.Add("CodeAnalysisFailOnMissingRules", null);
+			allowed.Add("CodeAnalysisIgnoreBuiltInRules", null);
+			allowed.Add("CodeAnalysisLogFile", null);
+			allowed.Add("CodeAnalysisRuleDirectories", null);
 			allowed.Add("CodeAnalysisRules", null);
 			allowed.Add("CodeAnalysisRuleSet", null);
+			allowed.Add("CodeAnalysisRuleSetDirectories", null);
 			allowed.Add("CodeAnalysisUseTypeNameInSuppression", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
@@ -476,8 +482,13 @@ namespace CCNet.ProjectChecker
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
 			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
+			allowed.Add("CodeAnalysisFailOnMissingRules", null);
+			allowed.Add("CodeAnalysisIgnoreBuiltInRules", null);
+			allowed.Add("CodeAnalysisLogFile", null);
+			allowed.Add("CodeAnalysisRuleDirectories", null);
 			allowed.Add("CodeAnalysisRules", null);
 			allowed.Add("CodeAnalysisRuleSet", null);
+			allowed.Add("CodeAnalysisRuleSetDirectories", null);
 			allowed.Add("CodeAnalysisUseTypeNameInSuppression", null);
 			allowed.Add("CodeContractsArithmeticObligations", null);
 			allowed.Add("CodeContractsBaseLineFile", null);
@@ -622,6 +633,7 @@ namespace CCNet.ProjectChecker
 			switch (Arguments.ProjectType)
 			{
 				case ProjectType.ClickOnce:
+				case ProjectType.SystemTool:
 				case ProjectType.WindowsService:
 					required.Add("AssemblyTitle", Arguments.FriendlyName);
 					required.Add("AssemblyProduct", Arguments.FriendlyName);
@@ -733,6 +745,8 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Drawing");
 			allowedGac.Add("System.EnterpriseServices");
 			allowedGac.Add("System.Management");
+			allowedGac.Add("System.Messaging");
+			allowedGac.Add("System.Runtime.Remoting");
 			allowedGac.Add("System.Runtime.Serialization");
 			allowedGac.Add("System.Runtime.Serialization.Formatters.Soap");
 			allowedGac.Add("System.Security");
