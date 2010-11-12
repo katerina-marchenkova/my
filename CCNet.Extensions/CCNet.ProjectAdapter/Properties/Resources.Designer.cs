@@ -61,7 +61,7 @@ namespace CCNet.ProjectAdapter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [REFERENCES TO] {0} ({1}).
+        ///   Looks up a localized string similar to [REFERENCES TO] {0} / {1} / {2}.
         /// </summary>
         internal static string LogReferencesTo {
             get {

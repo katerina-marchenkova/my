@@ -166,6 +166,7 @@ namespace CCNet.ProjectAdapter
 				Console.WriteLine(
 					Resources.LogReferencesTo,
 					reference.FileName,
+					reference.ProjectName,
 					reference.Version);
 			}
 		}
