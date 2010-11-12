@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using EnvDTE;
@@ -110,6 +111,19 @@ namespace SolutionHelper
 		{
 			Project project = m_projects[assemblyName];
 			BuildDependency dependency = m_solution.SolutionBuild.BuildDependencies.Item(project);
+
+			bool same = Enumerable.SequenceEqual(
+				((object[])dependency.RequiredProjects)
+					.Cast<Project>()
+					.Select(proj => proj.UniqueName)
+					.OrderBy(name => name),
+				m_references[assemblyName]
+					.Select(reference => m_projects[reference.Name].UniqueName)
+					.OrderBy(name => name));
+
+			if (same)
+				return;
+
 			dependency.RemoveAllProjects();
 			foreach (Reference reference in m_references[assemblyName])
 			{

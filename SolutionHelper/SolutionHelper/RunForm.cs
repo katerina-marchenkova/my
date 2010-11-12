@@ -40,6 +40,8 @@ namespace SolutionHelper
 
 			Adjust();
 			Enabled = true;
+
+			Close();
 		}
 
 		private void RunForm_KeyDown(object sender, KeyEventArgs e)
