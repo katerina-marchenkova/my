@@ -377,6 +377,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
 			allowed.Add("CodeAnalysisFailOnMissingRules", null);
 			allowed.Add("CodeAnalysisIgnoreBuiltInRules", null);
+			allowed.Add("CodeAnalysisIgnoreBuiltInRuleSets", null);
 			allowed.Add("CodeAnalysisLogFile", null);
 			allowed.Add("CodeAnalysisRuleDirectories", null);
 			allowed.Add("CodeAnalysisRules", null);
@@ -484,6 +485,7 @@ namespace CCNet.ProjectChecker
 			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
 			allowed.Add("CodeAnalysisFailOnMissingRules", null);
 			allowed.Add("CodeAnalysisIgnoreBuiltInRules", null);
+			allowed.Add("CodeAnalysisIgnoreBuiltInRuleSets", null);
 			allowed.Add("CodeAnalysisLogFile", null);
 			allowed.Add("CodeAnalysisRuleDirectories", null);
 			allowed.Add("CodeAnalysisRules", null);
@@ -762,6 +764,7 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.Web.DynamicData");
 			allowedGac.Add("System.Web.Entity");
 			allowedGac.Add("System.Web.Extensions");
+			allowedGac.Add("System.Web.Extensions.Design");
 			allowedGac.Add("System.Web.Mobile");
 			allowedGac.Add("System.Web.Routing");
 			allowedGac.Add("System.Web.Services");
