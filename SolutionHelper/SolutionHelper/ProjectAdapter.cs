@@ -113,7 +113,7 @@ namespace SolutionHelper
 			BuildDependency dependency = m_solution.SolutionBuild.BuildDependencies.Item(project);
 
 			bool same = Enumerable.SequenceEqual(
-				((object[])dependency.RequiredProjects)
+				(dependency.RequiredProjects == null ? new object[] { } : (object[])dependency.RequiredProjects)
 					.Cast<Project>()
 					.Select(proj => proj.UniqueName)
 					.OrderBy(name => name),
