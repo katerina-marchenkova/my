@@ -897,6 +897,7 @@ namespace CCNet.ProjectChecker
 			forbidden.Add("publish.cmd");
 			forbidden.Add("Web.Debug.config");
 			forbidden.Add("Web.Release.config");
+			forbidden.Add("Local.testsettings");
 
 			List<string> items = ProjectHelper.GetProjectItems()
 				.Select(item => Path.GetFileName(item.FullName))
