@@ -58,6 +58,16 @@ namespace CCNet.ProjectChecker
 			RaiseInternal(Errors.WrongAssemblyInfoFileLocation);
 		}
 
+		/// <summary>
+		/// Raises "WrongConfigFileLocation" error.
+		/// </summary>
+		public static void WrongConfigFileLocation(string configFileName)
+		{
+			RaiseInternal(
+				Errors.WrongConfigFileLocation
+				.Display(configFileName));
+		}
+
 		#endregion
 
 		#region Project properties errors
@@ -182,6 +192,16 @@ namespace CCNet.ProjectChecker
 			RaiseInternal(
 				Errors.ForbiddenFiles
 				.Display(description));
+		}
+
+		/// <summary>
+		/// Raises "WrongFileProperties" error.
+		/// </summary>
+		public static void WrongFileProperties(string fileName, string description)
+		{
+			RaiseInternal(
+				Errors.WrongFileProperties
+				.Display(fileName, description));
 		}
 
 		#endregion

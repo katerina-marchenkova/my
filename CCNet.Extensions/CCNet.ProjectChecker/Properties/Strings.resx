@@ -126,4 +126,7 @@
   <data name="DontUseSpecificVersion" xml:space="preserve">
     <value>- {0} should not use specific version</value>
   </data>
+  <data name="UseSpecificVersion" xml:space="preserve">
+    <value>- {0} should use specific version</value>
+  </data>
 </root>

@@ -11,8 +11,13 @@
 		public string FullName { get; set; }
 
 		/// <summary>
-		/// Gets or sets assembly name.
+		/// Gets or sets project item type.
 		/// </summary>
 		public ProjectItemType Type { get; set; }
+
+		/// <summary>
+		/// Gets or sets copying to output directory option.
+		/// </summary>
+		public CopyToOutputDirectory CopyToOutput { get; set; }
 	}
 }

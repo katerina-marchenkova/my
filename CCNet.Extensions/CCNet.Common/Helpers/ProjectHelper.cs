@@ -371,10 +371,37 @@ namespace CCNet.Common
 			}
 
 			string fullName = node.Attributes["Include"].Value;
+
+			CopyToOutputDirectory copyToOutput = CopyToOutputDirectory.None;
+
+			if (node.HasChildNodes)
+			{
+				Dictionary<string, string> properties = PropertiesHelper.ParseFromXml(node);
+
+				string copyToOutputKey = "/{0}/CopyToOutputDirectory".Display(node.Name);
+				if (properties.ContainsKey(copyToOutputKey))
+				{
+					string copyToOutputValue = properties[copyToOutputKey];
+					switch (copyToOutputValue)
+					{
+						case "PreserveNewest":
+							copyToOutput = CopyToOutputDirectory.PreserveNewest;
+							break;
+						case "Always":
+							copyToOutput = CopyToOutputDirectory.Always;
+							break;
+						default:
+							throw new InvalidOperationException(
+								String.Format("Unknown copying to output value: {0}.", copyToOutputValue));
+					}
+				}
+			}
+
 			return new ProjectItem
 				{
 					FullName = fullName,
-					Type = type
+					Type = type,
+					CopyToOutput = copyToOutput
 				};
 		}
 

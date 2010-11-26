@@ -64,5 +64,16 @@
 		/// Gets or sets executable extension.
 		/// </summary>
 		public string ExecutableExtension { get; set; }
+
+		/// <summary>
+		/// Gets a value indicating that reference uses specific version.
+		/// </summary>
+		public bool IsSpecificVersion
+		{
+			get
+			{
+				return Version != null && SpecificVersion != "False";
+			}
+		}
 	}
 }

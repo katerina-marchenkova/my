@@ -137,9 +137,16 @@ Use standard configurations only: Debug and Release.</value>
     <value>Some project properties seem not to conform the agreements:
 {0}</value>
   </data>
+  <data name="WrongConfigFileLocation" xml:space="preserve">
+    <value>The project should have configuration file named as {0} and placed in root folder.</value>
+  </data>
   <data name="WrongDebugProperties" xml:space="preserve">
     <value>Some project properties for Debug configuration seem not to conform the agreements:
 {0}</value>
+  </data>
+  <data name="WrongFileProperties" xml:space="preserve">
+    <value>Some properties for {0} file seem not to conform the agreements:
+{1}</value>
   </data>
   <data name="WrongFileSet" xml:space="preserve">
     <value>All files under source control should match the files included into project:

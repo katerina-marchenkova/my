@@ -86,5 +86,14 @@ namespace CCNet.ProjectChecker.Properties {
                 return ResourceManager.GetString("DontUseSpecificVersion", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - {0} should use specific version.
+        /// </summary>
+        internal static string UseSpecificVersion {
+            get {
+                return ResourceManager.GetString("UseSpecificVersion", resourceCulture);
+            }
+        }
     }
 }

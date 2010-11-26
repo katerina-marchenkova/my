@@ -111,12 +111,31 @@ namespace CCNet.ProjectChecker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The project should have configuration file named as {0} and placed in root folder..
+        /// </summary>
+        internal static string WrongConfigFileLocation {
+            get {
+                return ResourceManager.GetString("WrongConfigFileLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some project properties for Debug configuration seem not to conform the agreements:
         ///{0}.
         /// </summary>
         internal static string WrongDebugProperties {
             get {
                 return ResourceManager.GetString("WrongDebugProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some properties for {0} file seem not to conform the agreements:
+        ///{1}.
+        /// </summary>
+        internal static string WrongFileProperties {
+            get {
+                return ResourceManager.GetString("WrongFileProperties", resourceCulture);
             }
         }
         

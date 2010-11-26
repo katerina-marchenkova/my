@@ -100,6 +100,8 @@ namespace CCNet.ProjectChecker
 
 			CheckWrongFileSet();
 			CheckForbiddenFiles();
+			CheckWrongConfig();
+			CheckWrongDefaultConfig();
 		}
 
 		/// <summary>
@@ -803,13 +805,22 @@ namespace CCNet.ProjectChecker
 				CheckDirectlySpecifiedProperties(reference, message);
 
 				if (exceptions.Contains(reference.Name))
-					continue;
-
-				if (reference.Version != null && reference.SpecificVersion != "False")
 				{
-					message.AppendLine(
-						Strings.DontUseSpecificVersion
-						.Display(reference.Name));
+					if (!reference.IsSpecificVersion)
+					{
+						message.AppendLine(
+							Strings.UseSpecificVersion
+							.Display(reference.Name));
+					}
+				}
+				else
+				{
+					if (reference.IsSpecificVersion)
+					{
+						message.AppendLine(
+							Strings.DontUseSpecificVersion
+							.Display(reference.Name));
+					}
 				}
 			}
 		}
@@ -898,6 +909,9 @@ namespace CCNet.ProjectChecker
 			forbidden.Add("Web.Debug.config");
 			forbidden.Add("Web.Release.config");
 			forbidden.Add("Local.testsettings");
+			forbidden.Add("app.config");
+			forbidden.Add("web.config");
+			forbidden.Add("web.config.default");
 
 			List<string> items = ProjectHelper.GetProjectItems()
 				.Select(item => Path.GetFileName(item.FullName))
@@ -916,6 +930,135 @@ namespace CCNet.ProjectChecker
 				return;
 
 			RaiseError.ForbiddenFiles(message.ToString());
+		}
+
+		/// <summary>
+		/// Checks "WrongConfig" condition.
+		/// </summary>
+		public static void CheckWrongConfig()
+		{
+			string configFileName;
+			ProjectItemType type;
+			CopyToOutputDirectory copyToOutput;
+
+			switch (Arguments.ProjectType)
+			{
+				case ProjectType.Console:
+				case ProjectType.SystemTool:
+				case ProjectType.WindowsService:
+					configFileName = "App.config";
+					type = ProjectItemType.None;
+					copyToOutput = CopyToOutputDirectory.None;
+					break;
+				case ProjectType.WebService:
+				case ProjectType.WebSite:
+					configFileName = "Web.config";
+					type = ProjectItemType.Content;
+					copyToOutput = CopyToOutputDirectory.None;
+					break;
+				case ProjectType.ClickOnce:
+				case ProjectType.Library:
+				case ProjectType.Test:
+					return;
+				default:
+					throw new InvalidOperationException(
+						String.Format("Unknown project type: {0}.", Arguments.ProjectType));
+			}
+
+			CheckConfigProperties(configFileName, type, copyToOutput);
+		}
+
+		/// <summary>
+		/// Checks "WrongDefaultConfig" condition.
+		/// </summary>
+		public static void CheckWrongDefaultConfig()
+		{
+			string configFileName;
+			ProjectItemType type;
+			CopyToOutputDirectory copyToOutput;
+
+			switch (Arguments.ProjectType)
+			{
+				case ProjectType.Console:
+				case ProjectType.SystemTool:
+				case ProjectType.WindowsService:
+					configFileName = "{0}.exe.config.default".Display(Arguments.AssemblyName);
+					type = ProjectItemType.Content;
+					copyToOutput = CopyToOutputDirectory.Always;
+					break;
+				case ProjectType.WebService:
+				case ProjectType.WebSite:
+					configFileName = "Web.config.default";
+					type = ProjectItemType.Content;
+					copyToOutput = CopyToOutputDirectory.None;
+					break;
+				case ProjectType.ClickOnce:
+				case ProjectType.Library:
+				case ProjectType.Test:
+					return;
+				default:
+					throw new InvalidOperationException(
+						String.Format("Unknown project type: {0}.", Arguments.ProjectType));
+			}
+
+			CheckConfigProperties(configFileName, type, copyToOutput);
+		}
+
+		/// <summary>
+		/// Checks properties for configuration file.
+		/// </summary>
+		private static void CheckConfigProperties(
+			string configFileName,
+			ProjectItemType type,
+			CopyToOutputDirectory copyToOutput)
+		{
+			IEnumerable<ProjectItem> items = ProjectHelper.GetProjectItems()
+				.Where(item => Path.GetFileName(item.FullName) == configFileName);
+
+			if (items.Count() != 1)
+			{
+				bool ignore = false;
+
+				if (configFileName == "Web.config"
+					&& items.Count() > 0)
+					ignore = true;
+
+				if (!ignore)
+					RaiseError.WrongConfigFileLocation(configFileName);
+			}
+
+			foreach (ProjectItem config in items)
+			{
+				StringBuilder message = new StringBuilder();
+
+				string description;
+				if (!ValidationHelper.CheckProperties(
+					BuildConfigProperties(config.Type, config.CopyToOutput),
+					BuildConfigProperties(type, copyToOutput),
+					new Dictionary<string, string>(),
+					out description))
+				{
+					message.Append(description);
+				}
+
+				if (message.Length == 0)
+					continue;
+
+				RaiseError.WrongFileProperties(configFileName, message.ToString());
+			}
+		}
+
+		/// <summary>
+		/// Builds properties collection for configuration file.
+		/// </summary>
+		private static Dictionary<string, string> BuildConfigProperties(
+			ProjectItemType type,
+			CopyToOutputDirectory copyToOutput)
+		{
+			Dictionary<string, string> properties = new Dictionary<string, string>();
+			properties["BuildAction"] = type.ToString();
+			properties["CopyToOutput"] = copyToOutput.ToString();
+			return properties;
 		}
 
 		#endregion
