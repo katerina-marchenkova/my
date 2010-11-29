@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
@@ -40,6 +41,14 @@ namespace Shuruev.StyleCop.CSharp
 			m_bold = new Font(listRules.Font, FontStyle.Bold);
 
 			UpdateControls();
+		}
+
+		private void NamingRulesPage_VisibleChanged(object sender, EventArgs e)
+		{
+			if (DesignMode)
+				return;
+
+			UpdateWarnings();
 		}
 
 		private void listRules_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,6 +130,63 @@ namespace Shuruev.StyleCop.CSharp
 			}
 
 			UpdateControls();
+		}
+
+		#endregion
+
+		#region Displaying warnings
+
+		/// <summary>
+		/// Updates page warnings.
+		/// </summary>
+		private void UpdateWarnings()
+		{
+			warningArea.Clear();
+
+			if (Page == null)
+				return;
+
+			if (Page.TabControl == null)
+				return;
+
+			if (!CheckAdvancedNamingRules())
+			{
+				warningArea.Add(
+					Resources.WarningDisabledAdvancedNamingRules,
+					Resources.WarningDisabledAdvancedNamingRulesUrl);
+			}
+			else if (CheckOriginalNamingRules())
+			{
+				warningArea.Add(
+					Resources.WarningDontUseOriginalNamingRules,
+					Resources.WarningDontUseOriginalNamingRulesUrl);
+			}
+		}
+
+		/// <summary>
+		/// Checks whether advanced naming rules are enabled.
+		/// </summary>
+		private bool CheckAdvancedNamingRules()
+		{
+			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, Page.Analyzer.Id);
+			return checkedMap["AdvancedNamingRules"];
+		}
+
+		/// <summary>
+		/// Checks whether some of original naming rules are enabled.
+		/// </summary>
+		private bool CheckOriginalNamingRules()
+		{
+			string analyzerId = SettingsManager.GetAnalyzerId("NamingRules");
+			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, analyzerId);
+
+			foreach (bool value in checkedMap.Values)
+			{
+				if (value)
+					return true;
+			}
+
+			return false;
 		}
 
 		#endregion

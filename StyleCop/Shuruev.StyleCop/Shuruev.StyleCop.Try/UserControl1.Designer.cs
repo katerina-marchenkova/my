@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.warningArea1 = new Shuruev.StyleCop.Try.WarningArea();
+			this.warningArea1 = new Shuruev.StyleCop.CSharp.WarningArea();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -67,7 +67,7 @@
 
 		#endregion
 
-		private WarningArea warningArea1;
+		private Shuruev.StyleCop.CSharp.WarningArea warningArea1;
 		private System.Windows.Forms.GroupBox groupBox1;
 	}
 }

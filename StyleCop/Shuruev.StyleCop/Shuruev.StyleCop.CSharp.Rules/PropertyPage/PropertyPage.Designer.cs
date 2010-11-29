@@ -31,12 +31,12 @@
 			this.tabPages = new System.Windows.Forms.TabControl();
 			this.pageNaming = new System.Windows.Forms.TabPage();
 			this.namingRulesPage = new Shuruev.StyleCop.CSharp.NamingRulesPage();
+			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.pictureLogo = new System.Windows.Forms.PictureBox();
 			this.panelLogoBorder = new System.Windows.Forms.Panel();
 			this.panelTitleBorder = new System.Windows.Forms.Panel();
 			this.panelTitle = new System.Windows.Forms.Panel();
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPages.SuspendLayout();
 			this.pageNaming.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
@@ -78,6 +78,16 @@
 			this.namingRulesPage.Page = null;
 			this.namingRulesPage.Size = new System.Drawing.Size(620, 370);
 			this.namingRulesPage.TabIndex = 0;
+			// 
+			// tabPage1
+			// 
+			this.tabPage1.Location = new System.Drawing.Point(4, 22);
+			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage1.Size = new System.Drawing.Size(626, 376);
+			this.tabPage1.TabIndex = 2;
+			this.tabPage1.Text = "tabPage1xxx";
+			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// pictureLogo
 			// 
@@ -132,16 +142,6 @@
 			this.pictureTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			this.pictureTitle.TabIndex = 0;
 			this.pictureTitle.TabStop = false;
-			// 
-			// tabPage1
-			// 
-			this.tabPage1.Location = new System.Drawing.Point(4, 22);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(626, 376);
-			this.tabPage1.TabIndex = 2;
-			this.tabPage1.Text = "tabPage1";
-			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// PropertyPage
 			// 

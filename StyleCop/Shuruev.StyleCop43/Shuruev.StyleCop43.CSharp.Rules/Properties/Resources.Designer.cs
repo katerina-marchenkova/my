@@ -567,5 +567,50 @@ namespace Shuruev.StyleCop.CSharp.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap Warning {
+            get {
+                object obj = ResourceManager.GetObject("Warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced naming rules are currently disabled.
+        ///You can enable them from Rules tab..
+        /// </summary>
+        internal static string WarningDisabledAdvancedNamingRules {
+            get {
+                return ResourceManager.GetString("WarningDisabledAdvancedNamingRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/DisabledAdvancedNamingRules.
+        /// </summary>
+        internal static string WarningDisabledAdvancedNamingRulesUrl {
+            get {
+                return ResourceManager.GetString("WarningDisabledAdvancedNamingRulesUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that some original naming rules (SA15xx) are still enabled.
+        ///There is no need to use them together with advanced naming rules..
+        /// </summary>
+        internal static string WarningDontUseOriginalNamingRules {
+            get {
+                return ResourceManager.GetString("WarningDontUseOriginalNamingRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/DontUseOriginalNamingRules.
+        /// </summary>
+        internal static string WarningDontUseOriginalNamingRulesUrl {
+            get {
+                return ResourceManager.GetString("WarningDontUseOriginalNamingRulesUrl", resourceCulture);
+            }
+        }
     }
 }

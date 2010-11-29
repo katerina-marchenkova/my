@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
 
@@ -170,7 +169,7 @@ namespace Shuruev.StyleCop.CSharp
 		private bool CheckAdvancedNamingRules()
 		{
 			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, Page.Analyzer.Id);
-			return checkedMap.Values.Where(i => i).Any();
+			return checkedMap["AdvancedNamingRules"];
 		}
 
 		/// <summary>
@@ -180,7 +179,14 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			string analyzerId = SettingsManager.GetAnalyzerId("NamingRules");
 			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, analyzerId);
-			return checkedMap.Values.Where(i => i).Any();
+
+			foreach (bool value in checkedMap.Values)
+			{
+				if (value)
+					return true;
+			}
+
+			return false;
 		}
 
 		#endregion

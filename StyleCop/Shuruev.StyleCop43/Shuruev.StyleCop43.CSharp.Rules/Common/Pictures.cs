@@ -17,6 +17,7 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string CapitalLetter = "CapitalLetter";
 		internal const string TwoLetters = "TwoLetters";
 		internal const string RightArrow = "RightArrow";
+		internal const string Warning = "Warning";
 
 		#endregion
 
@@ -31,6 +32,7 @@ namespace Shuruev.StyleCop.CSharp
 			s_images.Add(CapitalLetter, Resources.CapitalLetter);
 			s_images.Add(TwoLetters, Resources.TwoLetters);
 			s_images.Add(RightArrow, Resources.RightArrow);
+			s_images.Add(Warning, Resources.Warning);
 		}
 
 		#region Accessing pictures

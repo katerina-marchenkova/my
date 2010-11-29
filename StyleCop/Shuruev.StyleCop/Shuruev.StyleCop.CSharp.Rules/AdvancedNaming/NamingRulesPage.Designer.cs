@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NamingRulesPage));
-			this.warningArea = new Shuruev.StyleCop.Try.WarningArea();
+			this.warningArea = new Shuruev.StyleCop.CSharp.WarningArea();
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.panelHelpBorder = new System.Windows.Forms.Panel();
 			this.labelHelp = new System.Windows.Forms.Label();
@@ -160,7 +160,7 @@
 
 		#endregion
 
-		private Try.WarningArea warningArea;
+		private Shuruev.StyleCop.CSharp.WarningArea warningArea;
 		private System.Windows.Forms.Panel panelMain;
 		private System.Windows.Forms.Panel panelHelpBorder;
 		private System.Windows.Forms.Label labelHelp;
