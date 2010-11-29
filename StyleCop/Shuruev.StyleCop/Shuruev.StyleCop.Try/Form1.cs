@@ -40,5 +40,10 @@ namespace Shuruev.StyleCop.Try
 				}
 			}
 		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			userControl11.Add("This Holiday Season, give the\r\nultimate g\r\nift to your special someone.");
+		}
 	}
 }

@@ -46,9 +46,6 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			foreach (CsElement element in elements)
 			{
-				if (CodeHelper.IsGenerated(element))
-					continue;
-
 				AnalyzeElement(element, settings);
 				AnalyzeElements(element.ChildElements, settings);
 			}

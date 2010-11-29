@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 using Microsoft.StyleCop;
 
 namespace Shuruev.StyleCop.CSharp
@@ -120,6 +124,83 @@ namespace Shuruev.StyleCop.CSharp
 		public static void ClearLocalValue(PropertyPage page, string settingName)
 		{
 			page.Analyzer.ClearSetting(page.TabControl.LocalSettings, settingName);
+		}
+
+		#endregion
+
+		#region Accessing foreign settings
+
+		/// <summary>
+		/// Gets rules tree from the user interface.
+		/// </summary>
+		private static TreeView GetRulesTree(PropertyControl tabControl)
+		{
+			IPropertyControlPage analyzersOptions = tabControl.Pages[0];
+			return (TreeView)analyzersOptions.GetType().InvokeMember(
+				"analyzeTree",
+				BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField,
+				null,
+				analyzersOptions,
+				null);
+		}
+
+		/// <summary>
+		/// Gets tree node for specified analyzer.
+		/// </summary>
+		private static TreeNode GetAnalyzerNode(TreeView tree, string analyzerId)
+		{
+			foreach (TreeNode parserNode in tree.Nodes)
+			{
+				foreach (TreeNode analyzerNode in parserNode.Nodes)
+				{
+					SourceAnalyzer analyzer = (SourceAnalyzer)analyzerNode.Tag;
+					if (analyzer.Id == analyzerId)
+						return analyzerNode;
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Analyzes rule nodes.
+		/// </summary>
+		private static void AnalyzeRuleNodes(Dictionary<string, bool> checkedMap, TreeNode parentNode)
+		{
+			foreach (TreeNode node in parentNode.Nodes)
+			{
+				if (node.Tag is Rule)
+				{
+					Rule rule = (Rule)node.Tag;
+					checkedMap[rule.Name] = node.Checked;
+				}
+				else
+				{
+					AnalyzeRuleNodes(checkedMap, node);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets internal ID for specified analyzer.
+		/// </summary>
+		public static string GetAnalyzerId(string analyzerName)
+		{
+			return String.Format("Microsoft.StyleCop.CSharp.{0}", analyzerName);
+		}
+
+		/// <summary>
+		/// Grabs the map of checked rules from UI for specified analyzer.
+		/// </summary>
+		public static Dictionary<string, bool> GrabCheckedRulesMap(PropertyControl tabControl, string analyzerId)
+		{
+			TreeView rulesTree = GetRulesTree(tabControl);
+			TreeNode analyzerNode = GetAnalyzerNode(rulesTree, analyzerId);
+
+			Dictionary<string, bool> checkedMap = new Dictionary<string, bool>();
+			AnalyzeRuleNodes(checkedMap, analyzerNode);
+
+			return checkedMap;
 		}
 
 		#endregion

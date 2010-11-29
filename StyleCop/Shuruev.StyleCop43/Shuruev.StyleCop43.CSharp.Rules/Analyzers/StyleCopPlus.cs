@@ -76,6 +76,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public override void AnalyzeDocument(CodeDocument document)
 		{
+			CsDocument doc = (CsDocument)document;
+			if (doc.RootElement.Generated)
+				return;
+
 			if (IsRuleEnabled(document, Rules.AdvancedNamingRules.ToString()))
 				m_advancedNamingRules.AnalyzeDocument(document);
 

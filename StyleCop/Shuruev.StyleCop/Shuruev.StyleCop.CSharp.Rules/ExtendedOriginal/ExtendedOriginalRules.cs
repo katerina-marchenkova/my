@@ -274,7 +274,7 @@ namespace Shuruev.StyleCop.CSharp
 		#region Reading custom settings
 
 		/// <summary>
-		/// Reads the value of custom setting.
+		/// Checks whether original rule is enabled.
 		/// </summary>
 		private void CheckOriginalRule(CodeDocument document, string analyzerName, Rules rule)
 		{
@@ -283,7 +283,7 @@ namespace Shuruev.StyleCop.CSharp
 			if (!m_parent.IsRuleEnabled(document, ruleName))
 				return;
 
-			string fullName = String.Format("Microsoft.StyleCop.CSharp.{0}", analyzerName);
+			string fullName = SettingsManager.GetAnalyzerId(analyzerName);
 			SourceAnalyzer analyzer = m_parent.Core.GetAnalyzer(fullName);
 
 			if (StyleCop43Compatibility.IsStyleCop43())

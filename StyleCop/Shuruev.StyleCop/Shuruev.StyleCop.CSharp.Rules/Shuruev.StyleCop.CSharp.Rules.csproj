@@ -81,18 +81,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvancedNaming\AdvancedNamingRules.cs" />
-    <Compile Include="AdvancedNaming\AbbreviationsSpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\WordsSpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\DerivingsSpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\SimpleSpecialSetting.cs" />
-    <Compile Include="AdvancedNaming\ITextValidator.cs" />
-    <Compile Include="AdvancedNaming\ICharValidator.cs" />
-    <Compile Include="AdvancedNaming\ISpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\AbbreviationsSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\WordsSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\DerivingsSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\SimpleSpecialSetting.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\ITextValidator.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\ICharValidator.cs" />
+    <Compile Include="AdvancedNaming\SpecialSettings\ISpecialSetting.cs" />
     <Compile Include="AdvancedNaming\IAdvancedNamingEditor.cs" />
-    <Compile Include="AdvancedNaming\SpecialSettingEditor.cs">
+    <Compile Include="AdvancedNaming\SpecialSettings\SpecialSettingEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdvancedNaming\SpecialSettingEditor.Designer.cs">
+    <Compile Include="AdvancedNaming\SpecialSettings\SpecialSettingEditor.Designer.cs">
       <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="AdvancedNaming\NamingMacro.cs" />
@@ -113,6 +113,18 @@
     <Compile Include="CodeHelper\TypeParameterItem.cs" />
     <Compile Include="CodeHelper\ParameterItem.cs" />
     <Compile Include="CodeHelper\LabelItem.cs" />
+    <Compile Include="Common\WarningArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\WarningArea.Designer.cs">
+      <DependentUpon>WarningArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WarningItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\WarningItem.Designer.cs">
+      <DependentUpon>WarningItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="StyleCop43Compatibility.cs" />
     <Compile Include="ExtendedOriginal\CustomDocumentationRules.cs" />
     <Compile Include="ExtendedOriginal\CustomLayoutRules.cs" />
@@ -160,6 +172,12 @@
     <EmbeddedResource Include="Common\HighlightTextBox.resx">
       <DependentUpon>HighlightTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\WarningArea.resx">
+      <DependentUpon>WarningArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\WarningItem.resx">
+      <DependentUpon>WarningItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -170,7 +188,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AdvancedNaming\SpecialSettingEditor.resx">
+    <EmbeddedResource Include="AdvancedNaming\SpecialSettings\SpecialSettingEditor.resx">
       <DependentUpon>SpecialSettingEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StyleCopPlus.xml">
@@ -214,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TwoLetters.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -137,26 +137,6 @@ namespace Shuruev.StyleCop.CSharp
 			return element.Declaration.Name.StartsWith("operator ");
 		}
 
-		/// <summary>
-		/// Checks whether specified element is generated.
-		/// </summary>
-		public static bool IsGenerated(CsElement element)
-		{
-			if (element.Attributes != null)
-			{
-				foreach (Attribute attr in element.Attributes)
-				{
-					for (Node<CsToken> node = attr.ChildTokens.First; node != null; node = node.Next)
-					{
-						if (node.Value.Text == "GeneratedCodeAttribute")
-							return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
 		#endregion
 
 		#region Working with element names

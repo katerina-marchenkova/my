@@ -310,4 +310,21 @@ Please check that:
   <data name="ExtendedRuleConflictError" xml:space="preserve">
     <value>Extended rule {0} from StyleCop+ conflicts with enabled original rule from StyleCop. Disable {1} rule in StyleCop if you want to use extended StyleCop+ rule.</value>
   </data>
+  <data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Warning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WarningDisabledAdvancedNamingRules" xml:space="preserve">
+    <value>Advanced naming rules are currently disabled.
+You can enable them from Rules tab.</value>
+  </data>
+  <data name="WarningDisabledAdvancedNamingRulesUrl" xml:space="preserve">
+    <value>http://stylecopplus.codeplex.com/documentation/DisabledAdvancedNamingRules</value>
+  </data>
+  <data name="WarningDontUseOriginalNamingRules" xml:space="preserve">
+    <value>It seems that some original naming rules (SA15xx) are still enabled.
+There is no need to use them together with advanced naming rules.</value>
+  </data>
+  <data name="WarningDontUseOriginalNamingRulesUrl" xml:space="preserve">
+    <value>http://stylecopplus.codeplex.com/documentation/DontUseOriginalNamingRules</value>
+  </data>
 </root>

@@ -29,15 +29,40 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NamingRulesPage));
+			this.warningArea = new Shuruev.StyleCop.Try.WarningArea();
+			this.panelMain = new System.Windows.Forms.Panel();
 			this.panelHelpBorder = new System.Windows.Forms.Panel();
 			this.labelHelp = new System.Windows.Forms.Label();
 			this.btnReset = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.listRules = new System.Windows.Forms.ListView();
-			this.columnEntity = new System.Windows.Forms.ColumnHeader();
-			this.columnPreview = new System.Windows.Forms.ColumnHeader();
+			this.columnEntity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnPreview = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.panelMain.SuspendLayout();
 			this.panelHelpBorder.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// warningArea
+			// 
+			this.warningArea.AutoSize = true;
+			this.warningArea.Dock = System.Windows.Forms.DockStyle.Top;
+			this.warningArea.Location = new System.Drawing.Point(0, 0);
+			this.warningArea.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+			this.warningArea.Name = "warningArea";
+			this.warningArea.Size = new System.Drawing.Size(640, 24);
+			this.warningArea.TabIndex = 1;
+			// 
+			// panelMain
+			// 
+			this.panelMain.Controls.Add(this.panelHelpBorder);
+			this.panelMain.Controls.Add(this.btnReset);
+			this.panelMain.Controls.Add(this.btnEdit);
+			this.panelMain.Controls.Add(this.listRules);
+			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelMain.Location = new System.Drawing.Point(0, 24);
+			this.panelMain.Name = "panelMain";
+			this.panelMain.Size = new System.Drawing.Size(640, 456);
+			this.panelMain.TabIndex = 2;
 			// 
 			// panelHelpBorder
 			// 
@@ -47,7 +72,7 @@
 			this.panelHelpBorder.Controls.Add(this.labelHelp);
 			this.panelHelpBorder.Location = new System.Drawing.Point(481, 32);
 			this.panelHelpBorder.Name = "panelHelpBorder";
-			this.panelHelpBorder.Size = new System.Drawing.Size(156, 385);
+			this.panelHelpBorder.Size = new System.Drawing.Size(156, 421);
 			this.panelHelpBorder.TabIndex = 3;
 			// 
 			// labelHelp
@@ -61,7 +86,7 @@
 			this.labelHelp.Margin = new System.Windows.Forms.Padding(1);
 			this.labelHelp.Name = "labelHelp";
 			this.labelHelp.Padding = new System.Windows.Forms.Padding(2);
-			this.labelHelp.Size = new System.Drawing.Size(154, 383);
+			this.labelHelp.Size = new System.Drawing.Size(154, 419);
 			this.labelHelp.TabIndex = 0;
 			this.labelHelp.Text = resources.GetString("labelHelp.Text");
 			// 
@@ -99,12 +124,12 @@
 			this.listRules.HideSelection = false;
 			this.listRules.Location = new System.Drawing.Point(3, 3);
 			this.listRules.Name = "listRules";
-			this.listRules.Size = new System.Drawing.Size(472, 414);
+			this.listRules.Size = new System.Drawing.Size(472, 450);
 			this.listRules.TabIndex = 0;
 			this.listRules.UseCompatibleStateImageBehavior = false;
 			this.listRules.View = System.Windows.Forms.View.Details;
-			this.listRules.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listRules_MouseDoubleClick);
 			this.listRules.SelectedIndexChanged += new System.EventHandler(this.listRules_SelectedIndexChanged);
+			this.listRules.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listRules_MouseDoubleClick);
 			// 
 			// columnEntity
 			// 
@@ -120,20 +145,23 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.panelHelpBorder);
-			this.Controls.Add(this.btnReset);
-			this.Controls.Add(this.btnEdit);
-			this.Controls.Add(this.listRules);
+			this.Controls.Add(this.panelMain);
+			this.Controls.Add(this.warningArea);
 			this.Name = "NamingRulesPage";
-			this.Size = new System.Drawing.Size(640, 420);
+			this.Size = new System.Drawing.Size(640, 480);
 			this.Load += new System.EventHandler(this.NamingRulesPage_Load);
+			this.VisibleChanged += new System.EventHandler(this.NamingRulesPage_VisibleChanged);
+			this.panelMain.ResumeLayout(false);
 			this.panelHelpBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
 		#endregion
 
+		private Try.WarningArea warningArea;
+		private System.Windows.Forms.Panel panelMain;
 		private System.Windows.Forms.Panel panelHelpBorder;
 		private System.Windows.Forms.Label labelHelp;
 		private System.Windows.Forms.Button btnReset;
@@ -141,5 +169,6 @@
 		private System.Windows.Forms.ListView listRules;
 		private System.Windows.Forms.ColumnHeader columnEntity;
 		private System.Windows.Forms.ColumnHeader columnPreview;
+
 	}
 }
