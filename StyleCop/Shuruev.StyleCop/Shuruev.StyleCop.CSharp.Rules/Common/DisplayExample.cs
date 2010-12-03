@@ -16,6 +16,7 @@ namespace Shuruev.StyleCop.CSharp
 
 		private Image m_sample;
 		private string m_exampleUrl;
+		private string m_exampleDescription;
 
 		/// <summary>
 		/// Initializes a new instance.
@@ -60,6 +61,26 @@ namespace Shuruev.StyleCop.CSharp
 				e.Graphics.DrawLine(pen, 0, 0, 0, box.Height);
 			}
 
+			Rectangle rectLeft = new Rectangle(1, 1, box.Width - 90, 35);
+			using (LinearGradientBrush brush = new LinearGradientBrush(
+				rectLeft,
+				SystemColors.Info,
+				Color.White,
+				LinearGradientMode.Vertical))
+			{
+				e.Graphics.FillRectangle(brush, rectLeft);
+			}
+
+			Rectangle rectRight = new Rectangle(rectLeft.Right - 150, rectLeft.Top, 150, rectLeft.Height);
+			using (LinearGradientBrush brush = new LinearGradientBrush(
+				rectRight,
+				Color.Transparent,
+				Color.White,
+				LinearGradientMode.Horizontal))
+			{
+				e.Graphics.FillRectangle(brush, rectRight);
+			}
+
 			using (LinearGradientBrush brush = new LinearGradientBrush(
 				new Point(0, 0),
 				new Point(400, 0),
@@ -67,6 +88,25 @@ namespace Shuruev.StyleCop.CSharp
 				Color.White))
 			{
 				e.Graphics.FillRectangle(brush, 8, 25, 380, 1);
+			}
+
+			string text = m_exampleDescription;
+			Color color = SystemColors.ControlText;
+			if (String.IsNullOrEmpty(text))
+			{
+				text = Resources.EmptyExampleDescription;
+				color = SystemColors.ControlDarkDark;
+			}
+
+			Rectangle bounds = new Rectangle(8, 7, rectLeft.Width, rectLeft.Height);
+			using (StringFormat sf = new StringFormat())
+			{
+				using (SolidBrush brush = new SolidBrush(color))
+				{
+					sf.Trimming = StringTrimming.EllipsisCharacter;
+					sf.FormatFlags = StringFormatFlags.NoWrap;
+					e.Graphics.DrawString(text, Font, brush, bounds, sf);
+				}
 			}
 		}
 
@@ -151,10 +191,13 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void Clear()
 		{
+			m_exampleUrl = null;
+			m_exampleDescription = null;
+
 			pictureExample.Image = null;
-			labelDescription.Text = Resources.EmptyExampleDescription;
-			labelDescription.ForeColor = s_borderColor;
 			linkDetails.Visible = false;
+
+			InvalidateAll();
 		}
 
 		/// <summary>
@@ -163,11 +206,12 @@ namespace Shuruev.StyleCop.CSharp
 		public void Display(Image exampleImage, string exampleDescription, string exampleUrl)
 		{
 			m_exampleUrl = exampleUrl;
+			m_exampleDescription = exampleDescription;
 
 			pictureExample.Image = exampleImage;
-			labelDescription.Text = exampleDescription;
-			labelDescription.ForeColor = Color.Black;
 			linkDetails.Visible = true;
+
+			InvalidateAll();
 		}
 
 		#endregion

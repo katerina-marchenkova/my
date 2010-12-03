@@ -37,7 +37,6 @@
 			this.backgroundUpper = new System.Windows.Forms.PictureBox();
 			this.backgroundLower = new System.Windows.Forms.PictureBox();
 			this.linkDetails = new System.Windows.Forms.LinkLabel();
-			this.labelDescription = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.borderBottomRight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.borderRight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.borderTopRight)).BeginInit();
@@ -151,29 +150,16 @@
 			this.linkDetails.Location = new System.Drawing.Point(309, 7);
 			this.linkDetails.Name = "linkDetails";
 			this.linkDetails.Size = new System.Drawing.Size(69, 13);
-			this.linkDetails.TabIndex = 1;
+			this.linkDetails.TabIndex = 0;
 			this.linkDetails.TabStop = true;
 			this.linkDetails.Text = "Learn more...";
 			this.linkDetails.VisitedLinkColor = System.Drawing.Color.ForestGreen;
 			this.linkDetails.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDetails_LinkClicked);
 			// 
-			// labelDescription
-			// 
-			this.labelDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.labelDescription.AutoEllipsis = true;
-			this.labelDescription.BackColor = System.Drawing.Color.White;
-			this.labelDescription.Location = new System.Drawing.Point(5, 7);
-			this.labelDescription.Name = "labelDescription";
-			this.labelDescription.Size = new System.Drawing.Size(299, 13);
-			this.labelDescription.TabIndex = 0;
-			this.labelDescription.Text = "[Example rule description.]";
-			// 
 			// DisplayExample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.labelDescription);
 			this.Controls.Add(this.linkDetails);
 			this.Controls.Add(this.pictureExample);
 			this.Controls.Add(this.borderBottomLeft);
@@ -211,6 +197,5 @@
 		private System.Windows.Forms.PictureBox backgroundUpper;
 		private System.Windows.Forms.PictureBox backgroundLower;
 		private System.Windows.Forms.LinkLabel linkDetails;
-		private System.Windows.Forms.Label labelDescription;
 	}
 }
