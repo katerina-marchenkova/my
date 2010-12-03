@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
 
-namespace Shuruev.StyleCop.CSharp.Common
+namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
 	/// Graphically displays an example for selected rule.
@@ -57,6 +58,15 @@ namespace Shuruev.StyleCop.CSharp.Common
 			{
 				e.Graphics.DrawLine(pen, 0, 0, box.Width, 0);
 				e.Graphics.DrawLine(pen, 0, 0, 0, box.Height);
+			}
+
+			using (LinearGradientBrush brush = new LinearGradientBrush(
+				new Point(0, 0),
+				new Point(400, 0),
+				s_borderColor,
+				Color.White))
+			{
+				e.Graphics.FillRectangle(brush, 8, 25, 380, 1);
 			}
 		}
 
@@ -142,18 +152,22 @@ namespace Shuruev.StyleCop.CSharp.Common
 		public void Clear()
 		{
 			pictureExample.Image = null;
-			linkDetails.Enabled = false;
+			labelDescription.Text = Resources.EmptyExampleDescription;
+			labelDescription.ForeColor = s_borderColor;
+			linkDetails.Visible = false;
 		}
 
 		/// <summary>
 		/// Displays specified example.
 		/// </summary>
-		public void Display(Image exampleImage, string exampleUrl)
+		public void Display(Image exampleImage, string exampleDescription, string exampleUrl)
 		{
 			m_exampleUrl = exampleUrl;
 
 			pictureExample.Image = exampleImage;
-			linkDetails.Enabled = true;
+			labelDescription.Text = exampleDescription;
+			labelDescription.ForeColor = Color.Black;
+			linkDetails.Visible = true;
 		}
 
 		#endregion

@@ -32,7 +32,7 @@
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
-			this.customRulesPage1 = new Shuruev.StyleCop.CSharp.MoreCustom.CustomRulesPage();
+			this.customRulesPage1 = new Shuruev.StyleCop.CSharp.CustomRulesPage();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -107,7 +107,7 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
-		private CSharp.MoreCustom.CustomRulesPage customRulesPage1;
+		private CSharp.CustomRulesPage customRulesPage1;
 
 	}
 }

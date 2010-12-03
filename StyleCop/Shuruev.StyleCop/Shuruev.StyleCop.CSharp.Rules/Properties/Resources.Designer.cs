@@ -163,6 +163,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Select a rule from the list above..
+        /// </summary>
+        internal static string EmptyExampleDescription {
+            get {
+                return ResourceManager.GetString("EmptyExampleDescription", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap ExampleSP1000 {
             get {
                 object obj = ResourceManager.GetObject("ExampleSP1000", resourceCulture);
