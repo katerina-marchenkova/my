@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
@@ -48,6 +47,12 @@ namespace Shuruev.StyleCop.CSharp
 			if (DesignMode)
 				return;
 
+			if (!Visible)
+				return;
+
+			if (!SettingsGrabber.Initialized)
+				return;
+
 			UpdateWarnings();
 		}
 
@@ -83,6 +88,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void Initialize()
 		{
+			UpdateWarnings();
 			RebuildRuleList();
 		}
 
@@ -139,54 +145,22 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Updates page warnings.
 		/// </summary>
-		private void UpdateWarnings()
+		public void UpdateWarnings()
 		{
 			warningArea.Clear();
 
-			if (Page == null)
-				return;
-
-			if (Page.TabControl == null)
-				return;
-
-			if (!CheckAdvancedNamingRules())
+			if (!SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, Rules.AdvancedNamingRules.ToString()))
 			{
 				warningArea.Add(
 					Resources.WarningDisabledAdvancedNamingRules,
 					Resources.WarningDisabledAdvancedNamingRulesUrl);
 			}
-			else if (CheckOriginalNamingRules())
+			else if (SettingsGrabber.IsAnalyzerEnabled(Constants.NamingRulesAnalyzerId))
 			{
 				warningArea.Add(
 					Resources.WarningDontUseOriginalNamingRules,
 					Resources.WarningDontUseOriginalNamingRulesUrl);
 			}
-		}
-
-		/// <summary>
-		/// Checks whether advanced naming rules are enabled.
-		/// </summary>
-		private bool CheckAdvancedNamingRules()
-		{
-			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, Page.Analyzer.Id);
-			return checkedMap["AdvancedNamingRules"];
-		}
-
-		/// <summary>
-		/// Checks whether some of original naming rules are enabled.
-		/// </summary>
-		private bool CheckOriginalNamingRules()
-		{
-			string analyzerId = SettingsManager.GetAnalyzerId("NamingRules");
-			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, analyzerId);
-
-			foreach (bool value in checkedMap.Values)
-			{
-				if (value)
-					return true;
-			}
-
-			return false;
 		}
 
 		#endregion

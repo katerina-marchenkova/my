@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
@@ -143,50 +142,21 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			warningArea.Clear();
 
-			if (Page == null)
+			if (!SettingsGrabber.Initialized)
 				return;
 
-			if (Page.TabControl == null)
-				return;
-
-			if (!CheckAdvancedNamingRules())
+			if (!SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, Rules.AdvancedNamingRules.ToString()))
 			{
 				warningArea.Add(
 					Resources.WarningDisabledAdvancedNamingRules,
 					Resources.WarningDisabledAdvancedNamingRulesUrl);
 			}
-			else if (CheckOriginalNamingRules())
+			else if (SettingsGrabber.IsAnalyzerEnabled(Constants.NamingRulesAnalyzerId))
 			{
 				warningArea.Add(
 					Resources.WarningDontUseOriginalNamingRules,
 					Resources.WarningDontUseOriginalNamingRulesUrl);
 			}
-		}
-
-		/// <summary>
-		/// Checks whether advanced naming rules are enabled.
-		/// </summary>
-		private bool CheckAdvancedNamingRules()
-		{
-			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, Page.Analyzer.Id);
-			return checkedMap["AdvancedNamingRules"];
-		}
-
-		/// <summary>
-		/// Checks whether some of original naming rules are enabled.
-		/// </summary>
-		private bool CheckOriginalNamingRules()
-		{
-			string analyzerId = SettingsManager.GetAnalyzerId("NamingRules");
-			Dictionary<string, bool> checkedMap = SettingsManager.GrabCheckedRulesMap(Page.TabControl, analyzerId);
-
-			foreach (bool value in checkedMap.Values)
-			{
-				if (value)
-					return true;
-			}
-
-			return false;
 		}
 
 		#endregion

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp;
+using Shuruev.StyleCop.Try.Properties;
 
 namespace Shuruev.StyleCop.Try
 {
@@ -43,7 +45,12 @@ namespace Shuruev.StyleCop.Try
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			userControl11.Add("This Holiday Season, give the\r\nultimate g\r\nift to your special someone.");
+			customRulesPage1.XXX();
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			customRulesPage1.XXX2();
 		}
 	}
 }

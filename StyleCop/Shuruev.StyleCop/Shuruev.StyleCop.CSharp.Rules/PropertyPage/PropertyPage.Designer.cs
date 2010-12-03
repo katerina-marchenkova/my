@@ -31,7 +31,8 @@
 			this.tabPages = new System.Windows.Forms.TabControl();
 			this.pageNaming = new System.Windows.Forms.TabPage();
 			this.namingRulesPage = new Shuruev.StyleCop.CSharp.NamingRulesPage();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.pageCustom = new System.Windows.Forms.TabPage();
+			this.customRulesPage = new Shuruev.StyleCop.CSharp.MoreCustom.CustomRulesPage();
 			this.pictureLogo = new System.Windows.Forms.PictureBox();
 			this.panelLogoBorder = new System.Windows.Forms.Panel();
 			this.panelTitleBorder = new System.Windows.Forms.Panel();
@@ -39,6 +40,7 @@
 			this.pictureTitle = new System.Windows.Forms.PictureBox();
 			this.tabPages.SuspendLayout();
 			this.pageNaming.SuspendLayout();
+			this.pageCustom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
 			this.panelLogoBorder.SuspendLayout();
 			this.panelTitleBorder.SuspendLayout();
@@ -52,7 +54,7 @@
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.tabPages.Controls.Add(this.pageNaming);
-			this.tabPages.Controls.Add(this.tabPage1);
+			this.tabPages.Controls.Add(this.pageCustom);
 			this.tabPages.Location = new System.Drawing.Point(3, 75);
 			this.tabPages.Name = "tabPages";
 			this.tabPages.SelectedIndex = 0;
@@ -79,15 +81,24 @@
 			this.namingRulesPage.Size = new System.Drawing.Size(620, 370);
 			this.namingRulesPage.TabIndex = 0;
 			// 
-			// tabPage1
+			// pageCustom
 			// 
-			this.tabPage1.Location = new System.Drawing.Point(4, 22);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(626, 376);
-			this.tabPage1.TabIndex = 2;
-			this.tabPage1.Text = "tabPage1xxx";
-			this.tabPage1.UseVisualStyleBackColor = true;
+			this.pageCustom.Controls.Add(this.customRulesPage);
+			this.pageCustom.Location = new System.Drawing.Point(4, 22);
+			this.pageCustom.Name = "pageCustom";
+			this.pageCustom.Padding = new System.Windows.Forms.Padding(3);
+			this.pageCustom.Size = new System.Drawing.Size(626, 376);
+			this.pageCustom.TabIndex = 2;
+			this.pageCustom.Text = "More Custom Rules";
+			this.pageCustom.UseVisualStyleBackColor = true;
+			// 
+			// customRulesPage
+			// 
+			this.customRulesPage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.customRulesPage.Location = new System.Drawing.Point(3, 3);
+			this.customRulesPage.Name = "customRulesPage";
+			this.customRulesPage.Size = new System.Drawing.Size(620, 370);
+			this.customRulesPage.TabIndex = 0;
 			// 
 			// pictureLogo
 			// 
@@ -154,6 +165,7 @@
 			this.Size = new System.Drawing.Size(640, 480);
 			this.tabPages.ResumeLayout(false);
 			this.pageNaming.ResumeLayout(false);
+			this.pageCustom.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
 			this.panelLogoBorder.ResumeLayout(false);
 			this.panelLogoBorder.PerformLayout();
@@ -175,6 +187,7 @@
 		private System.Windows.Forms.Panel panelTitleBorder;
 		private System.Windows.Forms.Panel panelTitle;
 		private System.Windows.Forms.PictureBox pictureTitle;
-		private System.Windows.Forms.TabPage tabPage1;
+		private System.Windows.Forms.TabPage pageCustom;
+		private MoreCustom.CustomRulesPage customRulesPage;
 	}
 }

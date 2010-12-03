@@ -1,0 +1,121 @@
+using System.Collections.Generic;
+using System.Reflection;
+using System.Windows.Forms;
+using Microsoft.StyleCop;
+
+namespace Shuruev.StyleCop.CSharp
+{
+	/// <summary>
+	/// Allows to grab settings directly from UI.
+	/// </summary>
+	public static class SettingsGrabber
+	{
+		private static Dictionary<string, Dictionary<string, TreeNode>> s_ruleNodes;
+
+		#region Properties
+
+		/// <summary>
+		/// Gets a value indicating whether settings grabber is initialized.
+		/// </summary>
+		public static bool Initialized
+		{
+			get
+			{
+				return s_ruleNodes != null;
+			}
+		}
+
+		#endregion
+
+		#region Initializing
+
+		/// <summary>
+		/// Analyzes rules tree directly from UI.
+		/// </summary>
+		public static void Initialize(PropertyControl tabControl)
+		{
+			IPropertyControlPage analyzersOptions = tabControl.Pages[0];
+			TreeView tree = (TreeView)analyzersOptions.GetType().InvokeMember(
+				"analyzeTree",
+				BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField,
+				null,
+				analyzersOptions,
+				null);
+
+			s_ruleNodes = new Dictionary<string, Dictionary<string, TreeNode>>();
+
+			foreach (TreeNode parserNode in tree.Nodes)
+			{
+				foreach (TreeNode analyzerNode in parserNode.Nodes)
+				{
+					SourceAnalyzer analyzer = (SourceAnalyzer)analyzerNode.Tag;
+					s_ruleNodes[analyzer.Id] = new Dictionary<string, TreeNode>();
+					AnalyzeRuleNodes(s_ruleNodes[analyzer.Id], analyzerNode);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Analyzes rule nodes.
+		/// </summary>
+		private static void AnalyzeRuleNodes(Dictionary<string, TreeNode> rulesMap, TreeNode parentNode)
+		{
+			foreach (TreeNode node in parentNode.Nodes)
+			{
+				if (node.Tag is Rule)
+				{
+					Rule rule = (Rule)node.Tag;
+					rulesMap[rule.Name] = node;
+				}
+				else
+				{
+					AnalyzeRuleNodes(rulesMap, node);
+				}
+			}
+		}
+
+		#endregion
+
+		#region Accessing foreign settings
+
+		/// <summary>
+		/// Checks whether specified analyzer is enabled.
+		/// </summary>
+		public static bool IsAnalyzerEnabled(string analyzerId)
+		{
+			Dictionary<string, TreeNode> rulesMap = s_ruleNodes[analyzerId];
+
+			foreach (TreeNode ruleNode in rulesMap.Values)
+			{
+				if (GetRuleEnabled(ruleNode))
+					return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Checks whether specified rule is enabled.
+		/// </summary>
+		public static bool IsRuleEnabled(string analyzerId, string ruleName)
+		{
+			Dictionary<string, TreeNode> rulesMap = s_ruleNodes[analyzerId];
+			TreeNode ruleNode = rulesMap[ruleName];
+			return GetRuleEnabled(ruleNode);
+		}
+
+		#endregion
+
+		#region Working with rules tree
+
+		/// <summary>
+		/// Gets a value indicating whether specified rule is enabled.
+		/// </summary>
+		private static bool GetRuleEnabled(TreeNode ruleNode)
+		{
+			return ruleNode.Checked;
+		}
+
+		#endregion
+	}
+}

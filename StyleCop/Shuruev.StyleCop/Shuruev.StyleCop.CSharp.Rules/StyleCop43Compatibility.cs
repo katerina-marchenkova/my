@@ -50,7 +50,7 @@ namespace Shuruev.StyleCop.CSharp
 		public static void InitializeCustomAnalyzer(
 			StyleCopCore originalCore,
 			StyleCopCore customCore,
-			string originalAnalyzerCode,
+			string originalAnalyzerId,
 			SourceAnalyzer customAnalyzer)
 		{
 			Dictionary<string, SourceAnalyzer> originalAnalyzers = (Dictionary<string, SourceAnalyzer>)typeof(StyleCopCore).InvokeMember(
@@ -60,7 +60,7 @@ namespace Shuruev.StyleCop.CSharp
 				originalCore,
 				null);
 
-			SourceAnalyzer originalAnalyzer = originalAnalyzers[originalAnalyzerCode];
+			SourceAnalyzer originalAnalyzer = originalAnalyzers[originalAnalyzerId];
 
 			Dictionary<string, Rule> originalRules = (Dictionary<string, Rule>)typeof(StyleCopAddIn).InvokeMember(
 				"rules",

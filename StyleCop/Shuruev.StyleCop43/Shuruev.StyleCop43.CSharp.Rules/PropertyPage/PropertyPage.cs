@@ -86,6 +86,7 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			m_tabControl = propertyControl;
 
+			SettingsGrabber.Initialize(m_tabControl);
 			namingRulesPage.Initialize();
 		}
 

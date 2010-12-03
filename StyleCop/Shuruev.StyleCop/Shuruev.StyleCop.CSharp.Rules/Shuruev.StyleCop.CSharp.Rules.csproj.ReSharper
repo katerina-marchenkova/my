@@ -1,0 +1,12 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:AdvancedNaming</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:Analyzers</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:CodeHelper</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:Common</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:ExtendedOriginal</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:MoreCustom</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:PropertyPage</SkipFolder>
+    <SkipFolder>BDC82CFD-67BF-4562-8BBD-E374C9538297/d:Resources</SkipFolder>
+  </NamespaceFolders>
+</Configuration>

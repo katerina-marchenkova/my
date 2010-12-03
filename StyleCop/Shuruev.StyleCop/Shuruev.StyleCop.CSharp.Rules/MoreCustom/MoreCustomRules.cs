@@ -36,10 +36,10 @@ namespace Shuruev.StyleCop.CSharp
 					if (node.Value.CsTokenType == CsTokenType.WhiteSpace)
 					{
 						m_parent.AddViolation(
-								doc.RootElement,
-								node.Value.LineNumber,
-								Rules.CodeLineMustNotEndWithWhitespace,
-								new object[0]);
+							doc.RootElement,
+							node.Value.LineNumber,
+							Rules.CodeLineMustNotEndWithWhitespace,
+							new object[0]);
 					}
 				}
 

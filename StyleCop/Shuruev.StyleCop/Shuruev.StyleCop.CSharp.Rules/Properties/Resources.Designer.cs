@@ -94,6 +94,48 @@ namespace Shuruev.StyleCop.CSharp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CurlBottom {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlBottomLeft {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottomLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlBottomRight {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottomRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlBottomRightTransparent {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottomRightTransparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlRight {
+            get {
+                object obj = ResourceManager.GetObject("CurlRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlTopRight {
+            get {
+                object obj = ResourceManager.GetObject("CurlTopRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Derived class.
         /// </summary>
@@ -118,6 +160,13 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string DoNotCheck {
             get {
                 return ResourceManager.GetString("DoNotCheck", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExampleSP1000 {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSP1000", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -50,19 +50,19 @@ namespace Shuruev.StyleCop.CSharp
 			StyleCop43Compatibility.InitializeCustomAnalyzer(
 				m_parent.Core,
 				m_customCore,
-				"Microsoft.StyleCop.CSharp.NamingRules",
+				Constants.NamingRulesAnalyzerId,
 				m_customNamingAnalyzer);
 
 			StyleCop43Compatibility.InitializeCustomAnalyzer(
 				m_parent.Core,
 				m_customCore,
-				"Microsoft.StyleCop.CSharp.LayoutRules",
+				Constants.LayoutRulesAnalyzerId,
 				m_customLayoutAnalyzer);
 
 			StyleCop43Compatibility.InitializeCustomAnalyzer(
 				m_parent.Core,
 				m_customCore,
-				"Microsoft.StyleCop.CSharp.DocumentationRules",
+				Constants.DocumentationRulesAnalyzerId,
 				m_customDocumentationAnalyzer);
 		}
 
@@ -71,10 +71,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void AnalyzeDocument(CodeDocument document)
 		{
-			CheckOriginalRule(document, "LayoutRules", Rules.ElementMustNotBeOnSingleLine);
-			CheckOriginalRule(document, "LayoutRules", Rules.OpeningCurlyBracketsMustNotBePrecededByBlankLine);
-			CheckOriginalRule(document, "LayoutRules", Rules.ClosingCurlyBracketMustBeFollowedByBlankLine);
-			CheckOriginalRule(document, "LayoutRules", Rules.ElementsMustBeSeparatedByBlankLine);
+			CheckOriginalRule(document, Constants.LayoutRulesAnalyzerId, Rules.ElementMustNotBeOnSingleLine);
+			CheckOriginalRule(document, Constants.LayoutRulesAnalyzerId, Rules.OpeningCurlyBracketsMustNotBePrecededByBlankLine);
+			CheckOriginalRule(document, Constants.LayoutRulesAnalyzerId, Rules.ClosingCurlyBracketMustBeFollowedByBlankLine);
+			CheckOriginalRule(document, Constants.LayoutRulesAnalyzerId, Rules.ElementsMustBeSeparatedByBlankLine);
 
 			m_customNamingAnalyzer.AnalyzeDocument(document);
 			m_customLayoutAnalyzer.AnalyzeDocument(document);
@@ -276,15 +276,14 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks whether original rule is enabled.
 		/// </summary>
-		private void CheckOriginalRule(CodeDocument document, string analyzerName, Rules rule)
+		private void CheckOriginalRule(CodeDocument document, string analyzerId, Rules rule)
 		{
 			string ruleName = rule.ToString();
 
 			if (!m_parent.IsRuleEnabled(document, ruleName))
 				return;
 
-			string fullName = SettingsManager.GetAnalyzerId(analyzerName);
-			SourceAnalyzer analyzer = m_parent.Core.GetAnalyzer(fullName);
+			SourceAnalyzer analyzer = m_parent.Core.GetAnalyzer(analyzerId);
 
 			if (StyleCop43Compatibility.IsStyleCop43())
 			{

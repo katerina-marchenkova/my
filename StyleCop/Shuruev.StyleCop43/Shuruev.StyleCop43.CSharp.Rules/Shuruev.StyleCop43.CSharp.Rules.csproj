@@ -96,6 +96,7 @@
     <Compile Include="Common\WarningItem.Designer.cs">
       <DependentUpon>WarningItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="ExtendedOriginal\CustomDocumentationRules.cs" />
     <Compile Include="ExtendedOriginal\CustomLayoutRules.cs" />
     <Compile Include="ExtendedOriginal\CustomNamingRules.cs" />
@@ -120,6 +121,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PropertyPage\SettingsGrabber.cs" />
     <Compile Include="PropertyPage\SettingTag.cs" />
     <Compile Include="PropertyPage\NamingSettings.cs" />
     <Compile Include="PropertyPage\SettingsManager.cs" />

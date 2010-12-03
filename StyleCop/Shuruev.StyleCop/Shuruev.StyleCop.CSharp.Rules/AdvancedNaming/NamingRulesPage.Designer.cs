@@ -62,7 +62,7 @@
 			this.panelMain.Location = new System.Drawing.Point(0, 24);
 			this.panelMain.Name = "panelMain";
 			this.panelMain.Size = new System.Drawing.Size(640, 456);
-			this.panelMain.TabIndex = 2;
+			this.panelMain.TabIndex = 0;
 			// 
 			// panelHelpBorder
 			// 
