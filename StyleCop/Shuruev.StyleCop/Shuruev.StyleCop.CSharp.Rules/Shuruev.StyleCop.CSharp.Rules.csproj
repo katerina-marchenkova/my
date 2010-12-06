@@ -133,9 +133,17 @@
       <DependentUpon>WarningItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="MoreCustom\CustomRuleTag.cs" />
     <Compile Include="MoreCustom\CustomRules.cs" />
+    <Compile Include="MoreCustom\ICustomRuleOptions.cs" />
+    <Compile Include="MoreCustom\Options\CustomRuleIndentOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreCustom\Options\CustomRuleIndentOptions.Designer.cs">
+      <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="MoreCustom\Rules\CustomRuleSP2001.cs" />
-    <Compile Include="MoreCustom\Rules\CustomRule.cs" />
+    <Compile Include="MoreCustom\CustomRule.cs" />
     <Compile Include="MoreCustom\CustomRulesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\CustomRulesPage.resx">
       <DependentUpon>CustomRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Options\CustomRuleIndentOptions.resx">
+      <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\Rules\CustomRulesResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -290,15 +301,10 @@
     <None Include="Resources\CurlBottomRightTransparent.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ExampleSP2000.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ExampleSP2001.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2000.png" />
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2001.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

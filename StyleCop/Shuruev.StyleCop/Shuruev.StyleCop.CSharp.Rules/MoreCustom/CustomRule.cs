@@ -54,6 +54,17 @@ namespace Shuruev.StyleCop.CSharp
 		public string SettingName { get; private set; }
 
 		/// <summary>
+		/// Gets a value indicating whether rule has an inner setting.
+		/// </summary>
+		public bool HasSetting
+		{
+			get
+			{
+				return !String.IsNullOrEmpty(SettingName);
+			}
+		}
+
+		/// <summary>
 		/// Gets rule description.
 		/// </summary>
 		public string Description { get; private set; }
@@ -73,6 +84,26 @@ namespace Shuruev.StyleCop.CSharp
 		/// Gets rule example image.
 		/// </summary>
 		public Image ExampleImage { get; private set; }
+
+		#endregion
+
+		#region Working with inner setting
+
+		/// <summary>
+		/// Gets options text for specified setting value.
+		/// </summary>
+		public virtual string GetOptionsText(string settingValue)
+		{
+			throw new InvalidOperationException();
+		}
+
+		/// <summary>
+		/// Creates control for displaying options.
+		/// </summary>
+		public virtual ICustomRuleOptions CreateOptionsControl()
+		{
+			throw new InvalidOperationException();
+		}
 
 		#endregion
 	}

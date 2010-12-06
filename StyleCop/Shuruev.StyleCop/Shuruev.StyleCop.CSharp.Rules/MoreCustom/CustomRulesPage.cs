@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Shuruev.StyleCop.CSharp.Properties;
 
@@ -60,6 +55,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			UpdateWarnings();
 			UpdateAllListItems();
+			UpdateControls();
 		}
 
 		private void listRules_SelectedIndexChanged(object sender, EventArgs e)
@@ -176,11 +172,20 @@ namespace Shuruev.StyleCop.CSharp
 
 				foreach (CustomRule rule in CustomRules.GetByGroup(group))
 				{
+					CustomRuleTag tag = new CustomRuleTag();
+					tag.Rule = rule;
+					if (rule.HasSetting)
+					{
+						tag.SettingName = rule.SettingName;
+						tag.MergedValue = SettingsManager.GetMergedValue(Page, rule.SettingName);
+						tag.InheritedValue = SettingsManager.GetInheritedValue(Page, rule.SettingName);
+					}
+
 					ListViewItem lvi = new ListViewItem();
 					lvi.Group = lvg;
 					lvi.UseItemStyleForSubItems = false;
 					lvi.Text = rule.RuleName;
-					lvi.Tag = rule;
+					lvi.Tag = tag;
 
 					ListViewItem.ListViewSubItem sub = new ListViewItem.ListViewSubItem();
 					lvi.SubItems.Add(sub);
@@ -199,34 +204,23 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void UpdateListItem(ListViewItem lvi)
 		{
-			CustomRule rule = (CustomRule)lvi.Tag;
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
 			ListViewItem.ListViewSubItem sub = lvi.SubItems[1];
 
-			bool enabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, rule.RuleName);
+			bool enabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, tag.Rule.RuleName);
 
-			sub.Text = GetOptionsText(enabled);
+			sub.Text = GetOptionsText(enabled, tag.Rule, tag.MergedValue);
 			lvi.ImageKey = enabled ? Pictures.RuleEnabled : Pictures.RuleDisabled;
 
-			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, rule.RuleName))
+			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, tag.Rule.RuleName))
 			{
 				sub.Font = m_bold;
 			}
 			else
 			{
-				sub.Font = SettingsGrabber.IsRuleBold(Page.Analyzer.Id, rule.RuleName) ? m_bold : m_regular;
+				sub.Font = tag.Modified ? m_bold : m_regular;
 				return;
 			}
-
-			/*xxxif (String.IsNullOrEmpty(tag.MergedValue))
-			{
-				lvi.ImageKey = Pictures.RuleDisabled;
-				sub.Text = Resources.DoNotCheck;
-			}
-			else
-			{
-				lvi.ImageKey = Pictures.RuleEnabled;
-				sub.Text = NamingMacro.BuildExample(tag.MergedValue);
-			}*/
 		}
 
 		/// <summary>
@@ -243,12 +237,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets options text for specified custom rule.
 		/// </summary>
-		private string GetOptionsText(bool enabled)
+		private static string GetOptionsText(bool enabled, CustomRule rule, string settingValue)
 		{
 			if (!enabled)
 				return Resources.Disabled;
 
-			return "asdasxxxx";
+			if (!rule.HasSetting)
+				return Resources.Enabled;
+
+			return rule.GetOptionsText(settingValue);
 		}
 
 		/// <summary>
@@ -256,10 +253,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void UpdateControls()
 		{
-			/*xxxbtnEdit.Enabled = Action_Edit_IsAvailable();
-			btnReset.Enabled = Action_Reset_IsAvailable();*/
+			btnReset.Enabled = Action_Reset_IsAvailable();
 
 			UpdateOptions();
+			UpdateExample();
 		}
 
 		/// <summary>
@@ -269,14 +266,48 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			if (listRules.SelectedItems.Count != 1)
 			{
+				checkEnabled.Enabled = false;
+				checkEnabled.Checked = false;
 				panelOptions.Controls.Clear();
 				return;
 			}
 
 			ListViewItem lvi = listRules.SelectedItems[0];
-			CustomRule rule = (CustomRule)lvi.Tag;
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
 
-			//xxx
+			bool enabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, tag.Rule.RuleName);
+
+			checkEnabled.Enabled = true;
+			checkEnabled.Checked = enabled;
+			panelOptions.Enabled = enabled;
+
+			panelOptions.Controls.Clear();
+			if (tag.Rule.HasSetting)
+			{
+				Control options = (Control)tag.Rule.CreateOptionsControl();
+				options.Dock = DockStyle.Fill;
+				panelOptions.Controls.Add(options);
+			}
+		}
+
+		/// <summary>
+		/// Updates example panel.
+		/// </summary>
+		private void UpdateExample()
+		{
+			if (listRules.SelectedItems.Count != 1)
+			{
+				displayExample.Clear();
+				return;
+			}
+
+			ListViewItem lvi = listRules.SelectedItems[0];
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
+
+			displayExample.Display(
+				tag.Rule.ExampleImage,
+				tag.Rule.Description,
+				tag.Rule.DetailsUrl);
 		}
 
 		#endregion
@@ -342,7 +373,7 @@ namespace Shuruev.StyleCop.CSharp
 			UpdateControls();
 		}*/
 
-		/*xxx/// <summary>
+		/// <summary>
 		/// Checks whether action "Reset" is available.
 		/// </summary>
 		private bool Action_Reset_IsAvailable()
@@ -351,23 +382,16 @@ namespace Shuruev.StyleCop.CSharp
 				return false;
 
 			ListViewItem lvi = listRules.SelectedItems[0];
-			SettingTag tag = (SettingTag)lvi.Tag;
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
+			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, tag.Rule.RuleName))
+				return true;
+
 			if (tag.Modified)
 				return true;
 
 			return false;
-		}*/
+		}
 
 		#endregion
-
-		public void XXX()
-		{
-			displayExample.Display(CustomRulesResources.ExampleSP2000, "Validates the spacing at the end of the each code line.", "http://www.google.com");
-		}
-
-		public void XXX2()
-		{
-			displayExample.Clear();
-		}
 	}
 }

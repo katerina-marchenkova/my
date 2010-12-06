@@ -182,6 +182,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        internal static string Enabled {
+            get {
+                return ResourceManager.GetString("Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Extended rule {0} from StyleCop+ conflicts with enabled original rule from StyleCop. Disable {1} rule in StyleCop if you want to use extended StyleCop+ rule..
         /// </summary>
         internal static string ExtendedRuleConflictError {

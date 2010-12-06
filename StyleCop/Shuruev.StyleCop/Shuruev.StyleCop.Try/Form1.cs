@@ -44,15 +44,5 @@ namespace Shuruev.StyleCop.Try
 				}
 			}
 		}
-
-		private void button3_Click(object sender, EventArgs e)
-		{
-			customRulesPage1.XXX();
-		}
-
-		private void button4_Click(object sender, EventArgs e)
-		{
-			customRulesPage1.XXX2();
-		}
 	}
 }

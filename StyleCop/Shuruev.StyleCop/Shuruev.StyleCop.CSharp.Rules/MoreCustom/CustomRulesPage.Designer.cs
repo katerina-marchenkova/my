@@ -30,12 +30,13 @@
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.groupOptions = new System.Windows.Forms.GroupBox();
+			this.btnReset = new System.Windows.Forms.Button();
+			this.checkEnabled = new System.Windows.Forms.CheckBox();
 			this.panelOptions = new System.Windows.Forms.Panel();
 			this.displayExample = new Shuruev.StyleCop.CSharp.DisplayExample();
 			this.listRules = new System.Windows.Forms.ListView();
 			this.columnRule = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnOptions = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.btnReset = new System.Windows.Forms.Button();
 			this.warningArea = new Shuruev.StyleCop.CSharp.WarningArea();
 			this.panelMain.SuspendLayout();
 			this.groupOptions.SuspendLayout();
@@ -56,6 +57,8 @@
 			// 
 			this.groupOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupOptions.Controls.Add(this.btnReset);
+			this.groupOptions.Controls.Add(this.checkEnabled);
 			this.groupOptions.Controls.Add(this.panelOptions);
 			this.groupOptions.Location = new System.Drawing.Point(409, 0);
 			this.groupOptions.Name = "groupOptions";
@@ -64,15 +67,35 @@
 			this.groupOptions.TabStop = false;
 			this.groupOptions.Text = "Rule Options";
 			// 
+			// btnReset
+			// 
+			this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnReset.Location = new System.Drawing.Point(140, 19);
+			this.btnReset.Name = "btnReset";
+			this.btnReset.Size = new System.Drawing.Size(75, 23);
+			this.btnReset.TabIndex = 1;
+			this.btnReset.Text = "Reset";
+			this.btnReset.UseVisualStyleBackColor = true;
+			// 
+			// checkEnabled
+			// 
+			this.checkEnabled.AutoSize = true;
+			this.checkEnabled.Location = new System.Drawing.Point(6, 23);
+			this.checkEnabled.Name = "checkEnabled";
+			this.checkEnabled.Size = new System.Drawing.Size(65, 17);
+			this.checkEnabled.TabIndex = 0;
+			this.checkEnabled.Text = "Enabled";
+			this.checkEnabled.UseVisualStyleBackColor = true;
+			// 
 			// panelOptions
 			// 
 			this.panelOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.panelOptions.Location = new System.Drawing.Point(6, 19);
+			this.panelOptions.Location = new System.Drawing.Point(6, 48);
 			this.panelOptions.Name = "panelOptions";
 			this.panelOptions.Size = new System.Drawing.Size(209, 204);
-			this.panelOptions.TabIndex = 0;
+			this.panelOptions.TabIndex = 2;
 			// 
 			// displayExample
 			// 
@@ -112,16 +135,6 @@
 			this.columnOptions.Text = "Options";
 			this.columnOptions.Width = 100;
 			// 
-			// btnReset
-			// 
-			this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnReset.Location = new System.Drawing.Point(549, 253);
-			this.btnReset.Name = "btnReset";
-			this.btnReset.Size = new System.Drawing.Size(75, 23);
-			this.btnReset.TabIndex = 1;
-			this.btnReset.Text = "Reset";
-			this.btnReset.UseVisualStyleBackColor = true;
-			// 
 			// warningArea
 			// 
 			this.warningArea.AutoSize = true;
@@ -136,7 +149,6 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.btnReset);
 			this.Controls.Add(this.panelMain);
 			this.Controls.Add(this.warningArea);
 			this.Name = "CustomRulesPage";
@@ -145,6 +157,7 @@
 			this.VisibleChanged += new System.EventHandler(this.CustomRulesPage_VisibleChanged);
 			this.panelMain.ResumeLayout(false);
 			this.groupOptions.ResumeLayout(false);
+			this.groupOptions.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -161,5 +174,6 @@
 		private System.Windows.Forms.GroupBox groupOptions;
 		private System.Windows.Forms.Button btnReset;
 		private System.Windows.Forms.Panel panelOptions;
+		private System.Windows.Forms.CheckBox checkEnabled;
 	}
 }
