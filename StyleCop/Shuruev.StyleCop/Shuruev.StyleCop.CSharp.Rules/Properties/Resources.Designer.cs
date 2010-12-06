@@ -155,6 +155,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not check.
         /// </summary>
         internal static string DoNotCheck {
@@ -169,13 +178,6 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string EmptyExampleDescription {
             get {
                 return ResourceManager.GetString("EmptyExampleDescription", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap ExampleSP1000 {
-            get {
-                object obj = ResourceManager.GetObject("ExampleSP1000", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

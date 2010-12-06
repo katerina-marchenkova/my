@@ -15,6 +15,9 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public partial class CustomRulesPage : UserControl
 	{
+		private Font m_regular;
+		private Font m_bold;
+
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
@@ -23,8 +26,6 @@ namespace Shuruev.StyleCop.CSharp
 			InitializeComponent();
 
 			listRules.SmallImageList = Pictures.GetList();
-			listRules.Items[0].ImageKey = Pictures.RuleEnabled;
-			listRules.Items[1].ImageKey = Pictures.RuleEnabled;
 		}
 
 		#region Properties
@@ -33,6 +34,56 @@ namespace Shuruev.StyleCop.CSharp
 		/// Gets or sets parent property page.
 		/// </summary>
 		public PropertyPage Page { get; set; }
+
+		#endregion
+
+		#region Event handlers
+
+		private void CustomRulesPage_Load(object sender, EventArgs e)
+		{
+			m_regular = new Font(listRules.Font, FontStyle.Regular);
+			m_bold = new Font(listRules.Font, FontStyle.Bold);
+
+			UpdateControls();
+		}
+
+		private void CustomRulesPage_VisibleChanged(object sender, EventArgs e)
+		{
+			if (DesignMode)
+				return;
+
+			if (!Visible)
+				return;
+
+			if (!SettingsGrabber.Initialized)
+				return;
+
+			UpdateWarnings();
+			UpdateAllListItems();
+		}
+
+		private void listRules_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			UpdateControls();
+		}
+
+		/*xxxprivate void listRules_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Left)
+				return;
+
+			Action_Edit_Do();
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e)
+		{
+			Action_Edit_Do();
+		}
+
+		private void btnReset_Click(object sender, EventArgs e)
+		{
+			Action_Reset_Do();
+		}*/
 
 		#endregion
 
@@ -114,31 +165,22 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void RebuildRuleList()
 		{
-			/*xxxlistRules.BeginUpdate();
+			listRules.BeginUpdate();
 			listRules.Groups.Clear();
 			listRules.Items.Clear();
 
-			foreach (string group in NamingSettings.GetGroups())
+			foreach (string group in CustomRules.GetGroups())
 			{
 				ListViewGroup lvg = new ListViewGroup(group);
 				listRules.Groups.Add(lvg);
 
-				foreach (string setting in NamingSettings.GetByGroup(group))
+				foreach (CustomRule rule in CustomRules.GetByGroup(group))
 				{
-					string friendlyName = SettingsManager.GetFriendlyName(Page, setting);
-					string mergedValue = SettingsManager.GetMergedValue(Page, setting);
-					string inheritedValue = SettingsManager.GetInheritedValue(Page, setting);
-
-					SettingTag tag = new SettingTag();
-					tag.SettingName = setting;
-					tag.MergedValue = mergedValue;
-					tag.InheritedValue = inheritedValue;
-
 					ListViewItem lvi = new ListViewItem();
 					lvi.Group = lvg;
 					lvi.UseItemStyleForSubItems = false;
-					lvi.Text = friendlyName;
-					lvi.Tag = tag;
+					lvi.Text = rule.RuleName;
+					lvi.Tag = rule;
 
 					ListViewItem.ListViewSubItem sub = new ListViewItem.ListViewSubItem();
 					lvi.SubItems.Add(sub);
@@ -149,7 +191,7 @@ namespace Shuruev.StyleCop.CSharp
 				}
 			}
 
-			listRules.EndUpdate();*/
+			listRules.EndUpdate();
 		}
 
 		/// <summary>
@@ -157,35 +199,25 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void UpdateListItem(ListViewItem lvi)
 		{
-			/*xxxSettingTag tag = (SettingTag)lvi.Tag;
+			CustomRule rule = (CustomRule)lvi.Tag;
 			ListViewItem.ListViewSubItem sub = lvi.SubItems[1];
 
-			sub.Font = tag.Modified ?
-				m_bold :
-				m_regular;
+			bool enabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, rule.RuleName);
 
-			if (tag.SettingName == NamingSettings.Abbreviations)
+			sub.Text = GetOptionsText(enabled);
+			lvi.ImageKey = enabled ? Pictures.RuleEnabled : Pictures.RuleDisabled;
+
+			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, rule.RuleName))
 			{
-				lvi.ImageKey = Pictures.CapitalLetter;
-				sub.Text = tag.MergedValue;
+				sub.Font = m_bold;
+			}
+			else
+			{
+				sub.Font = SettingsGrabber.IsRuleBold(Page.Analyzer.Id, rule.RuleName) ? m_bold : m_regular;
 				return;
 			}
 
-			if (tag.SettingName == NamingSettings.Words)
-			{
-				lvi.ImageKey = Pictures.TwoLetters;
-				sub.Text = tag.MergedValue;
-				return;
-			}
-
-			if (tag.SettingName == NamingSettings.Derivings)
-			{
-				lvi.ImageKey = Pictures.RightArrow;
-				sub.Text = tag.MergedValue;
-				return;
-			}
-
-			if (String.IsNullOrEmpty(tag.MergedValue))
+			/*xxxif (String.IsNullOrEmpty(tag.MergedValue))
 			{
 				lvi.ImageKey = Pictures.RuleDisabled;
 				sub.Text = Resources.DoNotCheck;
@@ -198,12 +230,53 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
+		/// Updates all list items.
+		/// </summary>
+		private void UpdateAllListItems()
+		{
+			foreach (ListViewItem lvi in listRules.Items)
+			{
+				UpdateListItem(lvi);
+			}
+		}
+
+		/// <summary>
+		/// Gets options text for specified custom rule.
+		/// </summary>
+		private string GetOptionsText(bool enabled)
+		{
+			if (!enabled)
+				return Resources.Disabled;
+
+			return "asdasxxxx";
+		}
+
+		/// <summary>
 		/// Updates controls for all actions.
 		/// </summary>
 		private void UpdateControls()
 		{
 			/*xxxbtnEdit.Enabled = Action_Edit_IsAvailable();
 			btnReset.Enabled = Action_Reset_IsAvailable();*/
+
+			UpdateOptions();
+		}
+
+		/// <summary>
+		/// Updates option panel.
+		/// </summary>
+		private void UpdateOptions()
+		{
+			if (listRules.SelectedItems.Count != 1)
+			{
+				panelOptions.Controls.Clear();
+				return;
+			}
+
+			ListViewItem lvi = listRules.SelectedItems[0];
+			CustomRule rule = (CustomRule)lvi.Tag;
+
+			//xxx
 		}
 
 		#endregion
@@ -289,7 +362,7 @@ namespace Shuruev.StyleCop.CSharp
 
 		public void XXX()
 		{
-			displayExample.Display(Resources.ExampleSP1000, "Validates the spacing at the end of the each code line.", "http://www.google.com");
+			displayExample.Display(CustomRulesResources.ExampleSP2000, "Validates the spacing at the end of the each code line.", "http://www.google.com");
 		}
 
 		public void XXX2()

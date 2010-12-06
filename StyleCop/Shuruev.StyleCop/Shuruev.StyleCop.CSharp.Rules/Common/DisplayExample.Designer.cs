@@ -169,6 +169,7 @@
 			this.Controls.Add(this.borderBottomRight);
 			this.Controls.Add(this.backgroundUpper);
 			this.Controls.Add(this.backgroundLower);
+			this.MinimumSize = new System.Drawing.Size(240, 120);
 			this.Name = "DisplayExample";
 			this.Size = new System.Drawing.Size(400, 200);
 			this.BackColorChanged += new System.EventHandler(this.DisplayExample_BackColorChanged);

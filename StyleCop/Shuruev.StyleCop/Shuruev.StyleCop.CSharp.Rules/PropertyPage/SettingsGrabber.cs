@@ -119,6 +119,15 @@ namespace Shuruev.StyleCop.CSharp
 			SetRuleEnabled(ruleNode, false);
 		}
 
+		/// <summary>
+		/// Checks whether specified rule is bold.
+		/// </summary>
+		public static bool IsRuleBold(string analyzerId, string ruleName)
+		{
+			TreeNode ruleNode = GetRuleNode(analyzerId, ruleName);
+			return GetRuleBold(ruleNode);
+		}
+
 		#endregion
 
 		#region Working with rules tree
@@ -155,6 +164,17 @@ namespace Shuruev.StyleCop.CSharp
 		private static void SetRuleEnabled(TreeNode ruleNode, bool enabled)
 		{
 			ruleNode.Checked = enabled;
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether specified rule is bold.
+		/// </summary>
+		private static bool GetRuleBold(TreeNode ruleNode)
+		{
+			if (ruleNode.NodeFont == null)
+				return false;
+
+			return ruleNode.NodeFont.Bold;
 		}
 
 		#endregion

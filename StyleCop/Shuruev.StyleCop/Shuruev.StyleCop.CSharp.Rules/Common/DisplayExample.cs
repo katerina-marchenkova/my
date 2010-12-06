@@ -83,11 +83,11 @@ namespace Shuruev.StyleCop.CSharp
 
 			using (LinearGradientBrush brush = new LinearGradientBrush(
 				new Point(0, 0),
-				new Point(400, 0),
+				new Point(Math.Min(400, box.Width - 40), 0),
 				s_borderColor,
 				Color.White))
 			{
-				e.Graphics.FillRectangle(brush, 8, 25, 380, 1);
+				e.Graphics.FillRectangle(brush, 8, 25, Math.Min(380, box.Width - 60), 1);
 			}
 
 			string text = m_exampleDescription;

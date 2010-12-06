@@ -133,11 +133,20 @@
       <DependentUpon>WarningItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="MoreCustom\CustomRules.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2001.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRule.cs" />
     <Compile Include="MoreCustom\CustomRulesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MoreCustom\CustomRulesPage.Designer.cs">
       <DependentUpon>CustomRulesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2000.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRulesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomRulesResources.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertyPage\SettingsGrabber.cs" />
     <Compile Include="StyleCop43Compatibility.cs" />
@@ -167,7 +176,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertyPage\SettingTag.cs" />
-    <Compile Include="PropertyPage\NamingSettings.cs" />
+    <Compile Include="AdvancedNaming\NamingSettings.cs" />
     <Compile Include="PropertyPage\SettingsManager.cs" />
     <Compile Include="PropertyPage\PropertyPage.cs">
       <SubType>UserControl</SubType>
@@ -198,6 +207,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\CustomRulesPage.resx">
       <DependentUpon>CustomRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Rules\CustomRulesResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomRulesResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Shuruev.StyleCop.CSharp</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -276,7 +290,14 @@
     <None Include="Resources\CurlBottomRightTransparent.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ExampleSP1000.png" />
+    <None Include="Resources\ExampleSP2000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExampleSP2001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2000.png" />
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2001.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

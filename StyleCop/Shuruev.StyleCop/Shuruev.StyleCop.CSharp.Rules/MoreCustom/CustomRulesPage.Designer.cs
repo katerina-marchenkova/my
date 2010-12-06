@@ -28,16 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("CodeLineMustNotEndWithWhitespace");
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("CodeLineMustBeginWithIdenticalWhitespaces");
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.groupOptions = new System.Windows.Forms.GroupBox();
 			this.panelOptions = new System.Windows.Forms.Panel();
+			this.displayExample = new Shuruev.StyleCop.CSharp.DisplayExample();
 			this.listRules = new System.Windows.Forms.ListView();
 			this.columnRule = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnOptions = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.btnReset = new System.Windows.Forms.Button();
-			this.displayExample = new Shuruev.StyleCop.CSharp.DisplayExample();
 			this.warningArea = new Shuruev.StyleCop.CSharp.WarningArea();
 			this.panelMain.SuspendLayout();
 			this.groupOptions.SuspendLayout();
@@ -76,6 +74,16 @@
 			this.panelOptions.Size = new System.Drawing.Size(209, 204);
 			this.panelOptions.TabIndex = 0;
 			// 
+			// displayExample
+			// 
+			this.displayExample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.displayExample.Location = new System.Drawing.Point(3, 264);
+			this.displayExample.MinimumSize = new System.Drawing.Size(240, 120);
+			this.displayExample.Name = "displayExample";
+			this.displayExample.Size = new System.Drawing.Size(637, 192);
+			this.displayExample.TabIndex = 2;
+			// 
 			// listRules
 			// 
 			this.listRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -86,15 +94,13 @@
             this.columnOptions});
 			this.listRules.FullRowSelect = true;
 			this.listRules.HideSelection = false;
-			this.listRules.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
 			this.listRules.Location = new System.Drawing.Point(3, 3);
 			this.listRules.Name = "listRules";
 			this.listRules.Size = new System.Drawing.Size(400, 255);
 			this.listRules.TabIndex = 0;
 			this.listRules.UseCompatibleStateImageBehavior = false;
 			this.listRules.View = System.Windows.Forms.View.Details;
+			this.listRules.SelectedIndexChanged += new System.EventHandler(this.listRules_SelectedIndexChanged);
 			// 
 			// columnRule
 			// 
@@ -116,16 +122,6 @@
 			this.btnReset.Text = "Reset";
 			this.btnReset.UseVisualStyleBackColor = true;
 			// 
-			// displayExample
-			// 
-			this.displayExample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.displayExample.Location = new System.Drawing.Point(3, 264);
-			this.displayExample.MinimumSize = new System.Drawing.Size(240, 120);
-			this.displayExample.Name = "displayExample";
-			this.displayExample.Size = new System.Drawing.Size(637, 192);
-			this.displayExample.TabIndex = 2;
-			// 
 			// warningArea
 			// 
 			this.warningArea.AutoSize = true;
@@ -145,6 +141,8 @@
 			this.Controls.Add(this.warningArea);
 			this.Name = "CustomRulesPage";
 			this.Size = new System.Drawing.Size(640, 480);
+			this.Load += new System.EventHandler(this.CustomRulesPage_Load);
+			this.VisibleChanged += new System.EventHandler(this.CustomRulesPage_VisibleChanged);
 			this.panelMain.ResumeLayout(false);
 			this.groupOptions.ResumeLayout(false);
 			this.ResumeLayout(false);
