@@ -19,17 +19,9 @@
 		}
 
 		/// <summary>
-		/// Gets options text for specified setting value.
-		/// </summary>
-		public override string GetOptionsText(string settingValue)
-		{
-			return "xxxxxxx";
-		}
-
-		/// <summary>
 		/// Creates control for displaying options.
 		/// </summary>
-		public override ICustomRuleOptions CreateOptionsControl()
+		public override CustomRuleOptions CreateOptionsControl()
 		{
 			return new CustomRuleIndentOptions();
 		}

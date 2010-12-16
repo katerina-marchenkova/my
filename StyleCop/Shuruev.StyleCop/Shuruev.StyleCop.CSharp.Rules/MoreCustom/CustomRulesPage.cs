@@ -63,23 +63,23 @@ namespace Shuruev.StyleCop.CSharp
 			UpdateControls();
 		}
 
-		/*xxxprivate void listRules_MouseDoubleClick(object sender, MouseEventArgs e)
+		private void listRules_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Left)
 				return;
 
-			Action_Edit_Do();
+			checkEnabled_Click(sender, e);
 		}
 
-		private void btnEdit_Click(object sender, EventArgs e)
+		private void checkEnabled_Click(object sender, EventArgs e)
 		{
-			Action_Edit_Do();
+			Action_SwitchEnabled_Do();
 		}
 
 		private void btnReset_Click(object sender, EventArgs e)
 		{
 			Action_Reset_Do();
-		}*/
+		}
 
 		#endregion
 
@@ -99,18 +99,21 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public bool Apply()
 		{
-			/*xxxforeach (ListViewItem lvi in listRules.Items)
+			foreach (ListViewItem lvi in listRules.Items)
 			{
-				SettingTag tag = (SettingTag)lvi.Tag;
-				if (tag.Modified)
+				CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
+				if (tag.SettingName != null)
 				{
-					SettingsManager.SetLocalValue(Page, tag.SettingName, tag.MergedValue);
+					if (tag.Modified)
+					{
+						SettingsManager.SetLocalValue(Page, tag.SettingName, tag.MergedValue);
+					}
+					else
+					{
+						SettingsManager.ClearLocalValue(Page, tag.SettingName);
+					}
 				}
-				else
-				{
-					SettingsManager.ClearLocalValue(Page, tag.SettingName);
-				}
-			}*/
+			}
 
 			return true;
 		}
@@ -120,24 +123,27 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void RefreshSettingsOverrideState()
 		{
-			/*xxxforeach (ListViewItem lvi in listRules.Items)
+			foreach (ListViewItem lvi in listRules.Items)
 			{
-				SettingTag tag = (SettingTag)lvi.Tag;
-				tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
-
-				if (tag.Modified)
+				CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
+				if (tag.SettingName != null)
 				{
-					Page.Dirty = true;
-				}
-				else
-				{
-					tag.MergedValue = SettingsManager.GetMergedValue(Page, tag.SettingName);
+					if (tag.Modified)
+					{
+						tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
+						Page.Dirty = true;
+					}
+					else
+					{
+						tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
+						tag.MergedValue = SettingsManager.GetMergedValue(Page, tag.SettingName);
+					}
 				}
 
 				UpdateListItem(lvi);
 			}
 
-			UpdateControls();*/
+			UpdateControls();
 		}
 
 		#endregion
@@ -174,8 +180,12 @@ namespace Shuruev.StyleCop.CSharp
 				{
 					CustomRuleTag tag = new CustomRuleTag();
 					tag.Rule = rule;
-					if (rule.HasSetting)
+					if (rule.SettingName != null)
 					{
+						tag.OptionsControl = tag.Rule.CreateOptionsControl();
+						tag.OptionsControl.XXX += OptionsControl_XXX;
+						tag.OptionsControl.Dock = DockStyle.Fill;
+
 						tag.SettingName = rule.SettingName;
 						tag.MergedValue = SettingsManager.GetMergedValue(Page, rule.SettingName);
 						tag.InheritedValue = SettingsManager.GetInheritedValue(Page, rule.SettingName);
@@ -200,6 +210,27 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
+		/// Handles changed options data.
+		/// </summary>
+		private void OptionsControl_XXX(object sender, EventArgs e)
+		{
+			if (listRules.SelectedItems.Count != 1)
+				return;
+
+			CustomRuleOptions optionsControl = (CustomRuleOptions)sender;
+
+			ListViewItem lvi = listRules.SelectedItems[0];
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
+
+			tag.MergedValue = optionsControl.ParseOptions();
+
+			UpdateListItem(lvi);
+			Page.Dirty = true;
+
+			UpdateControls();
+		}
+
+		/// <summary>
 		/// Updates list item depending on specified properties.
 		/// </summary>
 		private void UpdateListItem(ListViewItem lvi)
@@ -209,7 +240,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			bool enabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, tag.Rule.RuleName);
 
-			sub.Text = GetOptionsText(enabled, tag.Rule, tag.MergedValue);
+			sub.Text = GetOptionsText(enabled, tag.OptionsControl, tag.MergedValue);
 			lvi.ImageKey = enabled ? Pictures.RuleEnabled : Pictures.RuleDisabled;
 
 			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, tag.Rule.RuleName))
@@ -237,15 +268,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets options text for specified custom rule.
 		/// </summary>
-		private static string GetOptionsText(bool enabled, CustomRule rule, string settingValue)
+		private static string GetOptionsText(bool enabled, CustomRuleOptions options, string settingValue)
 		{
 			if (!enabled)
 				return Resources.Disabled;
 
-			if (!rule.HasSetting)
+			if (options == null)
 				return Resources.Enabled;
 
-			return rule.GetOptionsText(settingValue);
+			return options.GetOptionsText(settingValue);
 		}
 
 		/// <summary>
@@ -281,13 +312,24 @@ namespace Shuruev.StyleCop.CSharp
 			checkEnabled.Checked = enabled;
 			panelOptions.Enabled = enabled;
 
-			panelOptions.Controls.Clear();
-			if (tag.Rule.HasSetting)
+			if (tag.OptionsControl == null)
 			{
-				Control options = (Control)tag.Rule.CreateOptionsControl();
-				options.Dock = DockStyle.Fill;
-				panelOptions.Controls.Add(options);
+				panelOptions.Controls.Clear();
+				return;
 			}
+
+			if (panelOptions.Controls.Count > 0)
+			{
+				if (panelOptions.Controls[0] == tag.OptionsControl)
+				{
+					if (tag.OptionsControl.ParseOptions() == tag.MergedValue)
+						return;
+				}
+			}
+
+			panelOptions.Controls.Clear();
+			panelOptions.Controls.Add(tag.OptionsControl);
+			tag.OptionsControl.DisplayOptions(tag.MergedValue);
 		}
 
 		/// <summary>
@@ -314,44 +356,45 @@ namespace Shuruev.StyleCop.CSharp
 
 		#region Actions
 
-		/*xxx/// <summary>
-		/// Does action "Edit".
+		/// <summary>
+		/// Does action "Switch Enabled".
 		/// </summary>
-		private void Action_Edit_Do()
+		private void Action_SwitchEnabled_Do()
 		{
-			if (!Action_Edit_IsAvailable())
+			if (!Action_SwitchEnabled_IsAvailable())
 				return;
 
 			ListViewItem lvi = listRules.SelectedItems[0];
-			SettingTag tag = (SettingTag)lvi.Tag;
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
 
-			using (IAdvancedNamingEditor dialog = NamingSettings.GetEditor(tag.SettingName))
+			bool enabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, tag.Rule.RuleName);
+			if (enabled)
 			{
-				dialog.ObjectName = lvi.Text;
-				dialog.TargetRule = tag.MergedValue;
-				if (dialog.ShowDialog(this) == DialogResult.OK)
-				{
-					tag.MergedValue = dialog.TargetRule;
-					UpdateListItem(lvi);
-					Page.Dirty = true;
-
-					UpdateControls();
-				}
+				SettingsGrabber.DisableRule(Page.Analyzer.Id, tag.Rule.RuleName);
 			}
-		}*/
+			else
+			{
+				SettingsGrabber.EnableRule(Page.Analyzer.Id, tag.Rule.RuleName);
+			}
 
-		/*xxx/// <summary>
-		/// Checks whether action "Edit" is available.
+			UpdateListItem(lvi);
+			Page.Dirty = true;
+
+			UpdateControls();
+		}
+
+		/// <summary>
+		/// Checks whether action "Switch Enabled" is available.
 		/// </summary>
-		private bool Action_Edit_IsAvailable()
+		private bool Action_SwitchEnabled_IsAvailable()
 		{
 			if (listRules.SelectedItems.Count == 1)
 				return true;
 
 			return false;
-		}*/
+		}
 
-		/*xxx/// <summary>
+		/// <summary>
 		/// Does action "Reset".
 		/// </summary>
 		private void Action_Reset_Do()
@@ -360,18 +403,37 @@ namespace Shuruev.StyleCop.CSharp
 				return;
 
 			ListViewItem lvi = listRules.SelectedItems[0];
-			SettingTag tag = (SettingTag)lvi.Tag;
+			CustomRuleTag tag = (CustomRuleTag)lvi.Tag;
 
-			string example = NamingMacro.BuildExample(tag.InheritedValue);
-			if (Messages.ShowWarningYesNo(this, Resources.ResetSettingQuestion, example) != DialogResult.Yes)
+			bool inheritedEnabled = SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, tag.Rule.RuleName);
+			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, tag.Rule.RuleName))
+			{
+				inheritedEnabled = !inheritedEnabled;
+			}
+
+			string preview = GetOptionsText(inheritedEnabled, tag.OptionsControl, tag.InheritedValue);
+			if (Messages.ShowWarningYesNo(this, Resources.ResetSettingQuestion, preview) != DialogResult.Yes)
 				return;
 
-			tag.MergedValue = tag.InheritedValue;
+			if (inheritedEnabled)
+			{
+				SettingsGrabber.EnableRule(Page.Analyzer.Id, tag.Rule.RuleName);
+			}
+			else
+			{
+				SettingsGrabber.DisableRule(Page.Analyzer.Id, tag.Rule.RuleName);
+			}
+
+			if (tag.SettingName != null)
+			{
+				tag.MergedValue = tag.InheritedValue;
+			}
+
 			UpdateListItem(lvi);
 			Page.Dirty = true;
 
 			UpdateControls();
-		}*/
+		}
 
 		/// <summary>
 		/// Checks whether action "Reset" is available.
@@ -386,8 +448,11 @@ namespace Shuruev.StyleCop.CSharp
 			if (SettingsGrabber.IsRuleBold(Page.Analyzer.Id, tag.Rule.RuleName))
 				return true;
 
-			if (tag.Modified)
-				return true;
+			if (tag.SettingName != null)
+			{
+				if (tag.Modified)
+					return true;
+			}
 
 			return false;
 		}

@@ -76,6 +76,7 @@
 			this.btnReset.TabIndex = 1;
 			this.btnReset.Text = "Reset";
 			this.btnReset.UseVisualStyleBackColor = true;
+			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
 			// 
 			// checkEnabled
 			// 
@@ -86,6 +87,7 @@
 			this.checkEnabled.TabIndex = 0;
 			this.checkEnabled.Text = "Enabled";
 			this.checkEnabled.UseVisualStyleBackColor = true;
+			this.checkEnabled.Click += new System.EventHandler(this.checkEnabled_Click);
 			// 
 			// panelOptions
 			// 
@@ -124,6 +126,7 @@
 			this.listRules.UseCompatibleStateImageBehavior = false;
 			this.listRules.View = System.Windows.Forms.View.Details;
 			this.listRules.SelectedIndexChanged += new System.EventHandler(this.listRules_SelectedIndexChanged);
+			this.listRules.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listRules_MouseDoubleClick);
 			// 
 			// columnRule
 			// 

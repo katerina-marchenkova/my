@@ -9,5 +9,10 @@
 		/// Gets or sets rule object.
 		/// </summary>
 		internal CustomRule Rule { get; set; }
+
+		/// <summary>
+		/// Gets or sets rule options control.
+		/// </summary>
+		internal CustomRuleOptions OptionsControl { get; set; }
 	}
 }

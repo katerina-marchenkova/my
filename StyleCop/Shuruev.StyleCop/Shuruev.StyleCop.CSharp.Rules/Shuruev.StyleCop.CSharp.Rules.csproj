@@ -133,9 +133,15 @@
       <DependentUpon>WarningItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="MoreCustom\ICustomRuleOptionsData.cs" />
     <Compile Include="MoreCustom\CustomRuleTag.cs" />
     <Compile Include="MoreCustom\CustomRules.cs" />
-    <Compile Include="MoreCustom\ICustomRuleOptions.cs" />
+    <Compile Include="MoreCustom\Options\CustomRuleOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreCustom\Options\CustomRuleOptions.Designer.cs">
+      <DependentUpon>CustomRuleOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="MoreCustom\Options\CustomRuleIndentOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -215,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\CustomRulesPage.resx">
       <DependentUpon>CustomRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Options\CustomRuleOptions.resx">
+      <DependentUpon>CustomRuleOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\Options\CustomRuleIndentOptions.resx">
       <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>

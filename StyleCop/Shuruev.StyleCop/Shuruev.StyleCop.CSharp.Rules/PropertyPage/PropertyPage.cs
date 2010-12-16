@@ -135,6 +135,8 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void RefreshSettingsOverrideState()
 		{
+			SettingsGrabber.Initialize(m_tabControl);
+
 			namingRulesPage.RefreshSettingsOverrideState();
 			customRulesPage.RefreshSettingsOverrideState();
 		}
