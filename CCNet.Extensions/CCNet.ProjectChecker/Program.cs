@@ -373,7 +373,15 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			allowed.Add("AllowUnsafeBlocks", "false");
+			if (Arguments.AllowUnsafeBlocks)
+			{
+				required.Add("AllowUnsafeBlocks", "true");
+			}
+			else
+			{
+				allowed.Add("AllowUnsafeBlocks", "false");
+			}
+
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
 			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
@@ -481,7 +489,15 @@ namespace CCNet.ProjectChecker
 			Dictionary<string, string> required = new Dictionary<string, string>();
 			Dictionary<string, string> allowed = new Dictionary<string, string>();
 
-			allowed.Add("AllowUnsafeBlocks", "false");
+			if (Arguments.AllowUnsafeBlocks)
+			{
+				required.Add("AllowUnsafeBlocks", "true");
+			}
+			else
+			{
+				allowed.Add("AllowUnsafeBlocks", "false");
+			}
+
 			allowed.Add("BaseAddress", "285212672");
 			allowed.Add("CheckForOverflowUnderflow", "false");
 			allowed.Add("CodeAnalysisModuleSuppressionsFile", null);
@@ -736,6 +752,8 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("Microsoft.CSharp");
 			allowedGac.Add("Microsoft.mshtml");
 			allowedGac.Add("Microsoft.VisualStudio.QualityTools.UnitTestFramework");
+			allowedGac.Add("PresentationCore");
+			allowedGac.Add("PresentationFramework");
 			allowedGac.Add("System");
 			allowedGac.Add("System.Core");
 			allowedGac.Add("System.ComponentModel.DataAnnotations");
@@ -774,6 +792,7 @@ namespace CCNet.ProjectChecker
 			allowedGac.Add("System.XML");
 			allowedGac.Add("System.Xml");
 			allowedGac.Add("System.Xml.Linq");
+			allowedGac.Add("WindowsBase");
 
 			string description;
 			if (!ValidationHelper.CheckEntries(

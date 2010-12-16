@@ -125,6 +125,14 @@ namespace CCNet.ProjectChecker
 		}
 
 		/// <summary>
+		/// Gets a value indicating whether unsafe blocks are supported.
+		/// </summary>
+		public static bool AllowUnsafeBlocks
+		{
+			get { return Default.GetBooleanValue("AllowUnsafeBlocks"); }
+		}
+
+		/// <summary>
 		/// Gets expected version.
 		/// </summary>
 		public static string ExpectedVersion

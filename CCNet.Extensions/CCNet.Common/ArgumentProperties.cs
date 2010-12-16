@@ -118,6 +118,15 @@ namespace CCNet.Common
 			}
 		}
 
+		/// <summary>
+		/// Gets boolean property value for specified key.
+		/// </summary>
+		public bool GetBooleanValue(string key)
+		{
+			string value = GetValue(key);
+			return Boolean.Parse(value);
+		}
+
 		#endregion
 	}
 }
