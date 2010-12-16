@@ -8,13 +8,20 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	internal static class CustomRules
 	{
-		private static readonly List<string> s_groups = new List<string>();
-		private static readonly Dictionary<string, List<CustomRule>> s_all = new Dictionary<string, List<CustomRule>>();
+		private static readonly List<string> s_groups;
+		private static readonly Dictionary<string, List<CustomRule>> s_all;
 
 		static CustomRules()
 		{
-			Add(new CustomRuleSP2000(), Resources.GroupSpecial);
-			Add(new CustomRuleSP2001(), Resources.GroupMethods);
+			s_groups = new List<string>();
+			s_all = new Dictionary<string, List<CustomRule>>();
+
+			Add(new CustomRuleSP2000(), Resources.GroupFormatting);
+			Add(new CustomRuleSP2001(), Resources.GroupFormatting);
+			Add(new CustomRuleSP2002(), Resources.GroupFormatting);
+
+			Add(new CustomRuleSP2100(), Resources.GroupReadability);
+			Add(new CustomRuleSP2101(), Resources.GroupReadability);
 		}
 
 		/// <summary>

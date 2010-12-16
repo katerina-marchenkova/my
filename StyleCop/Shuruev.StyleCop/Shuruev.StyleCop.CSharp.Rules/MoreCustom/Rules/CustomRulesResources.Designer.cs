@@ -79,7 +79,34 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.google.com/search?q={0}.
+        ///   Looks up a localized string similar to Validates that last code line is not empty..
+        /// </summary>
+        internal static string DescriptionSP2002 {
+            get {
+                return ResourceManager.GetString("DescriptionSP2002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validates that code line is not longer than specified characters count..
+        /// </summary>
+        internal static string DescriptionSP2100 {
+            get {
+                return ResourceManager.GetString("DescriptionSP2100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validates that method body does not contain more code line than specified..
+        /// </summary>
+        internal static string DescriptionSP2101 {
+            get {
+                return ResourceManager.GetString("DescriptionSP2101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.google.com/search?q=xxx{0}.
         /// </summary>
         internal static string DetailsUrl {
             get {
@@ -98,6 +125,54 @@ namespace Shuruev.StyleCop.CSharp {
             get {
                 object obj = ResourceManager.GetObject("ExampleSP2001", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExampleSP2002 {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSP2002", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExampleSP2100 {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSP2100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExampleSP2101 {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSP2101", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spaces only.
+        /// </summary>
+        internal static string IndentOptionsSpacesOnly {
+            get {
+                return ResourceManager.GetString("IndentOptionsSpacesOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabs and spaces.
+        /// </summary>
+        internal static string IndentOptionsTabsAndSpaces {
+            get {
+                return ResourceManager.GetString("IndentOptionsTabsAndSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabs only.
+        /// </summary>
+        internal static string IndentOptionsTabsOnly {
+            get {
+                return ResourceManager.GetString("IndentOptionsTabsOnly", resourceCulture);
             }
         }
     }

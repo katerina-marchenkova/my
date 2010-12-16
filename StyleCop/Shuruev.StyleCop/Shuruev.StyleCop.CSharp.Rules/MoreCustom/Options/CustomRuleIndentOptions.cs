@@ -8,21 +8,48 @@ namespace Shuruev.StyleCop.CSharp
 	public partial class CustomRuleIndentOptions : CustomRuleOptions
 	{
 		/// <summary>
+		/// Specifies different indentation modes.
+		/// </summary>
+		public enum IndentMode
+		{
+			/// <summary>
+			/// Only tabs are allowed for indentation.
+			/// </summary>
+			Tabs,
+
+			/// <summary>
+			/// Only spaces are allowed for indentation.
+			/// </summary>
+			Spaces,
+
+			/// <summary>
+			/// Both tabs and spaces are allowed for indentation.
+			/// </summary>
+			Both
+		}
+
+		/// <summary>
 		/// Options data structure.
 		/// </summary>
-		private class OptionsData : ICustomRuleOptionsData
+		public class OptionsData : ICustomRuleOptionsData
 		{
-			public bool Field1 { get; set; }
-			public string Field2 { get; set; }
+			/// <summary>
+			/// Indentation mode.
+			/// </summary>
+			public IndentMode Mode { get; set; }
 
 			/// <summary>
 			/// Initializes object data from setting value.
 			/// </summary>
 			public void ConvertFromValue(string settingValue)
 			{
-				string[] parts = settingValue.Split(':');
-				Field1 = Boolean.Parse(parts[0]);
-				Field2 = parts[1];
+				try
+				{
+					Mode = (IndentMode)Enum.Parse(typeof(IndentMode), settingValue);
+				}
+				catch
+				{
+				}
 			}
 
 			/// <summary>
@@ -30,7 +57,7 @@ namespace Shuruev.StyleCop.CSharp
 			/// </summary>
 			public string ConvertToValue()
 			{
-				return String.Format("{0}:{1}", Field1, Field2);
+				return Mode.ToString();
 			}
 
 			/// <summary>
@@ -38,7 +65,17 @@ namespace Shuruev.StyleCop.CSharp
 			/// </summary>
 			public string GetDescription()
 			{
-				return String.Format("{0}, {1}", Field1, Field2);
+				switch (Mode)
+				{
+					case IndentMode.Tabs:
+						return CustomRulesResources.IndentOptionsTabsOnly;
+					case IndentMode.Spaces:
+						return CustomRulesResources.IndentOptionsSpacesOnly;
+					case IndentMode.Both:
+						return CustomRulesResources.IndentOptionsTabsAndSpaces;
+					default:
+						throw new InvalidOperationException();
+				}
 			}
 		}
 
@@ -67,8 +104,8 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			OptionsData options = (OptionsData)data;
 
-			checkBox1.Checked = options.Field1;
-			textBox1.Text = options.Field2;
+			/*xxxcheckBox1.Checked = options.Field1;
+			textBox1.Text = options.Field2;*/
 		}
 
 		/// <summary>
@@ -78,20 +115,20 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			OptionsData options = (OptionsData)data;
 
-			options.Field1 = checkBox1.Checked;
-			options.Field2 = textBox1.Text;
+			/*xxxoptions.Field1 = checkBox1.Checked;
+			options.Field2 = textBox1.Text;*/
 		}
 
 		#endregion
 
 		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{
-			OnXXX(e);
+			OnOptionsDataChanged(e);
 		}
 
 		private void textBox1_TextChanged(object sender, EventArgs e)
 		{
-			OnXXX(e);
+			OnOptionsDataChanged(e);
 		}
 	}
 }

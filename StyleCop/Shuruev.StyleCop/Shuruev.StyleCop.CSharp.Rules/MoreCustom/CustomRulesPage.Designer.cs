@@ -136,7 +136,7 @@
 			// columnOptions
 			// 
 			this.columnOptions.Text = "Options";
-			this.columnOptions.Width = 100;
+			this.columnOptions.Width = 150;
 			// 
 			// warningArea
 			// 

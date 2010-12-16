@@ -183,7 +183,7 @@ namespace Shuruev.StyleCop.CSharp
 					if (rule.SettingName != null)
 					{
 						tag.OptionsControl = tag.Rule.CreateOptionsControl();
-						tag.OptionsControl.XXX += OptionsControl_XXX;
+						tag.OptionsControl.OptionsDataChanged += OnOptionsDataChanged;
 						tag.OptionsControl.Dock = DockStyle.Fill;
 
 						tag.SettingName = rule.SettingName;
@@ -212,7 +212,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Handles changed options data.
 		/// </summary>
-		private void OptionsControl_XXX(object sender, EventArgs e)
+		private void OnOptionsDataChanged(object sender, EventArgs e)
 		{
 			if (listRules.SelectedItems.Count != 1)
 				return;

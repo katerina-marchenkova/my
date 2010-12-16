@@ -56,7 +56,22 @@
 		/// <summary>
 		/// Validates that spacing at the beginning of the each code line uses identical characters.
 		/// </summary>
-		CodeLineMustBeginWithIdenticalWhitespaces
+		CodeLineMustBeginWithIdenticalWhitespaces,
+
+		/// <summary>
+		/// Validates that last code line is not empty.
+		/// </summary>
+		LastCodeLineMustNotBeEmpty,
+
+		/// <summary>
+		/// Validates that code line is not longer than specified characters count.
+		/// </summary>
+		CodeLineMustNotBeLongerThan,
+
+		/// <summary>
+		/// Validates that method body does not contain more code line than specified.
+		/// </summary>
+		MethodMustNotContainMoreLinesThan
 
 		#endregion
 	}

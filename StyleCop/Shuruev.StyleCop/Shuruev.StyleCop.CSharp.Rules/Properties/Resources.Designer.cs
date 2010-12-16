@@ -218,6 +218,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formatting.
+        /// </summary>
+        internal static string GroupFormatting {
+            get {
+                return ResourceManager.GetString("GroupFormatting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Methods, Events and Delegates.
         /// </summary>
         internal static string GroupMethods {
@@ -232,6 +241,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string GroupParameters {
             get {
                 return ResourceManager.GetString("GroupParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Readability.
+        /// </summary>
+        internal static string GroupReadability {
+            get {
+                return ResourceManager.GetString("GroupReadability", resourceCulture);
             }
         }
         
@@ -655,7 +673,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/DisabledAdvancedNamingRules.
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/xxx/DisabledAdvancedNamingRules.
         /// </summary>
         internal static string WarningDisabledAdvancedNamingRulesUrl {
             get {
@@ -674,7 +692,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/DontUseOriginalNamingRules.
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/xxx/DontUseOriginalNamingRules.
         /// </summary>
         internal static string WarningDontUseOriginalNamingRulesUrl {
             get {

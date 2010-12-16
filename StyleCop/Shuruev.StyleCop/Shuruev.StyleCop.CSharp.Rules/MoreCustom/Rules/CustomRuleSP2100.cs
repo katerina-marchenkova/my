@@ -1,20 +1,20 @@
 ﻿namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// SP2001 custom rule.
+	/// SP2100 custom rule.
 	/// </summary>
-	public class CustomRuleSP2001 : CustomRule
+	public class CustomRuleSP2100 : CustomRule
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		internal CustomRuleSP2001()
+		internal CustomRuleSP2100()
 			: base(
-				Rules.CodeLineMustBeginWithIdenticalWhitespaces,
-				"SP2001",
-				"SP2001_Mode",
-				CustomRulesResources.DescriptionSP2001,
-				CustomRulesResources.ExampleSP2001)
+				Rules.CodeLineMustNotBeLongerThan,
+				"SP2100",
+				"SP2100_Limit",
+				CustomRulesResources.DescriptionSP2100,
+				CustomRulesResources.ExampleSP2100)
 		{
 		}
 

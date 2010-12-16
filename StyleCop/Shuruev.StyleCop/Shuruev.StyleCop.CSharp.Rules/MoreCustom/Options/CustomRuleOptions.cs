@@ -21,15 +21,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Occurs when options data is changed.
 		/// </summary>
-		public event EventHandler XXX;
+		public event EventHandler OptionsDataChanged;
 
 		/// <summary>
-		/// Raises XXX event.
+		/// Raises OptionsDataChanged event.
 		/// </summary>
-		protected virtual void OnXXX(EventArgs e)
+		protected virtual void OnOptionsDataChanged(EventArgs e)
 		{
-			if (XXX != null)
-				XXX(this, e);
+			if (OptionsDataChanged != null)
+				OptionsDataChanged(this, e);
 		}
 
 		#endregion

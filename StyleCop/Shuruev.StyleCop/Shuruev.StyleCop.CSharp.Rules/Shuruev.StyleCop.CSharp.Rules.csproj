@@ -148,6 +148,9 @@
     <Compile Include="MoreCustom\Options\CustomRuleIndentOptions.Designer.cs">
       <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2100.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2101.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2002.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2001.cs" />
     <Compile Include="MoreCustom\CustomRule.cs" />
     <Compile Include="MoreCustom\CustomRulesPage.cs">
@@ -313,7 +316,15 @@
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2000.png" />
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2001.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2101.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
