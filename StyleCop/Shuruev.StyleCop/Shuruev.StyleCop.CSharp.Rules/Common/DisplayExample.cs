@@ -195,6 +195,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_exampleDescription = null;
 
 			pictureExample.Image = null;
+			pictureDetails.Visible = false;
 			linkDetails.Visible = false;
 
 			InvalidateAll();
@@ -209,6 +210,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_exampleDescription = exampleDescription;
 
 			pictureExample.Image = exampleImage;
+			pictureDetails.Visible = true;
 			linkDetails.Visible = true;
 
 			InvalidateAll();

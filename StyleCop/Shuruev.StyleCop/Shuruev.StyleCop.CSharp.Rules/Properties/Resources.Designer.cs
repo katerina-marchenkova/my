@@ -262,6 +262,13 @@ namespace Shuruev.StyleCop.CSharp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Help {
+            get {
+                object obj = ResourceManager.GetObject("Help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to *.
         /// </summary>

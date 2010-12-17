@@ -37,6 +37,7 @@
 			this.backgroundUpper = new System.Windows.Forms.PictureBox();
 			this.backgroundLower = new System.Windows.Forms.PictureBox();
 			this.linkDetails = new System.Windows.Forms.LinkLabel();
+			this.pictureDetails = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.borderBottomRight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.borderRight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.borderTopRight)).BeginInit();
@@ -45,6 +46,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureExample)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundUpper)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundLower)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureDetails)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// borderBottomRight
@@ -156,10 +158,23 @@
 			this.linkDetails.VisitedLinkColor = System.Drawing.Color.ForestGreen;
 			this.linkDetails.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDetails_LinkClicked);
 			// 
+			// pictureDetails
+			// 
+			this.pictureDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureDetails.BackColor = System.Drawing.Color.White;
+			this.pictureDetails.Image = global::Shuruev.StyleCop.CSharp.Properties.Resources.Help;
+			this.pictureDetails.Location = new System.Drawing.Point(292, 6);
+			this.pictureDetails.Name = "pictureDetails";
+			this.pictureDetails.Size = new System.Drawing.Size(16, 16);
+			this.pictureDetails.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureDetails.TabIndex = 8;
+			this.pictureDetails.TabStop = false;
+			// 
 			// DisplayExample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.pictureDetails);
 			this.Controls.Add(this.linkDetails);
 			this.Controls.Add(this.pictureExample);
 			this.Controls.Add(this.borderBottomLeft);
@@ -182,6 +197,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureExample)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundUpper)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundLower)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureDetails)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -198,5 +214,6 @@
 		private System.Windows.Forms.PictureBox backgroundUpper;
 		private System.Windows.Forms.PictureBox backgroundLower;
 		private System.Windows.Forms.LinkLabel linkDetails;
+		private System.Windows.Forms.PictureBox pictureDetails;
 	}
 }

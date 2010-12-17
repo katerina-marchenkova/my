@@ -23,7 +23,9 @@
 		/// </summary>
 		public override CustomRuleOptions CreateOptionsControl()
 		{
-			return new CustomRuleIndentOptions();
+			return new CustomRuleLimitOptions(
+				CustomRulesResources.LimitOptionsLineDescription,
+				CustomRulesResources.LimitOptionsLineFormat);
 		}
 	}
 }

@@ -10,12 +10,20 @@
 		/// </summary>
 		internal CustomRuleSP2002()
 			: base(
-				Rules.LastCodeLineMustNotBeEmpty,
+				Rules.CheckWhetherLastCodeLineIsEmpty,
 				"SP2002",
-				null,
+				"SP2002_Mode",
 				CustomRulesResources.DescriptionSP2002,
 				CustomRulesResources.ExampleSP2002)
 		{
+		}
+
+		/// <summary>
+		/// Creates control for displaying options.
+		/// </summary>
+		public override CustomRuleOptions CreateOptionsControl()
+		{
+			return new CustomRuleLastLineOptions();
 		}
 	}
 }

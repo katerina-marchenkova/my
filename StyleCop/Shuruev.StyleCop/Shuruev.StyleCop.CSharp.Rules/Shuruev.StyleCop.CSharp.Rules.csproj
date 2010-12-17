@@ -136,6 +136,23 @@
     <Compile Include="MoreCustom\ICustomRuleOptionsData.cs" />
     <Compile Include="MoreCustom\CustomRuleTag.cs" />
     <Compile Include="MoreCustom\CustomRules.cs" />
+    <Compile Include="MoreCustom\Options\CustomRuleLastLineOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreCustom\Options\CustomRuleLastLineOptions.Designer.cs">
+      <DependentUpon>CustomRuleLastLineOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreCustom\Options\LastLineOptionsData.cs" />
+    <Compile Include="MoreCustom\Options\LastLineMode.cs" />
+    <Compile Include="MoreCustom\Options\LimitOptionsData.cs" />
+    <Compile Include="MoreCustom\Options\IndentOptionsData.cs" />
+    <Compile Include="MoreCustom\Options\IndentMode.cs" />
+    <Compile Include="MoreCustom\Options\CustomRuleLimitOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreCustom\Options\CustomRuleLimitOptions.Designer.cs">
+      <DependentUpon>CustomRuleLimitOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="MoreCustom\Options\CustomRuleOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -225,6 +242,12 @@
     <EmbeddedResource Include="MoreCustom\CustomRulesPage.resx">
       <DependentUpon>CustomRulesPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Options\CustomRuleLastLineOptions.resx">
+      <DependentUpon>CustomRuleLastLineOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Options\CustomRuleLimitOptions.resx">
+      <DependentUpon>CustomRuleLimitOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\Options\CustomRuleOptions.resx">
       <DependentUpon>CustomRuleOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +258,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CustomRulesResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Shuruev.StyleCop.CSharp</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -324,6 +348,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

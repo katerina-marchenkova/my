@@ -79,7 +79,7 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validates that last code line is not empty..
+        ///   Looks up a localized string similar to Checks whether last code line is empty or not..
         /// </summary>
         internal static string DescriptionSP2002 {
             get {
@@ -173,6 +173,60 @@ namespace Shuruev.StyleCop.CSharp {
         internal static string IndentOptionsTabsOnly {
             get {
                 return ResourceManager.GetString("IndentOptionsTabsOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        internal static string LastLineOptionsEmpty {
+            get {
+                return ResourceManager.GetString("LastLineOptionsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not empty.
+        /// </summary>
+        internal static string LastLineOptionsNotEmpty {
+            get {
+                return ResourceManager.GetString("LastLineOptionsNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max character limit:.
+        /// </summary>
+        internal static string LimitOptionsCharDescription {
+            get {
+                return ResourceManager.GetString("LimitOptionsCharDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} chars.
+        /// </summary>
+        internal static string LimitOptionsCharFormat {
+            get {
+                return ResourceManager.GetString("LimitOptionsCharFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max line limit:.
+        /// </summary>
+        internal static string LimitOptionsLineDescription {
+            get {
+                return ResourceManager.GetString("LimitOptionsLineDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} lines.
+        /// </summary>
+        internal static string LimitOptionsLineFormat {
+            get {
+                return ResourceManager.GetString("LimitOptionsLineFormat", resourceCulture);
             }
         }
     }

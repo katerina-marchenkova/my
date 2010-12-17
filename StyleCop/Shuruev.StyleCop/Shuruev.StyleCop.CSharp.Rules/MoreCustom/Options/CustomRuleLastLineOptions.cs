@@ -3,14 +3,14 @@
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Control displaying indent options.
+	/// Control displaying last line options.
 	/// </summary>
-	public partial class CustomRuleIndentOptions : CustomRuleOptions
+	public partial class CustomRuleLastLineOptions : CustomRuleOptions
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public CustomRuleIndentOptions()
+		public CustomRuleLastLineOptions()
 		{
 			InitializeComponent();
 		}
@@ -31,7 +31,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		protected override ICustomRuleOptionsData CreateOptionsData()
 		{
-			return new IndentOptionsData();
+			return new LastLineOptionsData();
 		}
 
 		/// <summary>
@@ -39,11 +39,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		protected override void DisplayOptionsData(ICustomRuleOptionsData data)
 		{
-			IndentOptionsData options = (IndentOptionsData)data;
+			LastLineOptionsData options = (LastLineOptionsData)data;
 
-			radioTabs.Checked = options.Mode == IndentMode.Tabs;
-			radioSpaces.Checked = options.Mode == IndentMode.Spaces;
-			radioBoth.Checked = options.Mode == IndentMode.Both;
+			radioEmpty.Checked = options.Mode == LastLineMode.Empty;
+			radioNotEmpty.Checked = options.Mode == LastLineMode.NotEmpty;
 		}
 
 		/// <summary>
@@ -51,23 +50,17 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		protected override void ParseOptionsData(ICustomRuleOptionsData data)
 		{
-			IndentOptionsData options = (IndentOptionsData)data;
+			LastLineOptionsData options = (LastLineOptionsData)data;
 
-			if (radioTabs.Checked)
+			if (radioEmpty.Checked)
 			{
-				options.Mode = IndentMode.Tabs;
+				options.Mode = LastLineMode.Empty;
 				return;
 			}
 
-			if (radioSpaces.Checked)
+			if (radioNotEmpty.Checked)
 			{
-				options.Mode = IndentMode.Spaces;
-				return;
-			}
-
-			if (radioBoth.Checked)
-			{
-				options.Mode = IndentMode.Both;
+				options.Mode = LastLineMode.NotEmpty;
 				return;
 			}
 		}

@@ -28,44 +28,73 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.radioTabs = new System.Windows.Forms.RadioButton();
+			this.radioSpaces = new System.Windows.Forms.RadioButton();
+			this.radioBoth = new System.Windows.Forms.RadioButton();
+			this.labelTitle = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
-			// checkBox1
+			// radioTabs
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(42, 57);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(80, 17);
-			this.checkBox1.TabIndex = 0;
-			this.checkBox1.Text = "checkBox1";
-			this.checkBox1.UseVisualStyleBackColor = true;
-			this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+			this.radioTabs.Location = new System.Drawing.Point(0, 26);
+			this.radioTabs.Name = "radioTabs";
+			this.radioTabs.Size = new System.Drawing.Size(180, 23);
+			this.radioTabs.TabIndex = 1;
+			this.radioTabs.TabStop = true;
+			this.radioTabs.Text = "All lines must use tabs";
+			this.radioTabs.UseVisualStyleBackColor = true;
+			this.radioTabs.CheckedChanged += new System.EventHandler(this.radioMode_CheckedChanged);
 			// 
-			// textBox1
+			// radioSpaces
 			// 
-			this.textBox1.Location = new System.Drawing.Point(27, 101);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(100, 20);
-			this.textBox1.TabIndex = 1;
-			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+			this.radioSpaces.Location = new System.Drawing.Point(0, 55);
+			this.radioSpaces.Name = "radioSpaces";
+			this.radioSpaces.Size = new System.Drawing.Size(180, 23);
+			this.radioSpaces.TabIndex = 2;
+			this.radioSpaces.TabStop = true;
+			this.radioSpaces.Text = "All lines must use spaces";
+			this.radioSpaces.UseVisualStyleBackColor = true;
+			this.radioSpaces.CheckedChanged += new System.EventHandler(this.radioMode_CheckedChanged);
+			// 
+			// radioBoth
+			// 
+			this.radioBoth.Location = new System.Drawing.Point(0, 84);
+			this.radioBoth.Name = "radioBoth";
+			this.radioBoth.Size = new System.Drawing.Size(180, 48);
+			this.radioBoth.TabIndex = 3;
+			this.radioBoth.TabStop = true;
+			this.radioBoth.Text = "Some lines can use spaces, some can use tabs\r\n(supporting legacy code)";
+			this.radioBoth.UseVisualStyleBackColor = true;
+			this.radioBoth.CheckedChanged += new System.EventHandler(this.radioMode_CheckedChanged);
+			// 
+			// labelTitle
+			// 
+			this.labelTitle.Location = new System.Drawing.Point(0, 0);
+			this.labelTitle.Name = "labelTitle";
+			this.labelTitle.Size = new System.Drawing.Size(180, 23);
+			this.labelTitle.TabIndex = 0;
+			this.labelTitle.Text = "Indentation character:";
+			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// CustomRuleIndentOptions
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.checkBox1);
+			this.Controls.Add(this.labelTitle);
+			this.Controls.Add(this.radioBoth);
+			this.Controls.Add(this.radioSpaces);
+			this.Controls.Add(this.radioTabs);
 			this.Name = "CustomRuleIndentOptions";
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.CheckBox checkBox1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.RadioButton radioTabs;
+		private System.Windows.Forms.RadioButton radioSpaces;
+		private System.Windows.Forms.RadioButton radioBoth;
+		private System.Windows.Forms.Label labelTitle;
+
 	}
 }

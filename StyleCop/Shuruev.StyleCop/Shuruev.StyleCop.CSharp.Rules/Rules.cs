@@ -59,9 +59,9 @@
 		CodeLineMustBeginWithIdenticalWhitespaces,
 
 		/// <summary>
-		/// Validates that last code line is not empty.
+		/// Checks whether last code line is empty or not.
 		/// </summary>
-		LastCodeLineMustNotBeEmpty,
+		CheckWhetherLastCodeLineIsEmpty,
 
 		/// <summary>
 		/// Validates that code line is not longer than specified characters count.
