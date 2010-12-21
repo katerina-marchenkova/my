@@ -23,8 +23,12 @@ namespace SolutionHelper
 		/// </summary>
 		public static string GetDebugOutputPath(this Project project)
 		{
-			string path = Path.GetDirectoryName(project.FileName);
-			return String.Format(@"{0}\bin\Debug\", path);
+			string projectPath = Path.GetDirectoryName(project.FileName);
+
+			Configuration configuration = project.ConfigurationManager.ActiveConfiguration;
+			string outputPath = (string)configuration.Properties.Item("OutputPath").Value;
+
+			return String.Format(@"{0}\{1}", projectPath, outputPath);
 		}
 
 		/// <summary>
