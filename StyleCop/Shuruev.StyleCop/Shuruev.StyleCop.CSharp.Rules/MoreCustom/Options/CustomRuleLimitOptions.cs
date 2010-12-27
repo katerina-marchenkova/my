@@ -24,8 +24,17 @@ namespace Shuruev.StyleCop.CSharp
 			: this()
 		{
 			m_textFormat = textFormat;
-			label1.Text = description;
+			labelDescription.Text = description;
 		}
+
+		#region Event handlers
+
+		private void textLimit_TextChanged(object sender, EventArgs e)
+		{
+			OnOptionsDataChanged(e);
+		}
+
+		#endregion
 
 		#region Override methods
 
@@ -44,7 +53,7 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			LimitOptionsData options = (LimitOptionsData)data;
 
-			textBox1.Text = options.Limit.ToString();
+			textLimit.Text = options.Limit.ToString();
 		}
 
 		/// <summary>
@@ -55,18 +64,12 @@ namespace Shuruev.StyleCop.CSharp
 			LimitOptionsData options = (LimitOptionsData)data;
 
 			int limit;
-			if (Int32.TryParse(textBox1.Text, out limit))
+			if (Int32.TryParse(textLimit.Text, out limit))
 			{
 				options.Limit = limit;
 			}
 		}
 
 		#endregion
-
-		private void textBox1_TextChanged(object sender, EventArgs e)
-		{
-			//xxx
-			OnOptionsDataChanged(e);
-		}
 	}
 }

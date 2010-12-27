@@ -62,7 +62,7 @@
 			this.groupOptions.Controls.Add(this.panelOptions);
 			this.groupOptions.Location = new System.Drawing.Point(409, 0);
 			this.groupOptions.Name = "groupOptions";
-			this.groupOptions.Size = new System.Drawing.Size(221, 258);
+			this.groupOptions.Size = new System.Drawing.Size(221, 194);
 			this.groupOptions.TabIndex = 1;
 			this.groupOptions.TabStop = false;
 			this.groupOptions.Text = "Rule Options";
@@ -96,17 +96,17 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.panelOptions.Location = new System.Drawing.Point(6, 48);
 			this.panelOptions.Name = "panelOptions";
-			this.panelOptions.Size = new System.Drawing.Size(209, 204);
+			this.panelOptions.Size = new System.Drawing.Size(209, 140);
 			this.panelOptions.TabIndex = 2;
 			// 
 			// displayExample
 			// 
 			this.displayExample.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.displayExample.Location = new System.Drawing.Point(3, 264);
+			this.displayExample.Location = new System.Drawing.Point(3, 200);
 			this.displayExample.MinimumSize = new System.Drawing.Size(240, 120);
 			this.displayExample.Name = "displayExample";
-			this.displayExample.Size = new System.Drawing.Size(637, 192);
+			this.displayExample.Size = new System.Drawing.Size(637, 256);
 			this.displayExample.TabIndex = 2;
 			// 
 			// listRules
@@ -121,7 +121,7 @@
 			this.listRules.HideSelection = false;
 			this.listRules.Location = new System.Drawing.Point(3, 3);
 			this.listRules.Name = "listRules";
-			this.listRules.Size = new System.Drawing.Size(400, 255);
+			this.listRules.Size = new System.Drawing.Size(400, 191);
 			this.listRules.TabIndex = 0;
 			this.listRules.UseCompatibleStateImageBehavior = false;
 			this.listRules.View = System.Windows.Forms.View.Details;
