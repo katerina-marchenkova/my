@@ -16,6 +16,15 @@ namespace Shuruev.StyleCop.CSharp
 			InitializeComponent();
 		}
 
+		#region Properties
+
+		/// <summary>
+		/// Gets or sets underlying custom rule.
+		/// </summary>
+		public CustomRule Rule { get; set; }
+
+		#endregion
+
 		#region Events
 
 		/// <summary>
@@ -41,7 +50,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public string GetOptionsText(string settingValue)
 		{
-			ICustomRuleOptionsData data = CreateOptionsData();
+			ICustomRuleOptionsData data = Rule.CreateOptionsData();
 			data.ConvertFromValue(settingValue);
 
 			return data.GetDescription();
@@ -52,7 +61,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void DisplayOptions(string settingValue)
 		{
-			ICustomRuleOptionsData data = CreateOptionsData();
+			ICustomRuleOptionsData data = Rule.CreateOptionsData();
 			data.ConvertFromValue(settingValue);
 
 			DisplayOptionsData(data);
@@ -63,7 +72,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public string ParseOptions()
 		{
-			ICustomRuleOptionsData data = CreateOptionsData();
+			ICustomRuleOptionsData data = Rule.CreateOptionsData();
 			ParseOptionsData(data);
 
 			return data.ConvertToValue();
@@ -74,19 +83,11 @@ namespace Shuruev.StyleCop.CSharp
 		#region Methods to be overrided
 
 		/// <summary>
-		/// Creates an empty instance of options data.
-		/// </summary>
-		protected virtual ICustomRuleOptionsData CreateOptionsData()
-		{
-			throw new NotImplementedException();
-		}
-
-		/// <summary>
 		/// Displays specified options data.
 		/// </summary>
 		protected virtual void DisplayOptionsData(ICustomRuleOptionsData data)
 		{
-			throw new NotImplementedException();
+			throw new InvalidOperationException();
 		}
 
 		/// <summary>
@@ -94,7 +95,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		protected virtual void ParseOptionsData(ICustomRuleOptionsData data)
 		{
-			throw new NotImplementedException();
+			throw new InvalidOperationException();
 		}
 
 		#endregion

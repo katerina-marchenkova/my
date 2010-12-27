@@ -27,14 +27,6 @@ namespace Shuruev.StyleCop.CSharp
 		#region Override methods
 
 		/// <summary>
-		/// Creates an empty instance of options data.
-		/// </summary>
-		protected override ICustomRuleOptionsData CreateOptionsData()
-		{
-			return new IndentOptionsData();
-		}
-
-		/// <summary>
 		/// Displays specified options data.
 		/// </summary>
 		protected override void DisplayOptionsData(ICustomRuleOptionsData data)

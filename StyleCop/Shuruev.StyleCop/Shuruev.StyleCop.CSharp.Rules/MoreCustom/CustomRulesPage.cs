@@ -183,6 +183,7 @@ namespace Shuruev.StyleCop.CSharp
 					if (rule.SettingName != null)
 					{
 						tag.OptionsControl = tag.Rule.CreateOptionsControl();
+						tag.OptionsControl.Rule = tag.Rule;
 						tag.OptionsControl.OptionsDataChanged += OnOptionsDataChanged;
 						tag.OptionsControl.Dock = DockStyle.Fill;
 
@@ -194,7 +195,7 @@ namespace Shuruev.StyleCop.CSharp
 					ListViewItem lvi = new ListViewItem();
 					lvi.Group = lvg;
 					lvi.UseItemStyleForSubItems = false;
-					lvi.Text = rule.RuleName;
+					lvi.Text = String.Format("{0}: {1}", rule.Code, rule.RuleName);
 					lvi.Tag = tag;
 
 					ListViewItem.ListViewSubItem sub = new ListViewItem.ListViewSubItem();

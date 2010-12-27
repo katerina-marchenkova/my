@@ -9,12 +9,14 @@ namespace Shuruev.StyleCop.CSharp
 	internal static class CustomRules
 	{
 		private static readonly List<string> s_groups;
-		private static readonly Dictionary<string, List<CustomRule>> s_all;
+		private static readonly Dictionary<string, List<CustomRule>> s_allByGroup;
+		private static readonly Dictionary<Rules, CustomRule> s_allByRule;
 
 		static CustomRules()
 		{
 			s_groups = new List<string>();
-			s_all = new Dictionary<string, List<CustomRule>>();
+			s_allByGroup = new Dictionary<string, List<CustomRule>>();
+			s_allByRule = new Dictionary<Rules, CustomRule>();
 
 			Add(new CustomRuleSP2000(), Resources.GroupFormatting);
 			Add(new CustomRuleSP2001(), Resources.GroupFormatting);
@@ -29,13 +31,14 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private static void Add(CustomRule customRule, string groupName)
 		{
-			if (!s_all.ContainsKey(groupName))
+			if (!s_allByGroup.ContainsKey(groupName))
 			{
 				s_groups.Add(groupName);
-				s_all[groupName] = new List<CustomRule>();
+				s_allByGroup[groupName] = new List<CustomRule>();
 			}
 
-			s_all[groupName].Add(customRule);
+			s_allByGroup[groupName].Add(customRule);
+			s_allByRule.Add(customRule.Rule, customRule);
 		}
 
 		/// <summary>
@@ -43,7 +46,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static List<string> GetGroups()
 		{
-			return new List<string>(s_all.Keys);
+			return new List<string>(s_allByGroup.Keys);
 		}
 
 		/// <summary>
@@ -51,7 +54,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static List<CustomRule> GetByGroup(string groupName)
 		{
-			return new List<CustomRule>(s_all[groupName]);
+			return new List<CustomRule>(s_allByGroup[groupName]);
+		}
+
+		/// <summary>
+		/// Returns specified rule.
+		/// </summary>
+		public static CustomRule Get(Rules rule)
+		{
+			return s_allByRule[rule];
 		}
 	}
 }

@@ -23,9 +23,15 @@
 		/// </summary>
 		public override CustomRuleOptions CreateOptionsControl()
 		{
-			return new CustomRuleLimitOptions(
-				CustomRulesResources.LimitOptionsLineDescription,
-				CustomRulesResources.LimitOptionsLineFormat);
+			return new CustomRuleLimitOptions(CustomRulesResources.LimitOptionsLineDescription);
+		}
+
+		/// <summary>
+		/// Creates an empty instance of options data.
+		/// </summary>
+		public override ICustomRuleOptionsData CreateOptionsData()
+		{
+			return new LimitOptionsData(CustomRulesResources.LimitOptionsLineFormat);
 		}
 	}
 }

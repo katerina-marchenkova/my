@@ -7,8 +7,6 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public partial class CustomRuleLimitOptions : CustomRuleOptions
 	{
-		private readonly string m_textFormat;
-
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
@@ -20,10 +18,9 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public CustomRuleLimitOptions(string description, string textFormat)
+		public CustomRuleLimitOptions(string description)
 			: this()
 		{
-			m_textFormat = textFormat;
 			labelDescription.Text = description;
 		}
 
@@ -37,14 +34,6 @@ namespace Shuruev.StyleCop.CSharp
 		#endregion
 
 		#region Override methods
-
-		/// <summary>
-		/// Creates an empty instance of options data.
-		/// </summary>
-		protected override ICustomRuleOptionsData CreateOptionsData()
-		{
-			return new LimitOptionsData(m_textFormat);
-		}
 
 		/// <summary>
 		/// Displays specified options data.

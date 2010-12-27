@@ -30,7 +30,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Gets or sets rule object.
 		/// </summary>
-		private Rules Rule { get; set; }
+		internal Rules Rule { get; private set; }
 
 		/// <summary>
 		/// Gets rule code.
@@ -82,6 +82,14 @@ namespace Shuruev.StyleCop.CSharp
 		/// Creates control for displaying options.
 		/// </summary>
 		public virtual CustomRuleOptions CreateOptionsControl()
+		{
+			throw new InvalidOperationException();
+		}
+
+		/// <summary>
+		/// Creates an empty instance of options data.
+		/// </summary>
+		public virtual ICustomRuleOptionsData CreateOptionsData()
 		{
 			throw new InvalidOperationException();
 		}

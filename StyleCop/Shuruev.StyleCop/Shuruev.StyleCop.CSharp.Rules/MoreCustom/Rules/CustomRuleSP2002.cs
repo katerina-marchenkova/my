@@ -25,5 +25,13 @@
 		{
 			return new CustomRuleLastLineOptions();
 		}
+
+		/// <summary>
+		/// Creates an empty instance of options data.
+		/// </summary>
+		public override ICustomRuleOptionsData CreateOptionsData()
+		{
+			return new LastLineOptionsData();
+		}
 	}
 }
