@@ -36,7 +36,7 @@
 			// 
 			this.textLimit.Location = new System.Drawing.Point(3, 26);
 			this.textLimit.Name = "textLimit";
-			this.textLimit.Size = new System.Drawing.Size(100, 20);
+			this.textLimit.Size = new System.Drawing.Size(64, 20);
 			this.textLimit.TabIndex = 1;
 			this.textLimit.TextChanged += new System.EventHandler(this.textLimit_TextChanged);
 			// 
@@ -63,7 +63,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.TextBox textLimit;
 		private System.Windows.Forms.Label labelDescription;
+		protected System.Windows.Forms.TextBox textLimit;
 	}
 }

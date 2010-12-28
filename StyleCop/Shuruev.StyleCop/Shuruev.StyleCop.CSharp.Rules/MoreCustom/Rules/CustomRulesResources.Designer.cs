@@ -61,6 +61,15 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} (tabs x{1}).
+        /// </summary>
+        internal static string CharLimitOptionsFormat {
+            get {
+                return ResourceManager.GetString("CharLimitOptionsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Validates the spacing at the end of the each code line..
         /// </summary>
         internal static string DescriptionSP2000 {

@@ -97,7 +97,7 @@ namespace Shuruev.StyleCop.Run
 		/// </summary>
 		private static void OnViolationEncountered(object sender, ViolationEventArgs e)
 		{
-			Console.WriteLine("{0}: {1}", e.Violation.Rule.CheckId, e.Message);
+			Console.WriteLine("{0} ({1}): {2}", e.Violation.Rule.CheckId, e.LineNumber, e.Message);
 		}
 	}
 }

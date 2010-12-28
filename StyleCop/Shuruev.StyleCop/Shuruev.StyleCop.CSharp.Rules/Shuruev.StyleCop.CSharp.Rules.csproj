@@ -136,6 +136,13 @@
     <Compile Include="MoreCustom\ICustomRuleOptionsData.cs" />
     <Compile Include="MoreCustom\CustomRuleTag.cs" />
     <Compile Include="MoreCustom\CustomRules.cs" />
+    <Compile Include="MoreCustom\Options\CharLimitOptionsData.cs" />
+    <Compile Include="MoreCustom\Options\CustomRuleCharLimitOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreCustom\Options\CustomRuleCharLimitOptions.Designer.cs">
+      <DependentUpon>CustomRuleCharLimitOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="MoreCustom\Options\CustomRuleLastLineOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -165,6 +172,7 @@
     <Compile Include="MoreCustom\Options\CustomRuleIndentOptions.Designer.cs">
       <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoreCustom\Options\NumericValue.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2100.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2101.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2002.cs" />
@@ -241,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\CustomRulesPage.resx">
       <DependentUpon>CustomRulesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Options\CustomRuleCharLimitOptions.resx">
+      <DependentUpon>CustomRuleCharLimitOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MoreCustom\Options\CustomRuleLastLineOptions.resx">
       <DependentUpon>CustomRuleLastLineOptions.cs</DependentUpon>

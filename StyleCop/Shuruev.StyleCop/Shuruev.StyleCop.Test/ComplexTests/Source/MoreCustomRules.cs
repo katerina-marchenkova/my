@@ -160,6 +160,23 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
+//# [ERROR:3]
+//# Summary contains whitespaces at the end of the lines.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		/// <summary> 
+		/// Test summary. 
+		/// </summary> 
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
 #endregion
 
 #region CheckAllowedIndentationCharacters // Mode = Tabs
@@ -480,6 +497,23 @@ namespace Shuruev.StyleCop.Test
     
 //# [END]
 
+//# [ERROR:3]
+//# Summary contains whitespaces after indentation tabs.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		 /// <summary>
+		 /// Test summary.
+		 /// </summary>
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
 #endregion
 
 #region CheckWhetherLastCodeLineIsEmpty // Mode = Empty
@@ -490,13 +524,6 @@ namespace Shuruev.StyleCop.Test
 //# Source file is OK.
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
-	{
-		public void TestMethod()
-		{
-			int a = 10;
-		}
-	}
 }
 //# [END]
 
@@ -504,15 +531,16 @@ namespace Shuruev.StyleCop.Test
 //# Source file without a line break at the end.
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
-	{
-		public void TestMethod()
-		{
-
-			int a = 10;
-		}
-	}
 }//# [END]
+
+//# [OK]
+//# Source file contains line break at the end.
+
+//# [END]
+
+//# [ERROR]
+//# Source file doesn't contain a line break at the end.
+//# [END]
 
 #endregion
 
@@ -524,13 +552,6 @@ namespace Shuruev.StyleCop.Test
 //# Source file with a line break at the end.
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
-	{
-		public void TestMethod()
-		{
-			int a = 10;
-		}
-	}
 }
 //# [END]
 
@@ -538,14 +559,15 @@ namespace Shuruev.StyleCop.Test
 //# Source file is OK.
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
-	{
-		public void TestMethod()
-		{
-
-			int a = 10;
-		}
-	}
 }//# [END]
+
+//# [ERROR]
+//# Source file contains line break at the end.
+
+//# [END]
+
+//# [OK]
+//# Source file doesn't contain a line break at the end.
+//# [END]
 
 #endregion

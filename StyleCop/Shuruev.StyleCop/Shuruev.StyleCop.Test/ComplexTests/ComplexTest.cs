@@ -267,11 +267,22 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 					CustomSettings = customSettings
 				});
 
-			string message = String.Format(
-				"{0} ({1}): {2}",
-				targetRule,
-				comment,
-				description);
+			string message;
+			if (String.IsNullOrEmpty(comment))
+			{
+				message = String.Format(
+					"{0}: {1}",
+					targetRule,
+					description);
+			}
+			else
+			{
+				message = String.Format(
+					"{0} ({1}): {2}",
+					targetRule,
+					comment,
+					description);
+			}
 
 			Assert.AreEqual(
 				errorCount,

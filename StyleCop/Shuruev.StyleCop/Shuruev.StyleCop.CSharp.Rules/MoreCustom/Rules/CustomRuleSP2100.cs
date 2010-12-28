@@ -23,7 +23,7 @@
 		/// </summary>
 		public override CustomRuleOptions CreateOptionsControl()
 		{
-			return new CustomRuleLimitOptions(CustomRulesResources.LimitOptionsCharDescription);
+			return new CustomRuleCharLimitOptions();
 		}
 
 		/// <summary>
@@ -31,7 +31,7 @@
 		/// </summary>
 		public override ICustomRuleOptionsData CreateOptionsData()
 		{
-			return new LimitOptionsData(CustomRulesResources.LimitOptionsCharFormat);
+			return new CharLimitOptionsData();
 		}
 	}
 }

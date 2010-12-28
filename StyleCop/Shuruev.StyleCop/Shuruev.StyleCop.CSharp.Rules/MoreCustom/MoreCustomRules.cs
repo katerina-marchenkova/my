@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
 
@@ -28,7 +30,7 @@ namespace Shuruev.StyleCop.CSharp
 		public void AnalyzeDocument(CodeDocument document)
 		{
 			CsDocument doc = (CsDocument)document;
-			FullTokenResearch(doc);
+			AnalyzePlainText(doc);
 		}
 
 		#region Working with settings
@@ -49,57 +51,84 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
-		#region Full token research
+		#region Plain text analysis
 
 		/// <summary>
-		/// Iterates through all tokens in the document.
+		/// Analyzes source code as plain text.
 		/// </summary>
-		private void FullTokenResearch(CsDocument document)
+		private void AnalyzePlainText(CsDocument document)
 		{
 			var indentOptions = GetOptionsData<IndentOptionsData>(document, Rules.CheckAllowedIndentationCharacters);
 			var lastLineOptions = GetOptionsData<LastLineOptionsData>(document, Rules.CheckWhetherLastCodeLineIsEmpty);
+			var charLimitOptions = GetOptionsData<CharLimitOptionsData>(document, Rules.CodeLineMustNotBeLongerThan);
 
-			for (Node<CsToken> node = document.Tokens.First; node != null; node = node.Next)
+			string source;
+			using (TextReader reader = document.SourceCode.Read())
 			{
-				ResearchLineEnding(document, node);
-				ResearchLineBeginning(document, node, indentOptions);
+				source = reader.ReadToEnd();
 			}
 
-			ResearchLastLine(document, lastLineOptions);
+			List<string> lines = new List<string>(source.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+
+			for (int i = 0; i < lines.Count; i++)
+			{
+				int lineNumber = i + 1;
+				string lineText = lines[i];
+
+				CheckLineEnding(document, lineText, lineNumber);
+				CheckIndentation(document, lineText, lineNumber, indentOptions);
+				CheckLineLength(document, lineText, lineNumber, charLimitOptions);
+			}
+
+			CheckLastLine(document, source, lines.Count, lastLineOptions);
 		}
 
 		/// <summary>
-		/// Researches the ending of the line.
+		/// Checks the ending of specified code line.
 		/// </summary>
-		private void ResearchLineEnding(CsDocument document, Node<CsToken> node)
+		private void CheckLineEnding(CsDocument document, string lineText, int lineNumber)
 		{
-			if (node.Next != null && node.Next.Value.CsTokenType != CsTokenType.EndOfLine)
+			if (lineText.Length == 0)
 				return;
 
-			if (node.Value.CsTokenType == CsTokenType.WhiteSpace)
+			char lastChar = lineText[lineText.Length - 1];
+			if (Char.IsWhiteSpace(lastChar))
 			{
 				m_parent.AddViolation(
 					document.RootElement,
-					node.Value.LineNumber,
+					lineNumber,
 					Rules.CodeLineMustNotEndWithWhitespace);
 			}
 		}
 
 		/// <summary>
-		/// Researches the beginning of the line.
+		/// Checks indentation in specified code line.
 		/// </summary>
-		private void ResearchLineBeginning(CsDocument document, Node<CsToken> node, IndentOptionsData indentOptions)
+		private void CheckIndentation(CsDocument document, string lineText, int lineNumber, IndentOptionsData indentOptions)
 		{
-			if (node.Previous == null || node.Previous.Value.CsTokenType != CsTokenType.EndOfLine)
+			if (lineText.Trim().Length == 0)
 				return;
 
-			if (node.Value.CsTokenType != CsTokenType.WhiteSpace)
-				return;
+			bool containsTabs = false;
+			bool containsSpaces = false;
+			foreach (char c in lineText)
+			{
+				if (!Char.IsWhiteSpace(c))
+					break;
 
-			bool containsTabs = node.Value.Text.Contains("\t");
-			bool containsSpaces = node.Value.Text.Contains(" ");
+				switch (c)
+				{
+					case '\t':
+						containsTabs = true;
+						break;
 
-			bool failed = false;
+					case ' ':
+						containsSpaces = true;
+						break;
+				}
+			}
+
+			bool failed = true;
 			switch (indentOptions.Mode)
 			{
 				case IndentMode.Tabs:
@@ -119,36 +148,63 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				m_parent.AddViolation(
 					document.RootElement,
-					node.Value.LineNumber,
+					lineNumber,
 					Rules.CheckAllowedIndentationCharacters,
 					indentOptions.GetContextValues());
 			}
 		}
 
 		/// <summary>
-		/// Researches the last line.
+		/// Checks length of specified code line.
 		/// </summary>
-		private void ResearchLastLine(CsDocument document, LastLineOptionsData lastLineOptions)
+		private void CheckLineLength(CsDocument document, IEnumerable<char> lineText, int lineNumber, CharLimitOptionsData charLimitOptions)
 		{
-			CsToken token = document.Tokens.Last.Value;
-
-			bool failed = false;
-			switch (lastLineOptions.Mode)
+			int length = 0;
+			foreach (char c in lineText)
 			{
-				case LastLineMode.Empty:
-					failed = token.CsTokenType != CsTokenType.EndOfLine;
-					break;
-
-				case LastLineMode.NotEmpty:
-					failed = token.CsTokenType == CsTokenType.EndOfLine;
-					break;
+				if (c == '\t')
+				{
+					length += charLimitOptions.TabSize.Value;
+				}
+				else
+				{
+					length += 1;
+				}
 			}
 
-			if (failed)
+			if (length > charLimitOptions.Limit.Value)
 			{
 				m_parent.AddViolation(
 					document.RootElement,
-					token.LineNumber,
+					lineNumber,
+					Rules.CodeLineMustNotBeLongerThan,
+					charLimitOptions.Limit.Value,
+					length);
+			}
+		}
+
+		/// <summary>
+		/// Checks the last code line.
+		/// </summary>
+		private void CheckLastLine(CsDocument document, string sourceText, int lineNumber, LastLineOptionsData lastLineOptions)
+		{
+			bool passed = false;
+			switch (lastLineOptions.Mode)
+			{
+				case LastLineMode.Empty:
+					passed = sourceText.EndsWith(Environment.NewLine);
+					break;
+
+				case LastLineMode.NotEmpty:
+					passed = !sourceText.EndsWith(Environment.NewLine);
+					break;
+			}
+
+			if (!passed)
+			{
+				m_parent.AddViolation(
+					document.RootElement,
+					lineNumber,
 					Rules.CheckWhetherLastCodeLineIsEmpty,
 					lastLineOptions.GetContextValues());
 			}
