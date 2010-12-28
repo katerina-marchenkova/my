@@ -54,9 +54,9 @@
 		CodeLineMustNotEndWithWhitespace,
 
 		/// <summary>
-		/// Validates that spacing at the beginning of the each code line uses identical characters.
+		/// Checks characters used for indentation.
 		/// </summary>
-		CodeLineMustBeginWithIdenticalWhitespaces,
+		CheckAllowedIndentationCharacters,
 
 		/// <summary>
 		/// Checks whether last code line is empty or not.

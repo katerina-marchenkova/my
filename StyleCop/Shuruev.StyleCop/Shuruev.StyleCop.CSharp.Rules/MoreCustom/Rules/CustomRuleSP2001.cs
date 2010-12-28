@@ -10,7 +10,7 @@
 		/// </summary>
 		internal CustomRuleSP2001()
 			: base(
-				Rules.CodeLineMustBeginWithIdenticalWhitespaces,
+				Rules.CheckAllowedIndentationCharacters,
 				"SP2001",
 				"SP2001_Mode",
 				CustomRulesResources.DescriptionSP2001,

@@ -28,7 +28,7 @@ namespace Shuruev.StyleCop.CSharp
 		#region Properties
 
 		/// <summary>
-		/// Gets or sets rule object.
+		/// Gets rule object.
 		/// </summary>
 		internal Rules Rule { get; private set; }
 

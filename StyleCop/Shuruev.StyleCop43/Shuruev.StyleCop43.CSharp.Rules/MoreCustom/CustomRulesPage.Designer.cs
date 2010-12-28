@@ -131,7 +131,7 @@
 			// columnRule
 			// 
 			this.columnRule.Text = "Rule";
-			this.columnRule.Width = 250;
+			this.columnRule.Width = 300;
 			// 
 			// columnOptions
 			// 

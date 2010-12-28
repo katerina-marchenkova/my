@@ -70,7 +70,7 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validates that spacing at the beginning of the each code line uses identical characters..
+        ///   Looks up a localized string similar to Checks characters used for indentation..
         /// </summary>
         internal static string DescriptionSP2001 {
             get {
@@ -150,29 +150,74 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spaces only.
+        ///   Looks up a localized string similar to Do not use different indendation characters within one code line..
         /// </summary>
-        internal static string IndentOptionsSpacesOnly {
+        internal static string IndentContextBoth {
             get {
-                return ResourceManager.GetString("IndentOptionsSpacesOnly", resourceCulture);
+                return ResourceManager.GetString("IndentContextBoth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only space characters are allowed to be used for indentation..
+        /// </summary>
+        internal static string IndentContextSpaces {
+            get {
+                return ResourceManager.GetString("IndentContextSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only tab characters are allowed to be used for indentation..
+        /// </summary>
+        internal static string IndentContextTabs {
+            get {
+                return ResourceManager.GetString("IndentContextTabs", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tabs and spaces.
         /// </summary>
-        internal static string IndentOptionsTabsAndSpaces {
+        internal static string IndentOptionsBoth {
             get {
-                return ResourceManager.GetString("IndentOptionsTabsAndSpaces", resourceCulture);
+                return ResourceManager.GetString("IndentOptionsBoth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spaces only.
+        /// </summary>
+        internal static string IndentOptionsSpaces {
+            get {
+                return ResourceManager.GetString("IndentOptionsSpaces", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tabs only.
         /// </summary>
-        internal static string IndentOptionsTabsOnly {
+        internal static string IndentOptionsTabs {
             get {
-                return ResourceManager.GetString("IndentOptionsTabsOnly", resourceCulture);
+                return ResourceManager.GetString("IndentOptionsTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to should always.
+        /// </summary>
+        internal static string LastLineContextEmpty {
+            get {
+                return ResourceManager.GetString("LastLineContextEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to should not.
+        /// </summary>
+        internal static string LastLineContextNotEmpty {
+            get {
+                return ResourceManager.GetString("LastLineContextNotEmpty", resourceCulture);
             }
         }
         

@@ -121,7 +121,7 @@
     <value>Validates the spacing at the end of the each code line.</value>
   </data>
   <data name="DescriptionSP2001" xml:space="preserve">
-    <value>Validates that spacing at the beginning of the each code line uses identical characters.</value>
+    <value>Checks characters used for indentation.</value>
   </data>
   <data name="DescriptionSP2002" xml:space="preserve">
     <value>Checks whether last code line is empty or not.</value>
@@ -151,14 +151,29 @@
   <data name="ExampleSP2101" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ExampleImages\ExampleSP2101.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IndentOptionsSpacesOnly" xml:space="preserve">
-    <value>Spaces only</value>
+  <data name="IndentContextBoth" xml:space="preserve">
+    <value>Do not use different indendation characters within one code line.</value>
   </data>
-  <data name="IndentOptionsTabsAndSpaces" xml:space="preserve">
+  <data name="IndentContextSpaces" xml:space="preserve">
+    <value>Only space characters are allowed to be used for indentation.</value>
+  </data>
+  <data name="IndentContextTabs" xml:space="preserve">
+    <value>Only tab characters are allowed to be used for indentation.</value>
+  </data>
+  <data name="IndentOptionsBoth" xml:space="preserve">
     <value>Tabs and spaces</value>
   </data>
-  <data name="IndentOptionsTabsOnly" xml:space="preserve">
+  <data name="IndentOptionsSpaces" xml:space="preserve">
+    <value>Spaces only</value>
+  </data>
+  <data name="IndentOptionsTabs" xml:space="preserve">
     <value>Tabs only</value>
+  </data>
+  <data name="LastLineContextEmpty" xml:space="preserve">
+    <value>should always</value>
+  </data>
+  <data name="LastLineContextNotEmpty" xml:space="preserve">
+    <value>should not</value>
   </data>
   <data name="LastLineOptionsEmpty" xml:space="preserve">
     <value>Empty</value>

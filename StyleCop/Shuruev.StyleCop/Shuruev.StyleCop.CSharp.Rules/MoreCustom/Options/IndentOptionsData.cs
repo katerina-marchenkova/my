@@ -52,11 +52,29 @@ namespace Shuruev.StyleCop.CSharp
 			switch (Mode)
 			{
 				case IndentMode.Tabs:
-					return CustomRulesResources.IndentOptionsTabsOnly;
+					return CustomRulesResources.IndentOptionsTabs;
 				case IndentMode.Spaces:
-					return CustomRulesResources.IndentOptionsSpacesOnly;
+					return CustomRulesResources.IndentOptionsSpaces;
 				case IndentMode.Both:
-					return CustomRulesResources.IndentOptionsTabsAndSpaces;
+					return CustomRulesResources.IndentOptionsBoth;
+				default:
+					throw new InvalidOperationException();
+			}
+		}
+
+		/// <summary>
+		/// Gets objects for constructing context string.
+		/// </summary>
+		public object[] GetContextValues()
+		{
+			switch (Mode)
+			{
+				case IndentMode.Tabs:
+					return new object[] { CustomRulesResources.IndentContextTabs };
+				case IndentMode.Spaces:
+					return new object[] { CustomRulesResources.IndentContextSpaces };
+				case IndentMode.Both:
+					return new object[] { CustomRulesResources.IndentContextBoth };
 				default:
 					throw new InvalidOperationException();
 			}

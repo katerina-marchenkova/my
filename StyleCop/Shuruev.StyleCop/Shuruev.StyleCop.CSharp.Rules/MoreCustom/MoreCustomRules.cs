@@ -31,27 +31,41 @@ namespace Shuruev.StyleCop.CSharp
 			FullTokenResearch(doc);
 		}
 
+		#region Working with settings
+
+		/// <summary>
+		/// Gets options data for specified rule.
+		/// </summary>
+		private T GetOptionsData<T>(CodeDocument document, Rules rule) where T : ICustomRuleOptionsData
+		{
+			CustomRule customRule = CustomRules.Get(rule);
+			T data = (T)customRule.CreateOptionsData();
+
+			string settingValue = SettingsManager.GetValue<string>(m_parent, document.Settings, customRule.SettingName);
+			data.ConvertFromValue(settingValue);
+
+			return data;
+		}
+
+		#endregion
+
 		#region Full token research
 
 		/// <summary>
-		/// Iterates through all tokens in the document
+		/// Iterates through all tokens in the document.
 		/// </summary>
 		private void FullTokenResearch(CsDocument document)
 		{
-			//xxx
-			CustomRule rule = CustomRules.Get(Rules.CodeLineMustBeginWithIdenticalWhitespaces);
-			IndentOptionsData data = (IndentOptionsData)rule.CreateOptionsData();
-			string settingValue = SettingsManager.GetValue<string>(
-				m_parent,
-				document.Settings,
-				rule.SettingName);
-			data.ConvertFromValue(settingValue);
+			var indentOptions = GetOptionsData<IndentOptionsData>(document, Rules.CheckAllowedIndentationCharacters);
+			var lastLineOptions = GetOptionsData<LastLineOptionsData>(document, Rules.CheckWhetherLastCodeLineIsEmpty);
 
 			for (Node<CsToken> node = document.Tokens.First; node != null; node = node.Next)
 			{
 				ResearchLineEnding(document, node);
-				ResearchLineBeginning(document, node, data);
+				ResearchLineBeginning(document, node, indentOptions);
 			}
+
+			ResearchLastLine(document, lastLineOptions);
 		}
 
 		/// <summary>
@@ -106,7 +120,37 @@ namespace Shuruev.StyleCop.CSharp
 				m_parent.AddViolation(
 					document.RootElement,
 					node.Value.LineNumber,
-					Rules.CodeLineMustBeginWithIdenticalWhitespaces);
+					Rules.CheckAllowedIndentationCharacters,
+					indentOptions.GetContextValues());
+			}
+		}
+
+		/// <summary>
+		/// Researches the last line.
+		/// </summary>
+		private void ResearchLastLine(CsDocument document, LastLineOptionsData lastLineOptions)
+		{
+			CsToken token = document.Tokens.Last.Value;
+
+			bool failed = false;
+			switch (lastLineOptions.Mode)
+			{
+				case LastLineMode.Empty:
+					failed = token.CsTokenType != CsTokenType.EndOfLine;
+					break;
+
+				case LastLineMode.NotEmpty:
+					failed = token.CsTokenType == CsTokenType.EndOfLine;
+					break;
+			}
+
+			if (failed)
+			{
+				m_parent.AddViolation(
+					document.RootElement,
+					token.LineNumber,
+					Rules.CheckWhetherLastCodeLineIsEmpty,
+					lastLineOptions.GetContextValues());
 			}
 		}
 

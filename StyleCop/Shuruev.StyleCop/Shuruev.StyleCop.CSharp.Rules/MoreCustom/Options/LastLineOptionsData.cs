@@ -59,5 +59,21 @@ namespace Shuruev.StyleCop.CSharp
 					throw new InvalidOperationException();
 			}
 		}
+
+		/// <summary>
+		/// Gets objects for constructing context string.
+		/// </summary>
+		public object[] GetContextValues()
+		{
+			switch (Mode)
+			{
+				case LastLineMode.Empty:
+					return new object[] { CustomRulesResources.LastLineContextEmpty };
+				case LastLineMode.NotEmpty:
+					return new object[] { CustomRulesResources.LastLineContextNotEmpty };
+				default:
+					throw new InvalidOperationException();
+			}
+		}
 	}
 }

@@ -162,7 +162,7 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CodeLineMustBeginWithIdenticalWhitespaces // Mode = Tabs
+#region CheckAllowedIndentationCharacters // Mode = Tabs
 
 //# (SP2001_Mode = Tabs)
 
@@ -258,7 +258,7 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CodeLineMustBeginWithIdenticalWhitespaces // Mode = Spaces
+#region CheckAllowedIndentationCharacters // Mode = Spaces
 
 //# (SP2001_Mode = Spaces)
 
@@ -354,7 +354,7 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CodeLineMustBeginWithIdenticalWhitespaces // Mode = Both
+#region CheckAllowedIndentationCharacters // Mode = Both
 
 //# (SP2001_Mode = Both)
 
@@ -479,5 +479,73 @@ namespace Shuruev.StyleCop.Test
 }
     
 //# [END]
+
+#endregion
+
+#region CheckWhetherLastCodeLineIsEmpty // Mode = Empty
+
+//# (SP2002_Mode = Empty)
+
+//# [OK]
+//# Source file is OK.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Source file without a line break at the end.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+
+			int a = 10;
+		}
+	}
+}//# [END]
+
+#endregion
+
+#region CheckWhetherLastCodeLineIsEmpty // Mode = NotEmpty
+
+//# (SP2002_Mode = NotEmpty)
+
+//# [ERROR]
+//# Source file with a line break at the end.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
+//# [OK]
+//# Source file is OK.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+
+			int a = 10;
+		}
+	}
+}//# [END]
 
 #endregion
