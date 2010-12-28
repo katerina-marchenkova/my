@@ -47,12 +47,16 @@ namespace Shuruev.StyleCop.CSharp
 		internal const string LocalConstant = "AdvancedNaming_LocalConstant";
 		internal const string Label = "AdvancedNaming_Label";
 
-		private static readonly List<string> s_groups = new List<string>();
-		private static readonly List<string> s_commons = new List<string>();
-		private static readonly Dictionary<string, List<string>> s_all = new Dictionary<string, List<string>>();
+		private static readonly List<string> s_groups;
+		private static readonly Dictionary<string, bool> s_commons;
+		private static readonly Dictionary<string, List<string>> s_all;
 
 		static NamingSettings()
 		{
+			s_groups = new List<string>();
+			s_commons = new Dictionary<string, bool>();
+			s_all = new Dictionary<string, List<string>>();
+
 			Add(Abbreviations, false, Resources.GroupSpecial);
 			Add(Words, false, Resources.GroupSpecial);
 			Add(Derivings, false, Resources.GroupSpecial);
@@ -106,7 +110,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (isCommon)
 			{
-				s_commons.Add(settingName);
+				s_commons.Add(settingName, false);
 			}
 
 			s_all[groupName].Add(settingName);
@@ -117,7 +121,15 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static List<string> GetCommon()
 		{
-			return new List<string>(s_commons);
+			return new List<string>(s_commons.Keys);
+		}
+
+		/// <summary>
+		/// Checks whether specified setting is a common one.
+		/// </summary>
+		public static bool IsCommon(string settingName)
+		{
+			return s_commons.ContainsKey(settingName);
 		}
 
 		/// <summary>

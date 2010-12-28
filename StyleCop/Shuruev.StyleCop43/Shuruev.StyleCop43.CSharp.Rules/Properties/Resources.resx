@@ -318,13 +318,50 @@ Please check that:
 You can enable them from Rules tab.</value>
   </data>
   <data name="WarningDisabledAdvancedNamingRulesUrl" xml:space="preserve">
-    <value>http://stylecopplus.codeplex.com/documentation/DisabledAdvancedNamingRules</value>
+    <value>http://stylecopplus.codeplex.com/documentation/xxx/DisabledAdvancedNamingRules</value>
   </data>
   <data name="WarningDontUseOriginalNamingRules" xml:space="preserve">
     <value>It seems that some original naming rules (SA15xx) are still enabled.
 There is no need to use them together with advanced naming rules.</value>
   </data>
   <data name="WarningDontUseOriginalNamingRulesUrl" xml:space="preserve">
-    <value>http://stylecopplus.codeplex.com/documentation/DontUseOriginalNamingRules</value>
+    <value>http://stylecopplus.codeplex.com/documentation/xxx/DontUseOriginalNamingRules</value>
+  </data>
+  <data name="CurlBottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurlBottom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurlBottomLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurlBottomLeft.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurlBottomRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurlBottomRight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurlRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurlRight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurlTopRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurlTopRight.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurlBottomRightTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurlBottomRightTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EmptyExampleDescription" xml:space="preserve">
+    <value>Select a rule from the list above.</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="GroupFormatting" xml:space="preserve">
+    <value>Formatting</value>
+  </data>
+  <data name="GroupReadability" xml:space="preserve">
+    <value>Readability</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

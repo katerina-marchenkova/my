@@ -47,6 +47,12 @@ namespace Shuruev.StyleCop.CSharp
 			if (DesignMode)
 				return;
 
+			if (!Visible)
+				return;
+
+			if (!SettingsGrabber.Initialized)
+				return;
+
 			UpdateWarnings();
 		}
 
@@ -82,6 +88,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void Initialize()
 		{
+			UpdateWarnings();
 			RebuildRuleList();
 		}
 
@@ -114,14 +121,14 @@ namespace Shuruev.StyleCop.CSharp
 			foreach (ListViewItem lvi in listRules.Items)
 			{
 				SettingTag tag = (SettingTag)lvi.Tag;
-				tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
-
 				if (tag.Modified)
 				{
+					tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
 					Page.Dirty = true;
 				}
 				else
 				{
+					tag.InheritedValue = SettingsManager.GetInheritedValue(Page, tag.SettingName);
 					tag.MergedValue = SettingsManager.GetMergedValue(Page, tag.SettingName);
 				}
 
@@ -138,12 +145,9 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Updates page warnings.
 		/// </summary>
-		private void UpdateWarnings()
+		public void UpdateWarnings()
 		{
 			warningArea.Clear();
-
-			if (!SettingsGrabber.Initialized)
-				return;
 
 			if (!SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, Rules.AdvancedNamingRules.ToString()))
 			{
@@ -214,41 +218,43 @@ namespace Shuruev.StyleCop.CSharp
 			SettingTag tag = (SettingTag)lvi.Tag;
 			ListViewItem.ListViewSubItem sub = lvi.SubItems[1];
 
-			sub.Font = tag.Modified ?
-				m_bold :
-				m_regular;
+			sub.Font = tag.Modified ? m_bold : m_regular;
+			sub.Text = GetPreviewText(tag.SettingName, tag.MergedValue);
 
-			if (tag.SettingName == NamingSettings.Abbreviations)
+			switch (tag.SettingName)
 			{
-				lvi.ImageKey = Pictures.CapitalLetter;
-				sub.Text = tag.MergedValue;
-				return;
-			}
+				case NamingSettings.Abbreviations:
+					lvi.ImageKey = Pictures.CapitalLetter;
+					break;
 
-			if (tag.SettingName == NamingSettings.Words)
-			{
-				lvi.ImageKey = Pictures.TwoLetters;
-				sub.Text = tag.MergedValue;
-				return;
-			}
+				case NamingSettings.Words:
+					lvi.ImageKey = Pictures.TwoLetters;
+					break;
 
-			if (tag.SettingName == NamingSettings.Derivings)
-			{
-				lvi.ImageKey = Pictures.RightArrow;
-				sub.Text = tag.MergedValue;
-				return;
-			}
+				case NamingSettings.Derivings:
+					lvi.ImageKey = Pictures.RightArrow;
+					break;
 
-			if (String.IsNullOrEmpty(tag.MergedValue))
-			{
-				lvi.ImageKey = Pictures.RuleDisabled;
-				sub.Text = Resources.DoNotCheck;
+				default:
+					lvi.ImageKey = String.IsNullOrEmpty(tag.MergedValue) ?
+						Pictures.RuleDisabled :
+						Pictures.RuleEnabled;
+					break;
 			}
-			else
-			{
-				lvi.ImageKey = Pictures.RuleEnabled;
-				sub.Text = NamingMacro.BuildExample(tag.MergedValue);
-			}
+		}
+
+		/// <summary>
+		/// Gets preview text for specified setting value.
+		/// </summary>
+		private static string GetPreviewText(string settingName, string settingValue)
+		{
+			if (String.IsNullOrEmpty(settingValue))
+				return Resources.DoNotCheck;
+
+			if (NamingSettings.IsCommon(settingName))
+				return NamingMacro.BuildExample(settingValue);
+
+			return settingValue;
 		}
 
 		/// <summary>
@@ -312,8 +318,8 @@ namespace Shuruev.StyleCop.CSharp
 			ListViewItem lvi = listRules.SelectedItems[0];
 			SettingTag tag = (SettingTag)lvi.Tag;
 
-			string example = NamingMacro.BuildExample(tag.InheritedValue);
-			if (Messages.ShowWarningYesNo(this, Resources.ResetSettingQuestion, example) != DialogResult.Yes)
+			string preview = GetPreviewText(tag.SettingName, tag.InheritedValue);
+			if (Messages.ShowWarningYesNo(this, Resources.ResetSettingQuestion, preview) != DialogResult.Yes)
 				return;
 
 			tag.MergedValue = tag.InheritedValue;

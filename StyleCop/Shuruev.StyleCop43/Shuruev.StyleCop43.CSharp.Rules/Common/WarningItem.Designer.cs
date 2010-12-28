@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WarningItem));
 			this.panelBorder = new System.Windows.Forms.Panel();
 			this.panelContent = new System.Windows.Forms.Panel();
 			this.tableContent = new System.Windows.Forms.TableLayoutPanel();
@@ -87,7 +86,7 @@
 			// pictureIcon
 			// 
 			this.pictureIcon.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.pictureIcon.Image = ((System.Drawing.Image)(resources.GetObject("pictureIcon.Image")));
+			this.pictureIcon.Image = global::Shuruev.StyleCop.CSharp.Properties.Resources.Warning;
 			this.pictureIcon.Location = new System.Drawing.Point(8, 4);
 			this.pictureIcon.Name = "pictureIcon";
 			this.pictureIcon.Size = new System.Drawing.Size(16, 16);

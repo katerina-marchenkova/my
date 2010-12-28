@@ -94,6 +94,48 @@ namespace Shuruev.StyleCop.CSharp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CurlBottom {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlBottomLeft {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottomLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlBottomRight {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottomRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlBottomRightTransparent {
+            get {
+                object obj = ResourceManager.GetObject("CurlBottomRightTransparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlRight {
+            get {
+                object obj = ResourceManager.GetObject("CurlRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurlTopRight {
+            get {
+                object obj = ResourceManager.GetObject("CurlTopRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Derived class.
         /// </summary>
@@ -113,11 +155,38 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not check.
         /// </summary>
         internal static string DoNotCheck {
             get {
                 return ResourceManager.GetString("DoNotCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a rule from the list above..
+        /// </summary>
+        internal static string EmptyExampleDescription {
+            get {
+                return ResourceManager.GetString("EmptyExampleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        internal static string Enabled {
+            get {
+                return ResourceManager.GetString("Enabled", resourceCulture);
             }
         }
         
@@ -149,6 +218,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formatting.
+        /// </summary>
+        internal static string GroupFormatting {
+            get {
+                return ResourceManager.GetString("GroupFormatting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Methods, Events and Delegates.
         /// </summary>
         internal static string GroupMethods {
@@ -167,11 +245,27 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Readability.
+        /// </summary>
+        internal static string GroupReadability {
+            get {
+                return ResourceManager.GetString("GroupReadability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Special.
         /// </summary>
         internal static string GroupSpecial {
             get {
                 return ResourceManager.GetString("GroupSpecial", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Help {
+            get {
+                object obj = ResourceManager.GetObject("Help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -586,7 +680,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/DisabledAdvancedNamingRules.
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/xxx/DisabledAdvancedNamingRules.
         /// </summary>
         internal static string WarningDisabledAdvancedNamingRulesUrl {
             get {
@@ -605,7 +699,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/DontUseOriginalNamingRules.
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/xxx/DontUseOriginalNamingRules.
         /// </summary>
         internal static string WarningDontUseOriginalNamingRulesUrl {
             get {

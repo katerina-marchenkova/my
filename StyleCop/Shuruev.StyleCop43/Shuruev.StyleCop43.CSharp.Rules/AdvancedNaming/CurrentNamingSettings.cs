@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.StyleCop;
-using Microsoft.StyleCop.CSharp;
 
 namespace Shuruev.StyleCop.CSharp
 {

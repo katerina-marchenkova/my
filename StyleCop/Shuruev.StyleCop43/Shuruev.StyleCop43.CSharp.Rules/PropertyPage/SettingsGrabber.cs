@@ -83,9 +83,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static bool IsAnalyzerEnabled(string analyzerId)
 		{
-			Dictionary<string, TreeNode> rulesMap = s_ruleNodes[analyzerId];
-
-			foreach (TreeNode ruleNode in rulesMap.Values)
+			foreach (TreeNode ruleNode in GetRuleNodes(analyzerId))
 			{
 				if (GetRuleEnabled(ruleNode))
 					return true;
@@ -99,9 +97,35 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static bool IsRuleEnabled(string analyzerId, string ruleName)
 		{
-			Dictionary<string, TreeNode> rulesMap = s_ruleNodes[analyzerId];
-			TreeNode ruleNode = rulesMap[ruleName];
+			TreeNode ruleNode = GetRuleNode(analyzerId, ruleName);
 			return GetRuleEnabled(ruleNode);
+		}
+
+		/// <summary>
+		/// Enables specified rule.
+		/// </summary>
+		public static void EnableRule(string analyzerId, string ruleName)
+		{
+			TreeNode ruleNode = GetRuleNode(analyzerId, ruleName);
+			SetRuleEnabled(ruleNode, true);
+		}
+
+		/// <summary>
+		/// Disables specified rule.
+		/// </summary>
+		public static void DisableRule(string analyzerId, string ruleName)
+		{
+			TreeNode ruleNode = GetRuleNode(analyzerId, ruleName);
+			SetRuleEnabled(ruleNode, false);
+		}
+
+		/// <summary>
+		/// Checks whether specified rule is bold.
+		/// </summary>
+		public static bool IsRuleBold(string analyzerId, string ruleName)
+		{
+			TreeNode ruleNode = GetRuleNode(analyzerId, ruleName);
+			return GetRuleBold(ruleNode);
 		}
 
 		#endregion
@@ -109,11 +133,48 @@ namespace Shuruev.StyleCop.CSharp
 		#region Working with rules tree
 
 		/// <summary>
+		/// Gets tree node for specified rule.
+		/// </summary>
+		private static TreeNode GetRuleNode(string analyzerId, string ruleName)
+		{
+			Dictionary<string, TreeNode> rulesMap = s_ruleNodes[analyzerId];
+			return rulesMap[ruleName];
+		}
+
+		/// <summary>
+		/// Gets tree nodes for all rules of specified analyzer.
+		/// </summary>
+		private static IEnumerable<TreeNode> GetRuleNodes(string analyzerId)
+		{
+			Dictionary<string, TreeNode> rulesMap = s_ruleNodes[analyzerId];
+			return rulesMap.Values;
+		}
+
+		/// <summary>
 		/// Gets a value indicating whether specified rule is enabled.
 		/// </summary>
 		private static bool GetRuleEnabled(TreeNode ruleNode)
 		{
 			return ruleNode.Checked;
+		}
+
+		/// <summary>
+		/// Sets a value indicating whether specified rule is enabled.
+		/// </summary>
+		private static void SetRuleEnabled(TreeNode ruleNode, bool enabled)
+		{
+			ruleNode.Checked = enabled;
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether specified rule is bold.
+		/// </summary>
+		private static bool GetRuleBold(TreeNode ruleNode)
+		{
+			if (ruleNode.NodeFont == null)
+				return false;
+
+			return ruleNode.NodeFont.Bold;
 		}
 
 		#endregion

@@ -30,6 +30,7 @@ namespace Shuruev.StyleCop.CSharp
 			m_analyzer = analyzer;
 
 			namingRulesPage.Page = this;
+			customRulesPage.Page = this;
 		}
 
 		#region Properties
@@ -88,6 +89,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			SettingsGrabber.Initialize(m_tabControl);
 			namingRulesPage.Initialize();
+			customRulesPage.Initialize();
 		}
 
 		/// <summary>
@@ -96,6 +98,9 @@ namespace Shuruev.StyleCop.CSharp
 		public bool Apply()
 		{
 			if (!namingRulesPage.Apply())
+				return false;
+
+			if (!customRulesPage.Apply())
 				return false;
 
 			return true;
@@ -130,7 +135,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void RefreshSettingsOverrideState()
 		{
+			SettingsGrabber.Initialize(m_tabControl);
+
 			namingRulesPage.RefreshSettingsOverrideState();
+			customRulesPage.RefreshSettingsOverrideState();
 		}
 
 		#endregion
