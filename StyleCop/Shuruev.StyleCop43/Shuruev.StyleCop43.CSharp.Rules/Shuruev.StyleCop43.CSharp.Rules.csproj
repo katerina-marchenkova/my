@@ -120,6 +120,14 @@
     <Compile Include="Common\Messages.cs" />
     <Compile Include="Common\Colors.cs" />
     <Compile Include="Common\Pictures.cs" />
+    <Compile Include="MoreCustom\Options\CharLimitOptionsData.cs" />
+    <Compile Include="MoreCustom\Options\CustomRuleCharLimitOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreCustom\Options\CustomRuleCharLimitOptions.Designer.cs">
+      <DependentUpon>CustomRuleCharLimitOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreCustom\Options\NumericValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtendedOriginal\ExtendedOriginalRules.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -241,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\WarningItem.resx">
       <DependentUpon>WarningItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreCustom\Options\CustomRuleCharLimitOptions.resx">
+      <DependentUpon>CustomRuleCharLimitOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StyleCopPlus.xml">
       <SubType>Designer</SubType>

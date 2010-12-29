@@ -3,30 +3,22 @@
 namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// Control displaying limit options.
+	/// Control displaying char limit options.
 	/// </summary>
-	public partial class CustomRuleLimitOptions : CustomRuleOptions
+	public partial class CustomRuleCharLimitOptions : CustomRuleLimitOptions
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public CustomRuleLimitOptions()
+		public CustomRuleCharLimitOptions()
+			: base(CustomRulesResources.LimitOptionsCharDescription)
 		{
 			InitializeComponent();
 		}
 
-		/// <summary>
-		/// Initializes a new instance.
-		/// </summary>
-		public CustomRuleLimitOptions(string description)
-			: this()
-		{
-			labelDescription.Text = description;
-		}
-
 		#region Event handlers
 
-		private void textLimit_TextChanged(object sender, EventArgs e)
+		private void textTabSize_TextChanged(object sender, EventArgs e)
 		{
 			OnOptionsDataChanged(e);
 		}
@@ -40,8 +32,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		protected override void DisplayOptionsData(ICustomRuleOptionsData data)
 		{
-			LimitOptionsData options = (LimitOptionsData)data;
+			CharLimitOptionsData options = (CharLimitOptionsData)data;
+
 			textLimit.Text = options.Limit.Value.ToString();
+			textTabSize.Text = options.TabSize.Value.ToString();
 		}
 
 		/// <summary>
@@ -49,8 +43,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		protected override void ParseOptionsData(ICustomRuleOptionsData data)
 		{
-			LimitOptionsData options = (LimitOptionsData)data;
+			CharLimitOptionsData options = (CharLimitOptionsData)data;
+
 			options.Limit.Parse(textLimit.Text);
+			options.TabSize.Parse(textTabSize.Text);
 		}
 
 		#endregion

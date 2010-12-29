@@ -7,59 +7,56 @@ namespace Shuruev.StyleCop.CSharp
 	/// </summary>
 	public class LimitOptionsData : ICustomRuleOptionsData
 	{
-		private const int c_defaultLimit = 100;
-		private const int c_minLimit = 1;
-		private const int c_maxLimit = 100000;
-
+		private readonly NumericValue m_limit;
 		private readonly string m_textFormat;
-
-		/// <summary>
-		/// Gets or sets limit value.
-		/// </summary>
-		public int Limit { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public LimitOptionsData(string textFormat)
+		public LimitOptionsData(NumericValue limit, string textFormat)
 		{
+			m_limit = limit;
 			m_textFormat = textFormat;
-
-			Limit = c_defaultLimit;
 		}
+
+		#region Properties
+
+		/// <summary>
+		/// Gets limit value.
+		/// </summary>
+		public NumericValue Limit
+		{
+			get { return m_limit; }
+		}
+
+		#endregion
+
+		#region Implementation of ICustomRuleOptionsData
 
 		/// <summary>
 		/// Initializes object data from setting value.
 		/// </summary>
-		public void ConvertFromValue(string settingValue)
+		public virtual void ConvertFromValue(string settingValue)
 		{
-			int limit;
-			if (!Int32.TryParse(settingValue, out limit))
-				return;
-
-			if (limit < c_minLimit)
-				limit = c_minLimit;
-
-			if (limit > c_maxLimit)
-				limit = c_maxLimit;
-
-			Limit = limit;
+			Limit.Parse(settingValue);
 		}
 
 		/// <summary>
 		/// Converts object data to setting value.
 		/// </summary>
-		public string ConvertToValue()
+		public virtual string ConvertToValue()
 		{
-			return Limit.ToString();
+			return Limit.Value.ToString();
 		}
 
 		/// <summary>
 		/// Gets a friendly description for options data.
 		/// </summary>
-		public string GetDescription()
+		public virtual string GetDescription()
 		{
-			return String.Format(m_textFormat, Limit);
+			return String.Format(m_textFormat, Limit.Value);
 		}
+
+		#endregion
 	}
 }

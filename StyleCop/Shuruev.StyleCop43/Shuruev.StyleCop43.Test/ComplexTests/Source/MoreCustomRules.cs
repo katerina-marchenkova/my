@@ -160,6 +160,23 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
+//# [ERROR:3]
+//# Summary contains whitespaces at the end of the lines.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		/// <summary> 
+		/// Test summary. 
+		/// </summary> 
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
 #endregion
 
 #region CheckAllowedIndentationCharacters // Mode = Tabs
@@ -480,6 +497,23 @@ namespace Shuruev.StyleCop.Test
     
 //# [END]
 
+//# [ERROR:3]
+//# Summary contains whitespaces after indentation tabs.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		 /// <summary>
+		 /// Test summary.
+		 /// </summary>
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
 #endregion
 
 #region CheckWhetherLastCodeLineIsEmpty // Mode = Empty
@@ -490,13 +524,6 @@ namespace Shuruev.StyleCop.Test
 //# Source file is OK.
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
-	{
-		public void TestMethod()
-		{
-			int a = 10;
-		}
-	}
 }
 //# [END]
 
@@ -504,15 +531,16 @@ namespace Shuruev.StyleCop.Test
 //# Source file without a line break at the end.
 namespace Shuruev.StyleCop.Test
 {
-	public class TestClass
-	{
-		public void TestMethod()
-		{
-
-			int a = 10;
-		}
-	}
 }//# [END]
+
+//# [OK]
+//# Source file contains line break at the end.
+
+//# [END]
+
+//# [ERROR]
+//# Source file doesn't contain a line break at the end.
+//# [END]
 
 #endregion
 
@@ -524,8 +552,39 @@ namespace Shuruev.StyleCop.Test
 //# Source file with a line break at the end.
 namespace Shuruev.StyleCop.Test
 {
+}
+//# [END]
+
+//# [OK]
+//# Source file is OK.
+namespace Shuruev.StyleCop.Test
+{
+}//# [END]
+
+//# [ERROR]
+//# Source file contains line break at the end.
+
+//# [END]
+
+//# [OK]
+//# Source file doesn't contain a line break at the end.
+//# [END]
+
+#endregion
+
+#region CodeLineMustNotBeLongerThan // Limit = 40:4
+
+//# (SP2100_Limit = 40:4)
+
+//# [OK]
+//# All lines are less than 40 chars.
+namespace Shuruev.StyleCop.Test
+{
 	public class TestClass
 	{
+		/// <summary>
+		/// Test summary.
+		/// </summary>
 		public void TestMethod()
 		{
 			int a = 10;
@@ -535,17 +594,85 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 //# [OK]
-//# Source file is OK.
+//# Summary line is 40 chars.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
 	{
+		/// <summary>
+		/// Test summary (almost large).
+		/// </summary>
 		public void TestMethod()
 		{
-
 			int a = 10;
 		}
 	}
-}//# [END]
+}
+//# [END]
+
+//# [ERROR]
+//# Summary line is 41 chars.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		/// <summary>
+		/// Test summary (too large now).
+		/// </summary>
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# First line is 40 chars, second is 41.
+namespace Shuruev.StyleCop.Test
+{
+										
+										 
+}
+//# [END]
+
+#endregion
+
+#region CodeLineMustNotBeLongerThan // Limit = 40:8
+
+//# (SP2100_Limit = 40:8)
+
+//# [ERROR:2]
+//# First line is 80 chars, second is 81.
+namespace Shuruev.StyleCop.Test
+{
+										
+										 
+}
+//# [END]
+
+//# [ERROR]
+//# First line is 40 chars, second is 41.
+namespace Shuruev.StyleCop.Test
+{
+					
+					 
+}
+//# [END]
+
+#endregion
+
+#region CodeLineMustNotBeLongerThan // Limit = 5:0
+
+//# (SP2100_Limit = 5:0)
+
+//# [ERROR:2]
+//# Zero tab size should be treated as 1.
+namespace Shuruev.StyleCop.Test
+{
+					
+					 
+}
+//# [END]
 
 #endregion

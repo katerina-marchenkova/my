@@ -31,7 +31,9 @@
 		/// </summary>
 		public override ICustomRuleOptionsData CreateOptionsData()
 		{
-			return new LimitOptionsData(CustomRulesResources.LimitOptionsLineFormat);
+			return new LimitOptionsData(
+				NumericValue.CreateLineLimit(),
+				CustomRulesResources.LimitOptionsLineFormat);
 		}
 	}
 }

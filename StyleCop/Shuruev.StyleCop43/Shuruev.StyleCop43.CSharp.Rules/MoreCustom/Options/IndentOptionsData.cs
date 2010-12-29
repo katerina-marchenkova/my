@@ -10,17 +10,23 @@ namespace Shuruev.StyleCop.CSharp
 		private const IndentMode c_defaultMode = IndentMode.Tabs;
 
 		/// <summary>
-		/// Gets or sets indentation mode.
-		/// </summary>
-		public IndentMode Mode { get; set; }
-
-		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
 		public IndentOptionsData()
 		{
 			Mode = c_defaultMode;
 		}
+
+		#region Properties
+
+		/// <summary>
+		/// Gets or sets indentation mode.
+		/// </summary>
+		public IndentMode Mode { get; set; }
+
+		#endregion
+
+		#region Implementation of ICustomRuleOptionsData
 
 		/// <summary>
 		/// Initializes object data from setting value.
@@ -62,6 +68,10 @@ namespace Shuruev.StyleCop.CSharp
 			}
 		}
 
+		#endregion
+
+		#region Additional methods
+
 		/// <summary>
 		/// Gets objects for constructing context string.
 		/// </summary>
@@ -79,5 +89,7 @@ namespace Shuruev.StyleCop.CSharp
 					throw new InvalidOperationException();
 			}
 		}
+
+		#endregion
 	}
 }
