@@ -676,3 +676,183 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 #endregion
+
+#region MethodMustNotContainMoreLinesThan
+
+//# (SP2101_Limit = 3)
+
+//# [OK]
+//# All elements size are valid.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			int a = 10;
+		}
+
+		~TestClass()
+		{
+			int a = 10;
+		}
+
+		public void TestMethod()
+		{
+			int a = 10;
+		}
+
+		public static bool operator +(TestClass x, TestClass y)
+		{
+			return false;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Constructor violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public TestClass()
+		{
+			int a = 10;
+			int b = 20;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Destructor violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		~TestClass()
+		{
+			int a = 10;
+			int b = 20;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Method violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			int a = 10;
+			int b = 20;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Operator violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public static bool operator +(TestClass x, TestClass y)
+		{
+			int a = 10;
+			return false;
+		}
+	}
+}
+//# [END]
+
+#endregion
+
+#region PropertyMustNotContainMoreLinesThan
+
+//# (SP2102_Limit = 3)
+
+//# [OK]
+//# All elements size are valid.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int Count
+		{
+			get
+			{
+				return 0;
+			}
+			set
+			{
+				int a = 10;
+			}
+		}
+
+		public int this[int index]
+		{
+			get
+			{
+				return 0;
+			}
+			set
+			{
+				int a = 10;
+			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Property violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int Count
+		{
+			get
+			{
+				int a = 10;
+				return 0;
+			}
+			set
+			{
+				int a = 10;
+				int b = 20;
+			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Indexer violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int this[int index]
+		{
+			get
+			{
+				int a = 10;
+				return 0;
+			}
+			set
+			{
+				int a = 10;
+				int b = 20;
+			}
+		}
+	}
+}
+//# [END]
+
+#endregion

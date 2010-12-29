@@ -479,5 +479,19 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		#endregion
+
+		#region Working with elements size
+
+		/// <summary>
+		/// Gets element size in line count.
+		/// </summary>
+		public static int GetElementSizeByDeclaration(CsElement element)
+		{
+			var open = FindNextValueableNode(element.Declaration.Tokens.Last);
+			var close = element.Tokens.Last;
+			return close.Value.LineNumber - open.Value.LineNumber + 1;
+		}
+
+		#endregion
 	}
 }

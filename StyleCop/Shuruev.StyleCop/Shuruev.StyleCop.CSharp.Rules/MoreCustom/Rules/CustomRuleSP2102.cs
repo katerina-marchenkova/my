@@ -1,20 +1,20 @@
 ﻿namespace Shuruev.StyleCop.CSharp
 {
 	/// <summary>
-	/// SP2101 custom rule.
+	/// SP2102 custom rule.
 	/// </summary>
-	public class CustomRuleSP2101 : CustomRule
+	public class CustomRuleSP2102 : CustomRule
 	{
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		internal CustomRuleSP2101()
+		internal CustomRuleSP2102()
 			: base(
-				Rules.MethodMustNotContainMoreLinesThan,
-				"SP2101",
-				"SP2101_Limit",
-				CustomRulesResources.DescriptionSP2101,
-				CustomRulesResources.ExampleSP2101)
+				Rules.PropertyMustNotContainMoreLinesThan,
+				"SP2102",
+				"SP2102_Limit",
+				CustomRulesResources.DescriptionSP2102,
+				CustomRulesResources.ExampleSP2102)
 		{
 		}
 
@@ -32,7 +32,7 @@
 		public override ICustomRuleOptionsData CreateOptionsData()
 		{
 			return new LimitOptionsData(
-				NumericValue.CreateMethodSize(),
+				NumericValue.CreatePropertySize(),
 				CustomRulesResources.LimitOptionsLineFormat);
 		}
 	}

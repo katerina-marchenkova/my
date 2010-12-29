@@ -133,6 +133,7 @@
       <DependentUpon>WarningItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="MoreCustom\CustomRulesSettings.cs" />
     <Compile Include="MoreCustom\ICustomRuleOptionsData.cs" />
     <Compile Include="MoreCustom\CustomRuleTag.cs" />
     <Compile Include="MoreCustom\CustomRules.cs" />
@@ -173,6 +174,7 @@
       <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="MoreCustom\Options\NumericValue.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2102.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2100.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2101.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2002.cs" />
@@ -362,6 +364,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2102.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -61,6 +61,36 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class Class1
+        ///	{
+        ///		private int m_field = 5;
+        ///
+        ///		public Class1()
+        ///		{
+        ///			int a = 10;
+        ///		}
+        ///
+        ///		public Class1(int x)
+        ///			: this()
+        ///		{
+        ///			int a = 10;
+        ///			int b = 20;
+        ///		}
+        ///
+        ///		~Class1() { int a = 10; }
+        ///	}
+        ///}
+        ///.
+        /// </summary>
+        internal static string ElementsSize {
+            get {
+                return ResourceManager.GetString("ElementsSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to using System;
         ///using System.IO;
         ///using System.Threading;
@@ -157,10 +187,10 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         ///
         ///namespace Shuruev.StyleCop.Test
         ///{
+        ///	public delegate bool Delegate1(int x, int y);
+        ///
         ///	public class Class1
         ///	{
-        ///		public delegate bool Delegate1(int x, int y);
-        ///
         ///		public Class1(
         ///			IEnumerable&lt;int&gt; list,
         ///			IComparable&lt;string&gt; comparer)
@@ -179,7 +209,7 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         ///				int b)
         ///				{ return a == b; }).GetHashCode();
         ///
-        ///			new De [rest of string was truncated]&quot;;.
+        ///			new Del [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Parameters {
             get {
@@ -224,18 +254,22 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         ///
         ///namespace Shuruev.StyleCop.Test
         ///{
-        ///	public class Class1
-        ///	{
-        ///		public delegate TOutput Delegate1&lt;TInput, TOutput&gt;(TInput args)
-        ///			where TInput : IEnumerable&lt;int&gt;
-        ///			where TOutput : IEnumerable&lt;int&gt;;
+        ///	public delegate TOutput Delegate1&lt;
+        ///		TInput,
+        ///		TOutput&gt;(TInput args)
+        ///		where TInput : IEnumerable&lt;int&gt;
+        ///		where TOutput : IEnumerable&lt;int&gt;;
         ///
-        ///		public delegate TOutput Delegate2&lt;in TInput, out TOutput&gt;(TInput args)
-        ///			where TInput : IEnumerable&lt;int&gt;
-        ///			where TOutput : IEnumerable&lt;int&gt;;
-        ///	}
-        ///}
-        ///.
+        ///	public delegate TOutput Delegate2&lt;
+        ///		in TInput,
+        ///		out TOutput&gt;(TInput args)
+        ///		where TInput : IEnumerable&lt;int&gt;
+        ///		where TOutput : IEnumerable&lt;int&gt;;
+        ///
+        ///	public delegate bool Delegate3&lt;in TInput&gt;(TInput args)
+        ///		where TInput : IEnumerable&lt;byte&gt;;
+        ///
+        ///	public delegate TOutput Delegate4&lt;out TOu [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TypeParameters {
             get {

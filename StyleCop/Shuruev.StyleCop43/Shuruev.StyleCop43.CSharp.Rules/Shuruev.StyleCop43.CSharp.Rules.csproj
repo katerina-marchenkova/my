@@ -120,6 +120,7 @@
     <Compile Include="Common\Messages.cs" />
     <Compile Include="Common\Colors.cs" />
     <Compile Include="Common\Pictures.cs" />
+    <Compile Include="MoreCustom\CustomRulesSettings.cs" />
     <Compile Include="MoreCustom\Options\CharLimitOptionsData.cs" />
     <Compile Include="MoreCustom\Options\CustomRuleCharLimitOptions.cs">
       <SubType>UserControl</SubType>
@@ -128,6 +129,7 @@
       <DependentUpon>CustomRuleCharLimitOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="MoreCustom\Options\NumericValue.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2102.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtendedOriginal\ExtendedOriginalRules.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -292,6 +294,7 @@
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2101.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MoreCustom\Rules\ExampleImages\ExampleSP2102.png" />
     <Content Include="Resources\CurlBottom.png" />
     <Content Include="Resources\CurlBottomLeft.png" />
     <Content Include="Resources\CurlBottomRight.png" />

@@ -72,11 +72,19 @@ namespace Shuruev.StyleCop.CSharp
 		}
 
 		/// <summary>
-		/// Creates numeric value holding line count limit.
+		/// Creates numeric value holding method line count limit.
 		/// </summary>
-		public static NumericValue CreateLineLimit()
+		public static NumericValue CreateMethodSize()
 		{
 			return new NumericValue(120, 1, 100000);
+		}
+
+		/// <summary>
+		/// Creates numeric value holding property line count limit.
+		/// </summary>
+		public static NumericValue CreatePropertySize()
+		{
+			return new NumericValue(40, 1, 100000);
 		}
 
 		/// <summary>

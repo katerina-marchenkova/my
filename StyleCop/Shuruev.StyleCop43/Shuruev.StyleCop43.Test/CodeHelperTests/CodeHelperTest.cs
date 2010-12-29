@@ -41,20 +41,42 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 		/// </summary>
 		private static CsElement GetElementByName(CsDocument document, string name)
 		{
-			return GetElementByName(document.RootElement.ChildElements, StyleCop43Compatibility.ModifySourceForTest(name));
+			return GetElementByName(
+				document.RootElement.ChildElements,
+				StyleCop43Compatibility.ModifySourceForTest(name),
+				false);
 		}
 
 		/// <summary>
 		/// Gets element by name.
 		/// </summary>
-		private static CsElement GetElementByName(IEnumerable<CsElement> elements, string name)
+		private static CsElement GetElementByQualifiedName(CsDocument document, string qualifiedName)
+		{
+			return GetElementByName(
+				document.RootElement.ChildElements,
+				qualifiedName,
+				true);
+		}
+
+		/// <summary>
+		/// Gets element by name.
+		/// </summary>
+		private static CsElement GetElementByName(IEnumerable<CsElement> elements, string name, bool fullyQualified)
 		{
 			foreach (CsElement element in elements)
 			{
-				if (element.Name == name)
-					return element;
+				if (fullyQualified)
+				{
+					if (element.FullyQualifiedName == name)
+						return element;
+				}
+				else
+				{
+					if (element.Name == name)
+						return element;
+				}
 
-				CsElement result = GetElementByName(element.ChildElements, name);
+				CsElement result = GetElementByName(element.ChildElements, name, fullyQualified);
 				if (result != null)
 					return result;
 			}
@@ -369,6 +391,54 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 			AssertLabel("lab8", 44, labels[7]);
 			AssertLabel("lab9", 48, labels[8]);
 			AssertLabel("lab10", 53, labels[9]);
+		}
+
+		#endregion
+
+		#region Working with elements size
+
+		[TestMethod]
+		public void Get_Element_Size_By_Declaration()
+		{
+			int size;
+			CsDocument document = BuildCodeDocument(Source.ElementsSize);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.Class1"));
+			Assert.AreEqual(3, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.Class1%int%int"));
+			Assert.AreEqual(4, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.~Class1"));
+			Assert.AreEqual(1, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.Property.get"));
+			Assert.AreEqual(1, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.Property.set"));
+			Assert.AreEqual(6, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.this%int.get"));
+			Assert.AreEqual(2, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(
+				GetElementByQualifiedName(document, "Root.Shuruev.StyleCop.Test.Class1.this%int.set"));
+			Assert.AreEqual(2, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(GetElementByName(document, "method Method1"));
+			Assert.AreEqual(3, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(GetElementByName(document, "method Method2<T>"));
+			Assert.AreEqual(4, size);
+
+			size = CodeHelper.GetElementSizeByDeclaration(GetElementByName(document, "method operator +"));
+			Assert.AreEqual(3, size);
 		}
 
 		#endregion

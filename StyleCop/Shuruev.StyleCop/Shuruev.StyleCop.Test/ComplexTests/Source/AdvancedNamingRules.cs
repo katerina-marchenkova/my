@@ -158,6 +158,10 @@ namespace Shuruev.StyleCop.Test
 				TestDelegate lambda = (A, B) => A == B;
 				return 0;
 			}
+			set
+			{
+				TestDelegate lambda = (A, B) => A == B;
+			}
 		}
 
 		public int this[int Y]
@@ -166,6 +170,10 @@ namespace Shuruev.StyleCop.Test
 			{
 				TestDelegate lambda = (A, B) => A == B;
 				return 0;
+			}
+			set
+			{
+				TestDelegate lambda = (A, B) => A == B;
 			}
 		}
 
@@ -205,7 +213,7 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
-//# [ERROR]
+//# [ERROR:2]
 //# Invalid parameter names in property.
 namespace Shuruev.StyleCop.Test
 {
@@ -218,12 +226,16 @@ namespace Shuruev.StyleCop.Test
 				TestDelegate lambda = (A1, B1) => A1 == B1;
 				return 0;
 			}
+			set
+			{
+				TestDelegate lambda = (A1, B1) => A1 == B1;
+			}
 		}
 	}
 }
 //# [END]
 
-//# [ERROR:2]
+//# [ERROR:3]
 //# Invalid parameter names in indexer.
 namespace Shuruev.StyleCop.Test
 {
@@ -235,6 +247,10 @@ namespace Shuruev.StyleCop.Test
 			{
 				TestDelegate lambda = (A1, B1) => A1 == B1;
 				return 0;
+			}
+			set
+			{
+				TestDelegate lambda = (A1, B1) => A1 == B1;
 			}
 		}
 	}
@@ -439,12 +455,21 @@ namespace Shuruev.StyleCop.Test
 			int A = 10;
 		}
 
+		~TestClass()
+		{
+			int A = 10;
+		}
+
 		public int Count
 		{
 			get
 			{
 				int A = 10;
 				return 0;
+			}
+			set
+			{
+				int A = 10;
 			}
 		}
 
@@ -454,6 +479,10 @@ namespace Shuruev.StyleCop.Test
 			{
 				int A = 10;
 				return 0;
+			}
+			set
+			{
+				int A = 10;
 			}
 		}
 
@@ -490,7 +519,21 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 //# [ERROR]
-//# Invalid local variable name in property.
+//# Invalid local variable name in destructor.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		~TestClass()
+		{
+			int X = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid local variable names in property.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -502,13 +545,17 @@ namespace Shuruev.StyleCop.Test
 				int X = 10;
 				return 0;
 			}
+			set
+			{
+				int X = 10;
+			}
 		}
 	}
 }
 //# [END]
 
-//# [ERROR]
-//# Invalid local variable name in indexer.
+//# [ERROR:2]
+//# Invalid local variable names in indexer.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -519,6 +566,10 @@ namespace Shuruev.StyleCop.Test
 			{
 				int X = 10;
 				return 0;
+			}
+			set
+			{
+				int X = 10;
 			}
 		}
 	}
@@ -576,12 +627,21 @@ namespace Shuruev.StyleCop.Test
 			const int A = 10;
 		}
 
+		~TestClass()
+		{
+			const int A = 10;
+		}
+
 		public int Count
 		{
 			get
 			{
 				const int A = 10;
 				return 0;
+			}
+			set
+			{
+				const int A = 10;
 			}
 		}
 
@@ -591,6 +651,10 @@ namespace Shuruev.StyleCop.Test
 			{
 				const int A = 10;
 				return 0;
+			}
+			set
+			{
+				const int A = 10;
 			}
 		}
 
@@ -627,7 +691,21 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 //# [ERROR]
-//# Invalid local constant name in property.
+//# Invalid local constant name in destructor.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		~TestClass()
+		{
+			const int X = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid local constant names in property.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -639,13 +717,17 @@ namespace Shuruev.StyleCop.Test
 				const int X = 10;
 				return 0;
 			}
+			set
+			{
+				const int X = 10;
+			}
 		}
 	}
 }
 //# [END]
 
-//# [ERROR]
-//# Invalid local constant name in indexer.
+//# [ERROR:2]
+//# Invalid local constant names in indexer.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -656,6 +738,10 @@ namespace Shuruev.StyleCop.Test
 			{
 				const int X = 10;
 				return 0;
+			}
+			set
+			{
+				const int X = 10;
 			}
 		}
 	}
@@ -713,12 +799,23 @@ namespace Shuruev.StyleCop.Test
 			int a = 10;
 		}
 
+		~TestClass()
+		{
+			LAB1:
+			int a = 10;
+		}
+
 		public int Count
 		{
 			get
 			{
 				LAB2:
 				return 0;
+			}
+			set
+			{
+				LAB2:
+				int a = 10;
 			}
 		}
 
@@ -728,6 +825,11 @@ namespace Shuruev.StyleCop.Test
 			{
 				LAB3:
 				return 0;
+			}
+			set
+			{
+				LAB3:
+				int a = 10;
 			}
 		}
 
@@ -766,7 +868,22 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 //# [ERROR]
-//# Invalid label name in property.
+//# Invalid label name in destructor.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		~TestClass()
+		{
+			lab1:
+			int a = 10;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Invalid label names in property.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -778,13 +895,18 @@ namespace Shuruev.StyleCop.Test
 				lab2:
 				return 0;
 			}
+			set
+			{
+				lab2:
+				int a = 10;
+			}
 		}
 	}
 }
 //# [END]
 
-//# [ERROR]
-//# Invalid label name in indexer.
+//# [ERROR:2]
+//# Invalid label names in indexer.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -795,6 +917,11 @@ namespace Shuruev.StyleCop.Test
 			{
 				lab3:
 				return 0;
+			}
+			set
+			{
+				lab3:
+				int a = 10;
 			}
 		}
 	}

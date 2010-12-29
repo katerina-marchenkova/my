@@ -24,6 +24,7 @@ namespace Shuruev.StyleCop.CSharp
 
 			Add(new CustomRuleSP2100(), Resources.GroupReadability);
 			Add(new CustomRuleSP2101(), Resources.GroupReadability);
+			Add(new CustomRuleSP2102(), Resources.GroupReadability);
 		}
 
 		/// <summary>

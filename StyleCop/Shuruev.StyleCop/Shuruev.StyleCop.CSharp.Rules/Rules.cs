@@ -69,9 +69,14 @@
 		CodeLineMustNotBeLongerThan,
 
 		/// <summary>
-		/// Validates that method body does not contain more code line than specified.
+		/// Validates that method body does not contain more code lines than specified.
 		/// </summary>
-		MethodMustNotContainMoreLinesThan
+		MethodMustNotContainMoreLinesThan,
+
+		/// <summary>
+		/// Validates that property body does not contain more code lines than specified.
+		/// </summary>
+		PropertyMustNotContainMoreLinesThan
 
 		#endregion
 	}

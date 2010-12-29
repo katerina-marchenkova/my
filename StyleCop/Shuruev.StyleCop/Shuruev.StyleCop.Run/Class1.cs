@@ -4,23 +4,42 @@ using System.IO;
 
 namespace Shuruev.StyleCop.Test
 {
-	public class Class1 : IDisposable
+	public class Class1
 	{
-		/// <summary>
-		/// 1234567890
-		/// 12345678901234567890
-        /// 1234567890123456789012345678fgss
-		/// 1234567890123456789012345678901234567890
-		/// 12345678901234567890123456789012345678901234567890
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		void IDisposable.Dispose()
+		public Class1()
 		{
-			label2:
-			for (int i = 0; i < 10; i++)
+			int AAA = 10;
+		}
+
+		public Class1(int z)
+			: this()
+		{
+		zzz:
+			int AAA = 10;
+		}
+
+		~Class1()
+		{
+		ZZZ:
+			int AAA = 10;
+		}
+
+		public string P
+		{
+			get
 			{
-				goto label2;
+				return null;
 			}
+			set
+			{
+				int a = 10;
+				int b = 10;
+			}
+		}
+
+		public void A()
+		{
+			int a = 10;
 		}
 	}
 }

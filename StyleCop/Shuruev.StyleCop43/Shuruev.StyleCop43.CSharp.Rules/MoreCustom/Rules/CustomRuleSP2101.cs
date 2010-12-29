@@ -32,7 +32,7 @@
 		public override ICustomRuleOptionsData CreateOptionsData()
 		{
 			return new LimitOptionsData(
-				NumericValue.CreateLineLimit(),
+				NumericValue.CreateMethodSize(),
 				CustomRulesResources.LimitOptionsLineFormat);
 		}
 	}

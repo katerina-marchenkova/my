@@ -106,11 +106,20 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validates that method body does not contain more code line than specified..
+        ///   Looks up a localized string similar to Validates that method body does not contain more code lines than specified..
         /// </summary>
         internal static string DescriptionSP2101 {
             get {
                 return ResourceManager.GetString("DescriptionSP2101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validates that property body does not contain more code lines than specified..
+        /// </summary>
+        internal static string DescriptionSP2102 {
+            get {
+                return ResourceManager.GetString("DescriptionSP2102", resourceCulture);
             }
         }
         
@@ -154,6 +163,13 @@ namespace Shuruev.StyleCop.CSharp {
         internal static System.Drawing.Bitmap ExampleSP2101 {
             get {
                 object obj = ResourceManager.GetObject("ExampleSP2101", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExampleSP2102 {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSP2102", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

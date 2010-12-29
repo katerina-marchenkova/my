@@ -29,39 +29,21 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public void AnalyzeDocument(CodeDocument document)
 		{
+			CustomRulesSettings settings = new CustomRulesSettings();
+			settings.Initialize(m_parent, document);
+
 			CsDocument doc = (CsDocument)document;
-			AnalyzePlainText(doc);
+			AnalyzePlainText(doc, settings);
+			AnalyzeElements(doc.RootElement.ChildElements, settings);
 		}
-
-		#region Working with settings
-
-		/// <summary>
-		/// Gets options data for specified rule.
-		/// </summary>
-		private T GetOptionsData<T>(CodeDocument document, Rules rule) where T : ICustomRuleOptionsData
-		{
-			CustomRule customRule = CustomRules.Get(rule);
-			T data = (T)customRule.CreateOptionsData();
-
-			string settingValue = SettingsManager.GetValue<string>(m_parent, document.Settings, customRule.SettingName);
-			data.ConvertFromValue(settingValue);
-
-			return data;
-		}
-
-		#endregion
 
 		#region Plain text analysis
 
 		/// <summary>
 		/// Analyzes source code as plain text.
 		/// </summary>
-		private void AnalyzePlainText(CsDocument document)
+		private void AnalyzePlainText(CsDocument document, CustomRulesSettings settings)
 		{
-			var indentOptions = GetOptionsData<IndentOptionsData>(document, Rules.CheckAllowedIndentationCharacters);
-			var lastLineOptions = GetOptionsData<LastLineOptionsData>(document, Rules.CheckWhetherLastCodeLineIsEmpty);
-			var charLimitOptions = GetOptionsData<CharLimitOptionsData>(document, Rules.CodeLineMustNotBeLongerThan);
-
 			string source;
 			using (TextReader reader = document.SourceCode.Read())
 			{
@@ -76,11 +58,11 @@ namespace Shuruev.StyleCop.CSharp
 				string lineText = lines[i];
 
 				CheckLineEnding(document, lineText, lineNumber);
-				CheckIndentation(document, lineText, lineNumber, indentOptions);
-				CheckLineLength(document, lineText, lineNumber, charLimitOptions);
+				CheckIndentation(document, lineText, lineNumber, settings);
+				CheckLineLength(document, lineText, lineNumber, settings);
 			}
 
-			CheckLastLine(document, source, lines.Count, lastLineOptions);
+			CheckLastLine(document, source, lines.Count, settings);
 		}
 
 		/// <summary>
@@ -104,7 +86,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks indentation in specified code line.
 		/// </summary>
-		private void CheckIndentation(CsDocument document, string lineText, int lineNumber, IndentOptionsData indentOptions)
+		private void CheckIndentation(CsDocument document, string lineText, int lineNumber, CustomRulesSettings settings)
 		{
 			if (lineText.Trim().Length == 0)
 				return;
@@ -129,7 +111,7 @@ namespace Shuruev.StyleCop.CSharp
 			}
 
 			bool failed = true;
-			switch (indentOptions.Mode)
+			switch (settings.IndentOptions.Mode)
 			{
 				case IndentMode.Tabs:
 					failed = containsSpaces;
@@ -150,21 +132,21 @@ namespace Shuruev.StyleCop.CSharp
 					document.RootElement,
 					lineNumber,
 					Rules.CheckAllowedIndentationCharacters,
-					indentOptions.GetContextValues());
+					settings.IndentOptions.GetContextValues());
 			}
 		}
 
 		/// <summary>
 		/// Checks length of specified code line.
 		/// </summary>
-		private void CheckLineLength(CsDocument document, IEnumerable<char> lineText, int lineNumber, CharLimitOptionsData charLimitOptions)
+		private void CheckLineLength(CsDocument document, string lineText, int lineNumber, CustomRulesSettings settings)
 		{
 			int length = 0;
 			foreach (char c in lineText)
 			{
 				if (c == '\t')
 				{
-					length += charLimitOptions.TabSize.Value;
+					length += settings.CharLimitOptions.TabSize.Value;
 				}
 				else
 				{
@@ -172,13 +154,13 @@ namespace Shuruev.StyleCop.CSharp
 				}
 			}
 
-			if (length > charLimitOptions.Limit.Value)
+			if (length > settings.CharLimitOptions.Limit.Value)
 			{
 				m_parent.AddViolation(
 					document.RootElement,
 					lineNumber,
 					Rules.CodeLineMustNotBeLongerThan,
-					charLimitOptions.Limit.Value,
+					settings.CharLimitOptions.Limit.Value,
 					length);
 			}
 		}
@@ -186,10 +168,10 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks the last code line.
 		/// </summary>
-		private void CheckLastLine(CsDocument document, string sourceText, int lineNumber, LastLineOptionsData lastLineOptions)
+		private void CheckLastLine(CsDocument document, string sourceText, int lineNumber, CustomRulesSettings settings)
 		{
 			bool passed = false;
-			switch (lastLineOptions.Mode)
+			switch (settings.LastLineOptions.Mode)
 			{
 				case LastLineMode.Empty:
 					passed = sourceText.EndsWith(Environment.NewLine);
@@ -206,7 +188,134 @@ namespace Shuruev.StyleCop.CSharp
 					document.RootElement,
 					lineNumber,
 					Rules.CheckWhetherLastCodeLineIsEmpty,
-					lastLineOptions.GetContextValues());
+					settings.LastLineOptions.GetContextValues());
+			}
+		}
+
+		#endregion
+
+		#region Analysis by elements
+
+		/// <summary>
+		/// Analyzes a collection of elements.
+		/// </summary>
+		private void AnalyzeElements(IEnumerable<CsElement> elements, CustomRulesSettings settings)
+		{
+			foreach (CsElement element in elements)
+			{
+				AnalyzeElement(element, settings);
+				AnalyzeElements(element.ChildElements, settings);
+			}
+		}
+
+		/// <summary>
+		/// Analyzes specified element.
+		/// </summary>
+		private void AnalyzeElement(CsElement element, CustomRulesSettings settings)
+		{
+			switch (element.ElementType)
+			{
+				case ElementType.Constructor:
+					AnalyzeConstructor(element, settings);
+					break;
+				case ElementType.Destructor:
+					AnalyzeDestructor(element, settings);
+					break;
+				case ElementType.Indexer:
+					AnalyzeIndexer(element, settings);
+					break;
+				case ElementType.Method:
+					AnalyzeMethod(element, settings);
+					break;
+				case ElementType.Property:
+					AnalyzeProperty(element, settings);
+					break;
+			}
+		}
+
+		/// <summary>
+		/// Analyzes constructor element.
+		/// </summary>
+		private void AnalyzeConstructor(CsElement element, CustomRulesSettings settings)
+		{
+			CheckSizeLimit(
+				element,
+				Rules.MethodMustNotContainMoreLinesThan,
+				settings.MethodSizeOptions.Limit);
+		}
+
+		/// <summary>
+		/// Analyzes destructor element.
+		/// </summary>
+		private void AnalyzeDestructor(CsElement element, CustomRulesSettings settings)
+		{
+			CheckSizeLimit(
+				element,
+				Rules.MethodMustNotContainMoreLinesThan,
+				settings.MethodSizeOptions.Limit);
+		}
+
+		/// <summary>
+		/// Analyzes indexer element.
+		/// </summary>
+		private void AnalyzeIndexer(CsElement element, CustomRulesSettings settings)
+		{
+			Indexer indexer = (Indexer)element;
+
+			CheckSizeLimit(
+				indexer.GetAccessor,
+				Rules.PropertyMustNotContainMoreLinesThan,
+				settings.PropertySizeOptions.Limit);
+
+			CheckSizeLimit(
+				indexer.SetAccessor,
+				Rules.PropertyMustNotContainMoreLinesThan,
+				settings.PropertySizeOptions.Limit);
+		}
+
+		/// <summary>
+		/// Analyzes method element.
+		/// </summary>
+		private void AnalyzeMethod(CsElement element, CustomRulesSettings settings)
+		{
+			CheckSizeLimit(
+				element,
+				Rules.MethodMustNotContainMoreLinesThan,
+				settings.MethodSizeOptions.Limit);
+		}
+
+		/// <summary>
+		/// Analyzes property element.
+		/// </summary>
+		private void AnalyzeProperty(CsElement element, CustomRulesSettings settings)
+		{
+			Property property = (Property)element;
+
+			CheckSizeLimit(
+				property.GetAccessor,
+				Rules.PropertyMustNotContainMoreLinesThan,
+				settings.PropertySizeOptions.Limit);
+
+			CheckSizeLimit(
+				property.SetAccessor,
+				Rules.PropertyMustNotContainMoreLinesThan,
+				settings.PropertySizeOptions.Limit);
+		}
+
+		/// <summary>
+		/// Checks if specified element violates size limit.
+		/// </summary>
+		private void CheckSizeLimit(CsElement element, Rules rule, NumericValue limit)
+		{
+			int size = CodeHelper.GetElementSizeByDeclaration(element);
+
+			if (size > limit.Value)
+			{
+				m_parent.AddViolation(
+					element,
+					rule,
+					limit.Value,
+					size);
 			}
 		}
 

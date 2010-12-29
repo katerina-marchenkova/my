@@ -67,6 +67,9 @@ namespace Shuruev.StyleCop.CSharp
 				case ElementType.Delegate:
 					AnalyzeDelegate(element, settings);
 					break;
+				case ElementType.Destructor:
+					AnalyzeDestructor(element, settings);
+					break;
 				case ElementType.Enum:
 					AnalyzeEnum(element, settings);
 					break;
@@ -137,6 +140,16 @@ namespace Shuruev.StyleCop.CSharp
 			CheckDeclaration(element, settings, NamingSettings.Delegate);
 			CheckTypeParameters(element, settings);
 			CheckParameters(element, settings);
+		}
+
+		/// <summary>
+		/// Analyzes destructor element.
+		/// </summary>
+		private void AnalyzeDestructor(CsElement element, CurrentNamingSettings settings)
+		{
+			CheckParameters(element, settings);
+			CheckLocalDeclarations(element, settings);
+			CheckLabels(element, settings);
 		}
 
 		/// <summary>
