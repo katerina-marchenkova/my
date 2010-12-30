@@ -124,7 +124,7 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://www.google.com/search?q=xxx{0}.
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/wikipage?title={0}.
         /// </summary>
         internal static string DetailsUrl {
             get {

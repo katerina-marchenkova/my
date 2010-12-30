@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Shuruev.StyleCop.CSharp.Properties;
 
 namespace Shuruev.StyleCop.CSharp
 {
@@ -38,6 +39,35 @@ namespace Shuruev.StyleCop.CSharp
 			tableWarnings.Controls.Clear();
 			tableWarnings.RowCount = 0;
 			tableWarnings.RowStyles.Clear();
+		}
+
+		/// <summary>
+		/// Adds specified warning.
+		/// </summary>
+		/// <remarks>
+		/// In future this method should be replaced with separate class
+		/// holding all different warning types.
+		/// </remarks>
+		public void Add(string warningCode)
+		{
+			string warningText;
+			if (warningCode == Resources.WarningDisabledAdvancedNamingRulesCode)
+			{
+				warningText = Resources.WarningDisabledAdvancedNamingRulesDescription;
+			}
+			else if (warningCode == Resources.WarningDontUseOriginalNamingRulesCode)
+			{
+				warningText = Resources.WarningDontUseOriginalNamingRulesDescription;
+			}
+			else
+			{
+				throw new InvalidOperationException(
+					String.Format("Unknown warning code: {0}", warningCode));
+			}
+
+			string warningUrl = String.Format(Resources.WarningUrl, warningCode);
+
+			Add(warningText, warningUrl);
 		}
 
 		/// <summary>

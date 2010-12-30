@@ -151,15 +151,11 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (!SettingsGrabber.IsRuleEnabled(Page.Analyzer.Id, Rules.AdvancedNamingRules.ToString()))
 			{
-				warningArea.Add(
-					Resources.WarningDisabledAdvancedNamingRules,
-					Resources.WarningDisabledAdvancedNamingRulesUrl);
+				warningArea.Add(Resources.WarningDisabledAdvancedNamingRulesCode);
 			}
 			else if (SettingsGrabber.IsAnalyzerEnabled(Constants.NamingRulesAnalyzerId))
 			{
-				warningArea.Add(
-					Resources.WarningDontUseOriginalNamingRules,
-					Resources.WarningDontUseOriginalNamingRulesUrl);
+				warningArea.Add(Resources.WarningDontUseOriginalNamingRulesCode);
 			}
 		}
 

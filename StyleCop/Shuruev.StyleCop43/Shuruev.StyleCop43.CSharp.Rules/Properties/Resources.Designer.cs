@@ -670,21 +670,30 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced naming rules are currently disabled.
-        ///You can enable them from Rules tab..
+        ///   Looks up a localized string similar to DisabledAdvancedNamingRules.
         /// </summary>
-        internal static string WarningDisabledAdvancedNamingRules {
+        internal static string WarningDisabledAdvancedNamingRulesCode {
             get {
-                return ResourceManager.GetString("WarningDisabledAdvancedNamingRules", resourceCulture);
+                return ResourceManager.GetString("WarningDisabledAdvancedNamingRulesCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/xxx/DisabledAdvancedNamingRules.
+        ///   Looks up a localized string similar to Advanced naming rules are currently disabled.
+        ///You can enable them from Rules tab..
         /// </summary>
-        internal static string WarningDisabledAdvancedNamingRulesUrl {
+        internal static string WarningDisabledAdvancedNamingRulesDescription {
             get {
-                return ResourceManager.GetString("WarningDisabledAdvancedNamingRulesUrl", resourceCulture);
+                return ResourceManager.GetString("WarningDisabledAdvancedNamingRulesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DontUseOriginalNamingRules.
+        /// </summary>
+        internal static string WarningDontUseOriginalNamingRulesCode {
+            get {
+                return ResourceManager.GetString("WarningDontUseOriginalNamingRulesCode", resourceCulture);
             }
         }
         
@@ -692,18 +701,18 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         ///   Looks up a localized string similar to It seems that some original naming rules (SA15xx) are still enabled.
         ///There is no need to use them together with advanced naming rules..
         /// </summary>
-        internal static string WarningDontUseOriginalNamingRules {
+        internal static string WarningDontUseOriginalNamingRulesDescription {
             get {
-                return ResourceManager.GetString("WarningDontUseOriginalNamingRules", resourceCulture);
+                return ResourceManager.GetString("WarningDontUseOriginalNamingRulesDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/documentation/xxx/DontUseOriginalNamingRules.
+        ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/wikipage?title=Warnings#{0}.
         /// </summary>
-        internal static string WarningDontUseOriginalNamingRulesUrl {
+        internal static string WarningUrl {
             get {
-                return ResourceManager.GetString("WarningDontUseOriginalNamingRulesUrl", resourceCulture);
+                return ResourceManager.GetString("WarningUrl", resourceCulture);
             }
         }
     }
