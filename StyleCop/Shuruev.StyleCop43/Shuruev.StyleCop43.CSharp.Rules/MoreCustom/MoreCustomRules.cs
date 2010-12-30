@@ -262,15 +262,21 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			Indexer indexer = (Indexer)element;
 
-			CheckSizeLimit(
-				indexer.GetAccessor,
-				Rules.PropertyMustNotContainMoreLinesThan,
-				settings.PropertySizeOptions.Limit);
+			if (indexer.GetAccessor != null)
+			{
+				CheckSizeLimit(
+					indexer.GetAccessor,
+					Rules.PropertyMustNotContainMoreLinesThan,
+					settings.PropertySizeOptions.Limit);
+			}
 
-			CheckSizeLimit(
-				indexer.SetAccessor,
-				Rules.PropertyMustNotContainMoreLinesThan,
-				settings.PropertySizeOptions.Limit);
+			if (indexer.SetAccessor != null)
+			{
+				CheckSizeLimit(
+					indexer.SetAccessor,
+					Rules.PropertyMustNotContainMoreLinesThan,
+					settings.PropertySizeOptions.Limit);
+			}
 		}
 
 		/// <summary>
@@ -291,15 +297,21 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			Property property = (Property)element;
 
-			CheckSizeLimit(
-				property.GetAccessor,
-				Rules.PropertyMustNotContainMoreLinesThan,
-				settings.PropertySizeOptions.Limit);
+			if (property.GetAccessor != null)
+			{
+				CheckSizeLimit(
+					property.GetAccessor,
+					Rules.PropertyMustNotContainMoreLinesThan,
+					settings.PropertySizeOptions.Limit);
+			}
 
-			CheckSizeLimit(
-				property.SetAccessor,
-				Rules.PropertyMustNotContainMoreLinesThan,
-				settings.PropertySizeOptions.Limit);
+			if (property.SetAccessor != null)
+			{
+				CheckSizeLimit(
+					property.SetAccessor,
+					Rules.PropertyMustNotContainMoreLinesThan,
+					settings.PropertySizeOptions.Limit);
+			}
 		}
 
 		/// <summary>

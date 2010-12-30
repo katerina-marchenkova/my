@@ -809,8 +809,8 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
-//# [ERROR:2]
-//# Property violates size limit.
+//# [ERROR]
+//# Property getter violates size limit.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -822,6 +822,19 @@ namespace Shuruev.StyleCop.Test
 				int a = 10;
 				return 0;
 			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Property setter violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int Count
+		{
 			set
 			{
 				int a = 10;
@@ -832,8 +845,8 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
-//# [ERROR:2]
-//# Indexer violates size limit.
+//# [ERROR]
+//# Indexer getter violates size limit.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -845,6 +858,19 @@ namespace Shuruev.StyleCop.Test
 				int a = 10;
 				return 0;
 			}
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Indexer setter violates size limit.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public int this[int index]
+		{
 			set
 			{
 				int a = 10;
