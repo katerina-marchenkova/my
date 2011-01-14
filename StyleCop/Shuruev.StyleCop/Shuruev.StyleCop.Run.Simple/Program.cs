@@ -13,8 +13,8 @@ namespace Shuruev.StyleCop.Run.Simple
 		/// </summary>
 		public static void Main(string[] args)
 		{
-			string projectPath = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run";
-			string filePath = @"C:\Users\Public\GIT\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class1.cs";
+			string projectPath = @"C:\Users\Public\GIT\GitHub\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run";
+			string filePath = @"C:\Users\Public\GIT\GitHub\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class1.cs";
 
 			StyleCopConsole console = new StyleCopConsole(null, false, null, null, true);
 			CodeProject project = new CodeProject(0, projectPath, new Configuration(null));

@@ -50,7 +50,10 @@ namespace Shuruev.StyleCop.CSharp
 				source = reader.ReadToEnd();
 			}
 
-			List<string> lines = new List<string>(source.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+			List<string> lines = new List<string>(
+				source.Split(
+					new[] { "\r\n", "\r", "\n" },
+					StringSplitOptions.None));
 
 			for (int i = 0; i < lines.Count; i++)
 			{
@@ -170,15 +173,23 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		private void CheckLastLine(CsDocument document, string sourceText, int lineNumber, CustomRulesSettings settings)
 		{
+			if (sourceText.Length == 0)
+				return;
+
+			char lastChar = sourceText[sourceText.Length - 1];
+			bool endsWithLineBreak =
+				lastChar == '\r'
+				|| lastChar == '\n';
+
 			bool passed = false;
 			switch (settings.LastLineOptions.Mode)
 			{
 				case LastLineMode.Empty:
-					passed = sourceText.EndsWith(Environment.NewLine);
+					passed = endsWithLineBreak;
 					break;
 
 				case LastLineMode.NotEmpty:
-					passed = !sourceText.EndsWith(Environment.NewLine);
+					passed = !endsWithLineBreak;
 					break;
 			}
 
