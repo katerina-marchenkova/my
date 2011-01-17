@@ -32,6 +32,12 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 		}
 
 		[TestMethod]
+		public void Environmental_Complex_Tests()
+		{
+			RunTests(Source.Environmental);
+		}
+
+		[TestMethod]
 		public void Advanced_Naming_Rules_Complex_Tests()
 		{
 			RunTests(Source.AdvancedNamingRules);
@@ -61,7 +67,9 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 			StringBuilder sb = new StringBuilder();
 			BlockItem block = new BlockItem();
 
-			string[] lines = allText.Split(new[] { "\r\n" }, StringSplitOptions.None);
+			string[] lines = allText.Split(
+				new[] { "\r\n", "\r", "\n" },
+				StringSplitOptions.None);
 
 			foreach (string line in lines)
 			{
@@ -150,7 +158,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 
 			List<string> lines = new List<string>(
 				testText.Split(
-					new[] { "\r\n" },
+					new[] { "\r\n", "\r", "\n" },
 					StringSplitOptions.None));
 
 			if (lines.Count < 3)
@@ -198,7 +206,7 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 
 			lines.RemoveAt(0);
 			lines.RemoveAt(0);
-			test.SourceCode = String.Join("\r\n", lines.ToArray());
+			test.SourceCode = String.Join(Environment.NewLine, lines.ToArray());
 
 			return test;
 		}

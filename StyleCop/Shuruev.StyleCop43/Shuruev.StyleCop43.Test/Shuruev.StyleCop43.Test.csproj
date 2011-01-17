@@ -64,6 +64,7 @@
       <DependentUpon>Source.resx</DependentUpon>
     </Compile>
     <None Include="ComplexTests\Source\OneRun.cs" />
+    <None Include="ComplexTests\Source\Environmental.cs" />
     <Compile Include="ComplexTests\Source\Source.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

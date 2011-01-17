@@ -44,6 +44,40 @@ namespace Shuruev.StyleCop.CSharp
 			return null;
 		}
 
+		/// <summary>
+		/// Gets first code element at specified line number.
+		/// </summary>
+		public static CodeElement GetElementByLine(CsDocument document, int lineNumber)
+		{
+			object[] args = new object[] { lineNumber, null };
+			document.WalkDocument(FindByLineElementVisitor, null, args);
+
+			return (CodeElement)args[1];
+		}
+
+		/// <summary>
+		/// Tries to find element by line.
+		/// </summary>
+		private static bool FindByLineElementVisitor(
+			CsElement element,
+			CsElement parentElement,
+			object context)
+		{
+			object[] args = (object[])context;
+			int lineNumber = (int)args[0];
+
+			if (element.Location.StartPoint.LineNumber > lineNumber)
+				return false;
+
+			if (element.Location.StartPoint.LineNumber <= lineNumber
+				&& element.Location.EndPoint.LineNumber >= lineNumber)
+			{
+				args[1] = element;
+			}
+
+			return true;
+		}
+
 		#endregion
 
 		#region Running original analyzers

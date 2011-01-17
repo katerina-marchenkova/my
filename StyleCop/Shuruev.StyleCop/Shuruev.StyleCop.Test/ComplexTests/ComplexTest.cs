@@ -32,6 +32,12 @@ namespace Shuruev.StyleCop.Test.ComplexTests
 		}
 
 		[TestMethod]
+		public void Environmental_Complex_Tests()
+		{
+			RunTests(Source.Environmental);
+		}
+
+		[TestMethod]
 		public void Advanced_Naming_Rules_Complex_Tests()
 		{
 			RunTests(Source.AdvancedNamingRules);

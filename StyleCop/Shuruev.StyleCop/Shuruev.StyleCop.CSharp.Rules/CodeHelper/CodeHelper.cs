@@ -383,7 +383,7 @@ namespace Shuruev.StyleCop.CSharp
 
 		#endregion
 
-		#region Working with node tree
+		#region Working with code tree
 
 		/// <summary>
 		/// Gets first node by specified line number.

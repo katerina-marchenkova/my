@@ -40,6 +40,22 @@ namespace Shuruev.StyleCop.CSharp
 			return variable.Location.LineNumber + variable.Location.LineSpan - 1;
 		}
 
+		/// <summary>
+		/// Gets first code element at specified line number.
+		/// </summary>
+		public static ICodeElement GetElementByLine(CsDocument document, int lineNumber)
+		{
+			for (Node<CsToken> node = document.Tokens.First; node != null; node = node.Next)
+			{
+				if (node.Value.LineNumber == lineNumber)
+				{
+					return node.Value.FindParentElement();
+				}
+			}
+
+			return null;
+		}
+
 		#endregion
 
 		#region Running original analyzers

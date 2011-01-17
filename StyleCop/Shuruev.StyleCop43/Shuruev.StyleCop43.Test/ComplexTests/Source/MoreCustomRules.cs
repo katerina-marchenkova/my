@@ -538,8 +538,8 @@ namespace Shuruev.StyleCop.Test
 
 //# [END]
 
-//# [ERROR]
-//# Source file doesn't contain a line break at the end.
+//# [OK]
+//# Empty source file should be OK.
 //# [END]
 
 #endregion
@@ -567,7 +567,7 @@ namespace Shuruev.StyleCop.Test
 //# [END]
 
 //# [OK]
-//# Source file doesn't contain a line break at the end.
+//# Empty source file should be OK.
 //# [END]
 
 #endregion

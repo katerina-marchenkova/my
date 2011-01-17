@@ -5,11 +5,13 @@ using System.IO;
 
 namespace Shuruev.StyleCop.Test
 {
+	[SuppressMessage("Shuruev.StyleCop.CSharp.StyleCopPlus", "SP2100:CodeLineMustNotBeLongerThan", Justification = "Long lines are allowed for better maintability.")]
+	[SuppressMessage("Shuruev.StyleCop.CSharp.StyleCopPlus", "SP0100:AdvancedNamingRules", Justification = "Long lines are allowed for better maintability.")]
 	public class Class1
 	{
 		public Class1()
 		{
-			int aaa = 10;
+			int Aaa = 10;
 		}
 
 		public Class1(int z)
@@ -40,7 +42,7 @@ namespace Shuruev.StyleCop.Test
 
 		public void A()
 		{
-			int a = 10;
+			string a = "sdk jfskd jfhskjd hfksjd hfksjdh fksjdhfk sjhd fkjshdk jfsh kdj hfksjdh fkjshd kfjshkdj fhskjd hfskjdh fksjd hfksjdh kfjshdk jfshkdj fhksjdh fksjdh fkjshdk jfshkjd hfksjd hfksjd kjfskdj hfksjd hfksjhd shk jdh kfjs";
 		}
 	}
 }

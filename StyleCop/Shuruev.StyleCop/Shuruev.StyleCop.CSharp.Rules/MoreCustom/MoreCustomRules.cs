@@ -79,8 +79,8 @@ namespace Shuruev.StyleCop.CSharp
 			char lastChar = lineText[lineText.Length - 1];
 			if (Char.IsWhiteSpace(lastChar))
 			{
-				m_parent.AddViolation(
-					document.RootElement,
+				AddViolation(
+					document,
 					lineNumber,
 					Rules.CodeLineMustNotEndWithWhitespace);
 			}
@@ -131,8 +131,8 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (failed)
 			{
-				m_parent.AddViolation(
-					document.RootElement,
+				AddViolation(
+					document,
 					lineNumber,
 					Rules.CheckAllowedIndentationCharacters,
 					settings.IndentOptions.GetContextValues());
@@ -159,8 +159,8 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (length > settings.CharLimitOptions.Limit.Value)
 			{
-				m_parent.AddViolation(
-					document.RootElement,
+				AddViolation(
+					document,
 					lineNumber,
 					Rules.CodeLineMustNotBeLongerThan,
 					settings.CharLimitOptions.Limit.Value,
@@ -195,8 +195,8 @@ namespace Shuruev.StyleCop.CSharp
 
 			if (!passed)
 			{
-				m_parent.AddViolation(
-					document.RootElement,
+				AddViolation(
+					document,
 					lineNumber,
 					Rules.CheckWhetherLastCodeLineIsEmpty,
 					settings.LastLineOptions.GetContextValues());
@@ -340,6 +340,26 @@ namespace Shuruev.StyleCop.CSharp
 					limit.Value,
 					size);
 			}
+		}
+
+		#endregion
+
+		#region Firing violations
+
+		/// <summary>
+		/// Fires violation.
+		/// </summary>
+		private void AddViolation(
+			CsDocument document,
+			int lineNumber,
+			Rules rule,
+			params object[] values)
+		{
+			m_parent.AddViolation(
+				StyleCop43Compatibility.GetElementByLine(document, lineNumber) ?? document.RootElement,
+				lineNumber,
+				rule,
+				values);
 		}
 
 		#endregion

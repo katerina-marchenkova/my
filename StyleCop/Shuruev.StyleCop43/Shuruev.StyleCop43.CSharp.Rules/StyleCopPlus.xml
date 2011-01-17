@@ -4,7 +4,7 @@
 		Plug-in that extends original StyleCop features. See StyleCop+ tab for detailed settings.
 	</Description>
 	<Properties>
-		<StringProperty Name="AdvancedNaming_Abbreviations" DefaultValue="A B C X ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
+		<StringProperty Name="AdvancedNaming_Abbreviations" DefaultValue="1 2 3 A B C X ID 3D OK" FriendlyName="Abbreviations" Description="Abbreviations used in naming rules." />
 		<StringProperty Name="AdvancedNaming_Words" DefaultValue="StyleCop FxCop" FriendlyName="Complex words" Description="Words used in naming rules." />
 		<StringProperty Name="AdvancedNaming_Derivings" DefaultValue="Attribute Exception EventArgs Stream" FriendlyName="Important base classes" Description="Derivings used in naming rules." />
 		<StringProperty Name="AdvancedNaming_Namespace" DefaultValue="$(AaBb)" FriendlyName="Namespace" Description="Naming rules for namespace." />
