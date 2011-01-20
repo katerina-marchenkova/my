@@ -401,6 +401,7 @@ namespace Shuruev.StyleCop.CSharp
 				string regular = "(" + GetRegular(key) + ")";
 				regular = regular.Replace("UPPER", "[\\p{Lu}\\p{Nd}]");
 				regular = regular.Replace("LOWER", "[\\p{Ll}\\p{Nd}]");
+				regular = regular.Replace("DIGIT", "[\\p{Nd}]");
 				regular = regular.Replace("EXTENSION", extension);
 				pattern = pattern.Replace(markup, regular);
 			}

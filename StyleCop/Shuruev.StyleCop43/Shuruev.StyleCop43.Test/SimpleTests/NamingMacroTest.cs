@@ -166,6 +166,23 @@ namespace Shuruev.StyleCop.Test.SimpleTests
 			Assert.IsFalse(regex.IsMatch("стайлКоп"));
 		}
 
+		[TestMethod]
+		public void Macro_Pascal_Digits()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(AaBb)");
+			Assert.IsTrue(regex.IsMatch("1"));
+			Assert.IsTrue(regex.IsMatch("123"));
+			Assert.IsTrue(regex.IsMatch("123456"));
+			Assert.IsTrue(regex.IsMatch("1StyleCop"));
+			Assert.IsTrue(regex.IsMatch("Style1Cop"));
+			Assert.IsTrue(regex.IsMatch("StyleCop1"));
+			Assert.IsTrue(regex.IsMatch("123StyleCop"));
+			Assert.IsTrue(regex.IsMatch("Style123Cop"));
+			Assert.IsTrue(regex.IsMatch("StyleCop123"));
+		}
+
 		#endregion
 
 		#region Macro "Camel"
@@ -246,6 +263,23 @@ namespace Shuruev.StyleCop.Test.SimpleTests
 			Assert.IsFalse(regex.IsMatch("СтайлКоп"));
 		}
 
+		[TestMethod]
+		public void Macro_Camel_Digits()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(aaBb)");
+			Assert.IsTrue(regex.IsMatch("1"));
+			Assert.IsTrue(regex.IsMatch("123"));
+			Assert.IsTrue(regex.IsMatch("123456"));
+			Assert.IsTrue(regex.IsMatch("1StyleCop"));
+			Assert.IsTrue(regex.IsMatch("style1Cop"));
+			Assert.IsTrue(regex.IsMatch("styleCop1"));
+			Assert.IsTrue(regex.IsMatch("123StyleCop"));
+			Assert.IsTrue(regex.IsMatch("style123Cop"));
+			Assert.IsTrue(regex.IsMatch("styleCop123"));
+		}
+
 		#endregion
 
 		#region Macro "Upper"
@@ -309,6 +343,23 @@ namespace Shuruev.StyleCop.Test.SimpleTests
 			Assert.IsFalse(regex.IsMatch("стайл_коп"));
 		}
 
+		[TestMethod]
+		public void Macro_Upper_Digits()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(AA_BB)");
+			Assert.IsTrue(regex.IsMatch("1"));
+			Assert.IsTrue(regex.IsMatch("123"));
+			Assert.IsTrue(regex.IsMatch("123_456"));
+			Assert.IsTrue(regex.IsMatch("1_STYLE_COP"));
+			Assert.IsTrue(regex.IsMatch("STYLE_1_COP"));
+			Assert.IsTrue(regex.IsMatch("STYLE_COP_1"));
+			Assert.IsTrue(regex.IsMatch("123_STYLE_COP"));
+			Assert.IsTrue(regex.IsMatch("STYLE_123_COP"));
+			Assert.IsTrue(regex.IsMatch("STYLE_COP_123"));
+		}
+
 		#endregion
 
 		#region Macro "Lower"
@@ -370,6 +421,23 @@ namespace Shuruev.StyleCop.Test.SimpleTests
 			regex = BuildSimple("$(aa_bb)");
 			Assert.IsTrue(regex.IsMatch("стайл_коп"));
 			Assert.IsFalse(regex.IsMatch("СТАЙЛ_КОП"));
+		}
+
+		[TestMethod]
+		public void Macro_Lower_Digits()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(aa_bb)");
+			Assert.IsTrue(regex.IsMatch("1"));
+			Assert.IsTrue(regex.IsMatch("123"));
+			Assert.IsTrue(regex.IsMatch("123_456"));
+			Assert.IsTrue(regex.IsMatch("1_style_cop"));
+			Assert.IsTrue(regex.IsMatch("style_1_cop"));
+			Assert.IsTrue(regex.IsMatch("style_cop_1"));
+			Assert.IsTrue(regex.IsMatch("123_style_cop"));
+			Assert.IsTrue(regex.IsMatch("style_123_cop"));
+			Assert.IsTrue(regex.IsMatch("style_cop_123"));
 		}
 
 		#endregion
@@ -514,6 +582,23 @@ namespace Shuruev.StyleCop.Test.SimpleTests
 			Assert.IsFalse(regex.IsMatch("стайл_Коп"));
 		}
 
+		[TestMethod]
+		public void Macro_Capitalized_Digits()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(Aa_Bb)");
+			Assert.IsTrue(regex.IsMatch("1"));
+			Assert.IsTrue(regex.IsMatch("123"));
+			Assert.IsTrue(regex.IsMatch("123_456"));
+			Assert.IsTrue(regex.IsMatch("1_Style_Cop"));
+			Assert.IsTrue(regex.IsMatch("Style_1_Cop"));
+			Assert.IsTrue(regex.IsMatch("Style_Cop_1"));
+			Assert.IsTrue(regex.IsMatch("123_Style_Cop"));
+			Assert.IsTrue(regex.IsMatch("Style_123_Cop"));
+			Assert.IsTrue(regex.IsMatch("Style_Cop_123"));
+		}
+
 		#endregion
 
 		#region Macro "Any"
@@ -571,6 +656,20 @@ namespace Shuruev.StyleCop.Test.SimpleTests
 			regex = BuildSimple("$(*)");
 			Assert.IsTrue(regex.IsMatch("Стайл_КОП"));
 			Assert.IsTrue(regex.IsMatch("стайл_Коп++СиШарп"));
+		}
+
+		[TestMethod]
+		public void Macro_Any_Digits()
+		{
+			Regex regex;
+
+			regex = BuildSimple("$(*)");
+			Assert.IsTrue(regex.IsMatch("1"));
+			Assert.IsTrue(regex.IsMatch("123"));
+			Assert.IsTrue(regex.IsMatch("123_456"));
+			Assert.IsTrue(regex.IsMatch("1_Style_COP"));
+			Assert.IsTrue(regex.IsMatch("style++_1_Cop"));
+			Assert.IsTrue(regex.IsMatch("STYLECOP_1"));
 		}
 
 		#endregion

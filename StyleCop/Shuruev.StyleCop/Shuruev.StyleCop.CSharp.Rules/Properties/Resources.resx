@@ -155,7 +155,7 @@ Please check that:
     <value>All_Words_Capitalized</value>
   </data>
   <data name="MacroCapitalizedRegular" xml:space="preserve">
-    <value>((UPPERLOWER+)EXTENSION)(_((UPPERLOWER+)EXTENSION))*|UPPER</value>
+    <value>((UPPERLOWER+)EXTENSION|DIGIT+)(_((UPPERLOWER+)EXTENSION|DIGIT+))*|UPPER</value>
   </data>
   <data name="MacroCapitalizedSample" xml:space="preserve">
     <value>Sample_Name</value>
@@ -179,7 +179,7 @@ Please check that:
     <value>PascalNamingStyle</value>
   </data>
   <data name="MacroPascalRegular" xml:space="preserve">
-    <value>((UPPERLOWER+)EXTENSION)+|UPPER</value>
+    <value>((UPPERLOWER+)EXTENSION|DIGIT+)+|UPPER</value>
   </data>
   <data name="MacroPascalSample" xml:space="preserve">
     <value>SampleName</value>

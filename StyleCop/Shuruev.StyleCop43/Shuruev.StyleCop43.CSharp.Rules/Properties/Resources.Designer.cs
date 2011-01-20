@@ -360,7 +360,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ((UPPERLOWER+)EXTENSION)(_((UPPERLOWER+)EXTENSION))*|UPPER.
+        ///   Looks up a localized string similar to ((UPPERLOWER+)EXTENSION|DIGIT+)(_((UPPERLOWER+)EXTENSION|DIGIT+))*|UPPER.
         /// </summary>
         internal static string MacroCapitalizedRegular {
             get {
@@ -432,7 +432,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ((UPPERLOWER+)EXTENSION)+|UPPER.
+        ///   Looks up a localized string similar to ((UPPERLOWER+)EXTENSION|DIGIT+)+|UPPER.
         /// </summary>
         internal static string MacroPascalRegular {
             get {
