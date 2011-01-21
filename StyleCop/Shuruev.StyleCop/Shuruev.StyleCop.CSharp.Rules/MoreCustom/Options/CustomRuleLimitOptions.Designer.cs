@@ -34,7 +34,7 @@
 			// 
 			// textLimit
 			// 
-			this.textLimit.Location = new System.Drawing.Point(3, 26);
+			this.textLimit.Location = new System.Drawing.Point(6, 22);
 			this.textLimit.Name = "textLimit";
 			this.textLimit.Size = new System.Drawing.Size(64, 20);
 			this.textLimit.TabIndex = 1;
@@ -42,9 +42,11 @@
 			// 
 			// labelDescription
 			// 
-			this.labelDescription.Location = new System.Drawing.Point(0, 0);
+			this.labelDescription.AutoSize = true;
+			this.labelDescription.Location = new System.Drawing.Point(3, 3);
+			this.labelDescription.Margin = new System.Windows.Forms.Padding(3);
 			this.labelDescription.Name = "labelDescription";
-			this.labelDescription.Size = new System.Drawing.Size(180, 23);
+			this.labelDescription.Size = new System.Drawing.Size(69, 13);
 			this.labelDescription.TabIndex = 0;
 			this.labelDescription.Text = "[Description:]";
 			this.labelDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

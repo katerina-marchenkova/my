@@ -32,13 +32,14 @@
 			this.radioSpaces = new System.Windows.Forms.RadioButton();
 			this.radioBoth = new System.Windows.Forms.RadioButton();
 			this.labelTitle = new System.Windows.Forms.Label();
+			this.allowPadding = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// radioTabs
 			// 
-			this.radioTabs.Location = new System.Drawing.Point(0, 26);
+			this.radioTabs.Location = new System.Drawing.Point(6, 22);
 			this.radioTabs.Name = "radioTabs";
-			this.radioTabs.Size = new System.Drawing.Size(180, 23);
+			this.radioTabs.Size = new System.Drawing.Size(180, 17);
 			this.radioTabs.TabIndex = 1;
 			this.radioTabs.TabStop = true;
 			this.radioTabs.Text = "All lines must use tabs";
@@ -47,9 +48,9 @@
 			// 
 			// radioSpaces
 			// 
-			this.radioSpaces.Location = new System.Drawing.Point(0, 55);
+			this.radioSpaces.Location = new System.Drawing.Point(6, 45);
 			this.radioSpaces.Name = "radioSpaces";
-			this.radioSpaces.Size = new System.Drawing.Size(180, 23);
+			this.radioSpaces.Size = new System.Drawing.Size(180, 17);
 			this.radioSpaces.TabIndex = 2;
 			this.radioSpaces.TabStop = true;
 			this.radioSpaces.Text = "All lines must use spaces";
@@ -58,9 +59,9 @@
 			// 
 			// radioBoth
 			// 
-			this.radioBoth.Location = new System.Drawing.Point(0, 84);
+			this.radioBoth.Location = new System.Drawing.Point(6, 68);
 			this.radioBoth.Name = "radioBoth";
-			this.radioBoth.Size = new System.Drawing.Size(180, 48);
+			this.radioBoth.Size = new System.Drawing.Size(180, 49);
 			this.radioBoth.TabIndex = 3;
 			this.radioBoth.TabStop = true;
 			this.radioBoth.Text = "Some lines can use spaces, some can use tabs\r\n(supporting legacy code)";
@@ -69,23 +70,36 @@
 			// 
 			// labelTitle
 			// 
-			this.labelTitle.Location = new System.Drawing.Point(0, 0);
+			this.labelTitle.AutoSize = true;
+			this.labelTitle.Location = new System.Drawing.Point(3, 3);
+			this.labelTitle.Margin = new System.Windows.Forms.Padding(3);
 			this.labelTitle.Name = "labelTitle";
-			this.labelTitle.Size = new System.Drawing.Size(180, 23);
+			this.labelTitle.Size = new System.Drawing.Size(111, 13);
 			this.labelTitle.TabIndex = 0;
 			this.labelTitle.Text = "Indentation character:";
 			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// allowPadding
+			// 
+			this.allowPadding.Location = new System.Drawing.Point(6, 123);
+			this.allowPadding.Name = "allowPadding";
+			this.allowPadding.Size = new System.Drawing.Size(180, 33);
+			this.allowPadding.TabIndex = 4;
+			this.allowPadding.Text = "Allow right space padding on multiline expressions";
+			this.allowPadding.UseVisualStyleBackColor = true;
 			// 
 			// CustomRuleIndentOptions
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.allowPadding);
 			this.Controls.Add(this.labelTitle);
 			this.Controls.Add(this.radioBoth);
 			this.Controls.Add(this.radioSpaces);
 			this.Controls.Add(this.radioTabs);
 			this.Name = "CustomRuleIndentOptions";
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -95,6 +109,7 @@
 		private System.Windows.Forms.RadioButton radioSpaces;
 		private System.Windows.Forms.RadioButton radioBoth;
 		private System.Windows.Forms.Label labelTitle;
+		private System.Windows.Forms.CheckBox allowPadding;
 
 	}
 }

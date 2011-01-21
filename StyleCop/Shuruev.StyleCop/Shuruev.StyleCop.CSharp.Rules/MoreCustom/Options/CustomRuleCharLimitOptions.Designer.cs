@@ -34,16 +34,18 @@
 			// 
 			// labelTabSize
 			// 
-			this.labelTabSize.Location = new System.Drawing.Point(0, 52);
+			this.labelTabSize.AutoSize = true;
+			this.labelTabSize.Location = new System.Drawing.Point(3, 48);
+			this.labelTabSize.Margin = new System.Windows.Forms.Padding(3);
 			this.labelTabSize.Name = "labelTabSize";
-			this.labelTabSize.Size = new System.Drawing.Size(180, 23);
+			this.labelTabSize.Size = new System.Drawing.Size(50, 13);
 			this.labelTabSize.TabIndex = 2;
 			this.labelTabSize.Text = "Tab size:";
 			this.labelTabSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// textTabSize
 			// 
-			this.textTabSize.Location = new System.Drawing.Point(3, 78);
+			this.textTabSize.Location = new System.Drawing.Point(6, 67);
 			this.textTabSize.Name = "textTabSize";
 			this.textTabSize.Size = new System.Drawing.Size(32, 20);
 			this.textTabSize.TabIndex = 3;
