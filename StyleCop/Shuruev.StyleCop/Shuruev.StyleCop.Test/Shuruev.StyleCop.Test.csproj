@@ -80,11 +80,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestHelper.cs" />
     <None Include="ComplexTests\Source\AdvancedNamingRules.cs" />
     <None Include="CodeHelperTests\Source\Labels.cs" />
     <None Include="CodeHelperTests\Source\Parameters.cs" />
     <None Include="CodeHelperTests\Source\TypeParameters.cs" />
     <None Include="CodeHelperTests\Source\ElementsSize.cs" />
+    <None Include="CodeHelperTests\Source\GetByLine.cs" />
     <Compile Include="ComplexTests\BlockItem.cs" />
     <None Include="ComplexTests\Source\MoreCustomRules.cs" />
     <None Include="ComplexTests\Source\ExtendedOriginalRules.cs" />

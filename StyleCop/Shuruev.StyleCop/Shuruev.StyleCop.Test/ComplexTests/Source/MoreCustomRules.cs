@@ -179,9 +179,9 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CheckAllowedIndentationCharacters // Mode = Tabs
+#region CheckAllowedIndentationCharacters // Tabs only
 
-//# (SP2001_Mode = Tabs)
+//# (SP2001_Mode = Tabs:False)
 
 //# [OK]
 //# Each line uses tabs for indentation.
@@ -275,9 +275,9 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CheckAllowedIndentationCharacters // Mode = Spaces
+#region CheckAllowedIndentationCharacters // Spaces only
 
-//# (SP2001_Mode = Spaces)
+//# (SP2001_Mode = Spaces:False)
 
 //# [OK]
 //# Each line uses spaces for indentation.
@@ -371,9 +371,9 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CheckAllowedIndentationCharacters // Mode = Both
+#region CheckAllowedIndentationCharacters // Tabs and spaces
 
-//# (SP2001_Mode = Both)
+//# (SP2001_Mode = Both:False)
 
 //# [OK]
 //# Each line begins with identical characters.
@@ -509,6 +509,30 @@ namespace Shuruev.StyleCop.Test
 		public void TestMethod()
 		{
 			int a = 10;
+		}
+	}
+}
+//# [END]
+
+#endregion
+
+#region CheckAllowedIndentationCharacters // xxxx
+
+//# (SP2001_Mode = Tabs:True)
+
+//# [OK]
+//# Space padding is allowed for multiline expressions.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			bool a = false;
+			if (true
+			    || true
+				   || true)
+				a = true;
 		}
 	}
 }

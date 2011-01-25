@@ -136,7 +136,7 @@ namespace Shuruev.StyleCop.Test
 
 #region CheckAllowedIndentationCharacters // Suppressing
 
-//# (SP2001_Mode = Tabs)
+//# (SP2001_Mode = Tabs:False)
 
 //# [ERROR]
 //# One line starts with tabs and whitespace.

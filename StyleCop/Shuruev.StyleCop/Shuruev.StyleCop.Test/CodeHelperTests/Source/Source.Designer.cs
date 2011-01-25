@@ -72,21 +72,93 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests {
         ///			int a = 10;
         ///		}
         ///
-        ///		public Class1(int x)
-        ///			: this()
-        ///		{
+        ///		public Class1(
+        ///			int x,
+        ///			int y)
+        ///			: this() {
         ///			int a = 10;
         ///			int b = 20;
-        ///		}
+        ///			int c = 30; }
         ///
         ///		~Class1() { int a = 10; }
-        ///	}
-        ///}
-        ///.
+        ///
+        ///		public int Property
+        ///		{
+        ///			get { int a = 10;  return 0; }
+        ///
+        ///			set
+        ///			{
+        ///
+        ///				int a = 10;
+        ///				m_field = value;
+        ///
+        ///			}
+        ///		}
+        ///
+        ///		public int this[int x]
+        ///		{
+        ///			get {
+        ///				return 0; }
+        ///
+        ///			set {
+        ///				m_field = value; }
+        ///		}
+        ///        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ElementsSize {
             get {
                 return ResourceManager.GetString("ElementsSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to namespace Shuruev.StyleCop.Test
+        ///{
+        ///	public class Class1
+        ///	{
+        ///		private int m_field = 5;
+        ///
+        ///		public Class1()
+        ///		{
+        ///			int a = 10;
+        ///		}
+        ///
+        ///		public Class1(
+        ///			int x,
+        ///			int y)
+        ///			: this() {
+        ///			int a = 10;
+        ///			int b = 20;
+        ///			int c = 30; }
+        ///
+        ///		~Class1() { int a = 10; }
+        ///
+        ///		public int Property
+        ///		{
+        ///			get { int a = 10;  return 0; }
+        ///
+        ///			set
+        ///			{
+        ///
+        ///				int a = 10;
+        ///				m_field = value;
+        ///
+        ///			}
+        ///		}
+        ///
+        ///		public int this[int x]
+        ///		{
+        ///			get {
+        ///				return 0; }
+        ///
+        ///			set {
+        ///				m_field = value; }
+        ///		}
+        ///        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GetByLine {
+            get {
+                return ResourceManager.GetString("GetByLine", resourceCulture);
             }
         }
         
