@@ -45,15 +45,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public static ICodeElement GetElementByLine(CsDocument document, int lineNumber)
 		{
-			for (Node<CsToken> node = document.Tokens.First; node != null; node = node.Next)
-			{
-				if (node.Value.LineNumber == lineNumber)
-				{
-					return node.Value.FindParentElement();
-				}
-			}
-
-			return null;
+			return (ICodeElement)CodeHelper.GetElementByLine(document, lineNumber);
 		}
 
 		#endregion

@@ -211,6 +211,15 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} (allow padding).
+        /// </summary>
+        internal static string IndentOptionsPaddingFormat {
+            get {
+                return ResourceManager.GetString("IndentOptionsPaddingFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Spaces only.
         /// </summary>
         internal static string IndentOptionsSpaces {

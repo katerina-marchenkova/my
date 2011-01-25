@@ -172,6 +172,9 @@
   <data name="IndentOptionsBoth" xml:space="preserve">
     <value>Tabs and spaces</value>
   </data>
+  <data name="IndentOptionsPaddingFormat" xml:space="preserve">
+    <value>{0} (allow padding)</value>
+  </data>
   <data name="IndentOptionsSpaces" xml:space="preserve">
     <value>Spaces only</value>
   </data>

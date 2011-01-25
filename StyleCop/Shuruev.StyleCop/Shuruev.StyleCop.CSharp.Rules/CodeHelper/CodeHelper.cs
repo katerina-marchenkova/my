@@ -433,6 +433,94 @@ namespace Shuruev.StyleCop.CSharp
 			return null;
 		}
 
+		/// <summary>
+		/// Gets first code element at specified line number.
+		/// </summary>
+		/// <remarks>
+		/// Returns object because it is ICodeElement for 4.4 and CodeElement for 4.3.
+		/// </remarks>
+		public static object GetElementByLine(CsDocument document, int lineNumber)
+		{
+			object[] args = new object[] { lineNumber, null };
+			document.WalkDocument(FindByLineElementVisitor, null, args);
+
+			return args[1];
+		}
+
+		/// <summary>
+		/// Tries to find code element by line.
+		/// </summary>
+		private static bool FindByLineElementVisitor(
+			CsElement element,
+			CsElement parentElement,
+			object context)
+		{
+			object[] args = (object[])context;
+			int lineNumber = (int)args[0];
+
+			if (element.Location.StartPoint.LineNumber > lineNumber)
+				return false;
+
+			if (element.Location.StartPoint.LineNumber <= lineNumber
+				&& element.Location.EndPoint.LineNumber >= lineNumber)
+			{
+				args[1] = element;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Gets first expression at specified line number.
+		/// </summary>
+		public static Expression GetExpressionByLine(CsDocument document, int lineNumber)
+		{
+			object[] args = new object[] { lineNumber, null };
+			document.WalkDocument(null, null, FindByLineExpressionVisitor, args);
+
+			return (Expression)args[1];
+		}
+
+		/// <summary>
+		/// Tries to find expression by line.
+		/// </summary>
+		private static bool FindByLineExpressionVisitor(
+			Expression expression,
+			Expression parentExpression,
+			Statement parentStatement,
+			CsElement parentElement,
+			object context)
+		{
+			object[] args = (object[])context;
+			int lineNumber = (int)args[0];
+
+			if (expression.Location.StartPoint.LineNumber > lineNumber)
+				return false;
+
+			if (expression.Location.StartPoint.LineNumber <= lineNumber
+				&& expression.Location.EndPoint.LineNumber >= lineNumber)
+			{
+				args[1] = expression;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Finds the root expression.
+		/// </summary>
+		public static Expression GetRootExpression(Expression expression)
+		{
+			Expression root = expression;
+
+			while (root.Parent is Expression)
+			{
+				root = (Expression)root.Parent;
+			}
+
+			return root;
+		}
+
 		#endregion
 
 		#region Working with documentation

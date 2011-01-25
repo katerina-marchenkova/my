@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
 
@@ -57,12 +58,13 @@ namespace Shuruev.StyleCop.CSharp
 
 			for (int i = 0; i < lines.Count; i++)
 			{
-				int lineNumber = i + 1;
-				string lineText = lines[i];
+				int currentLineNumber = i + 1;
+				string currentLine = lines[i];
+				string previousLine = i > 0 ? lines[i - 1] : null;
 
-				CheckLineEnding(document, lineText, lineNumber);
-				CheckIndentation(document, lineText, lineNumber, settings);
-				CheckLineLength(document, lineText, lineNumber, settings);
+				CheckLineEnding(document, currentLine, currentLineNumber);
+				CheckIndentation(document, currentLine, previousLine, currentLineNumber, settings);
+				CheckLineLength(document, currentLine, currentLineNumber, settings);
 			}
 
 			CheckLastLine(document, source, lines.Count, settings);
@@ -71,17 +73,20 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks the ending of specified code line.
 		/// </summary>
-		private void CheckLineEnding(CsDocument document, string lineText, int lineNumber)
+		private void CheckLineEnding(
+			CsDocument document,
+			string currentLine,
+			int currentLineNumber)
 		{
-			if (lineText.Length == 0)
+			if (currentLine.Length == 0)
 				return;
 
-			char lastChar = lineText[lineText.Length - 1];
+			char lastChar = currentLine[currentLine.Length - 1];
 			if (Char.IsWhiteSpace(lastChar))
 			{
 				AddViolation(
 					document,
-					lineNumber,
+					currentLineNumber,
 					Rules.CodeLineMustNotEndWithWhitespace);
 			}
 		}
@@ -89,63 +94,116 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks indentation in specified code line.
 		/// </summary>
-		private void CheckIndentation(CsDocument document, string lineText, int lineNumber, CustomRulesSettings settings)
+		private void CheckIndentation(
+			CsDocument document,
+			string currentLine,
+			string previousLine,
+			int currentLineNumber,
+			CustomRulesSettings settings)
 		{
-			if (lineText.Trim().Length == 0)
+			if (currentLine.Trim().Length == 0)
 				return;
 
-			bool containsTabs = false;
-			bool containsSpaces = false;
-			foreach (char c in lineText)
-			{
-				if (!Char.IsWhiteSpace(c))
-					break;
-
-				switch (c)
-				{
-					case '\t':
-						containsTabs = true;
-						break;
-
-					case ' ':
-						containsSpaces = true;
-						break;
-				}
-			}
+			string currentIndent = ExtractIndentation(currentLine);
 
 			bool failed = true;
 			switch (settings.IndentOptions.Mode)
 			{
 				case IndentMode.Tabs:
-					failed = containsSpaces;
+					failed = currentIndent.Contains(" ");
 					break;
 
 				case IndentMode.Spaces:
-					failed = containsTabs;
+					failed = currentIndent.Contains("\t");
 					break;
 
 				case IndentMode.Both:
-					failed = containsSpaces && containsTabs;
+					failed = currentIndent.Contains(" ") && currentIndent.Contains("\t");
 					break;
 			}
 
-			if (failed)
+			if (!failed)
+				return;
+
+			if (settings.IndentOptions.AllowPadding)
 			{
-				AddViolation(
-					document,
-					lineNumber,
-					Rules.CheckAllowedIndentationCharacters,
-					settings.IndentOptions.GetContextValues());
+				if (previousLine != null)
+				{
+					string previousIndent = ExtractIndentation(previousLine);
+					if (IsPaddingAllowed(document, currentIndent, previousIndent, currentLineNumber))
+						return;
+				}
 			}
+
+			AddViolation(
+				document,
+				currentLineNumber,
+				Rules.CheckAllowedIndentationCharacters,
+				settings.IndentOptions.GetContextValues());
+		}
+
+		/// <summary>
+		/// Extracts indentation part from specified string.
+		/// </summary>
+		private static string ExtractIndentation(string text)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (char c in text)
+			{
+				if (!Char.IsWhiteSpace(c))
+					break;
+
+				sb.Append(c);
+			}
+
+			return sb.ToString();
+		}
+
+		/// <summary>
+		/// Checks whether padding is allowed in specified situation.
+		/// </summary>
+		private static bool IsPaddingAllowed(
+			CsDocument document,
+			string currentIndent,
+			string previousIndent,
+			int currentLineNumber)
+		{
+			if (currentIndent.TrimStart('\t').TrimEnd(' ').Length > 0)
+				return false;
+
+			if (currentIndent.TrimEnd(' ').Length != previousIndent.TrimEnd(' ').Length)
+				return false;
+
+			return IsSuitableForPadding(document, currentLineNumber);
+		}
+
+		/// <summary>
+		/// Checks whether specified line is suitable for padding.
+		/// </summary>
+		private static bool IsSuitableForPadding(CsDocument document, int lineNumber)
+		{
+			Expression expr = CodeHelper.GetExpressionByLine(document, lineNumber);
+			if (expr != null)
+			{
+				Expression root = CodeHelper.GetRootExpression(expr);
+				if (root.Location.LineSpan > 1)
+					return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
 		/// Checks length of specified code line.
 		/// </summary>
-		private void CheckLineLength(CsDocument document, string lineText, int lineNumber, CustomRulesSettings settings)
+		private void CheckLineLength(
+			CsDocument document,
+			string currentLine,
+			int currentLineNumber,
+			CustomRulesSettings settings)
 		{
 			int length = 0;
-			foreach (char c in lineText)
+			foreach (char c in currentLine)
 			{
 				if (c == '\t')
 				{
@@ -161,7 +219,7 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				AddViolation(
 					document,
-					lineNumber,
+					currentLineNumber,
 					Rules.CodeLineMustNotBeLongerThan,
 					settings.CharLimitOptions.Limit.Value,
 					length);
@@ -171,7 +229,11 @@ namespace Shuruev.StyleCop.CSharp
 		/// <summary>
 		/// Checks the last code line.
 		/// </summary>
-		private void CheckLastLine(CsDocument document, string sourceText, int lineNumber, CustomRulesSettings settings)
+		private void CheckLastLine(
+			CsDocument document,
+			string sourceText,
+			int lastLineNumber,
+			CustomRulesSettings settings)
 		{
 			if (sourceText.Length == 0)
 				return;
@@ -197,7 +259,7 @@ namespace Shuruev.StyleCop.CSharp
 			{
 				AddViolation(
 					document,
-					lineNumber,
+					lastLineNumber,
 					Rules.CheckWhetherLastCodeLineIsEmpty,
 					settings.LastLineOptions.GetContextValues());
 			}

@@ -22,6 +22,11 @@ namespace Shuruev.StyleCop.CSharp
 			OnOptionsDataChanged(e);
 		}
 
+		private void checkPadding_CheckedChanged(object sender, EventArgs e)
+		{
+			OnOptionsDataChanged(e);
+		}
+
 		#endregion
 
 		#region Override methods
@@ -36,6 +41,8 @@ namespace Shuruev.StyleCop.CSharp
 			radioTabs.Checked = options.Mode == IndentMode.Tabs;
 			radioSpaces.Checked = options.Mode == IndentMode.Spaces;
 			radioBoth.Checked = options.Mode == IndentMode.Both;
+
+			checkPadding.Checked = options.AllowPadding;
 		}
 
 		/// <summary>
@@ -48,20 +55,17 @@ namespace Shuruev.StyleCop.CSharp
 			if (radioTabs.Checked)
 			{
 				options.Mode = IndentMode.Tabs;
-				return;
 			}
-
-			if (radioSpaces.Checked)
+			else if (radioSpaces.Checked)
 			{
 				options.Mode = IndentMode.Spaces;
-				return;
 			}
-
-			if (radioBoth.Checked)
+			else if (radioBoth.Checked)
 			{
 				options.Mode = IndentMode.Both;
-				return;
 			}
+
+			options.AllowPadding = checkPadding.Checked;
 		}
 
 		#endregion

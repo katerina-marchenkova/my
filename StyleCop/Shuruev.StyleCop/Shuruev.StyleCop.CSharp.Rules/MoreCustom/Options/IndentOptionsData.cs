@@ -24,6 +24,11 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public IndentMode Mode { get; set; }
 
+		/// <summary>
+		/// Gets or sets a value indicating whether space padding is allowed.
+		/// </summary>
+		public bool AllowPadding { get; set; }
+
 		#endregion
 
 		#region Implementation of ICustomRuleOptionsData
@@ -35,7 +40,10 @@ namespace Shuruev.StyleCop.CSharp
 		{
 			try
 			{
-				Mode = (IndentMode)Enum.Parse(typeof(IndentMode), settingValue);
+				string[] parts = settingValue.Split(':');
+
+				Mode = (IndentMode)Enum.Parse(typeof(IndentMode), parts[0]);
+				AllowPadding = Boolean.Parse(parts[1]);
 			}
 			catch
 			{
@@ -47,7 +55,7 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public string ConvertToValue()
 		{
-			return Mode.ToString();
+			return String.Format("{0}:{1}", Mode, AllowPadding);
 		}
 
 		/// <summary>
@@ -55,17 +63,25 @@ namespace Shuruev.StyleCop.CSharp
 		/// </summary>
 		public string GetDescription()
 		{
+			string description;
 			switch (Mode)
 			{
 				case IndentMode.Tabs:
-					return CustomRulesResources.IndentOptionsTabs;
+					description = CustomRulesResources.IndentOptionsTabs;
+					break;
 				case IndentMode.Spaces:
-					return CustomRulesResources.IndentOptionsSpaces;
+					description = CustomRulesResources.IndentOptionsSpaces;
+					break;
 				case IndentMode.Both:
-					return CustomRulesResources.IndentOptionsBoth;
+					description = CustomRulesResources.IndentOptionsBoth;
+					break;
 				default:
 					throw new InvalidOperationException();
 			}
+
+			return AllowPadding ?
+				String.Format(CustomRulesResources.IndentOptionsPaddingFormat, description) :
+				description;
 		}
 
 		#endregion

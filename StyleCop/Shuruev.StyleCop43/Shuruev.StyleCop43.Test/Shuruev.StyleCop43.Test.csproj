@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ComplexTests\ComplexTest.cs" />
     <Compile Include="ComplexTests\StyleCopPlusRunner.cs" />
+    <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shuruev.StyleCop43.CSharp.Rules\Shuruev.StyleCop43.CSharp.Rules.csproj">

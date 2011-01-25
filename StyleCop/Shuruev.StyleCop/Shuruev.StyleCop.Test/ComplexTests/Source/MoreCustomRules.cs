@@ -516,12 +516,64 @@ namespace Shuruev.StyleCop.Test
 
 #endregion
 
-#region CheckAllowedIndentationCharacters // xxxx
+#region CheckAllowedIndentationCharacters // Allow padding for expressions
 
 //# (SP2001_Mode = Tabs:True)
 
 //# [OK]
-//# Space padding is allowed for multiline expressions.
+//# Padding is allowed in all cases below.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			bool a = false;
+			if (true
+			    || true
+			       || true)
+				a = true;
+
+			bool x =
+					a || ((b && c)
+					       || d);
+
+			bool y =
+			        a || ((b && c)
+			               || d);
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:3]
+//# Padding is not allowed when it is not padding actually.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			bool a = false;
+			if (true
+			    || true
+	    	       || true)
+				a = true;
+
+			bool x =
+					a || ((b && c)
+    				       || d);
+
+			bool y =
+			        a || ((b && c)
+			            	|| d);
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:3]
+//# Padding is not allowed if previous line has different amount of tabs.
 namespace Shuruev.StyleCop.Test
 {
 	public class TestClass
@@ -533,6 +585,105 @@ namespace Shuruev.StyleCop.Test
 			    || true
 				   || true)
 				a = true;
+
+			bool x =
+					a || ((b && c)
+						   || d);
+
+			bool y =
+				    a || ((b && c)
+				           || d);
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:3]
+//# Padding is not allowed for common entities.
+	   namespace Shuruev.StyleCop.Test
+	   {
+	   }
+//# [END]
+
+//# [OK]
+//# Padding rule does not react upon empty lines.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			bool a = false;
+			if (true
+			    || true
+			    
+			       || true)
+				a = true;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR]
+//# Padding is allowed only if the expression is multiline.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			bool a = false;
+			if (
+			    true || true || true)
+				a = true;
+		}
+	}
+}
+//# [END]
+
+//# [ERROR:2]
+//# Padding is not allowed because padded elements are not expressions.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		    public void TestMethod()
+		{
+			bool a = false;
+			    if (true || true)
+				a = true;
+		}
+	}
+}
+//# [END]
+
+#endregion
+
+#region CheckAllowedIndentationCharacters // Do not allow padding for expressions
+
+//# (SP2001_Mode = Tabs:False)
+
+//# [ERROR:5]
+//# Padding is allowed in all cases below, but it is forbidden.
+namespace Shuruev.StyleCop.Test
+{
+	public class TestClass
+	{
+		public void TestMethod()
+		{
+			bool a = false;
+			if (true
+			    || true
+			       || true)
+				a = true;
+
+			bool x =
+					a || ((b && c)
+					       || d);
+
+			bool y =
+			        a || ((b && c)
+			               || d);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.StyleCop;
 using Microsoft.StyleCop.CSharp;
@@ -12,8 +13,14 @@ namespace Shuruev.StyleCop.Run
 	/// </summary>
 	public class Program
 	{
-		private static readonly string basePath = AppDomain.CurrentDomain.BaseDirectory;
-		private static readonly string sourceFile = @"C:\Users\Public\GIT\GitHub\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class1.cs";
+		private static readonly string s_basePath;
+		private static readonly string s_sourceFile;
+
+		static Program()
+		{
+			s_basePath = AppDomain.CurrentDomain.BaseDirectory;
+			s_sourceFile = @"C:\Users\Public\GIT\GitHub\My\StyleCop\Shuruev.StyleCop\Shuruev.StyleCop.Run\Class1.cs";
+		}
 
 		/// <summary>
 		/// Main program entry.
@@ -24,7 +31,7 @@ namespace Shuruev.StyleCop.Run
 				null,
 				false,
 				null,
-				new List<string>(new[] { basePath }),
+				new List<string>(new[] { s_basePath }),
 				true);
 
 			/*xxxStyleCopPlus styleCopPlus = null;
@@ -58,10 +65,10 @@ namespace Shuruev.StyleCop.Run
 
 			CodeProject project = new CodeProject(
 				0,
-				basePath,
+				s_basePath,
 				new Configuration(null));
 
-			console.Core.Environment.AddSourceCode(project, sourceFile, null);
+			console.Core.Environment.AddSourceCode(project, s_sourceFile, null);
 
 			console.OutputGenerated += OnOutputGenerated;
 			console.ViolationEncountered += OnViolationEncountered;

@@ -81,7 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="QuestionSA1009.cs" />
     <Compile Include="Samples\SP2102.cs" />
     <Compile Include="Samples\SP2101.cs" />
     <Compile Include="Samples\SP2100.cs" />

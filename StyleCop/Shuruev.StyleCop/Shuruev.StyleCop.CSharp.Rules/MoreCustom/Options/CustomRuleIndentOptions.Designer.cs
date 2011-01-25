@@ -32,7 +32,7 @@
 			this.radioSpaces = new System.Windows.Forms.RadioButton();
 			this.radioBoth = new System.Windows.Forms.RadioButton();
 			this.labelTitle = new System.Windows.Forms.Label();
-			this.allowPadding = new System.Windows.Forms.CheckBox();
+			this.checkPadding = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// radioTabs
@@ -79,20 +79,21 @@
 			this.labelTitle.Text = "Indentation character:";
 			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// allowPadding
+			// checkPadding
 			// 
-			this.allowPadding.Location = new System.Drawing.Point(6, 123);
-			this.allowPadding.Name = "allowPadding";
-			this.allowPadding.Size = new System.Drawing.Size(180, 33);
-			this.allowPadding.TabIndex = 4;
-			this.allowPadding.Text = "Allow right space padding on multiline expressions";
-			this.allowPadding.UseVisualStyleBackColor = true;
+			this.checkPadding.Location = new System.Drawing.Point(6, 123);
+			this.checkPadding.Name = "checkPadding";
+			this.checkPadding.Size = new System.Drawing.Size(180, 33);
+			this.checkPadding.TabIndex = 4;
+			this.checkPadding.Text = "Allow right space padding for multiline expressions";
+			this.checkPadding.UseVisualStyleBackColor = true;
+			this.checkPadding.CheckedChanged += new System.EventHandler(this.checkPadding_CheckedChanged);
 			// 
 			// CustomRuleIndentOptions
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.allowPadding);
+			this.Controls.Add(this.checkPadding);
 			this.Controls.Add(this.labelTitle);
 			this.Controls.Add(this.radioBoth);
 			this.Controls.Add(this.radioSpaces);
@@ -109,7 +110,7 @@
 		private System.Windows.Forms.RadioButton radioSpaces;
 		private System.Windows.Forms.RadioButton radioBoth;
 		private System.Windows.Forms.Label labelTitle;
-		private System.Windows.Forms.CheckBox allowPadding;
+		private System.Windows.Forms.CheckBox checkPadding;
 
 	}
 }

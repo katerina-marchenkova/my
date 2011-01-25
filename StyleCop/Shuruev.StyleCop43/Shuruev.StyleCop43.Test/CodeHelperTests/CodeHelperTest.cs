@@ -395,6 +395,151 @@ namespace Shuruev.StyleCop.Test.CodeHelperTests
 
 		#endregion
 
+		#region Working with code tree
+
+		[TestMethod]
+		public void Get_Node_By_Line()
+		{
+			Node<CsToken> node;
+			CsDocument document = BuildCodeDocument(Source.GetByLine);
+
+			node = CodeHelper.GetNodeByLine(document, 1);
+			Assert.IsTrue(node.Value.CsTokenType == CsTokenType.Namespace);
+			Assert.IsTrue(node.Value.Text == "namespace");
+
+			node = CodeHelper.GetNodeByLine(document, 2);
+			Assert.IsTrue(node.Value.CsTokenType == CsTokenType.OpenCurlyBracket);
+			Assert.IsTrue(node.Value.Text == "{");
+
+			node = CodeHelper.GetNodeByLine(document, 9);
+			Assert.IsTrue(node.Value.CsTokenType == CsTokenType.WhiteSpace);
+			Assert.IsTrue(node.Value.Text == "\t\t\t");
+
+			node = node.Next;
+			Assert.IsTrue(node.Value.CsTokenClass == CsTokenClass.Type);
+			Assert.IsTrue(node.Value.Text == "int");
+
+			Assert.IsNull(CodeHelper.GetNodeByLine(document, 0));
+			Assert.IsNull(CodeHelper.GetNodeByLine(document, 1000));
+		}
+
+		[TestMethod]
+		public void Find_Next_Or_Previous_Valueable_Node()
+		{
+			Node<CsToken> node;
+			CsDocument document = BuildCodeDocument(Source.GetByLine);
+
+			node = CodeHelper.GetNodeByLine(document, 1);
+			node = CodeHelper.FindPreviousValueableNode(node);
+			Assert.IsNull(node);
+
+			node = CodeHelper.GetNodeByLine(document, 1);
+			node = CodeHelper.FindNextValueableNode(node);
+			Assert.IsTrue(node.Value.CsTokenClass == CsTokenClass.Type);
+			Assert.IsTrue(node.Value.Text == "Shuruev.StyleCop.Test");
+
+			node = CodeHelper.GetNodeByLine(document, 9);
+			node = CodeHelper.FindPreviousValueableNode(node);
+			Assert.IsTrue(node.Value.CsTokenType == CsTokenType.OpenCurlyBracket);
+			Assert.IsTrue(node.Value.Text == "{");
+
+			node = CodeHelper.GetNodeByLine(document, 9);
+			node = CodeHelper.FindNextValueableNode(node);
+			Assert.IsTrue(node.Value.CsTokenClass == CsTokenClass.Type);
+			Assert.IsTrue(node.Value.Text == "int");
+
+			node = CodeHelper.GetNodeByLine(document, 15);
+			node = CodeHelper.FindPreviousValueableNode(node);
+			Assert.IsTrue(node.Value.CsTokenType == CsTokenType.CloseCurlyBracket);
+			Assert.IsTrue(node.Value.Text == "}");
+
+			node = CodeHelper.GetNodeByLine(document, 15);
+			node = CodeHelper.FindNextValueableNode(node);
+			Assert.IsNull(node);
+
+			TestHelper.Throws(() => CodeHelper.FindPreviousValueableNode(null));
+			TestHelper.Throws(() => CodeHelper.FindNextValueableNode(null));
+		}
+
+		[TestMethod]
+		public void Get_Element_By_Line()
+		{
+			CsDocument document = BuildCodeDocument(Source.GetByLine);
+
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 5));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 6));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 7));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 8));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 9));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 10));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 11));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 12));
+			Assert.AreEqual(GetElementByName(document, "method Method1"), CodeHelper.GetElementByLine(document, 13));
+
+			Assert.IsNull(CodeHelper.GetElementByLine(document, 0));
+			Assert.IsNull(CodeHelper.GetElementByLine(document, 1000));
+		}
+
+		[TestMethod]
+		public void Get_Expression_By_Line()
+		{
+			Expression expr;
+			CsDocument document = BuildCodeDocument(Source.GetByLine);
+
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 5));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 6));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 7));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 8));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 13));
+
+			expr = CodeHelper.GetExpressionByLine(document, 9);
+			Assert.IsTrue(expr.ExpressionType == ExpressionType.Literal);
+			Assert.IsTrue(expr.Text == "10");
+
+			expr = CodeHelper.GetExpressionByLine(document, 10);
+			Assert.IsTrue(expr.ExpressionType == ExpressionType.Literal);
+			Assert.IsTrue(expr.Text == "10");
+
+			expr = CodeHelper.GetExpressionByLine(document, 11);
+			Assert.IsTrue(expr.ExpressionType == ExpressionType.Literal);
+			Assert.IsTrue(expr.Text == "30");
+
+			expr = CodeHelper.GetExpressionByLine(document, 12);
+			Assert.IsTrue(expr.ExpressionType == ExpressionType.Literal);
+			Assert.IsTrue(expr.Text == "40");
+
+			Assert.IsNull(CodeHelper.GetElementByLine(document, 0));
+			Assert.IsNull(CodeHelper.GetElementByLine(document, 1000));
+		}
+
+		[TestMethod]
+		public void Get_Root_Expression()
+		{
+			Expression expr;
+			CsDocument document = BuildCodeDocument(Source.GetByLine);
+
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 5));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 6));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 7));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 8));
+			Assert.IsNull(CodeHelper.GetExpressionByLine(document, 13));
+
+			expr = CodeHelper.GetExpressionByLine(document, 9);
+			expr = CodeHelper.GetRootExpression(expr);
+			Assert.IsTrue(expr.ExpressionType == ExpressionType.VariableDeclaration);
+			Assert.IsTrue(expr.Text == "int a = 10");
+
+			for (int i = 10; i <= 12; i++)
+			{
+				expr = CodeHelper.GetExpressionByLine(document, i);
+				expr = CodeHelper.GetRootExpression(expr);
+				Assert.IsTrue(expr.ExpressionType == ExpressionType.VariableDeclaration);
+				Assert.IsTrue(expr.Text == "int b = 10\n\t\t\t\t+ (20 + 30\n\t\t\t\t\t- 40)");
+			}
+		}
+
+		#endregion
+
 		#region Working with elements size
 
 		[TestMethod]
