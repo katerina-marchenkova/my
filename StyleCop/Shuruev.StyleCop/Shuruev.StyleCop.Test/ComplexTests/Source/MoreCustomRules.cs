@@ -641,7 +641,7 @@ namespace Shuruev.StyleCop.Test
 }
 //# [END]
 
-//# [ERROR:2]
+//# [ERROR:4]
 //# Padding is not allowed because padded elements are not expressions.
 namespace Shuruev.StyleCop.Test
 {
@@ -652,6 +652,13 @@ namespace Shuruev.StyleCop.Test
 			bool a = false;
 			    if (true || true)
 				a = true;
+
+			if (true
+			    || true
+			       || true)
+			  {
+				a = true;
+			  }
 		}
 	}
 }
