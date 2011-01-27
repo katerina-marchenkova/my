@@ -11,8 +11,6 @@ namespace Shuruev.StyleCop.Try
 		public Form1()
 		{
 			InitializeComponent();
-
-			customRulesPage1.Initialize();
 		}
 
 		private string m_test1 = "I$(AaBb)";

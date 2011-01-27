@@ -32,7 +32,6 @@
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
-			this.customRulesPage1 = new Shuruev.StyleCop.CSharp.CustomRulesPage();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -73,22 +72,11 @@
 			this.button4.Text = "button4";
 			this.button4.UseVisualStyleBackColor = true;
 			// 
-			// customRulesPage1
-			// 
-			this.customRulesPage1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.customRulesPage1.Location = new System.Drawing.Point(174, 12);
-			this.customRulesPage1.Name = "customRulesPage1";
-			this.customRulesPage1.Size = new System.Drawing.Size(746, 460);
-			this.customRulesPage1.TabIndex = 8;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(932, 484);
-			this.Controls.Add(this.customRulesPage1);
+			this.ClientSize = new System.Drawing.Size(439, 266);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
@@ -105,7 +93,6 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
-		private CSharp.CustomRulesPage customRulesPage1;
 
 	}
 }

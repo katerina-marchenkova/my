@@ -35,14 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.StyleCop">
-      <HintPath>.\Microsoft.StyleCop.dll</HintPath>
+    <Reference Include="Microsoft.StyleCop, Version=4.4.0.14, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Microsoft.StyleCop.CSharp">
-      <HintPath>.\Microsoft.StyleCop.CSharp.dll</HintPath>
+    <Reference Include="Microsoft.StyleCop.CSharp, Version=4.4.0.14, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Microsoft.StyleCop.CSharp.Rules">
-      <HintPath>.\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
+    <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.4.0.14, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

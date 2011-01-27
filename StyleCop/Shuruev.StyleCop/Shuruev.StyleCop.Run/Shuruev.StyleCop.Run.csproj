@@ -54,17 +54,14 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.StyleCop, Version=4.4.0.9, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.StyleCop, Version=4.4.0.14, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Microsoft.StyleCop.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.StyleCop.CSharp, Version=4.4.0.9, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.StyleCop.CSharp, Version=4.4.0.14, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Microsoft.StyleCop.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.4.0.9, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.StyleCop.CSharp.Rules, Version=4.4.0.14, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Microsoft.StyleCop.CSharp.Rules.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
