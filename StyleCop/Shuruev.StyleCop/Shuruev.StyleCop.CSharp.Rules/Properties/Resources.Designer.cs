@@ -698,7 +698,7 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It seems that some original naming rules (SA15xx) are still enabled.
+        ///   Looks up a localized string similar to It seems that some original naming rules (SA13xx) are still enabled.
         ///There is no need to use them together with advanced naming rules..
         /// </summary>
         internal static string WarningDontUseOriginalNamingRulesDescription {

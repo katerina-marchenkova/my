@@ -321,7 +321,7 @@ You can enable them from Rules tab.</value>
     <value>DisabledAdvancedNamingRules</value>
   </data>
   <data name="WarningDontUseOriginalNamingRulesDescription" xml:space="preserve">
-    <value>It seems that some original naming rules (SA15xx) are still enabled.
+    <value>It seems that some original naming rules (SA13xx) are still enabled.
 There is no need to use them together with advanced naming rules.</value>
   </data>
   <data name="WarningDontUseOriginalNamingRulesCode" xml:space="preserve">
