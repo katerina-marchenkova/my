@@ -43,6 +43,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <NoWarn>
     </NoWarn>
+    <DocumentationFile>bin\Debug\Shuruev.StyleCop.Run.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -78,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Samples\SP2103.cs" />
     <Compile Include="Samples\SP2102.cs" />
     <Compile Include="Samples\SP2101.cs" />
     <Compile Include="Samples\SP2100.cs" />

@@ -171,6 +171,7 @@
       <DependentUpon>CustomRuleIndentOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="MoreCustom\Options\NumericValue.cs" />
+    <Compile Include="MoreCustom\Rules\CustomRuleSP2103.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2102.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2100.cs" />
     <Compile Include="MoreCustom\Rules\CustomRuleSP2101.cs" />
@@ -364,6 +365,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MoreCustom\Rules\ExampleImages\ExampleSP2103.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

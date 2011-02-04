@@ -7,34 +7,37 @@ namespace Shuruev.StyleCop.Test
 {
 	public class Class1
 	{
+		public class MyObject
+		{
+			public string Name { get; set; }
+
+			public MyObject(params int[] args)
+			{
+			}
+		}
+
 		public void A()
 		{
-			bool a = DateTime.Now.Day > 5;
-			bool b = DateTime.Now.Day > 5;
-			bool c = DateTime.Now.Day > 5;
-			bool d = DateTime.Now.Day > 5;
-
-			if (a || b ||
-			    c || d)
+			var obj = new MyObject(new[] { 5 })
 			{
-			}
+				Name = "Ex1"
+			};
 
-			if (a || b ||
-			        c || d)
+			Console.WriteLine("Hello");
 			{
+				// Limited scope
 			}
-
-			if
-			(
-			a || b ||
-			c || d
-			)
-			{
-			}
-
-			bool z =
-					a || ((b && c)
-						   || d);
 		}
+	}
+
+	public class Class1<TFirst, TSecond>
+	{
+	}
+
+	/// <summary>
+	/// Uses the <see cref="Class1{A,B}"/> class.
+	/// </summary>
+	public class Class2
+	{
 	}
 }

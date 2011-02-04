@@ -22,9 +22,10 @@ namespace Shuruev.StyleCop.CSharp
 			Add(new CustomRuleSP2001(), Resources.GroupFormatting);
 			Add(new CustomRuleSP2002(), Resources.GroupFormatting);
 
-			Add(new CustomRuleSP2100(), Resources.GroupReadability);
-			Add(new CustomRuleSP2101(), Resources.GroupReadability);
-			Add(new CustomRuleSP2102(), Resources.GroupReadability);
+			Add(new CustomRuleSP2100(), Resources.GroupMaintainability);
+			Add(new CustomRuleSP2101(), Resources.GroupMaintainability);
+			Add(new CustomRuleSP2102(), Resources.GroupMaintainability);
+			Add(new CustomRuleSP2103(), Resources.GroupMaintainability);
 		}
 
 		/// <summary>

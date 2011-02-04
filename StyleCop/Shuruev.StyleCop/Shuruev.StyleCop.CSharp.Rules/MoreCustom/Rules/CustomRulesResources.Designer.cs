@@ -124,6 +124,15 @@ namespace Shuruev.StyleCop.CSharp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Validates that source file does not contain more code lines than specified..
+        /// </summary>
+        internal static string DescriptionSP2103 {
+            get {
+                return ResourceManager.GetString("DescriptionSP2103", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://stylecopplus.codeplex.com/wikipage?title={0}.
         /// </summary>
         internal static string DetailsUrl {
@@ -170,6 +179,13 @@ namespace Shuruev.StyleCop.CSharp {
         internal static System.Drawing.Bitmap ExampleSP2102 {
             get {
                 object obj = ResourceManager.GetObject("ExampleSP2102", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExampleSP2103 {
+            get {
+                object obj = ResourceManager.GetObject("ExampleSP2103", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

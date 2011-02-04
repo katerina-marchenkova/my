@@ -47,6 +47,7 @@
 		<StringProperty Name="SP2100_Limit" DefaultValue="140:4" FriendlyName="None" Description="None" />
 		<StringProperty Name="SP2101_Limit" DefaultValue="120" FriendlyName="None" Description="None" />
 		<StringProperty Name="SP2102_Limit" DefaultValue="80" FriendlyName="None" Description="None" />
+		<StringProperty Name="SP2103_Limit" DefaultValue="2000" FriendlyName="None" Description="None" />
 	</Properties>
 	<Rules>
 		<Rule Name="AdvancedNamingRules" CheckId="SP0100">
@@ -102,6 +103,10 @@
 			</Rule>
 			<Rule Name="PropertyMustNotContainMoreLinesThan" CheckId="SP2102">
 				<Context>Property body must not contain more than {0} code lines (now {1}).</Context>
+				<Description>See StyleCop+ tab for managing this rule.</Description>
+			</Rule>
+			<Rule Name="FileMustNotContainMoreLinesThan" CheckId="SP2103">
+				<Context>Source file must not contain more than {0} code lines (now {1}).</Context>
 				<Description>See StyleCop+ tab for managing this rule.</Description>
 			</Rule>
 		</RuleGroup>

@@ -76,7 +76,12 @@
 		/// <summary>
 		/// Validates that property body does not contain more code lines than specified.
 		/// </summary>
-		PropertyMustNotContainMoreLinesThan
+		PropertyMustNotContainMoreLinesThan,
+
+		/// <summary>
+		/// Validates that source file does not contain more code lines than specified.
+		/// </summary>
+		FileMustNotContainMoreLinesThan
 
 		#endregion
 	}

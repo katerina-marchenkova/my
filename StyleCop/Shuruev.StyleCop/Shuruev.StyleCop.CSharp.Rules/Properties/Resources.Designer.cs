@@ -227,6 +227,15 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maintainability.
+        /// </summary>
+        internal static string GroupMaintainability {
+            get {
+                return ResourceManager.GetString("GroupMaintainability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Methods, Events and Delegates.
         /// </summary>
         internal static string GroupMethods {
@@ -241,15 +250,6 @@ namespace Shuruev.StyleCop.CSharp.Properties {
         internal static string GroupParameters {
             get {
                 return ResourceManager.GetString("GroupParameters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Readability.
-        /// </summary>
-        internal static string GroupReadability {
-            get {
-                return ResourceManager.GetString("GroupReadability", resourceCulture);
             }
         }
         
