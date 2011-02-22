@@ -1,43 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿//-----------------------------------------------------------------------
+// <copyright company="My Company" file="MyFile.cs">
+// Copyright © My Company 2011. All Rights Reserved
+// </copyright>
+// <xxauto-generated />
+//
+// COMPANY CONFIDENTIAL.
+//-----------------------------------------------------------------------
 
-namespace Shuruev.StyleCop.Test
+using System;
+
+namespace @Shuruev.@StyleCop.Test
 {
-	public class Class1
+	class XXX
 	{
-		public class MyObject
+	}
+	/*class Cl\u0061ss1<TK\u0065y> where TKe\u0079 : IDisposa\u0062le
+	{
+		string v\u0061riable = "StyleC\u006Fp";
+		char ch\u0061racter = '\u0078';
+
+		void Meth\u006Fd1()
 		{
-			public string Name { get; set; }
-
-			public MyObject(params int[] args)
-			{
-			}
+			string local = "St\u0079leCop";
 		}
-
-		public void A()
-		{
-			var obj = new MyObject(new[] { 5 })
-			{
-				Name = "Ex1"
-			};
-
-			Console.WriteLine("Hello");
-			{
-				// Limited scope
-			}
-		}
-	}
-
-	public class Class1<TFirst, TSecond>
-	{
-	}
-
-	/// <summary>
-	/// Uses the <see cref="Class1{A,B}"/> class.
-	/// </summary>
-	public class Class2
-	{
-	}
+	}*/
 }
