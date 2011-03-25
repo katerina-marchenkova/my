@@ -1,27 +1,35 @@
-﻿//-----------------------------------------------------------------------
-// <copyright company="My Company" file="MyFile.cs">
-// Copyright © My Company 2011. All Rights Reserved
-// </copyright>
-// <xxauto-generated />
-//
-// COMPANY CONFIDENTIAL.
-//-----------------------------------------------------------------------
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-using System;
-
-namespace @Shuruev.@StyleCop.Test
+namespace Shuruev.StyleCop.Test
 {
-	class XXX
+	public class Class1
 	{
-	}
-	/*class Cl\u0061ss1<TK\u0065y> where TKe\u0079 : IDisposa\u0062le
-	{
-		string v\u0061riable = "StyleC\u006Fp";
-		char ch\u0061racter = '\u0078';
-
-		void Meth\u006Fd1()
+		private class Entity
 		{
-			string local = "St\u0079leCop";
+			int Id;
+			string Name;
 		}
-	}*/
+
+		private IQueryable<Entity> sectors;
+
+		[HttpPost]
+        public ActionResult Search(string searchCriteria, IEnumerable<int?> selected, int? page = null)
+        {
+            if (page.HasValue)
+            {
+                const int PageSize = 6;
+                IEnumerable src =
+                    this.sectors.Where(o => (selected == null || !selected.Contains(o.Id)) && o.Name.Contains(searchCriteria));
+                string rows = this.RenderView(
+                    @"Awesome\LookupList", src.Skip((page.Value - 1) * PageSize).Take(PageSize));
+                return this.Json(new { rows, more = src.Count() > page * PageSize });
+            }
+
+        return this.View(
+            @"Awesome\LookupList",
+            this.sectors.Where(o => (selected == null || !selected.Contains(o.Id)) && o.Name.Contains(searchCriteria)));
+		}
+	}
 }
