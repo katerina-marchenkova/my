@@ -30,21 +30,59 @@ namespace SourceTracker
 		/// </summary>
 		public List<ISourceFile> GetFiles(ITrackerOptions options)
 		{
+			// TODO: configurable path here
 			ItemSet set = m_server.GetItems(
-				//"$/",
-				"$/DataThrow/ContentCast/CC.Core/Properties/",
+				"$/",
+				//"$/DataThrow/ContentCast/CC.SubscriberPortal/Properties",
 				VersionSpec.Latest,
 				RecursionType.Full,
 				DeletedState.Any,
 				ItemType.File,
 				false);
 
+			var branchItems = set.Items.SelectMany(GetBranchItems);
+
 			return set.Items
+				.Concat(branchItems)
 				.Where(i => !options.SkipByExtension(i.ServerItem))
 				.Where(i => !options.SkipByDate(i.CheckinDate))
 				.Select(i => new TeamFoundationFile(i))
 				.Cast<ISourceFile>()
 				.ToList();
+		}
+
+		/// <summary>
+		/// Gets branch items for specified item.
+		/// </summary>
+		private List<Item> GetBranchItems(Item item)
+		{
+			List<Item> branchItems = new List<Item>();
+
+			var tree = m_server.GetBranchHistory(
+				new[] { new ItemSpec(item.ServerItem, RecursionType.Full) },
+				VersionSpec.Latest);
+
+			foreach (var a in tree)
+			{
+				foreach (var b in a)
+				{
+					CollectBranches(branchItems, b);
+				}
+			}
+
+			return branchItems;
+		}
+
+		/// <summary>
+		/// Researches branch tree for collecting all branches.
+		/// </summary>
+		private static void CollectBranches(ICollection<Item> branchItems, BranchHistoryTreeItem branchItem)
+		{
+			branchItems.Add(branchItem.Relative.BranchToItem);
+			foreach (BranchHistoryTreeItem child in branchItem.Children)
+			{
+				CollectBranches(branchItems, child);
+			}
 		}
 
 		/// <summary>

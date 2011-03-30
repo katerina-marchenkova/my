@@ -1,15 +1,15 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using VX.Sys.DbHelper;
 
-namespace SourceTracker.Databases
+namespace SourceTracker
 {
 	public struct LineRow : IDataRow
 	{
-		public int FileId;
 		public int VersionId;
 		public int LineNumber;
-		public byte[] LineCrc;
-		public string LineOriginal;
+		public Guid LineCrc;
+		public string LineText;
 
 		#region Implementation of IDataRow
 
@@ -19,11 +19,10 @@ namespace SourceTracker.Databases
 		public DataTable CreateTable()
 		{
 			DataTable table = new DataTable();
-			table.Columns.Add("FileId", typeof(int));
+			table.Columns.Add("LineCrc", typeof(Guid));
 			table.Columns.Add("VersionId", typeof(int));
 			table.Columns.Add("LineNumber", typeof(int));
-			table.Columns.Add("LineCrc", typeof(byte[]));
-			table.Columns.Add("LineOriginal", typeof(string));
+			table.Columns.Add("LineText", typeof(string));
 			return table;
 		}
 
@@ -33,11 +32,10 @@ namespace SourceTracker.Databases
 		public void AddToTable(DataTable table)
 		{
 			table.Rows.Add(
-				FileId,
+				LineCrc,
 				VersionId,
 				LineNumber,
-				LineCrc,
-				LineOriginal);
+				LineText);
 		}
 
 		#endregion

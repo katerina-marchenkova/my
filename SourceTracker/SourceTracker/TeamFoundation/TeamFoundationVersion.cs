@@ -18,11 +18,11 @@ namespace SourceTracker
 		#region Implementation of ISourceVersion
 
 		/// <summary>
-		/// Gets version ID.
+		/// Gets version key.
 		/// </summary>
-		public int VersionId
+		public string VersionKey
 		{
-			get { return Changeset.ChangesetId; }
+			get { return Changeset.ChangesetId.ToString(); }
 		}
 
 		/// <summary>

@@ -15,18 +15,18 @@ namespace SourceTracker
 
 		static SourceProcessor()
 		{
-			string good = "\t `~!@#$%^&*()-_=+[{]};:'\"\\|,<.>/?1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+			string good = "`~!@#$%^&*()-_=+[{]};:'\"\\|,<.>/?1234567890abcdefghijklmnopqrstuvwxyzабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 			foreach (char c in good)
 				s_goodChars.Add(c);
 		}
 
 		/// <summary>
-		/// Calculates hash for specified line.
+		/// Calculates CRC for specified line.
 		/// </summary>
-		public static Guid CalculateHash(string line)
+		public static Guid CalculateCrc(string line)
 		{
 			StringBuilder clean = new StringBuilder();
-			foreach (char c in line)
+			foreach (char c in line.ToLowerInvariant())
 			{
 				if (!s_goodChars.Contains(c))
 					continue;

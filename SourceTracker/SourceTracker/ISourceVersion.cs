@@ -8,9 +8,9 @@ namespace SourceTracker
 	public interface ISourceVersion
 	{
 		/// <summary>
-		/// Gets version ID.
+		/// Gets version key.
 		/// </summary>
-		int VersionId { get; }
+		string VersionKey { get; }
 
 		/// <summary>
 		/// Gets version date.

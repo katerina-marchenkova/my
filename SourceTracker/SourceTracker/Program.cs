@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using Microsoft.TeamFoundation.Client;
-using Microsoft.TeamFoundation.VersionControl.Client;
 
 namespace SourceTracker
 {
@@ -21,8 +17,12 @@ namespace SourceTracker
 		/// </summary>
 		public static void Main(string[] args)
 		{
-			s_options = new TrackerOptions(new DateTime(1983, 5, 25));
+			s_options = new TrackerOptions(new DateTime(2011, 3, 28));
 			s_engine = new TeamFoundationEngine("http://rufrt-vxbuild:8080/tfs/sandbox");
+
+			// TODO: fake uploading for garbage parts
+			// FakeUploader.UploadFakeFile(1);
+			// return;
 
 			DateTime start = DateTime.Now;
 			Console.WriteLine("Started at {0:G}.", start);
@@ -51,19 +51,46 @@ namespace SourceTracker
 		{
 			int fileId = ResolveFile(file);
 
-			Dictionary<Guid, DateTime> dates = new Dictionary<Guid, DateTime>();
-			Dictionary<Guid, string> originals = new Dictionary<Guid, string>();
+			Dictionary<Guid, LineRow> lineRows = new Dictionary<Guid, LineRow>();
+			Dictionary<Guid, DateTime> lineDates = new Dictionary<Guid, DateTime>();
 
 			List<ISourceVersion> versions = s_engine.GetVersions(file, s_options);
 			foreach (ISourceVersion version in versions)
 			{
 				int userId = ResolveUser(version);
+				int versionId = ResolveVersion(fileId, userId, version);
 
 				List<string> lines = s_engine.GetLines(version);
-				foreach (string line in lines)
+				for (int i = 0; i < lines.Count; i++)
 				{
+					string text = lines[i];
+
+					Guid crc = SourceProcessor.CalculateCrc(text);
+					LineRow lineRow = new LineRow
+					{
+						VersionId = versionId,
+						LineCrc = crc,
+						LineNumber = i,
+						LineText = text
+					};
+
+					if (!lineRows.ContainsKey(crc))
+					{
+						lineRows.Add(crc, lineRow);
+						lineDates.Add(crc, version.VersionDate);
+					}
+					else
+					{
+						if (version.VersionDate < lineDates[crc])
+						{
+							lineRows[crc] = lineRow;
+							lineDates[crc] = version.VersionDate;
+						}
+					}
 				}
 			}
+
+			SourceTrackerDb.UploadLines(lineRows.Values);
 		}
 
 		/// <summary>
@@ -81,10 +108,26 @@ namespace SourceTracker
 		private static int ResolveUser(ISourceVersion version)
 		{
 			string userName = version.UserName.ToUpperInvariant();
+
 			if (userName.StartsWith(@"CNEU\"))
 				userName = userName.Substring(5);
 
+			if (userName.StartsWith(@"CNET\"))
+				userName = userName.Substring(5);
+
 			return SourceTrackerDb.ResolveUser(userName);
+		}
+
+		/// <summary>
+		/// Returns existing version or creates a new one.
+		/// </summary>
+		private static int ResolveVersion(int fileId, int userId, ISourceVersion version)
+		{
+			return SourceTrackerDb.ResolveVersion(
+				fileId,
+				version.VersionKey,
+				userId,
+				version.VersionDate);
 		}
 	}
 }

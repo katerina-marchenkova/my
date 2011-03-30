@@ -2,12 +2,12 @@
 using System.Data;
 using VX.Sys.DbHelper;
 
-namespace SourceTracker.Databases
+namespace SourceTracker
 {
 	public struct VersionRow : IDataRow
 	{
-		public int FileId;
 		public int VersionId;
+		public int FileId;
 		public int UserId;
 		public DateTime VersionDate;
 
@@ -19,8 +19,8 @@ namespace SourceTracker.Databases
 		public DataTable CreateTable()
 		{
 			DataTable table = new DataTable();
-			table.Columns.Add("FileId", typeof(int));
 			table.Columns.Add("VersionId", typeof(int));
+			table.Columns.Add("FileId", typeof(int));
 			table.Columns.Add("UserId", typeof(int));
 			table.Columns.Add("VersionDate", typeof(DateTime));
 			return table;
@@ -32,8 +32,8 @@ namespace SourceTracker.Databases
 		public void AddToTable(DataTable table)
 		{
 			table.Rows.Add(
-				FileId,
 				VersionId,
+				FileId,
 				UserId,
 				VersionDate);
 		}
