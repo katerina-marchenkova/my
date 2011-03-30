@@ -38,6 +38,15 @@ namespace SolutionHelper
 					continue;
 
 				string assemblyName = project.GetAssemblyName();
+				if (m_projects.ContainsKey(assemblyName))
+				{
+					throw new InvalidOperationException(
+						String.Format(
+							Resources.SharedAssemblyName,
+							m_projects[assemblyName].Name,
+							project.Name,
+							assemblyName));
+				}
 
 				m_projects.Add(assemblyName, project);
 				m_references.Add(assemblyName, new List<Reference>());
