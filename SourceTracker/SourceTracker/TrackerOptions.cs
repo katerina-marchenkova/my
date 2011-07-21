@@ -39,6 +39,7 @@ namespace SourceTracker
 			{
 				case ".asax":
 				case ".ascx":
+				case ".asmx":
 				case ".aspx":
 				case ".cs":
 				case ".cshtml":
@@ -56,6 +57,8 @@ namespace SourceTracker
 				case ".cscfg":
 				case ".csdef":
 				case ".csproj":
+				case ".datasource":
+				case ".disco":
 				case ".dll":
 				case ".docx":
 				case ".gif":
@@ -68,12 +71,15 @@ namespace SourceTracker
 				case ".psess":
 				case ".resx":
 				case ".sln":
+				case ".svcinfo":
+				case ".svcmap":
 				case ".swf":
 				case ".testsettings":
 				case ".txt":
 				case ".vsmdi":
 				case ".vspscc":
 				case ".vssscc":
+				case ".wsdl":
 				case ".xml":
 					return true;
 

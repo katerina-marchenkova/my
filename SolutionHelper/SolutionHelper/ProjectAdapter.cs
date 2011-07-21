@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Xml;
 using EnvDTE;
 using EnvDTE80;
 using SolutionHelper.Properties;
@@ -34,7 +37,10 @@ namespace SolutionHelper
 				if (project.ConfigurationManager == null)
 					continue;
 
-				if (project.Kind == "{54435603-DBB4-11D2-8724-00A0C9A8B90C}")
+				if (project.Kind.ToLowerInvariant() == "{54435603-dbb4-11d2-8724-00a0c9a8b90c}")
+					continue;
+
+				if (project.Kind.ToLowerInvariant() == "{cc5fd16d-436d-48ad-a40c-5a424c6e3e79}")
 					continue;
 
 				string assemblyName = project.GetAssemblyName();
@@ -90,6 +96,7 @@ namespace SolutionHelper
 			{
 				SetupReferencePaths(assemblyName, baseReferencePaths);
 				SetupDependencies(assemblyName);
+				ClearHintPaths(assemblyName);
 			}
 		}
 
@@ -110,6 +117,44 @@ namespace SolutionHelper
 
 			Property property = project.Properties.Item("ReferencePath");
 			property.Value = String.Join(";", paths.ToArray());
+		}
+
+		/// <summary>
+		/// Setups hint paths for specified project.
+		/// </summary>
+		private void ClearHintPaths(string assemblyName)
+		{
+			Project project = m_projects[assemblyName];
+			project.Save();
+			string text = File.ReadAllText(project.FileName);
+
+			XmlDocument doc = new XmlDocument();
+			doc.LoadXml(text);
+
+			XmlNamespaceManager xnm = new XmlNamespaceManager(doc.NameTable);
+			xnm.AddNamespace("ms", "http://schemas.microsoft.com/developer/msbuild/2003");
+
+			bool changed = false;
+			foreach (XmlNode node in doc.SelectNodes("/ms:Project/ms:ItemGroup/ms:Reference/ms:HintPath", xnm))
+			{
+				node.ParentNode.RemoveChild(node);
+				changed = true;
+			}
+
+			if (!changed)
+				return;
+
+			// raise source control check-out notification
+			ProjectItem temp = project.ProjectItems.AddFolder("Temp");
+			temp.Remove();
+			Directory.Delete(temp.FileNames[0]);
+			project.Save();
+
+			using (XmlTextWriter xtw = new XmlTextWriter(project.FileName, Encoding.UTF8))
+			{
+				xtw.Formatting = Formatting.Indented;
+				doc.WriteTo(xtw);
+			}
 		}
 
 		/// <summary>
