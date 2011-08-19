@@ -58,6 +58,7 @@ namespace SourceTracker
 				case ".csdef":
 				case ".csproj":
 				case ".datasource":
+				case ".default":
 				case ".disco":
 				case ".dll":
 				case ".docx":

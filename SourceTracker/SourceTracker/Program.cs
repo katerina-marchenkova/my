@@ -17,7 +17,7 @@ namespace SourceTracker
 		/// </summary>
 		public static void Main(string[] args)
 		{
-			s_options = new TrackerOptions(new DateTime(2011, 7, 14));
+			s_options = new TrackerOptions(new DateTime(2011, 8, 8));
 			s_engine = new TeamFoundationEngine("http://rufrt-vxbuild:8080/tfs/sandbox");
 
 			// TODO: fake uploading for garbage parts
