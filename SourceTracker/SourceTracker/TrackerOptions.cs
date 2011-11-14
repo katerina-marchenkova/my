@@ -48,11 +48,14 @@ namespace SourceTracker
 				case ".js":
 				case ".master":
 				case ".sql":
+				case ".svc":
 				case ".xaml":
 					return false;
 
 				case "":
+				case ".bmp":
 				case ".ccproj":
+				case ".cd":
 				case ".config":
 				case ".cscfg":
 				case ".csdef":
@@ -66,11 +69,16 @@ namespace SourceTracker
 				case ".ico":
 				case ".jpg":
 				case ".jss":
+				case ".licx":
+				case ".manifest":
+				case ".map":
 				case ".pdb":
+				case ".pfx":
 				case ".png":
 				case ".pptx":
 				case ".psess":
 				case ".resx":
+				case ".settings":
 				case ".sln":
 				case ".svcinfo":
 				case ".svcmap":
