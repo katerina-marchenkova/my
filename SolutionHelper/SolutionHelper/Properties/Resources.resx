@@ -135,4 +135,7 @@ Consider using binary reference instead.</value>
     <value>Projects {0} and {1} use the same assembly name: {2}.
 Please resolve naming conflict and try again.</value>
   </data>
+  <data name="DownloadReferencesDone" xml:space="preserve">
+    <value>Last referenced version were successfully downloaded.</value>
+  </data>
 </root>

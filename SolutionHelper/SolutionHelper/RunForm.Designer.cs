@@ -36,9 +36,16 @@
 			this.textBaseReferencePaths = new System.Windows.Forms.TextBox();
 			this.labelBaseReferencePaths = new System.Windows.Forms.Label();
 			this.btnAdjust = new System.Windows.Forms.Button();
+			this.btnDownloadLatestLibraries = new System.Windows.Forms.Button();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.lblLocalPathInternal = new System.Windows.Forms.Label();
+			this.txtLocalPathInternal = new System.Windows.Forms.TextBox();
+			this.lblLocalPathExternal = new System.Windows.Forms.Label();
+			this.txtLocalPathExternal = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
 			this.panelInfoBorder.SuspendLayout();
 			this.panelInfo.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pictureLogo
@@ -62,9 +69,9 @@
 			// 
 			// panelInfo
 			// 
-			this.panelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.panelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelInfo.BackColor = System.Drawing.SystemColors.Info;
 			this.panelInfo.Controls.Add(this.labelInfo);
 			this.panelInfo.Location = new System.Drawing.Point(1, 1);
@@ -74,9 +81,9 @@
 			// 
 			// labelInfo
 			// 
-			this.labelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelInfo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
 			this.labelInfo.Location = new System.Drawing.Point(8, 8);
 			this.labelInfo.Margin = new System.Windows.Forms.Padding(8);
@@ -84,8 +91,8 @@
 			this.labelInfo.Size = new System.Drawing.Size(364, 66);
 			this.labelInfo.TabIndex = 0;
 			this.labelInfo.Text = "This tool will adjust your solution to the build process by updating:\r\n   - Refer" +
-				"ence Paths\r\n   - Project Dependencies\r\n\r\nSet base reference paths and press \"Adj" +
-				"ust Solution\" button.";
+    "ence Paths\r\n   - Project Dependencies\r\n\r\nSet base reference paths and press \"Adj" +
+    "ust Solution\" button.";
 			// 
 			// textBaseReferencePaths
 			// 
@@ -105,7 +112,7 @@
 			// 
 			// btnAdjust
 			// 
-			this.btnAdjust.Location = new System.Drawing.Point(133, 221);
+			this.btnAdjust.Location = new System.Drawing.Point(254, 203);
 			this.btnAdjust.Name = "btnAdjust";
 			this.btnAdjust.Size = new System.Drawing.Size(128, 23);
 			this.btnAdjust.TabIndex = 3;
@@ -113,12 +120,67 @@
 			this.btnAdjust.UseVisualStyleBackColor = true;
 			this.btnAdjust.Click += new System.EventHandler(this.btnAdjust_Click);
 			// 
+			// btnDownloadLatestLibraries
+			// 
+			this.btnDownloadLatestLibraries.Location = new System.Drawing.Point(207, 86);
+			this.btnDownloadLatestLibraries.Name = "btnDownloadLatestLibraries";
+			this.btnDownloadLatestLibraries.Size = new System.Drawing.Size(175, 23);
+			this.btnDownloadLatestLibraries.TabIndex = 4;
+			this.btnDownloadLatestLibraries.Text = "Download Latest References";
+			this.btnDownloadLatestLibraries.UseVisualStyleBackColor = true;
+			this.btnDownloadLatestLibraries.Click += new System.EventHandler(this.btnDownloadLatestLibraries_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.txtLocalPathExternal);
+			this.panel1.Controls.Add(this.lblLocalPathExternal);
+			this.panel1.Controls.Add(this.txtLocalPathInternal);
+			this.panel1.Controls.Add(this.lblLocalPathInternal);
+			this.panel1.Controls.Add(this.btnDownloadLatestLibraries);
+			this.panel1.Location = new System.Drawing.Point(0, 232);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(393, 119);
+			this.panel1.TabIndex = 5;
+			// 
+			// lblLocalPathInternal
+			// 
+			this.lblLocalPathInternal.AutoSize = true;
+			this.lblLocalPathInternal.Location = new System.Drawing.Point(9, 0);
+			this.lblLocalPathInternal.Name = "lblLocalPathInternal";
+			this.lblLocalPathInternal.Size = new System.Drawing.Size(247, 13);
+			this.lblLocalPathInternal.TabIndex = 5;
+			this.lblLocalPathInternal.Text = "Please enter your local path for Internal references:";
+			// 
+			// txtLocalPathInternal
+			// 
+			this.txtLocalPathInternal.Location = new System.Drawing.Point(12, 16);
+			this.txtLocalPathInternal.Name = "txtLocalPathInternal";
+			this.txtLocalPathInternal.Size = new System.Drawing.Size(370, 20);
+			this.txtLocalPathInternal.TabIndex = 6;
+			// 
+			// lblLocalPathExternal
+			// 
+			this.lblLocalPathExternal.AutoSize = true;
+			this.lblLocalPathExternal.Location = new System.Drawing.Point(12, 43);
+			this.lblLocalPathExternal.Name = "lblLocalPathExternal";
+			this.lblLocalPathExternal.Size = new System.Drawing.Size(250, 13);
+			this.lblLocalPathExternal.TabIndex = 7;
+			this.lblLocalPathExternal.Text = "Please enter your local path for External references:";
+			// 
+			// txtLocalPathExternal
+			// 
+			this.txtLocalPathExternal.Location = new System.Drawing.Point(12, 60);
+			this.txtLocalPathExternal.Name = "txtLocalPathExternal";
+			this.txtLocalPathExternal.Size = new System.Drawing.Size(370, 20);
+			this.txtLocalPathExternal.TabIndex = 8;
+			// 
 			// RunForm
 			// 
 			this.AcceptButton = this.btnAdjust;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(394, 272);
+			this.ClientSize = new System.Drawing.Size(394, 354);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.btnAdjust);
 			this.Controls.Add(this.labelBaseReferencePaths);
 			this.Controls.Add(this.textBaseReferencePaths);
@@ -138,6 +200,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
 			this.panelInfoBorder.ResumeLayout(false);
 			this.panelInfo.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -152,5 +216,11 @@
 		private System.Windows.Forms.TextBox textBaseReferencePaths;
 		private System.Windows.Forms.Label labelBaseReferencePaths;
 		private System.Windows.Forms.Button btnAdjust;
+		private System.Windows.Forms.Button btnDownloadLatestLibraries;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.TextBox txtLocalPathExternal;
+		private System.Windows.Forms.Label lblLocalPathExternal;
+		private System.Windows.Forms.TextBox txtLocalPathInternal;
+		private System.Windows.Forms.Label lblLocalPathInternal;
 	}
 }

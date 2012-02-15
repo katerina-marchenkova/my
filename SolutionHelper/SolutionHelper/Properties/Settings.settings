@@ -5,5 +5,17 @@
     <Setting Name="BaseReferencePaths" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\references\Internal\;D:\references\External\</Value>
     </Setting>
+    <Setting Name="InternalReferencesSourcePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\rufrt-vxbuild\InternalReferences\</Value>
+    </Setting>
+    <Setting Name="ExternalReferencesSourcePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\rufrt-vxbuild\ExternalReferences\</Value>
+    </Setting>
+    <Setting Name="InternalReferencesTargetPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\references\Internal\</Value>
+    </Setting>
+    <Setting Name="ExternalReferencesTargetPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\references\External\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

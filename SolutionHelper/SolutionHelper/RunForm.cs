@@ -29,6 +29,8 @@ namespace SolutionHelper
 		{
 			Text = Messages.AddInName;
 			textBaseReferencePaths.Text = Settings.Default.BaseReferencePaths;
+			txtLocalPathInternal.Text = Settings.Default.InternalReferencesTargetPath;
+			txtLocalPathExternal.Text = Settings.Default.ExternalReferencesTargetPath;
 		}
 
 		private void btnAdjust_Click(object sender, EventArgs e)
@@ -42,6 +44,18 @@ namespace SolutionHelper
 			Enabled = true;
 
 			Close();
+		}
+
+
+		private void btnDownloadLatestLibraries_Click(object sender, EventArgs e)
+		{
+			Enabled = false;
+
+			Refresh();
+			Application.DoEvents();
+
+			DownloadLatestReferences();
+			Enabled = true;
 		}
 
 		private void RunForm_KeyDown(object sender, KeyEventArgs e)
@@ -61,8 +75,7 @@ namespace SolutionHelper
 		{
 			try
 			{
-				Settings.Default.BaseReferencePaths = textBaseReferencePaths.Text;
-				Settings.Default.Save();
+				SaveSettings();
 
 				ProjectAdapter adapter = new ProjectAdapter();
 				adapter.Adjust(ApplicationObject, Settings.Default.BaseReferencePaths);
@@ -74,6 +87,43 @@ namespace SolutionHelper
 			}
 
 			Messages.ShowInformation(this, Resources.AdjustDone);
+		}
+
+		/// <summary>
+		/// Reloads latest version of references.
+		/// </summary>
+		private void DownloadLatestReferences()
+		{
+			try
+			{
+				SaveSettings();
+
+				ProjectAdapter adapter = new ProjectAdapter();
+				adapter.DownloadLatestReferences(
+					ApplicationObject,
+					Settings.Default.InternalReferencesSourcePath,
+					Settings.Default.ExternalReferencesSourcePath,
+					Settings.Default.InternalReferencesTargetPath,
+					Settings.Default.ExternalReferencesTargetPath);
+			}
+			catch (Exception e)
+			{
+				Messages.ShowWarning(this, e.Message);
+				return;
+			}
+
+			Messages.ShowInformation(this, Resources.AdjustDone);
+		}
+
+		/// <summary>
+		/// Saves user settings.
+		/// </summary>
+		private void SaveSettings()
+		{
+			Settings.Default.BaseReferencePaths = textBaseReferencePaths.Text;
+			Settings.Default.InternalReferencesTargetPath = txtLocalPathInternal.Text;
+			Settings.Default.ExternalReferencesTargetPath = txtLocalPathExternal.Text;
+			Settings.Default.Save();
 		}
 
 		#endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace SolutionHelper
 		private Solution m_solution;
 		private Dictionary<string, Project> m_projects;
 		private Dictionary<string, List<Reference>> m_references;
+		private List<string> m_referencedAssemblies;
 
 		#region Researching projects
 
@@ -31,6 +33,7 @@ namespace SolutionHelper
 
 			m_projects = new Dictionary<string, Project>();
 			m_references = new Dictionary<string, List<Reference>>();
+			m_referencedAssemblies = new List<string>();
 
 			foreach (Project project in m_solution.Projects)
 			{
@@ -74,7 +77,14 @@ namespace SolutionHelper
 					}
 
 					if (!m_projects.ContainsKey(reference.Name))
+					{
+						if (!m_referencedAssemblies.Contains(reference.Name))
+						{
+							m_referencedAssemblies.Add(reference.Name);
+						}
+
 						continue;
+					}
 
 					m_references[assemblyName].Add(reference);
 				}
@@ -98,6 +108,37 @@ namespace SolutionHelper
 				SetupDependencies(assemblyName);
 				ClearHintPaths(assemblyName);
 			}
+		}
+
+		/// <summary>
+		/// Downloads the latest references.
+		/// </summary>
+		public void DownloadLatestReferences(
+			DTE2 applicationObject,
+			string internalRefPath,
+			string externalRefPath,
+			string internalRefTargetPath,
+			string externalRefTargetPath)
+		{
+			Initialize(applicationObject);
+
+			IDictionary<string, string> internalAssemblyPaths =
+				GetDownloadPathsForInternalAssemblies(
+				internalRefPath,
+				m_referencedAssemblies);
+
+			IDictionary<string, string> externalAssemblyPaths =
+				GetDownloadPathsForExternalAssemblies(
+				externalRefPath,
+				m_referencedAssemblies);
+
+			PerformDownload(
+				internalRefPath,
+				externalRefPath,
+				internalAssemblyPaths.Values,
+				externalAssemblyPaths.Values,
+				internalRefTargetPath,
+				externalRefTargetPath);
 		}
 
 		/// <summary>
@@ -183,6 +224,131 @@ namespace SolutionHelper
 				Project refProj = m_projects[reference.Name];
 				dependency.AddProject(refProj.UniqueName);
 			}
+		}
+
+		#endregion
+
+		#region Download Latest References
+
+		/// <summary>
+		/// Performs downloading referenced libraries from server.
+		/// </summary>
+		private void PerformDownload(
+			string internalSourcePath,
+			string externalSourcePath,
+			IEnumerable<string> internalAssemblyPaths,
+			IEnumerable<string> externalAssemblyPaths,
+			string internalTargetPath,
+			string externalTargetPath)
+		{
+
+			ProcessStartInfo si = new ProcessStartInfo("cmd.exe");
+
+			StringBuilder commandString = new StringBuilder();
+			commandString.Append(" /c ");
+			commandString.Append(" @ECHO OFF ");
+
+			string internalReferencesDownloadCommand =
+				CreateAssemblyDownloadCommand(internalTargetPath, internalAssemblyPaths.ToArray());
+			string externalReferencesDownloadCommand =
+				CreateAssemblyDownloadCommand(externalTargetPath, externalAssemblyPaths.ToArray());
+
+			if (!string.IsNullOrEmpty(internalReferencesDownloadCommand))
+			{
+				AppendDownloadCommand(commandString, internalReferencesDownloadCommand, internalSourcePath);
+			}
+
+			if (!string.IsNullOrEmpty(externalReferencesDownloadCommand))
+			{
+				AppendDownloadCommand(commandString, externalReferencesDownloadCommand, externalSourcePath);
+			}
+
+			si.Arguments = commandString.ToString();
+
+			System.Diagnostics.Process console =
+				System.Diagnostics.Process.Start(si);
+
+			console.WaitForExit();
+		}
+
+		/// <summary>
+		/// Appends the download references command.
+		/// </summary>
+		private void AppendDownloadCommand(
+			StringBuilder commandString,
+			string internalReferencesDownloadCommand,
+			string internalSourcePath)
+		{
+			if (!string.IsNullOrEmpty(internalReferencesDownloadCommand))
+			{
+				commandString.AppendFormat(" & ( PUSHD {0} ", internalSourcePath);
+				commandString.AppendFormat(" & {0} ", internalReferencesDownloadCommand);
+				commandString.AppendFormat(" & POPD ) ");
+			}
+		}
+
+		/// <summary>
+		/// Gets the download paths for internal assemblies.
+		/// </summary>
+		private static IDictionary<string, string> GetDownloadPathsForInternalAssemblies(
+			string sourceInternalPath,
+			List<string> assemblyNames)
+		{
+			Dictionary<string, string> internalAssemblyPaths = new Dictionary<string, string>();
+
+			DirectoryInfo dirInfo = new DirectoryInfo(sourceInternalPath);
+			DirectoryInfo[] subDirInfos = dirInfo.GetDirectories();
+			foreach (DirectoryInfo subdirectory in subDirInfos)
+			{
+				if (assemblyNames.Contains(subdirectory.Name))
+				{
+					internalAssemblyPaths[subdirectory.Name] = subdirectory.FullName;
+				}
+			}
+
+			return internalAssemblyPaths;
+		}
+
+		/// <summary>
+		/// Gets the download paths for external assemblies.
+		/// </summary>
+		private static IDictionary<string, string> GetDownloadPathsForExternalAssemblies(
+			string sourceExternalPath,
+			List<string> assemblyNames)
+		{
+			Dictionary<string, string> externalAssemblyPaths = new Dictionary<string, string>();
+
+			DirectoryInfo dirInfo = new DirectoryInfo(sourceExternalPath);
+			DirectoryInfo[] subDirInfos = dirInfo.GetDirectories();
+			foreach (DirectoryInfo subdirectory in subDirInfos)
+			{
+				FileInfo[] libraries = subdirectory.GetFiles("*.dll", SearchOption.AllDirectories);
+				foreach (FileInfo fileInfo in libraries)
+				{
+					string fileAssemblyName = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
+					if (assemblyNames.Contains(fileAssemblyName))
+					{
+						externalAssemblyPaths[fileAssemblyName] = subdirectory.FullName;
+						break;
+					}
+				}
+			}
+
+			return externalAssemblyPaths;
+		}
+
+		/// <summary>
+		/// Creates the download command for assemblies.
+		/// </summary>
+		private static string CreateAssemblyDownloadCommand(string targetPath, string[] assemblyPaths)
+		{
+			if (assemblyPaths.Length == 0)
+			{
+				return string.Empty;
+			}
+
+			string conjunction = string.Join(" ", assemblyPaths);
+			return string.Format("FOR /D %G IN ({0}) DO XCOPY \"%G\\Latest\" \"{1}\" /R /S /Y", conjunction, targetPath);
 		}
 
 		#endregion
